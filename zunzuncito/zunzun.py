@@ -38,12 +38,12 @@ class ZunZun(object):
         if 'QUERY_STRING' in env:
             self.params = urlparse.parse_qs(env['QUERY_STRING'])
 
-#        try:
-            #status, headers, body = self.dispatch(self.request_URI, self.method, self.params, self.env)
-        # except MethodExcept, e:
-            # pass
-        # except HTTPExcept, e:
-            # pass
+        try:
+            status, headers, body = self.dispatch()
+        except MethodExcept, e:
+            pass
+        except HTTPExcept, e:
+            pass
 
 #        status, headers, body = router(self.method, self.request_URI, self.params, self.env)
 
@@ -51,13 +51,17 @@ class ZunZun(object):
         headers = [('Content-Type', 'application/json; charset=utf-8')]
 
         start_response(status, headers)
-        return str(self.document_root)
+        return str(body)
+
 
     def dispatch(self):
         """
-        find module/comand/args
+        find resource module/comand/args "a la SlashQuery"
         """
-        pass
+        resource = [x.strip() for x in self.request_URI.split('/') if x]
+        return (None, None, resource)
+
+
 
     def add_route(self, route=None):
         pass
