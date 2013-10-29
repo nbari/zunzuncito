@@ -1,1 +1,1 @@
-from zunzuncito.zun import Zun
+from zunzuncito.zunzun import ZunZun
