@@ -2,11 +2,11 @@
 Main class
 """
 
-import exceptions
 import constants
+import exceptions
 import os
+import re
 import urlparse
-
 
 class ZunZun(object):
 
@@ -30,7 +30,12 @@ class ZunZun(object):
         """
         get the request URI
         """
-        self.request_URI = env['REQUEST_URI']
+        if 'REQUEST_URI' in env:
+            self.URI = env['REQUEST_URI']
+        elif 'PATH_INFO' in env:
+            self.URI = env['PATH_INFO']
+        else:
+            self.URI = '/'
 
         """
         The portion of the request URL that follows the "?"
@@ -58,7 +63,15 @@ class ZunZun(object):
         """
         find resource module/comand/args "a la SlashQuery"
         """
-        resource = [x.strip() for x in self.request_URI.split('/') if x]
+        resource = [x.strip() for x in self.URI.split('/') if x]
+        if resource[0]:
+            pass
+            """ search on document root and import the module """
+        else:
+            pass
+            """ load default """
+
+
         return (None, None, resource)
 
 
