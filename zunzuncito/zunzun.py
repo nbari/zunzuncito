@@ -2,11 +2,14 @@
 Main class
 """
 
-import constants
-import exceptions
+import http_status_codes
+import imp
+import json
 import os
 import re
 import urlparse
+from exceptions import APIException
+
 
 class ZunZun(object):
 
@@ -43,38 +46,51 @@ class ZunZun(object):
         if 'QUERY_STRING' in env:
             self.params = urlparse.parse_qs(env['QUERY_STRING'])
 
-        try:
-            status, headers, body = self.dispatch()
-        except MethodExcept, e:
-            pass
-        except HTTPExcept, e:
-            pass
-
-#        status, headers, body = router(self.method, self.request_URI, self.params, self.env)
-
         status = '200 OK'
         headers = [('Content-Type', 'application/json; charset=utf-8')]
 
-        start_response(status, headers)
-        return str(body)
+        try:
+            request = self.dispatch()
+            body = request.run()
+            if hasattr(body, 'status'):
+                status = getattr(http_status_codes, 'HTTP_%d' % body.status)
+            if hasattr(body, 'headers'):
+                headers = list(body.headers.items())
+        except APIException, e:
+            status = getattr(http_status_codes, 'HTTP_%d' % e.status)
+            if e.headers:
+                headers = list(e.headers.items())
+            if e.title:
+                body = e.to_json()
+        except Exception, e:
+            status = getattr(http_status_codes, 'HTTP_%d' % 500)
+            body = 'Something is broken: ' + str(e)
+           # body = json.dumps({k: str(env[k]) for k in env.keys()}, sort_keys=True, indent=4)
 
+        start_response(status, headers)
+        return body
 
     def dispatch(self):
         """
         find resource module/comand/args "a la SlashQuery"
         """
-        resource = [x.strip() for x in self.URI.split('/') if x]
-        if resource[0]:
-            pass
-            """ search on document root and import the module """
+        resources = [x.strip() for x in self.URI.split('/') if x != 0]
+        if resources[0]:
+            module_path = os.path.join(self.document_root, '%s/%s.py' % (resources[0], resources[0]))
         else:
-            pass
-            """ load default """
+            module_path = os.path.join(self.document_root, 'default/default.py')
 
+        if not os.access(module_path, os.R_OK):
+            raise APIException(500, 'default module not readable')
+        else:
+            mod_name, file_ext = os.path.splitext(os.path.split(module_path)[-1])
 
-        return (None, None, resource)
+            if file_ext == '.py':
+                py_mod = imp.load_source(mod_name, module_path)
+            elif file_ext == '.pyc':
+                py_mod = imp.load_compiled(mod_name, module_path)
 
-
+            return py_mod.Resource(self)
 
     def add_route(self, route=None):
         pass
