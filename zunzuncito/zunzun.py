@@ -8,7 +8,7 @@ import json
 import os
 import re
 import urlparse
-from exceptions import APIException
+from exceptions import HTTPError
 
 
 class ZunZun(object):
@@ -50,27 +50,33 @@ class ZunZun(object):
         headers = [('Content-Type', 'application/json; charset=utf-8')]
 
         try:
-            request = self.dispatch()
-            body = request.run()
+            body = self.router()
+            body = body.dispatch()
+
             if hasattr(body, 'status'):
                 status = getattr(http_status_codes, 'HTTP_%d' % body.status)
+
             if hasattr(body, 'headers'):
                 headers = list(body.headers.items())
-        except APIException, e:
+
+        except HTTPError, e:
             status = getattr(http_status_codes, 'HTTP_%d' % e.status)
+
             if e.headers:
                 headers = list(e.headers.items())
+
             if e.title:
                 body = e.to_json()
+
         except Exception, e:
             status = getattr(http_status_codes, 'HTTP_%d' % 500)
-            body = 'Something is broken: ' + str(e)
            # body = json.dumps({k: str(env[k]) for k in env.keys()}, sort_keys=True, indent=4)
 
         start_response(status, headers)
         return body
 
-    def dispatch(self):
+
+    def router(self):
         """
         find resource module/comand/args "a la SlashQuery"
         """
@@ -91,6 +97,7 @@ class ZunZun(object):
                 py_mod = imp.load_compiled(mod_name, module_path)
 
             return py_mod.Resource(self)
+
 
     def add_route(self, route=None):
         pass

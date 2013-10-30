@@ -4,7 +4,7 @@ exceptions
 import json
 
 
-class APIException(Exception):
+class HTTPError(Exception):
 
     def __init__(self, status, title=None, description=None, headers=None, code=None):
         self.status = status
@@ -17,13 +17,13 @@ class APIException(Exception):
         return json.dumps({k: v for k, v in self.__dict__.items()}, sort_keys=True, indent=4)
 
 
-class MethodException(APIException):
+class MethodException(HTTPError):
 
     def __init__(self, status=405, **kwargs):
         return super(MethodException, self).__init__(self, status, **kwargs)
 
 
-class HTTPException(APIException):
+class HTTPException(HTTPError):
 
     def __init__(self, status, **kwargs):
         return super(MethodException, self).__init__(self, status, **kwargs)
