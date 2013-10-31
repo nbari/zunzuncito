@@ -6,21 +6,28 @@ import http_status_codes
 import imp
 import json
 import os
+import re
 import urlparse
 from exceptions import HTTPError, MethodException, HTTPException
+from itertools import ifilter
 
 
 class ZunZun(object):
 
-    def __init__(self, document_root=None):
+    def __init__(self, document_root=None, routes=None):
+        self.routes = []
+        self.resources = []
+
         if document_root:
             self.document_root = os.path.abspath(document_root)
             if not os.access(self.document_root, os.R_OK):
                 raise Exception('Document root not readable')
         else:
             raise Exception('Document root missing')
-        self.routes = []
-        self.resources = []
+
+        if routes:
+            self.register_routes(routes)
+
 
     def __call__(self, env, start_response):
         """
@@ -86,19 +93,37 @@ class ZunZun(object):
 
     def router(self):
         """
-        find resource module/comand/args "a la SlashQuery"
+        first try to match any supplied routes
+        second find resource module/comand/args "a la SlashQuery"
         """
-        resources = [x.strip() for x in self.URI.split('/') if x != 0]
 
-        py_mod = resources[0] if resources[0] else 'default'
+        py_mod = False
+
+        """
+        t[0] = regex
+        t[1] = module
+        t[2] = data
+        """
+        filterf = lambda t: any(i in (self.method.upper(), 'ALL') for i in t[2])
+        for regex, module, method in ifilter(filterf, self.routes):
+            match = regex.match(self.URI)
+            if match:
+                py_mod = module
+                continue
+
+        if not py_mod:
+            self.resources = [x.strip() for x in self.URI.split('/') if x]
+
+            if not self.resources:
+                py_mod = 'default'
+            else:
+                py_mod = self.resources[0].lower()
 
         module_path = os.path.join(self.document_root, '%s/%s.py' % (py_mod, py_mod))
 
         if not os.access(module_path, os.R_OK):
             raise HTTPException(500, title="[ %s ] module not readable" % py_mod)
         else:
-            self.resources = resources
-
             mod_name, file_ext = os.path.splitext(os.path.split(module_path)[-1])
 
             if file_ext == '.py':
@@ -112,5 +137,19 @@ class ZunZun(object):
                 raise HTTPException(500, title="[ %s ] missing APIResource class" % py_mod)
 
 
-    def add_route(self, route=None):
-        ass
+    def register_routes(self, routes):
+        """compile regex pattern for routes
+
+        :param routes:
+            tuple(regex, handler, methods).
+        """
+        if routes:
+            for route in routes:
+                if isinstance(route, tuple):
+                    regex, module = route[:2]
+                    methods = ['ALL']
+
+                    if len(route) > 2:
+                        methods = [x.strip().upper() for x in route[2].split(',') if x]
+
+                    self.routes.append((re.compile(regex), module, methods))
