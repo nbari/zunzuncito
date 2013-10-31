@@ -8,7 +8,7 @@ import json
 import os
 import re
 import urlparse
-from exceptions import HTTPError
+from exceptions import HTTPError, MethodException, HTTPException
 
 
 class ZunZun(object):
@@ -21,8 +21,12 @@ class ZunZun(object):
         else:
             raise Exception('Document root missing')
         self.routes = []
+        self.resources = []
 
     def __call__(self, env, start_response):
+        """
+        see pep 3333
+        """
         self.env = env
 
         """
@@ -46,12 +50,16 @@ class ZunZun(object):
         if 'QUERY_STRING' in env:
             self.params = urlparse.parse_qs(env['QUERY_STRING'])
 
+        """
+        Default values
+        """
         status = '200 OK'
         headers = [('Content-Type', 'application/json; charset=utf-8')]
+        body = None
 
         try:
-            body = self.router()
-            body = body.dispatch()
+            resource = self.router()
+            body = resource.dispatch()
 
             if hasattr(body, 'status'):
                 status = getattr(http_status_codes, 'HTTP_%d' % body.status)
@@ -69,11 +77,12 @@ class ZunZun(object):
                 body = e.to_json()
 
         except Exception, e:
+            print e
             status = getattr(http_status_codes, 'HTTP_%d' % 500)
            # body = json.dumps({k: str(env[k]) for k in env.keys()}, sort_keys=True, indent=4)
 
         start_response(status, headers)
-        return body
+        yield body
 
 
     def router(self):
@@ -81,14 +90,16 @@ class ZunZun(object):
         find resource module/comand/args "a la SlashQuery"
         """
         resources = [x.strip() for x in self.URI.split('/') if x != 0]
-        if resources[0]:
-            module_path = os.path.join(self.document_root, '%s/%s.py' % (resources[0], resources[0]))
-        else:
-            module_path = os.path.join(self.document_root, 'default/default.py')
+
+        py_mod = resources[0] if resources[0] else 'default'
+
+        module_path = os.path.join(self.document_root, '%s/%s.py' % (py_mod, py_mod))
 
         if not os.access(module_path, os.R_OK):
-            raise APIException(500, 'default module not readable')
+            raise HTTPException(500, title="[ %s ] module not readable" % py_mod)
         else:
+            self.resources = resources
+
             mod_name, file_ext = os.path.splitext(os.path.split(module_path)[-1])
 
             if file_ext == '.py':
@@ -96,7 +107,7 @@ class ZunZun(object):
             elif file_ext == '.pyc':
                 py_mod = imp.load_compiled(mod_name, module_path)
 
-            return py_mod.Resource(self)
+            return py_mod.APIResource(self)
 
 
     def add_route(self, route=None):

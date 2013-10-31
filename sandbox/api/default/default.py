@@ -2,15 +2,16 @@
 default resource
 """
 import json
+from zunzuncito.exceptions import MethodException, HTTPException, allow
 
 
-class Resource(object):
+class APIResource(object):
 
-    def __init__(self, zunzun):
-        self.zunzun = zunzun
+    def __init__(self, app):
+        self.app = app
         self.status = 200
         self.headers = {}
 
-    def run(self):
-        self.headers['Content-Type'] = 'application/json; charset=utf-8'
-        return 'oioi'
+    @allow('get', 'post')
+    def dispatch(self):
+        return 'ja quase'
