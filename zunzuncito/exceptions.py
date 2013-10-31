@@ -19,6 +19,7 @@ class HTTPError(Exception):
         return json.dumps({k: v for k, v in self.__dict__.items() if v}, sort_keys=True, indent=4)
 
 
+
 class MethodException(HTTPError):
 
     def __init__(self, status=405, **kwargs):
@@ -32,12 +33,16 @@ class HTTPException(HTTPError):
 
 
 def allow(*methods):
+    """
+    allow decorator
+    arguments: list of http methods
+    """
 
     def true_decorator(f):
 
         @wraps(f)
         def wrapped(self, *args, **kwargs):
-            if self.app.method.lower() not in [x.lower() for x in list(methods)]:
+            if self.api.method.lower() not in [x.lower() for x in list(methods)]:
                 raise MethodException()
             else:
                 return f(self, *args, **kwargs)

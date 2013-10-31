@@ -7,11 +7,11 @@ from zunzuncito.exceptions import MethodException, HTTPException, allow
 
 class APIResource(object):
 
-    def __init__(self, app):
-        self.app = app
+    def __init__(self, api):
+        self.api = api
         self.status = 200
         self.headers = {}
 
     @allow('get', 'post')
     def dispatch(self):
-        return 'ja quase'
+        return __name__

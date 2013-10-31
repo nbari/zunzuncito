@@ -6,7 +6,6 @@ import http_status_codes
 import imp
 import json
 import os
-import re
 import urlparse
 from exceptions import HTTPError, MethodException, HTTPException
 
@@ -55,7 +54,7 @@ class ZunZun(object):
         """
         status = '200 OK'
         headers = [('Content-Type', 'application/json; charset=utf-8')]
-        body = None
+        body = ''
 
         try:
             resource = self.router()
@@ -82,7 +81,7 @@ class ZunZun(object):
            # body = json.dumps({k: str(env[k]) for k in env.keys()}, sort_keys=True, indent=4)
 
         start_response(status, headers)
-        yield body
+        return body
 
 
     def router(self):
@@ -107,8 +106,11 @@ class ZunZun(object):
             elif file_ext == '.pyc':
                 py_mod = imp.load_compiled(mod_name, module_path)
 
-            return py_mod.APIResource(self)
+            try:
+                return py_mod.APIResource(self)
+            except:
+                raise HTTPException(500, title="[ %s ] missing APIResource class" % py_mod)
 
 
     def add_route(self, route=None):
-        pass
+        ass
