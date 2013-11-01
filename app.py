@@ -5,11 +5,9 @@ import zunzuncito
 
 document_root = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'sandbox/api/')
 
-routes = [
+app = zunzuncito.ZunZun(document_root, [
         #('/.*', 'default'),
         ('/teste', 'test_get', 'GET'),
         ('/teste', 'test_post', 'POST'),
         ('/teste', 'test_put', 'PUT')
-        ]
-
-app = zunzuncito.ZunZun(document_root, routes)
+        ], debug=True)

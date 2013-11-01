@@ -1,8 +1,9 @@
 """
-exceptions
+exceptions and decorators
 """
 
 import json
+import logging
 from functools import wraps
 
 
@@ -19,7 +20,6 @@ class HTTPError(Exception):
         return json.dumps({k: v for k, v in self.__dict__.items() if v}, sort_keys=True, indent=4)
 
 
-
 class MethodException(HTTPError):
 
     def __init__(self, status=405, **kwargs):
@@ -32,10 +32,16 @@ class HTTPException(HTTPError):
         return super(HTTPException, self).__init__(status, **kwargs)
 
 
-def allow(*methods):
-    """
-    allow decorator
-    arguments: list of http methods
+class logAdapter(logging.LoggerAdapter):
+
+    def process(self, msg, kwargs):
+        return '[%s] > %s' % (self.extra['py_mod'], msg), kwargs
+
+
+def allow_methods(*methods):
+    """Allow methods decorator
+    :param methods:
+        list of http methods
     """
 
     def true_decorator(f):

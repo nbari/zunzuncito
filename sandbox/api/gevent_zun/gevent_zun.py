@@ -4,18 +4,20 @@ default resource
 import json
 import gevent
 import gevent.socket
-from zunzuncito.exceptions import MethodException, HTTPException, allow
+from zunzuncito.tools import MethodException, HTTPException, allow_methods
 
 
 def bg_task():
-    for i in range(1,10):
+    for i in range(1, 10):
         print "background task", i
         gevent.sleep(2)
 
+
 def long_task():
-    for i in range(1,10):
+    for i in range(1, 10):
         print i
         gevent.sleep()
+
 
 class APIResource(object):
 
