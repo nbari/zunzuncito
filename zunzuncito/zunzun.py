@@ -53,13 +53,13 @@ class ZunZun(object):
         set the logger
         """
         self.log = logging.getLogger()
-
         logHandler = logging.StreamHandler()
-        logformat = LogFormatter('%(asctime) %(filename) %(funcName) %(levelname) %(module) %(name) %(pathname) %(message) %(indent)')
+        logformat = LogFormatter('%(asctime) %(filename) %(funcName) %(levelname) %(module) %(name) %(pathname) %(message)')
         logHandler.setFormatter(logformat)
         self.log.addHandler(logHandler)
-
         self.log.setLevel('DEBUG' if debug else 'ERROR')
+
+        self.log = logging.getLogger()
         self.log.debug({k: str(v) for k, v in self.__dict__.items() if v and k not in 'log'})
 
         """
@@ -83,6 +83,9 @@ class ZunZun(object):
             self.request_id = env['HTTP_REQUEST_ID']
         else:
             self.request_id = str(uuid4())
+
+        self.log = logging.LoggerAdapter(logging.getLogger(),
+                {'rid': self.request_id, 'indent': 4})
 
         """
         get the HTTP method
@@ -108,9 +111,8 @@ class ZunZun(object):
         """
         if debug, log the full environ
         """
-        self.log.debug(json.dumps({k: str(env[k]) for k in env if k.isupper()},
-                                  sort_keys=True,
-                                  indent=4))
+        self.log.debug({k: str(env[k]) for k in env if k.isupper()},
+                extra={'rid': self.request_id})
 
         """
         Default values
@@ -139,22 +141,20 @@ class ZunZun(object):
             if e.title:
                 body = e.to_json()
 
-            self.log.debug('%s - [HTTPError: %s] > API version: %s, URI: %s, exception: %s',
-                           self.request_id,
-                           status,
-                           self.version,
-                           self.URI,
-                           e.to_json())
+            self.log.debug(dict((x,y) for x, y in (
+                ('API', self.version),
+                ('URI', self.URI),
+                ('HTTPError',status ),
+                ('Exception', json.loads(e.to_json()))
+                )))
 
         except Exception, e:
-            self.log.error('%s - [Exception: %s] > API version: %s, URI: %s, env: %s',
-                           self.request_id,
-                           e,
-                           self.version,
-                           self.URI,
-                           json.dumps({k: str(env[k]) for k in env.keys()},
-                                      sort_keys=True,
-                                      indent=4))
+            self.log.error(dict((x,y) for x, y in (
+                ('API', self.version),
+                ('URI', self.URI),
+                ('Exception', e),
+                ('environ', {k: str(env[k]) for k in env.keys()})
+                )))
             status = getattr(http_status_codes, 'HTTP_%d' % 500)
 
         headers['Request-ID'] = self.request_id
@@ -168,10 +168,6 @@ class ZunZun(object):
         """
         self.version = self.versions[0]
         for version in self.versions:
-            self.log.debug('%s - [Search version: %s in URI: %s]',
-                           self.request_id,
-                           version,
-                           self.URI)
             if self.URI.lower().startswith('/%s' % version):
                 self.version = version
                 """
@@ -181,10 +177,12 @@ class ZunZun(object):
                 self.URI = self.URI[len(version) + 1:]
                 break
 
-        self.log.debug('%s - [API version: %s URI: %s]',
-                       self.request_id,
-                       self.version,
-                       self.URI)
+        self.log.debug(dict((x,y) for x, y in (
+                ('API', self.version),
+                ('URI', self.URI),
+                ('versions', self.versions)
+                )))
+
         """
         find a python module (py_mod) to handle the request
         """
@@ -202,12 +200,10 @@ class ZunZun(object):
             match = regex.match(self.URI)
             if match:
                 py_mod = module
-                self.log.debug('%s - [router: %s URI: %s] > regex match: %s',
-                               self.request_id,
-                               self.version,
-                               self.URI,
-                               json.dumps({'URI': self.URI,
-                                           'HTTP method': method}, indent=4))
+                self.log.debug(dict((x,y) for x, y in (
+                    ('API', version),
+                    ('regex', self.URI),
+                    )))
                 break
 
         """
@@ -233,11 +229,12 @@ class ZunZun(object):
         module_path = os.path.join(self.document_root, '%s/%s_%s/%s_%s.py' % (self.version, py_mod, self.suffix, py_mod, self.suffix))
 
         if not os.access(module_path, os.R_OK):
-            self.log.error('%s - [router: %s URI: %s] > py_mod: %s not readable',
-                           self.request_id,
-                           self.version,
-                           self.URI,
-                           py_mod)
+            self.log.error(dict((x,y) for x, y in (
+                ('API', version),
+                ('URI', self.URI),
+                ('py_mod', py_mod),
+                ('msg', 'py_mod is not readable'),
+                )))
             raise HTTPException(500, title="[ %s ] module not readable" % py_mod)
         else:
             mod_name, file_ext = os.path.splitext(os.path.split(module_path)[-1])
@@ -245,12 +242,11 @@ class ZunZun(object):
             py_mod = imp.load_source(mod_name, module_path)
 
             try:
-                self.log.debug('%s - [router: %s URI: %s] > dispatching(%s, %s)',
-                               self.request_id,
-                               self.version,
-                               self.URI,
-                               mod_name,
-                               module_path)
+                self.log.debug(dict((x,y) for x, y in (
+                    ('API', version),
+                    ('URI', self.URI),
+                    ('dispatching', (mod_name, module_path))
+                    )))
                 return py_mod.APIResource(self)
             except:
                 raise HTTPException(500, title="[ %s ] missing APIResource class" % mod_name)
@@ -275,8 +271,4 @@ class ZunZun(object):
                     else:
                         self.routes.append((re.compile('^%s$' % regex), module, methods))
 
-                    self.log.debug(dict((x,y) for x, y in (("regex", regex), ("module", module), ("methods", methods))), extra={'moduloxxx': 'sopas'})
-                    #self.log.debug('aaa', extra={'moduloxxx': 'sopas'})
-#                    self.log.debug('{"special": "value", "run": 12}')
-#                    self.log.debug("classic message", extra={"special": "value", "run": 12})
-                    #     regex, module, methods,), extra={"special": "value", "run": 12})
+                    self.log.debug(dict((x,y) for x, y in (("registering regex for route", regex), ("handler", module), ("methods", methods))))

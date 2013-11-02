@@ -85,13 +85,12 @@ class LogFormatter(logging.Formatter):
     def __init__(self, *args, **kwargs):
         super(LogFormatter, self).__init__(*args, **kwargs)
         self.required_fields = [x.strip("%()") for x in self._fmt.split()]
-        if 'indent' in self.required_fields:
-            self.indent = 4
-            self.required_fields.remove('indent')
-        else:
-            self.indent = False;
 
     def format(self, record):
+        indent = record.__dict__.get('indent', None)
+        if indent:
+            del record.indent
+
         if isinstance(record.msg, dict):
             record.message = record.msg
         else:
@@ -114,4 +113,4 @@ class LogFormatter(logging.Formatter):
             ):
                 log_record[key] = value
 
-        return json.dumps(log_record,indent=self.indent)
+        return json.dumps(log_record, indent=indent)
