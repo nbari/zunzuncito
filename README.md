@@ -1,4 +1,4 @@
 zunzuncito
 ==========
 
-python micro barebones REST API
+micro-framework for creating REST API's.
