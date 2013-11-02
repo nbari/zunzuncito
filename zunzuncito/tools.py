@@ -4,6 +4,7 @@ exceptions and decorators
 
 import json
 import logging
+import time
 from functools import wraps
 
 
@@ -18,8 +19,8 @@ class HTTPError(Exception):
 
     def to_json(self):
         return json.dumps({k: v for k, v in self.__dict__.items() if v},
-                          sort_keys=True,
-                          indent=4)
+                sort_keys=True,
+                indent=4)
 
 
 class MethodException(HTTPError):
@@ -32,12 +33,6 @@ class HTTPException(HTTPError):
 
     def __init__(self, status, **kwargs):
         return super(HTTPException, self).__init__(status, **kwargs)
-
-
-class LogAdapter(logging.LoggerAdapter):
-
-    def process(self, msg, kwargs):
-        return '%s - [%s] > %s' % (self.extra['request_id'], self.extra['resource'], msg), kwargs
 
 
 def allow_methods(*methods):
@@ -58,3 +53,65 @@ def allow_methods(*methods):
         return wrapped
 
     return true_decorator
+
+
+class LogFormatter(logging.Formatter):
+    converter = time.gmtime
+
+    reserved_keys = [
+            'args',
+            'asctime',
+            'created',
+            'exc_info',
+            'exc_text',
+            'filename',
+            'funcName',
+            'levelname',
+            'levelno',
+            'lineno',
+            'message',
+            'module',
+            'msecs',
+            'msg',
+            'name',
+            'pathname',
+            'process',
+            'processName',
+            'relativeCreated',
+            'thread',
+            'threadName'
+            ]
+
+    def __init__(self, *args, **kwargs):
+        super(LogFormatter, self).__init__(*args, **kwargs)
+        self.required_fields = [x.strip("%()") for x in self._fmt.split()]
+        if 'indent' in self.required_fields:
+            self.indent = 4
+            self.required_fields.remove('indent')
+        else:
+            self.indent = False;
+
+    def format(self, record):
+        if isinstance(record.msg, dict):
+            record.message = record.msg
+        else:
+            record.message = record.getMessage()
+
+        if "asctime" in self.required_fields:
+            ct = self.converter(record.created)
+            t = time.strftime("%Y-%m-%d %H:%M:%S", ct)
+            record.asctime  = "%s,%03d" % (t, record.msecs)
+
+        log_record = {}
+
+        for field in self.required_fields:
+            log_record[field] = record.__dict__.get(field)
+
+        for key, value in record.__dict__.iteritems():
+            #this allows to have numeric keys
+            if (key not in self.reserved_keys
+                and not (hasattr(key,"startswith") and key.startswith('_'))
+            ):
+                log_record[key] = value
+
+        return json.dumps(log_record,indent=self.indent)

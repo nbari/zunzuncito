@@ -12,7 +12,7 @@ import os
 import re
 import urlparse
 from itertools import ifilter
-from tools import HTTPError, MethodException, HTTPException
+from tools import HTTPError, MethodException, HTTPException, LogFormatter
 from uuid import uuid4
 
 
@@ -54,16 +54,13 @@ class ZunZun(object):
         """
         self.log = logging.getLogger()
 
-        handler = logging.FileHandler('%s/debug.log' % self.document_root)
-        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-        handler.setFormatter(formatter)
+        logHandler = logging.StreamHandler()
+        logformat = LogFormatter('%(asctime) %(filename) %(funcName) %(levelname) %(module) %(name) %(pathname) %(message) %(indent)')
+        logHandler.setFormatter(logformat)
+        self.log.addHandler(logHandler)
 
-        self.log.addHandler(handler)
         self.log.setLevel('DEBUG' if debug else 'ERROR')
-        self.log.debug('[--- ZunZun ---] > %s',
-                       json.dumps({k: str(v) for k, v in self.__dict__.items() if v and k not in 'log'},
-                                  sort_keys=True,
-                                  indent=4))
+        self.log.debug({k: str(v) for k, v in self.__dict__.items() if v and k not in 'log'})
 
         """
         register / compile the routes regex
@@ -278,7 +275,8 @@ class ZunZun(object):
                     else:
                         self.routes.append((re.compile('^%s$' % regex), module, methods))
 
-                    self.log.debug('registering route: %s',
-                                   json.dumps({'regex': regex,
-                                               'module': module,
-                                               'methods': methods}, indent=4))
+                    self.log.debug(dict((x,y) for x, y in (("regex", regex), ("module", module), ("methods", methods))), extra={'moduloxxx': 'sopas'})
+                    #self.log.debug('aaa', extra={'moduloxxx': 'sopas'})
+#                    self.log.debug('{"special": "value", "run": 12}')
+#                    self.log.debug("classic message", extra={"special": "value", "run": 12})
+                    #     regex, module, methods,), extra={"special": "value", "run": 12})
