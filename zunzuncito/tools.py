@@ -17,7 +17,9 @@ class HTTPError(Exception):
         self.code = code
 
     def to_json(self):
-        return json.dumps({k: v for k, v in self.__dict__.items() if v}, sort_keys=True, indent=4)
+        return json.dumps({k: v for k, v in self.__dict__.items() if v},
+                          sort_keys=True,
+                          indent=4)
 
 
 class MethodException(HTTPError):
@@ -32,10 +34,10 @@ class HTTPException(HTTPError):
         return super(HTTPException, self).__init__(status, **kwargs)
 
 
-class logAdapter(logging.LoggerAdapter):
+class LogAdapter(logging.LoggerAdapter):
 
     def process(self, msg, kwargs):
-        return '[%s] > %s' % (self.extra['py_mod'], msg), kwargs
+        return '%s - [%s] > %s' % (self.extra['request_id'], self.extra['resource'], msg), kwargs
 
 
 def allow_methods(*methods):
