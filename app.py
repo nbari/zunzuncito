@@ -3,7 +3,7 @@
 import os
 import zunzuncito
 
-document_root = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'sandbox/api/')
+document_root = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'API/')
 
 versions = ['v0', 'v1', 'v2']
 
