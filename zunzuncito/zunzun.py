@@ -48,6 +48,7 @@ class ZunZun(object):
         self.resources = []
         self.routes = []
         self.suffix = suffix
+        self.headers = {}
 
         """
         set the logger
@@ -68,19 +69,17 @@ class ZunZun(object):
         if routes:
             self.register_routes(routes)
 
-    def __call__(self, env, start_response):
+    def __call__(self, environ, start_response):
         """
         try to be compliant with pep 3333 so that any WSGI can serve the app
         """
-        self.env = env
-
         """
         get the REQUEST_ID
         """
-        if 'REQUEST_ID' in env:
-            self.request_id = env['REQUEST_ID']
-        elif 'HTTP_REQUEST_ID' in env:
-            self.request_id = env['HTTP_REQUEST_ID']
+        if 'REQUEST_ID' in environ:
+            self.request_id = environ['REQUEST_ID']
+        elif 'HTTP_REQUEST_ID' in environ:
+            self.request_id = environ['HTTP_REQUEST_ID']
         else:
             self.request_id = str(uuid4())
 
@@ -90,53 +89,39 @@ class ZunZun(object):
         """
         get the HTTP method
         """
-        self.method = env['REQUEST_METHOD']
+        self.method = environ['REQUEST_METHOD']
 
         """
         get the request URI
         """
-        if 'REQUEST_URI' in env:
-            self.URI = env['REQUEST_URI']
-        elif 'PATH_INFO' in env:
-            self.URI = env['PATH_INFO']
+        if 'REQUEST_URI' in environ:
+            self.URI = environ['REQUEST_URI']
+        elif 'PATH_INFO' in environ:
+            self.URI = environ['PATH_INFO']
         else:
             self.URI = '/'
 
         """
         The portion of the request URL that follows the "?"
         """
-        if 'QUERY_STRING' in env:
-            self.params = urlparse.parse_qs(env['QUERY_STRING'])
+        if 'QUERY_STRING' in environ:
+            self.params = urlparse.parse_qs(environ['QUERY_STRING'])
 
         """
-        if debug, log the full environ
+        Default response values
         """
-        self.log.debug({k: str(env[k]) for k in env if k.isupper()},
-                extra={'rid': self.request_id})
-
-        """
-        Default values
-        """
-        status = '200 OK'
-        headers = {}
-        headers['Content-Type'] = 'application/json; charset=UTF-8'
+        self.headers['Content-Type'] = 'application/json; charset=UTF-8'
+        self.headers['Request-ID'] = self.request_id
         body = ''
 
         try:
             resource = self.router()
-            body = resource.dispatch()
-
-            if hasattr(body, 'status'):
-                status = getattr(http_status_codes, 'HTTP_%d' % body.status)
-
-            if hasattr(body, 'headers'):
-                headers = body.headers
-
+            return resource.dispatch(environ, start_response)
         except HTTPError, e:
-            status = getattr(http_status_codes, 'HTTP_%d' % e.status)
+            status = e.status
 
             if e.headers:
-                headers = e.headers
+                self.headers = e.headers
 
             if e.title:
                 body = e.to_json()
@@ -144,8 +129,7 @@ class ZunZun(object):
             self.log.debug(dict((x,y) for x, y in (
                 ('API', self.version),
                 ('URI', self.URI),
-                ('HTTPError',status ),
-                ('Exception', json.loads(e.to_json()))
+                ('HTTPError', status )
                 )))
 
         except Exception, e:
@@ -153,12 +137,11 @@ class ZunZun(object):
                 ('API', self.version),
                 ('URI', self.URI),
                 ('Exception', e),
-                ('environ', {k: str(env[k]) for k in env.keys()})
+                ('environ', {k: str(environ[k]) for k in environ.keys()})
                 )))
-            status = getattr(http_status_codes, 'HTTP_%d' % 500)
+            status = 500
 
-        headers['Request-ID'] = self.request_id
-        start_response(status, list(headers.items()))
+        start_response(getattr(http_status_codes, 'HTTP_%d' % status), list(self.headers.items()))
         return body
 
     def router(self):
