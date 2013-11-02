@@ -120,7 +120,7 @@ class ZunZun(object):
         """
         status = '200 OK'
         headers = {}
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        headers['Content-Type'] = 'application/json; charset=UTF-8'
         body = ''
 
         try:
