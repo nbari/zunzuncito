@@ -18,5 +18,5 @@ class APIResource(object):
     @allow_methods('get', 'post')
     def dispatch(self):
         print '------xxxx-------'
-        self.log.debug({k: str(v) for k, v in self.api.__dict__.items() if v})
+        self.log.debug({k: v for k, v in self.api.__dict__.items() if v})
         return __name__

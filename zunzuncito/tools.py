@@ -92,7 +92,16 @@ class LogFormatter(logging.Formatter):
             del record.indent
 
         if isinstance(record.msg, dict):
-            record.message = record.msg
+            def clean_dict(self, d):
+                new = {}
+                for k, v in d.iteritems():
+                    if isinstance(v, dict):
+                        v = clean_dict(self, v)
+                        new[k] = v
+                    else:
+                        new[k] = str(v)
+                return new
+            record.message = clean_dict(self, record.msg)
         else:
             record.message = record.getMessage()
 
@@ -113,4 +122,4 @@ class LogFormatter(logging.Formatter):
             ):
                 log_record[key] = value
 
-        return json.dumps(log_record, indent=indent)
+        return json.dumps(log_record, sort_keys=True, indent=indent)
