@@ -10,7 +10,6 @@ import json
 import logging
 import os
 import re
-import urlparse
 from itertools import ifilter
 from tools import HTTPError, MethodException, HTTPException, LogFormatter
 from uuid import uuid4
@@ -48,7 +47,7 @@ class ZunZun(object):
         self.resources = []
         self.routes = []
         self.suffix = suffix
-        self.headers = {}
+        self.version = self.versions[0]
 
         """
         set the logger
@@ -70,7 +69,9 @@ class ZunZun(object):
             self.register_routes(routes)
 
     def __call__(self, environ, start_response):
-        """See pep 3333
+        """Handle a WSGI application request.
+
+        See pep 3333
 
         :param environ:
             A WSGI environment
@@ -110,16 +111,10 @@ class ZunZun(object):
             self.URI = '/'
 
         """
-        The portion of the request URL that follows the "?"
+        Default headers in case an exception occurs
         """
-        if 'QUERY_STRING' in environ:
-            self.params = urlparse.parse_qs(environ['QUERY_STRING'])
-
-        """
-        Default response values
-        """
-        self.headers['Content-Type'] = 'application/json; charset=UTF-8'
-        self.headers['Request-ID'] = self.request_id
+        headers = {'Content-Type': 'application/json; charset=UTF-8',
+                   'Request-ID': self.request_id}
         body = ''
 
         try:
@@ -141,15 +136,15 @@ class ZunZun(object):
                 )))
 
         except Exception, e:
+            status = 500
             self.log.error(dict((x,y) for x, y in (
                 ('API', self.version),
                 ('URI', self.URI),
                 ('Exception', e),
                 ('environ', {k: str(environ[k]) for k in environ.keys()})
                 )))
-            status = 500
 
-        start_response(getattr(http_status_codes, 'HTTP_%d' % status), list(self.headers.items()))
+        start_response(getattr(http_status_codes, 'HTTP_%d' % status), list(headers.items()))
         return body
 
     def router(self):
@@ -192,7 +187,7 @@ class ZunZun(object):
             if match:
                 py_mod = module
                 self.log.debug(dict((x,y) for x, y in (
-                    ('API', version),
+                    ('API', self.version),
                     ('regex', self.URI),
                     )))
                 break
@@ -221,7 +216,7 @@ class ZunZun(object):
 
         if not os.access(module_path, os.R_OK):
             self.log.error(dict((x,y) for x, y in (
-                ('API', version),
+                ('API', self.version),
                 ('URI', self.URI),
                 ('py_mod', py_mod),
                 ('msg', 'py_mod is not readable'),
@@ -234,7 +229,7 @@ class ZunZun(object):
 
             try:
                 self.log.debug(dict((x,y) for x, y in (
-                    ('API', version),
+                    ('API', self.version),
                     ('URI', self.URI),
                     ('dispatching', (mod_name, module_path))
                     )))
