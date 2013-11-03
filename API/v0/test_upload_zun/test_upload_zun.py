@@ -14,8 +14,16 @@ class APIResource(object):
 
     def __init__(self, api):
         self.api = api
+        self.status = 200
         self.headers = api.headers.copy()
+        self.log = logging.getLogger()
+        self.log.setLevel('INFO')
         self.log = logging.LoggerAdapter(logging.getLogger(),{'rid': api.request_id, 'indent': 4})
+        self.log.info(dict((x,y) for x, y in (
+            ('API', api.version),
+            ('URI', api.URI),
+            ('method',api.method)
+            )))
 
     @allow_methods('get', 'post')
     def dispatch(self, environ, start_response):
@@ -40,7 +48,7 @@ class APIResource(object):
 
 #        raise HTTPException(201)
 
-        start_response(getattr(http_status_codes, 'HTTP_%d' % 200), list(self.headers.items()))
+        start_response(getattr(http_status_codes, 'HTTP_%d' % self.status), list(self.headers.items()))
 
 #        raise HTTPException(405)
         return output

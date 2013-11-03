@@ -43,6 +43,7 @@ class ZunZun(object):
         """
         set defauls
         """
+        self.headers = {}
         self.request_id = None
         self.resources = []
         self.routes = []
@@ -113,8 +114,8 @@ class ZunZun(object):
         """
         Default headers in case an exception occurs
         """
-        headers = {'Content-Type': 'application/json; charset=UTF-8',
-                   'Request-ID': self.request_id}
+        self.headers['Content-Type'] = 'application/json; charset=UTF-8'
+        self.headers['Request-ID']= self.request_id
         body = ''
 
         try:
@@ -129,10 +130,11 @@ class ZunZun(object):
             if e.title:
                 body = e.to_json()
 
-            self.log.debug(dict((x,y) for x, y in (
+            self.log.error(dict((x,y) for x, y in (
                 ('API', self.version),
                 ('URI', self.URI),
-                ('HTTPError', status )
+                ('HTTPError', status ),
+                ('body', json.loads(e.to_json()))
                 )))
 
         except Exception, e:
@@ -144,7 +146,7 @@ class ZunZun(object):
                 ('environ', {k: str(environ[k]) for k in environ.keys()})
                 )))
 
-        start_response(getattr(http_status_codes, 'HTTP_%d' % status), list(headers.items()))
+        start_response(getattr(http_status_codes, 'HTTP_%d' % status), list(self.headers.items()))
         return body
 
     def router(self):
@@ -227,15 +229,15 @@ class ZunZun(object):
 
             py_mod = imp.load_source(mod_name, module_path)
 
+            self.log.debug(dict((x,y) for x, y in (
+                ('API', self.version),
+                ('URI', self.URI),
+                ('dispatching', (mod_name, module_path))
+                )))
             try:
-                self.log.debug(dict((x,y) for x, y in (
-                    ('API', self.version),
-                    ('URI', self.URI),
-                    ('dispatching', (mod_name, module_path))
-                    )))
                 return py_mod.APIResource(self)
-            except:
-                raise HTTPException(500, title="[ %s ] missing APIResource class" % mod_name)
+            except Exception, e:
+                raise HTTPException(500, title="module [ %s ] throw exception" % mod_name, description=e)
 
     def register_routes(self, routes):
         """compile regex pattern for routes

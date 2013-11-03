@@ -18,7 +18,7 @@ class HTTPError(Exception):
         self.code = code
 
     def to_json(self):
-        return json.dumps({k: v for k, v in self.__dict__.items() if v},
+        return json.dumps({k: str(v) for k, v in self.__dict__.items() if v},
                 sort_keys=True,
                 indent=4)
 

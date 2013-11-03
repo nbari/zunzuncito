@@ -14,4 +14,4 @@ routes = [
     ('/teste', 'test_put', 'PUT')
 ]
 
-app = zunzuncito.ZunZun(document_root, versions, routes, debug=True)
+app = zunzuncito.ZunZun(document_root, versions, routes, debug=False)
