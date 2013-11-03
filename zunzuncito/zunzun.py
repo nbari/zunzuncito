@@ -143,7 +143,7 @@ class ZunZun(object):
                 ('API', self.version),
                 ('URI', self.URI),
                 ('Exception', e),
-                ('environ', {k: str(environ[k]) for k in environ.keys()})
+                ('environ', environ)
                 )))
 
         start_response(getattr(http_status_codes, 'HTTP_%d' % status), list(self.headers.items()))
