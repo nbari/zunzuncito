@@ -70,9 +70,17 @@ class ZunZun(object):
             self.register_routes(routes)
 
     def __call__(self, environ, start_response):
+        """See pep 3333
+
+        :param environ:
+            A WSGI environment
+        :param start_response:
+            A callable accepting a status code, a list of headers and an
+            optional exception context to start the response.
+        :returns:
+            An iterable with the response to return to the client.
         """
-        try to be compliant with pep 3333 so that any WSGI can serve the app
-        """
+
         """
         get the REQUEST_ID
         """
