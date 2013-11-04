@@ -4,15 +4,16 @@ ZunZuncito
 micro-framework for creating REST API's
 """
 
-import http_status_codes
 import imp
 import json
 import logging
 import os
 import re
+
 from itertools import ifilter
-from tools import HTTPError, MethodException, HTTPException, LogFormatter
 from uuid import uuid4
+from zunzuncito import http_status_codes
+from zunzuncito.tools import HTTPError, MethodException, HTTPException, LogFormatter
 
 
 class ZunZun(object):
@@ -199,7 +200,7 @@ class ZunZun(object):
                 py_mod = module
                 self.log.debug(dict((x, y) for x, y in (
                     ('API', self.version),
-                    ('regex', self.URI),
+                    ('regex_match', (regex.pattern, self.URI))
                 )))
                 break
 
