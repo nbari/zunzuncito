@@ -10,17 +10,20 @@ from functools import wraps
 
 class HTTPError(Exception):
 
-    def __init__(self, status, title=None, description=None, headers=None, code=None):
+    def __init__(self, status, title=None, description=None,
+                 headers=None, code=None, display=False):
         self.status = status
         self.title = title
         self.description = description
         self.headers = headers
         self.code = code
+        self.display = display
 
     def to_json(self):
-        return json.dumps({k: str(v) for k, v in self.__dict__.items() if v},
-                sort_keys=True,
-                indent=4)
+        return json.dumps({k: str(v) for k, v in self.__dict__.items()
+                           if v and k != 'display'},
+                          sort_keys=True,
+                          indent=4)
 
 
 class MethodException(HTTPError):
@@ -45,7 +48,8 @@ def allow_methods(*methods):
 
         @wraps(f)
         def wrapped(self, *args, **kwargs):
-            if self.api.method.lower() not in [x.lower() for x in list(methods)]:
+            if self.api.method.lower() not in [x.lower()
+                                               for x in list(methods)]:
                 raise MethodException()
             else:
                 return f(self, *args, **kwargs)
@@ -59,28 +63,28 @@ class LogFormatter(logging.Formatter):
     converter = time.gmtime
 
     reserved_keys = [
-            'args',
-            'asctime',
-            'created',
-            'exc_info',
-            'exc_text',
-            'filename',
-            'funcName',
-            'levelname',
-            'levelno',
-            'lineno',
-            'message',
-            'module',
-            'msecs',
-            'msg',
-            'name',
-            'pathname',
-            'process',
-            'processName',
-            'relativeCreated',
-            'thread',
-            'threadName'
-            ]
+        'args',
+        'asctime',
+        'created',
+        'exc_info',
+        'exc_text',
+        'filename',
+        'funcName',
+        'levelname',
+        'levelno',
+        'lineno',
+        'message',
+        'module',
+        'msecs',
+        'msg',
+        'name',
+        'pathname',
+        'process',
+        'processName',
+        'relativeCreated',
+        'thread',
+        'threadName'
+    ]
 
     def __init__(self, *args, **kwargs):
         super(LogFormatter, self).__init__(*args, **kwargs)
@@ -108,7 +112,7 @@ class LogFormatter(logging.Formatter):
         if "asctime" in self.required_fields:
             ct = self.converter(record.created)
             t = time.strftime("%Y-%m-%d %H:%M:%S", ct)
-            record.asctime  = "%s,%03d" % (t, record.msecs)
+            record.asctime = "%s,%03d" % (t, record.msecs)
 
         log_record = {}
 
@@ -116,10 +120,12 @@ class LogFormatter(logging.Formatter):
             log_record[field] = record.__dict__.get(field)
 
         for key, value in record.__dict__.iteritems():
-            #this allows to have numeric keys
-            if (key not in self.reserved_keys
-                and not (hasattr(key,"startswith") and key.startswith('_'))
-            ):
+            """See https://github.com/madzak/python-json-logger
+            this allows to have numeric keys
+            """
+            if (key not in self.reserved_keys and not (
+                    hasattr(key, "startswith") and key.startswith('_')
+            )):
                 log_record[key] = value
 
         return json.dumps(log_record, sort_keys=True, indent=indent)
