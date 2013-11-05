@@ -199,7 +199,7 @@ class ZunZun(object):
                 break
 
         """
-        if no match, try find API resource /py_mod/command/args
+        if no matches, try to find API resource /py_mod/command/args
         """
         if not py_mod:
             self.resources = [x.strip()
@@ -212,7 +212,7 @@ class ZunZun(object):
                 py_mod = self.resources[0]
 
         """
-        by default the zun_ prefix is appended, this is to avoid posible
+        by default the zun_ prefix is appended, this is to avoid possible
         conflicts, example if you want to have a module call 'gevent' the
         directory structure should be zun_gevent/zun_gevent.py, the URI:
         http://yourapi.tld/v1/gevent/
