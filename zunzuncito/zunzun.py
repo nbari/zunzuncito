@@ -7,7 +7,6 @@ micro-framework for creating REST API's
 import imp
 import json
 import logging
-import os
 import re
 
 from itertools import ifilter
@@ -18,14 +17,8 @@ from zunzuncito.tools import HTTPError, MethodException, HTTPException, LogForma
 
 class ZunZun(object):
 
-    def __init__(self, document_root=None, versions=None,
-                 routes=None, suffix='zun', debug=False):
-        if document_root:
-            self.document_root = os.path.abspath(document_root)
-            if not os.access(self.document_root, os.R_OK):
-                raise Exception('Document root not readable')
-        else:
-            raise Exception('Document root missing')
+    def __init__(self, root, versions=None,
+                 routes=None, prefix='zun_', debug=False):
 
         if versions:
             """versions:
@@ -48,10 +41,11 @@ class ZunZun(object):
         set defauls
         """
         self.headers = {}
+        self.prefix = prefix
         self.request_id = None
         self.resources = []
+        self.root = root
         self.routes = []
-        self.suffix = suffix
         self.version = self.versions[0]
 
         """
@@ -218,51 +212,32 @@ class ZunZun(object):
                 py_mod = self.resources[0]
 
         """
-        by default the _zun suffix is appended, this is to avoid posible
+        by default the zun_ prefix is appended, this is to avoid posible
         conflicts, example if you want to have a module call 'gevent' the
-        directory structure should be gevent_zun/gevent_zun.py, the URI:
-        http://yourapi.tld/gevent/
-        you can change the suffix when starting the class
+        directory structure should be zun_gevent/zun_gevent.py, the URI:
+        http://yourapi.tld/v1/gevent/
+        you can change the prefix when starting the class
         see PEP: 395
         """
-        py_mod = py_mod.lower()
-        module_path = os.path.join(self.document_root, '%s/%s_%s/%s_%s.py' % (
+        module_name = '%s%s' % (self.prefix.lower(), py_mod.lower())
+        module_path = '%s.%s.%s.%s' % (
+            self.root,
             self.version,
-            py_mod,
-            self.suffix,
-            py_mod,
-            self.suffix)
-        )
+            module_name,
+            module_name)
 
-        if not os.access(module_path, os.R_OK):
-            self.log.error(dict((x, y) for x, y in (
-                ('API', self.version),
-                ('URI', self.URI),
-                ('py_mod', py_mod),
-                ('msg', 'py_mod is not readable'),
-            )))
-            raise HTTPException(
-                500,
-                title="[ %s ] module not readable" %
-                py_mod)
-        else:
-            mod_name, file_ext = os.path.splitext(
-                os.path.split(module_path)[-1])
-
-            py_mod = imp.load_source(mod_name, module_path)
-
+        try:
             self.log.debug(dict((x, y) for x, y in (
                 ('API', self.version),
                 ('URI', self.URI),
-                ('dispatching', (mod_name, module_path))
+                ('dispatching', (module_name, module_path))
             )))
-
-            try:
-                return py_mod.APIResource(self)
-            except Exception as e:
-                raise HTTPException(500,
-                                    title="[ %s ] throw exception" % mod_name,
-                                    description=e)
+            return __import__(module_path, fromlist=['']).APIResource(self)
+        except Exception as e:
+            raise HTTPException(
+                500,
+                title="[ %s ] throw exception" % module_name,
+                description=e)
 
     def register_routes(self, routes):
         """compile regex pattern for routes

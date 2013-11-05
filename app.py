@@ -3,7 +3,7 @@
 import os
 import zunzuncito
 
-document_root = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'API/')
+root = 'my_api'
 
 versions = ['v0', 'v1', 'v2']
 
@@ -14,4 +14,4 @@ routes = [
     ('/teste', 'test_put', 'PUT')
 ]
 
-app = zunzuncito.ZunZun(document_root, versions, routes, debug=False)
+app = zunzuncito.ZunZun(root, versions, routes, debug=False)
