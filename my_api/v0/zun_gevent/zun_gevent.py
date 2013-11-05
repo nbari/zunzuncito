@@ -4,7 +4,8 @@ default resource
 import json
 import gevent
 import gevent.socket
-from zunzuncito.tools import MethodException, HTTPException, LogAdapter, allow_methods
+from zunzuncito import http_status_codes
+from zunzuncito.tools import MethodException, HTTPException, allow_methods
 
 def bg_task():
     for i in range(1, 10):
@@ -24,6 +25,7 @@ class APIResource(object):
         self.api = api
         self.status = 200
         self.headers = {}
+        print '---xx---'
 
     def dispatch(self):
         t = gevent.spawn(long_task)
