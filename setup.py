@@ -1,4 +1,5 @@
 import imp
+from os import path
 from setuptools import setup
 
 VERSION = imp.load_source(
