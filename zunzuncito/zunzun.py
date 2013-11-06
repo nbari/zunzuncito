@@ -26,7 +26,7 @@ class ZunZun(object):
             """
             if isinstance(versions, list):
                 versions = [x.lower().strip()
-                            for x in versions if x and not x.isspace()]
+                            for x in map(str, versions) if x.strip()]
                 if versions:
                     self.versions = versions
                 else:
@@ -204,7 +204,7 @@ class ZunZun(object):
         if not py_mod:
             self.resources = [x.strip()
                               for x in self.URI.split('?')[0].split('/')
-                              if x and not x.isspace()]
+                              if x.strip()]
 
             if not self.resources:
                 py_mod = 'default'
