@@ -1,6 +1,4 @@
 import imp
-import sys
-from os import path
 from setuptools import setup
 
 VERSION = imp.load_source(
@@ -21,12 +19,18 @@ setup(
     keywords='wsgi web api framework rest http',
     url='https://github.com/nbari/zunzuncito',
     packages=['zunzuncito'],
+    long_description=open('README.md', 'r').read(),
     classifiers=[
-        'Development Status :: 1 - Beta',
-        'Topic :: Internet :: WWW/HTTP :: WSGI',
-        'Topic :: Software Development :: Libraries :: Application Frameworks',
+        'Development Status :: 4 - Beta',
+        'Environment :: Console',
+        'Environment :: Web Environment'
+        'Intended Audience :: Developers',
+        'Intended Audience :: System Administrators',
+        'License :: OSI Approved :: BSD License',
+        'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
-        'License :: OSI Approved :: BSD License',
+        'Topic :: Internet :: WWW/HTTP :: WSGI',
+        'Topic :: Software Development :: Libraries :: Application Frameworks'
     ],
 )
