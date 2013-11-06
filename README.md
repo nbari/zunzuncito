@@ -3,4 +3,4 @@ zunzuncito
 
 micro-framework for creating REST API's.
 
-pip install https://github.com/nbari/zunzuncito.git
+pip install -e git+https://github.com/nbari/zunzuncito.git#egg=zunzuncito
