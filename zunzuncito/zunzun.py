@@ -1,5 +1,4 @@
-"""
-ZunZuncito
+"""ZunZuncito
 
 micro-framework for creating REST API's
 """
@@ -117,7 +116,7 @@ class ZunZun(object):
         """
         self.headers['Content-Type'] = 'application/json; charset=UTF-8'
         self.headers['Request-ID'] = self.request_id
-        body = ''
+        body = []
 
         try:
             resource = self.router()
@@ -129,7 +128,7 @@ class ZunZun(object):
                 self.headers = e.headers
 
             if e.display:
-                body = e.to_json()
+                body.append(e.to_json())
 
             self.log.error(dict((x, y) for x, y in (
                 ('API', self.version),
