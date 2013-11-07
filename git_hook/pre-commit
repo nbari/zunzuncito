@@ -6,4 +6,4 @@ commits=`git shortlog | wc -l`;
 
 find . -type f -iname "version.py" -print0 | xargs -0 sed -i '' "s/^commits.*/commits = '$((commits - 1))'/g"
 
-#git update-index --again
+git update-index --again
