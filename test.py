@@ -3,7 +3,7 @@ import zunzuncito
 
 
 class ZunZunTest(unittest.TestCase):
-    versions = ['  ', '', 1, 'v0', 'my version', (1,)]
+    versions = ['  ', '', 1, 'v0', 'my version', (1,), 'api/v1']
 
     routes = [
         ('/.*', 'default'),
@@ -15,7 +15,7 @@ class ZunZunTest(unittest.TestCase):
 
     def test_versions(self):
         zun = zunzuncito.ZunZun('/tmp', self.versions)
-        self.assertEqual(4, len(zun.versions))
+        self.assertEqual(5, len(zun.versions))
 
     def test_register_routes(self):
         zun = zunzuncito.ZunZun('/tmp', self.versions, self.routes)

@@ -1,8 +1,6 @@
 """
 test_upload resource
 """
-#import cgi
-#import cgitb
 import logging
 import os
 from zunzuncito import http_status_codes
@@ -36,19 +34,39 @@ class APIResource(object):
         except:
             raise HTTPException(400)
 
-        try:
-            chunk_size = int(environ.get('CONTENT_LENGTH', 0))
-            content_range = environ.get(
-                'HTTP_CONTENT_RANGE', 'bytes 0-%d/%d' %
-                (chunk_size, chunk_size)).split()[1].split('/')
+        """rfc2616-sec14.html
+        see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html
+        see http://www.grid.net.ru/nginx/resumable_uploads.en.html
+
+        """
+        content_range = environ.get('HTTP_CONTENT_RANGE', 0)
+
+        length = int(environ.get('CONTENT_LENGTH', 0))
+
+        if content_range:
+            content_range = content_range.split()[1].split('/')
+
             index, offset = [int(x) for x in content_range[0].split('-')]
+
             total_size = int(content_range[1])
-            if chunk_size == 0:
+
+            if length:
+                chunk_size = length
+            elif offset > index:
                 chunk_size = (offset - index) + 1
-        except ValueError:
-            raise HTTPException(411)
+            elif total_size:
+                chunk_size = total_size
+            else:
+                raise HTTPException(416)
+        elif length:
+            chunk_size = length
+            total_size = length
+        else:
+            raise HTTPException(400)
 
         stream = environ['wsgi.input']
+
+        body = []
 
         try:
             temp_file = os.path.join(
@@ -56,7 +74,6 @@ class APIResource(object):
                 temp_name)
             with open(temp_file, 'a+b') as f:
                 f.truncate(index)
-                stream = environ['wsgi.input']
 
                 while chunk_size > 0:
                     # buffer size
@@ -69,11 +86,10 @@ class APIResource(object):
                 file_size = f.tell()
 
             if file_size == total_size:
-                self.status = 201
-                body = ''
+                self.status = 200
             else:
-                self.status = 206
-                body = '%d-%d/%d' % (index, offset, total_size)
+                self.status = 201
+                body.append('%d-%d/%d' % (index, offset, total_size))
 
             self.log.info(dict((x, y) for x, y in (
                 ('index', index),
