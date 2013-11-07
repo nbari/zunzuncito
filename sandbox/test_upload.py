@@ -26,6 +26,8 @@ def main(file, url):
 
     content_md5 = base64.encodestring(hashlib.md5(f.read()).digest()).strip()
 
+    f.seek(0)
+
     index = 0
     offset = 0
     headers = {}
@@ -50,5 +52,5 @@ def main(file, url):
 
 if __name__ == '__main__':
     url = 'http://localhost:8080/test_upload/file_name'
-    #url = 'http://requestb.in/1kay3pk1'
+    # url = 'http://requestb.in/1kay3pk1'
     main('images/test_image_%d.jpg' % randint(1, 3), url)
