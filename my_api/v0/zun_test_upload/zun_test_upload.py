@@ -1,7 +1,6 @@
 """
 test_upload resource
 """
-import io
 import logging
 import os
 from zunzuncito import http_status_codes
@@ -15,7 +14,6 @@ class APIResource(object):
         self.status = 200
         self.headers = api.headers.copy()
         self.log = logging.getLogger()
-        # self.log.setLevel('DEBUG')
         self.log.setLevel('INFO')
         self.log = logging.LoggerAdapter(
             logging.getLogger(), {
@@ -38,7 +36,6 @@ class APIResource(object):
         """rfc2616-sec14.html
         see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html
         see http://www.grid.net.ru/nginx/resumable_uploads.en.html
-
         """
         content_range = environ.get('HTTP_CONTENT_RANGE', 0)
 
@@ -60,8 +57,9 @@ class APIResource(object):
             else:
                 raise HTTPException(416)
         elif length:
-            chunk_size = length
-            total_size = length
+            chunk_size = total_size = length
+            index = 0
+            offset = 0
         else:
             raise HTTPException(400)
 
@@ -73,20 +71,31 @@ class APIResource(object):
             temp_file = os.path.join(
                 os.path.dirname('/tmp/test_upload/'),
                 temp_name)
-            with io.open(temp_file, 'a+b') as f:
+
+            with open(temp_file, 'a+b') as f:
+                original_file_size = f.tell()
+
                 f.truncate(index)
+                f.seek(0)
+
+                bytes_to_write = chunk_size
 
                 while chunk_size > 0:
                     # buffer size
-                    part = stream.read(min(chunk_size, 1024 * 64))
-                    if not part:
+                    chunk = stream.read(min(chunk_size, 65536))
+                    if not chunk:
                         break
-                    f.write(part)
-                    chunk_size -= len(part)
+                    f.write(chunk)
+                    chunk_size -= len(chunk)
 
-                file_size = f.tell()
+                bytes_written = f.tell()
 
-            if file_size == total_size:
+                if bytes_written != bytes_to_write:
+                    f.truncate(original_file_size)
+                    f.close()
+                    raise HTTPException(416)
+
+            if os.stat(temp_file).st_size == total_size:
                 self.status = 200
             else:
                 self.status = 201
@@ -98,7 +107,7 @@ class APIResource(object):
                 ('size', total_size),
                 ('temp_file', temp_file),
                 ('status', self.status),
-                #('env', environ),
+                #  ('env', environ),
             )))
 
             start_response(
