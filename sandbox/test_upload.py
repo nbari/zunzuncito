@@ -1,8 +1,11 @@
 import os
 import requests
 import uuid
+import hashlib
+import base64
 from random import randint
 from uuid import uuid4
+
 
 def read_in_chunks(file_object, chunk_size=65536):
     while True:
@@ -10,6 +13,7 @@ def read_in_chunks(file_object, chunk_size=65536):
         if not data:
             break
         yield data
+
 
 def main(file, url):
     content_name = str(file)
@@ -20,6 +24,8 @@ def main(file, url):
 
     f = open(content_path)
 
+    content_md5 = base64.encodestring(hashlib.md5(f.read()).digest()).strip()
+
     index = 0
     offset = 0
     headers = {}
@@ -29,17 +35,20 @@ def main(file, url):
         offset = index + len(chunk)
         headers['Content-Type'] = 'application/octet-stream'
         headers['Content-length'] = content_size
-        headers['Content-Range'] = 'bytes %s-%s/%s' % (index, offset, content_size)
+        headers['Content-Range'] = 'bytes %s-%s/%s' % (
+            index, offset, content_size)
         headers['Session-ID'] = session_id
+        headers['Content-MD5'] = content_md5
+
         index = offset
         try:
             r = requests.put(url, data=chunk, headers=headers)
             print "r: %s, Content-Range: %s" % (r, headers['Content-Range'])
-        except Exception, e:
+        except Exception as e:
             print e
 
 
 if __name__ == '__main__':
     url = 'http://localhost:8080/test_upload/file_name'
     #url = 'http://requestb.in/1kay3pk1'
-    main('images/test_image_%d.jpg' % randint(1,3), url)
+    main('images/test_image_%d.jpg' % randint(1, 3), url)
