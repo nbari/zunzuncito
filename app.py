@@ -6,6 +6,8 @@ To run:
 uwsgi --http :8080 --wsgi-file app.py --callable app --master
 
 uwsgi --http :8080 --wsgi-file app.py --callable app --master --processes 2 --threads 2 --stats 127.0.0.1:8181 --harakiri 30
+
+gunicorn -b :8080 -w4 app:app
 """
 
 import zunzuncito
