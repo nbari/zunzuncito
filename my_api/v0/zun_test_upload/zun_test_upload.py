@@ -1,6 +1,7 @@
 """
 test_upload resource
 """
+import io
 import logging
 import os
 from zunzuncito import http_status_codes
@@ -72,7 +73,7 @@ class APIResource(object):
             temp_file = os.path.join(
                 os.path.dirname('/tmp/test_upload/'),
                 temp_name)
-            with open(temp_file, 'a+b') as f:
+            with io.open(temp_file, 'a+b') as f:
                 f.truncate(index)
 
                 while chunk_size > 0:
