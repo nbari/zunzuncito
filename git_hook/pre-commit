@@ -1,8 +1,6 @@
 #!/bin/sh
 
-commits=`git shortlog | wc -l`;
-
-#num=$((commits - 1))
+commits=$(git rev-list HEAD --count)
 
 find . -type f -iname "version.py" -print0 | xargs -0 sed -i '' "s/^commits.*/commits = '$((commits - 1))'/g"
 
