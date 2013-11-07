@@ -2,6 +2,6 @@
 
 COMMITS=$(git rev-list HEAD --count)
 
-find . -type f -iname "version.py" -print0 | xargs -0 sed -i '' "s/^commits.*/commits = '$COMMITS'/g"
+find . -type f -iname "version.py" -print0 | xargs -0 sed -i '' "s/^commits.*/commits = '$((COMMITS + 1))'/g"
 
 git update-index --again
