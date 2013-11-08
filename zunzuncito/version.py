@@ -2,7 +2,7 @@
 
 major.minor.commits
 """
-commits = '68'
+commits = '69'
 
 VERSION_TUPLE = (0, 1, commits)
 
