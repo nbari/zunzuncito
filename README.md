@@ -1,15 +1,7 @@
-zunzuncito
-==========
-
-micro-framework for creating REST API's.
-
-python setup.py install
-
-
 ### Design Goals
 * Keep it simple and small, avoid extra complexity at all cost [KISS](http://en.wikipedia.org/wiki/KISS_principle).
 * Creation of routes on the fly or by defining regular expressions.
-* Support API versions out of the box with out altering routes.
+* Support API versions out of the box without altering routes.
 * Via decorator or in a defined route, accept only certain HTTP methods. 
 * Follow the single responsibility principle.
 * Be compatible with any WSGI server, example: [uWSGI](http://uwsgi-docs.readthedocs.org/en/latest/), [Gunicorn](http://gunicorn.org/), [Twisted](http://twistedmatrix.com/), etc.
@@ -36,6 +28,8 @@ ZunZun is the name of the main class for the zunzuncito module.
 
 Example:
 
+Contents of file app.py:
+
     import zunzuncito
 
     root = 'my_api'
@@ -56,6 +50,10 @@ To run it with uWSGI:
 
     uwsgi --http :8080 --wsgi-file app.py --callable app --master
     
+### Install
+
+`python setup.py install`
+
 
 
  
