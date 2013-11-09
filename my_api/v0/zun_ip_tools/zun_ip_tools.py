@@ -37,10 +37,8 @@ class APIResource(object):
         data['REMOTE_ADDR'] = environ.get('REMOTE_ADDR', 0)
         data['URI'] = self.api.URI
         data['method'] = self.api.method
-        data['HTTP_X_APPENGINE_CITY'] = environ.get('HTTP_X_APPENGINE_CITY', 0)
-        data['HTTP_X_APPENGINE_CITYLATLONG'] = environ.get(
-            'HTTP_X_APPENGINE_CITYLATLONG', 0)
-        data['HTTP_X_APPENGINE_COUNTRY'] = environ.get(
-            'HTTP_X_APPENGINE_COUNTRY', 0)
+        data['city'] = environ.get('HTTP_X_APPENGINE_CITY', 0)
+        data['latlong'] = environ.get('HTTP_X_APPENGINE_CITYLATLONG', 0)
+        data['country'] = environ.get('HTTP_X_APPENGINE_COUNTRY', 0)
 
-        return json.dumps(data, sort_key=True, indent=4)
+        return json.dumps(data, sort_keys=True, indent=4)

@@ -32,7 +32,9 @@ routes = [
     # ('/.*', 'default'),
     ('/teste', 'test_get', 'GET'),
     ('/teste', 'test_post', 'POST'),
-    ('/teste', 'test_put', 'PUT')
+    ('/teste', 'test_put', 'PUT'),
+    ('/my', 'ip_tools', 'GET'),
+    ('/status/?.*', 'http_status', 'GET')
 ]
 
 app = zunzuncito.ZunZun(root, versions, routes, debug=False)

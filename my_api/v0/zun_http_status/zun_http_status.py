@@ -33,14 +33,13 @@ class APIResource(object):
             getattr(http_status_codes, 'HTTP_%d' %
                     self.status), list(headers.items()))
         data = {}
-        data['API'] = self.api.version
-        data['REMOTE_ADDR'] = environ.get('REMOTE_ADDR', 0)
-        data['URI'] = self.api.URI
-        data['method'] = self.api.method
-        data['HTTP_X_APPENGINE_CITY'] = environ.get('HTTP_X_APPENGINE_CITY', 0)
-        data['HTTP_X_APPENGINE_CITYLATLONG'] = environ.get(
-            'HTTP_X_APPENGINE_CITYLATLONG', 0)
-        data['HTTP_X_APPENGINE_COUNTRY'] = environ.get(
-            'HTTP_X_APPENGINE_COUNTRY', 0)
+        try:
+            data['status code'] = getattr(
+                http_status_codes, 'HTTP_%d' %
+                int(self.api.resources[1], 0))
+        except Exception as e:
+            data['status code'] = 'not found'
 
-        return json.dumps(data, sort_key=True, indent=4)
+        data['URI'] = self.api.URI
+
+        return json.dumps(data, sort_keys=True, indent=4)

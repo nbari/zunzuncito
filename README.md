@@ -228,7 +228,7 @@ root = 'my_api'
 versions = ['v0', 'v1']
 routes = [
     ('/my', 'ip_tools', 'GET'),
-    ('/status', 'http_status', 'GET'),
+    ('/status/?.*', 'http_status', 'GET')
 ]
 
 app = zunzuncito.ZunZun(root, versions, routes)

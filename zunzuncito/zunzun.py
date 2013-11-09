@@ -200,11 +200,11 @@ class ZunZun(object):
         """
         if no matches, try to find API resource /py_mod/command/args
         """
-        if not py_mod:
-            self.resources = [x.strip()
-                              for x in self.URI.split('?')[0].split('/')
-                              if x.strip()]
+        self.resources = [x.strip()
+                          for x in self.URI.split('?')[0].split('/')
+                          if x.strip()]
 
+        if not py_mod:
             if not self.resources:
                 py_mod = 'default'
             else:
@@ -232,7 +232,7 @@ class ZunZun(object):
                 ('dispatching', (module_name, module_path))
             )))
             return __import__(module_path, fromlist=['']).APIResource(self)
-        except IOError as e:
+        except ImportError as e:
             raise HTTPException(
                 501,
                 title="[ %s ] not found" % module_name,
