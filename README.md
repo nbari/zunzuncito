@@ -94,9 +94,9 @@ As you can see basically is a directory containing sub-directories the ones at t
 
     import my_api.v1.zun_default
 
-    where zun_default if from the api_resource 'default' that ends being a custom python module
+Where zun_default if from the api_resource 'default' that ends being a custom python module
 
-    * notice the prefix zun_
+* notice the prefix zun_
 
 This helps the router to dispatch all the request to an existing module, so continue with the flow, for the incoming request: http://api.zunzun.io/v1/gevent/ip we will try to find a module that matches the API resource 'gevent':
 
@@ -111,7 +111,10 @@ In case a list of routes is passed as an argument to the ZunZun instance, the ro
 The routes format is very simple, it can be something like:
 
 ```python
-# format is: regex pattern, handler (python module), allowed HTTP methods (defaults to ALL)
+"""
+format is:
+regex pattern, handler (python module), allowed HTTP methods (defaults to ALL)
+"""
 [
  ('/.*', default),
  ('/test', default, 'POST, PUT, PATCH'),
@@ -138,11 +141,13 @@ Well, this is more due the way python import modules, and basically is to avoid 
 
 In the previous example, the REQUEST_URI contains an **APIResource** with the word **gevent** the imported module name is in 'zun_gevent/zun_gevent.py' that gives the flexibility to use the [gevent](http://www.gevent.org/) library within your module without creating any conflict, your zun_gevent.py could look something like:
 
-        import gevent
-        import gevent.socket
-        ...
+```python
+import gevent
+import gevent.socket
+...
+```
 
-that way you could have any work with gevent or any other API resource having identical name of your current python modules without any conflict.
+That way you could have any work with gevent or any other API resource having identical name of your current python modules without any conflict.
 
 
 ### A basic example
