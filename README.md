@@ -7,7 +7,7 @@
 * Be compatible with any WSGI server, example: [uWSGI](http://uwsgi-docs.readthedocs.org/en/latest/), [Gunicorn](http://gunicorn.org/), [Twisted](http://twistedmatrix.com/), etc.
 * Structured Logging using JSON.
 * No template rendering.
-* Google App Engine compatible
+* Google App Engine compatible.
 
 > Documentation : [docs.zunzun.io](http://docs.zunzun.io)
 
