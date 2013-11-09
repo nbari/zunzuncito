@@ -3,12 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Zunzuncito</title>
+    <title>Zunzuncito by nbari</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
     <script src="javascripts/scale.fix.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -16,16 +17,14 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1 class="header">Zunzuncito</h1>
-        <p class="header">micro-framework for creating REST API's.</p>
-
+        <h1>Zunzuncito</h1>
+        <p>micro-framework for creating REST API's.</p>
+        <p class="view"><a href="https://github.com/nbari/zunzuncito">View the Project on GitHub <small>nbari/zunzuncito</small></a></p>
         <ul>
-          <li class="download"><a class="buttons" href="https://github.com/nbari/zunzuncito/zipball/master">Download ZIP</a></li>
-          <li class="download"><a class="buttons" href="https://github.com/nbari/zunzuncito/tarball/master">Download TAR</a></li>
-          <li><a class="buttons github" href="https://github.com/nbari/zunzuncito">View On GitHub</a></li>
+          <li><a href="https://github.com/nbari/zunzuncito/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/nbari/zunzuncito/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/nbari/zunzuncito">View On <strong>GitHub</strong></a></li>
         </ul>
-
-
       </header>
       <section>
         <h3>
@@ -39,12 +38,54 @@
 <li>Follow the single responsibility principle.</li>
 <li>Be compatible with any WSGI server, example: <a href="http://uwsgi-docs.readthedocs.org/en/latest/">uWSGI</a>, <a href="http://gunicorn.org/">Gunicorn</a>, <a href="http://twistedmatrix.com/">Twisted</a>, etc.</li>
 <li>Structured Logging using JSON.</li>
-</ul><hr><h3>
+<li>No template rendering.</li>
+</ul><h3>
 <a name="what--why-zunzuncito" class="anchor" href="#what--why-zunzuncito"><span class="octicon octicon-link"></span></a>What &amp; Why ZunZuncito</h3>
 
 <p>ZunZuncito is a python development that allows to create and maintain <a href="http://en.wikipedia.org/wiki/REST">REST</a> API's with out hassle.  </p>
 
-<p>The simplicity for sketching  and debugging helps to develop very fast, versioning is inherit by default, which allow to serve and maintain existing applications, while working in new releases without need to create separate instances, all the applications are  WSGI <a href="http://www.python.org/dev/peps/pep-0333/">PEP 333</a> compliant, allowing to migrate existing code to more robust frameworks, without need to modify existing code.</p>
+<p>The simplicity for sketching and debugging helps to develop very fast, versioning is inherit by default, which allow to serve and maintain existing applications, while working in new releases without need to create separate instances, all the applications are WSGI <a href="http://www.python.org/dev/peps/pep-0333/">PEP 333</a> compliant, allowing to migrate existing code to more robust frameworks, without need to modify existing code.</p>
+
+<p>The idea of creating ZunZuncito, was the need of a very small and light tool (batteries included), that could help to create and deploy REST API's quickly, without forcing the developers to learn or follow a complex flow, but in contrast, from the very beginning, guide them to properly structure their API, giving special attention to "versioned URI's", having with this a solid base that can be easy to maintain and to work in different versions on a single instance.</p>
+
+<h3>
+<a name="how-it-works" class="anchor" href="#how-it-works"><span class="octicon octicon-link"></span></a>How it works</h3>
+
+<p>The main application contains a <strong>ZunZun</strong> instance the one must be served by an WSGI compliant server, all request later are handle by custom python modules.</p>
+
+<p>All the custom python modules, follow the same structure, they basically consist off a class called <strong>APIResource</strong> which contains a method called <strong>dispatch</strong> that will require two arguments: a WSGI environment "environ" as first argument and a function "start_response" that will start the response, <a href="http://www.python.org/dev/peps/pep-0333/">see PEP 333</a></p>
+
+<p>ZunZun is the name of the main class for the zunzuncito module, and accept the following arguments:</p>
+
+<ol>
+<li>root  - Directory containing your API think of it like the "document root"</li>
+<li>versions - list of supported versions ['v0', 'v1', 'v1.1']</li>
+<li>routes - list of tupples defining your API routes</li>
+<li>prefix - 'zun_' by default</li>
+<li>debug  - True or False</li>
+</ol><p>Example:</p>
+
+<pre><code>import zunzuncito
+
+root = 'my_api'
+versions = ['v0', 'v1', 'v2']     
+routes = [
+    ('/test', 'test_get', 'GET, HEAD'),
+    ('/test', 'test_post', 'POST'),
+    ('/test', 'test_put', 'PUT')
+]
+app = zunzuncito.ZunZun(root, versions, routes)
+</code></pre>
+
+<p>To run it with gunicorn:</p>
+
+<pre><code>gunicorn -b :8080 -w4 app:app
+</code></pre>
+
+<p>To run it with uWSGI:</p>
+
+<pre><code>uwsgi --http :8080 --wsgi-file app.py --callable app --master
+</code></pre>
 
 <p>For example, if API v3.0 is the latest API version, the following two should be aliases (i.e. behave identically to all API requests):</p>
 
@@ -52,12 +93,13 @@
 <a href="http://api.zunzun.io/v3.0/customers/1234">http://api.zunzun.io/v3.0/customers/1234</a>
 <a href="http://api.zunzun.io/v3/customers/1234">http://api.zunzun.io/v3/customers/1234</a></p>
       </section>
-      <footer>
-        <p><small><a href="http://docs.zunzun.io">docs.zunzun.io</a></small></p>
-      </footer>
     </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/nbari">nbari</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-		          <script type="text/javascript">
+              <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
