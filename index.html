@@ -135,13 +135,13 @@ my_api
 <p>As you can see basically is a directory containing sub-directories the ones at the end are all python modules and can be called in a clean way like:</p>
 
 <pre><code>import my_api.v1.zun_default
-
-where zun_default if from the api_resource 'default' that ends being a custom python module
-
-* notice the prefix zun_
 </code></pre>
 
-<p>This helps the router to dispatch all the request to an existing module, so continue with the flow, for the incoming request: <a href="http://api.zunzun.io/v1/gevent/ip">http://api.zunzun.io/v1/gevent/ip</a> we will try to find a module that matches the API resource 'gevent':</p>
+<p>Where zun_default if from the api_resource 'default' that ends being a custom python module</p>
+
+<ul>
+<li>notice the prefix zun_</li>
+</ul><p>This helps the router to dispatch all the request to an existing module, so continue with the flow, for the incoming request: <a href="http://api.zunzun.io/v1/gevent/ip">http://api.zunzun.io/v1/gevent/ip</a> we will try to find a module that matches the API resource 'gevent':</p>
 
 <pre><code>'http://api.zunzun.io/v1/gevent/ip' ==&gt; ['v1', 'gevent', 'ip']
 version = v1
@@ -153,7 +153,10 @@ arguments = ip
 
 <p>The routes format is very simple, it can be something like:</p>
 
-<div class="highlight highlight-python"><pre><span class="c"># format is: regex pattern, handler (python module), allowed HTTP methods (defaults to ALL)</span>
+<div class="highlight highlight-python"><pre><span class="sd">"""</span>
+<span class="sd">format is:</span>
+<span class="sd">regex pattern, handler (python module), allowed HTTP methods (defaults to ALL)</span>
+<span class="sd">"""</span>
 <span class="p">[</span>
  <span class="p">(</span><span class="s">'/.*'</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
  <span class="p">(</span><span class="s">'/test'</span><span class="p">,</span> <span class="n">default</span><span class="p">,</span> <span class="s">'POST, PUT, PATCH'</span><span class="p">),</span>
@@ -182,12 +185,12 @@ arguments = ip
 
 <p>In the previous example, the REQUEST_URI contains an <strong>APIResource</strong> with the word <strong>gevent</strong> the imported module name is in 'zun_gevent/zun_gevent.py' that gives the flexibility to use the <a href="http://www.gevent.org/">gevent</a> library within your module without creating any conflict, your zun_gevent.py could look something like:</p>
 
-<pre><code>    import gevent
-    import gevent.socket
-    ...
-</code></pre>
+<div class="highlight highlight-python"><pre><span class="kn">import</span> <span class="nn">gevent</span>
+<span class="kn">import</span> <span class="nn">gevent.socket</span>
+<span class="o">...</span>
+</pre></div>
 
-<p>that way you could have any work with gevent or any other API resource having identical name of your current python modules without any conflict.</p>
+<p>That way you could have any work with gevent or any other API resource having identical name of your current python modules without any conflict.</p>
 
 <h3>
 <a name="a-basic-example" class="anchor" href="#a-basic-example"><span class="octicon octicon-link"></span></a>A basic example</h3>
