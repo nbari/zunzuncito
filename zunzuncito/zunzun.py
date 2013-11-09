@@ -232,9 +232,14 @@ class ZunZun(object):
                 ('dispatching', (module_name, module_path))
             )))
             return __import__(module_path, fromlist=['']).APIResource(self)
-        except Exception as e:
+        except IOError as e:
             raise HTTPException(
                 501,
+                title="[ %s ] not found" % module_name,
+                description=e)
+        except Exception as e:
+            raise HTTPException(
+                500,
                 title="[ %s ] throw exception" % module_name,
                 description=e)
 

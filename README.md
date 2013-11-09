@@ -7,6 +7,7 @@
 * Be compatible with any WSGI server, example: [uWSGI](http://uwsgi-docs.readthedocs.org/en/latest/), [Gunicorn](http://gunicorn.org/), [Twisted](http://twistedmatrix.com/), etc.
 * Structured Logging using JSON.
 * No template rendering.
+* Google App Engine compatible
 
 > Documentation : [docs.zunzun.io](http://docs.zunzun.io)
 
@@ -15,12 +16,12 @@ ZunZuncito is a [python](http://python.org/) module that allows to create and ma
 
 The simplicity for sketching and debugging helps to develop very fast; versioning is inherit by default, which allows to serve and maintain existing applications, while working in new releases without need to create separate instances, all the applications are WSGI [PEP 333](http://www.python.org/dev/peps/pep-0333/) compliant, allowing to migrate existing code to more robust frameworks, without need to modify existing code.
 
-The idea of creating ZunZuncito, was the need of a very small and light tool (batteries included), that could help to create and deploy REST API's quickly, without forcing the developers to learn or follow a complex flow, but in contrast, from the very beginning, guide them to properly structure their API, giving special attention to "versioned URI's", having with this a solid base that allow to work in different versions within a single ZunZun instance without interrupting service of any existing API [resources](http://en.wikipedia.org/wiki/Web_resource).
+The idea of creating ZunZuncito, was the need of a very small and light tool (batteries included), that could help to create and deploy REST API's quickly, without forcing the developers to learn or follow a complex flow, but in contrast, from the very beginning, guide them to properly structure their API, giving special attention to "versioned URI's", having with this a solid base that allows to work in different versions within a single ZunZun instance without interrupting service of any existing API [resources](http://en.wikipedia.org/wiki/Web_resource).
 
 
 ### How it works
 
-The main application contains a **ZunZun** instance the one must be served by an WSGI compliant server, all request later are handle by custom python modules; ZunZun is the name of the main class for the zunzuncito module.
+The main application contains a **ZunZun** instance that must be served by a WSGI compliant server. All request are later handled by custom python modules; ZunZun is the name of the main class for the zunzuncito module.
 
 All the custom python modules, follow the same structure, they basically consist off a class called **APIResource** which contains a method called **dispatch** that will require two arguments: a WSGI environment "environ" as first argument and a function "start_response" that will start the response, [see PEP 333](http://www.python.org/dev/peps/pep-0333/)
 
@@ -136,7 +137,7 @@ In the case of not founding a module, an HTTP status [501 Not Implemented](http:
 
 You may ask, why the need of the "zun_" prefix and why not just create a simple structure having the same name that the api_resource.
 
-Well, this is more due the way python import modules, and basically is to avoid collitions by having same modules with same hame,  you can change the prefix by passing it as an argument to the ZunZun instance or also disabling it by sending an empty prefix.
+Well, this is more due the way python import modules, and basically is to avoid collisions by having same modules with same name, you can change the prefix by passing it as an argument to the ZunZun instance or also disabling it by sending an empty prefix.
 
 In the previous example, the REQUEST_URI contains an **APIResource** with the word **gevent** the imported module name is in 'zun_gevent/zun_gevent.py' that gives the flexibility to use the [gevent](http://www.gevent.org/) library within your module without creating any conflict, your zun_gevent.py could look something like:
 
@@ -181,3 +182,89 @@ To run it with uWSGI:
     git clone https://github.com/nbari/zunzuncito.git
 
     python setup.py install
+
+### Demo
+
+Current demo running on Google App Engine.
+
+[http://api.zunzun.io](http://api.zunzun.io)
+
+available API resources:
+
+* /my
+* /status
+
+### GAE
+
+Tu have a ZunZun instance up and running in Google App Engine this are the configurations:
+
+Contents os the app.yaml file:
+
+```yaml
+application: <your-GAE-application-id>
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: no
+
+handlers:
+- url: /favicon\.ico
+-   static_files: favicon.ico
+-     upload: favicon\.ico
+-
+-     - url: .*
+-       script: main.py
+
+```
+
+Contents of the main.py file:
+
+```python
+
+from google.appengine.ext.webapp.util import run_wsgi_app
+import zunzuncito
+
+root = 'my_api'
+versions = ['v0', 'v1']
+routes = [
+    ('/my', 'ip_tools', 'GET'),
+    ('/status', 'http_status', 'GET'),
+]
+
+app = zunzuncito.ZunZun(root, versions, routes)
+
+run_wsgi_app(app)
+```
+
+Directory structure:
+
+<pre>
+<your-GAE-application-id>
+|--app.yaml
+|--main.py
+|--favicon.ico
+|--zunzuncito
+|  |--__init__.py
+|  |--http_status_codes.py
+|  |--tools.py
+|  `--zunzun.py`
+`--my_api
+  |--v0
+  | |--__init__.py
+  | |--zun_ip_tools
+  | | |--__init__.py
+  | | `--zun_ip_tools.py
+  | |--zun_http_status
+  | | |--__init__.py
+  | | `zun_http_status.py
+  `--v1
+    |--__init__.py
+    |--zun_ip_tools
+    | |--__init__.py
+    | `--zun_ip_tools.py
+    `--zun_http_status
+       |--__init__.py
+       `--zun_http_status.py
+</pre>
+
+Basically you just copy the zunzuncito module in to your GAE application directory, define your root, versions and routes, create a ZunZun objecte and focuse more on your API resources (custom python modules)
