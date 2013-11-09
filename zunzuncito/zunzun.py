@@ -234,7 +234,7 @@ class ZunZun(object):
             return __import__(module_path, fromlist=['']).APIResource(self)
         except Exception as e:
             raise HTTPException(
-                500,
+                501,
                 title="[ %s ] throw exception" % module_name,
                 description=e)
 
