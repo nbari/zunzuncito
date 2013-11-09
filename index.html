@@ -1,33 +1,35 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-
     <title>Zunzuncito by nbari</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
-
   <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Zunzuncito</h1>
+        <p class="header">micro-framework for creating REST API's.</p>
 
-    <header>
-      <div class="container">
-        <h1>Zunzuncito</h1>
-        <h2>micro-framework for creating REST API's.</h2>
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/nbari/zunzuncito/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/nbari/zunzuncito/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/nbari/zunzuncito">View On GitHub</a></li>
+        </ul>
 
-        <section id="downloads">
-          <a href="https://github.com/nbari/zunzuncito/zipball/master" class="btn">Download as .zip</a>
-          <a href="https://github.com/nbari/zunzuncito/tarball/master" class="btn">Download as .tar.gz</a>
-          <a href="https://github.com/nbari/zunzuncito" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-        </section>
-      </div>
-    </header>
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/nbari">nbari</a></p>
 
-    <div class="container">
-      <section id="main_content">
+
+      </header>
+      <section>
         <h3>
 <a name="design-goals" class="anchor" href="#design-goals"><span class="octicon octicon-link"></span></a>Design Goals</h3>
 
@@ -39,7 +41,7 @@
 <li>Follow the single responsibility principle.</li>
 <li>Be compatible with any WSGI server, example: <a href="http://uwsgi-docs.readthedocs.org/en/latest/">uWSGI</a>, <a href="http://gunicorn.org/">Gunicorn</a>, <a href="http://twistedmatrix.com/">Twisted</a>, etc.</li>
 <li>Structured Logging using JSON.</li>
-</ul><h3>
+</ul><hr><h3>
 <a name="what--why-zunzuncito" class="anchor" href="#what--why-zunzuncito"><span class="octicon octicon-link"></span></a>What &amp; Why ZunZuncito</h3>
 
 <p>ZunZuncito is a python development that allows to create and maintain <a href="http://en.wikipedia.org/wiki/REST">REST</a> API's with out hassle.  </p>
@@ -52,9 +54,12 @@
 <a href="http://api.zunzun.io/v3.0/customers/1234">http://api.zunzun.io/v3.0/customers/1234</a>
 <a href="http://api.zunzun.io/v3/customers/1234">http://api.zunzun.io/v3/customers/1234</a></p>
       </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
     </div>
-
-              <script type="text/javascript">
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		          <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
