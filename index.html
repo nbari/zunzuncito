@@ -34,7 +34,7 @@
 <li>Keep it simple and small, avoid extra complexity at all cost <a href="http://en.wikipedia.org/wiki/KISS_principle">KISS</a>.</li>
 <li>Creation of routes on the fly or by defining regular expressions.</li>
 <li>Support API versions out of the box without altering routes.</li>
-<li>Via decorator or in a defined route, accept only certain HTTP methods. </li>
+<li>Via decorator or in a defined route, accept only certain HTTP methods.</li>
 <li>Follow the single responsibility principle.</li>
 <li>Be compatible with any WSGI server, example: <a href="http://uwsgi-docs.readthedocs.org/en/latest/">uWSGI</a>, <a href="http://gunicorn.org/">Gunicorn</a>, <a href="http://twistedmatrix.com/">Twisted</a>, etc.</li>
 <li>Structured Logging using JSON.</li>
@@ -46,36 +46,165 @@
 <h3>
 <a name="what--why-zunzuncito" class="anchor" href="#what--why-zunzuncito"><span class="octicon octicon-link"></span></a>What &amp; Why ZunZuncito</h3>
 
-<p>ZunZuncito is a <a href="http://python.org/">python</a> module that allows to create and maintain <a href="http://en.wikipedia.org/wiki/REST">REST</a> API's with out hassle.  </p>
+<p>ZunZuncito is a <a href="http://python.org/">python</a> module that allows to create and maintain <a href="http://en.wikipedia.org/wiki/REST">REST</a> API's without hassle.</p>
 
 <p>The simplicity for sketching and debugging helps to develop very fast, versioning is inherit by default, which allow to serve and maintain existing applications, while working in new releases without need to create separate instances, all the applications are WSGI <a href="http://www.python.org/dev/peps/pep-0333/">PEP 333</a> compliant, allowing to migrate existing code to more robust frameworks, without need to modify existing code.</p>
 
-<p>The idea of creating ZunZuncito, was the need of a very small and light tool (batteries included), that could help to create and deploy REST API's quickly, without forcing the developers to learn or follow a complex flow, but in contrast, from the very beginning, guide them to properly structure their API, giving special attention to "versioned URI's", having with this a solid base that allow to work in different versions within a single ZunZun instance without interrupting service of any existing API <a href="http://en.wikipedia.org/wiki/Web_resource">resources</a>. </p>
+<p>The idea of creating ZunZuncito, was the need of a very small and light tool (batteries included), that could help to create and deploy REST API's quickly, without forcing the developers to learn or follow a complex flow, but in contrast, from the very beginning, guide them to properly structure their API, giving special attention to "versioned URI's", having with this a solid base that allow to work in different versions within a single ZunZun instance without interrupting service of any existing API <a href="http://en.wikipedia.org/wiki/Web_resource">resources</a>.</p>
 
 <h3>
 <a name="how-it-works" class="anchor" href="#how-it-works"><span class="octicon octicon-link"></span></a>How it works</h3>
 
-<p>The main application contains a <strong>ZunZun</strong> instance the one must be served by an WSGI compliant server, all request later are handle by custom python modules.</p>
+<p>The main application contains a <strong>ZunZun</strong> instance the one must be served by an WSGI compliant server, all request later are handle by custom python modules; ZunZun is the name of the main class for the zunzuncito module.</p>
 
 <p>All the custom python modules, follow the same structure, they basically consist off a class called <strong>APIResource</strong> which contains a method called <strong>dispatch</strong> that will require two arguments: a WSGI environment "environ" as first argument and a function "start_response" that will start the response, <a href="http://www.python.org/dev/peps/pep-0333/">see PEP 333</a></p>
 
-<p>ZunZun is the name of the main class for the zunzuncito module.</p>
+<p>ZunZun core turns around three arguments:</p>
 
-<p>Example:</p>
+<pre><code>root: directory containing all your API modules, see this like the "document_root"
+versions: list of supported versions ['v0', 'v1', 'v2']
+routes: list of tuples containing regex patterns, handlers and allowed http methods
+</code></pre>
+
+<blockquote>
+<p>In the docs you can find a more detailed overview of the ZunZun arguments and the class it self.</p>
+</blockquote>
+
+<p>When a new request arrive, the ZunZun router parses the REQUEST_URI in order to accomplish this pattern:</p>
+
+<pre><code>/version/api_resource/arguments
+</code></pre>
+
+<p>The router first analyse the URI and determines if it is versioned or not by finding a match with the current specified versions, in case none found, fallback to the default which is always the first item on the versions list in case one provided, or 'v0'.</p>
+
+<p>After this process, the REQUEST_URI becomes a list of resources something like:</p>
+
+<pre><code>['version, 'api_resource', 'arguments']
+</code></pre>
+
+<p>Suppose that the incoming request is:</p>
+
+<pre><code>'http://api.zunzun.io/v1/gevent/ip'
+</code></pre>
+
+<p>ZunZun will convert convert it to:</p>
+
+<pre><code>['v1', 'gevent', 'ip']
+</code></pre>
+
+<p>The second step on the router is to found a match within the routes list and the local modules, but before going further lets see the directory structure for the root (document_root) the first and required argument for the ZunZun class.</p>
+
+<pre>
+my_api
+|--__init__.py
+|--v0
+|  |--__init__.py
+|  |--zun_default
+|  |  |--__init__.py
+|  |  `--zun_default.py
+|  |--zun_gevent
+|  |  |--__init__.py
+|  |  `--zun_gevent.py
+|  `--zun_my
+|    |--__init__.py
+|    `--zun_my.py
+|--v1
+|  |--__init__.py
+|  |--zun_default
+|  |  |--__init__.py
+|  |  `--zun_default.py
+|  |--zun_gevent
+|  |  |--__init__.py
+|  |  `--zun_gevent.py
+|  `--zun_my
+|    |--__init__.py
+|    `--zun_my.py
+`--v2
+   |--__init__.py
+   |--zun_default
+   |  |--__init__.py
+   |  `--zun_default.py
+   |--zun_gevent
+   |  |--__init__.py
+   |  `--zun_gevent.py
+   `--zun_my
+     |--__init__.py
+     `--zun_my.py
+</pre>
+
+<p>As you can see basically is a directory containing sub-directories the ones at the end are all python modules and can be called in a clean way like:</p>
+
+<pre><code>import my_api.v1.zun_default
+
+where zun_default if from the api_resource 'default' that ends being a custom python module
+
+* notice the prefix zun_
+</code></pre>
+
+<p>This helps the router to dispatch all the request to an existing module, so continue with the flow, for the incoming request: <a href="http://api.zunzun.io/v1/gevent/ip">http://api.zunzun.io/v1/gevent/ip</a> we will try to find a module that matches the API resource 'gevent':</p>
+
+<pre><code>'http://api.zunzun.io/v1/gevent/ip' ==&gt; ['v1', 'gevent', 'ip']
+version = v1
+api_resource = gevent
+arguments = ip
+</code></pre>
+
+<p>In case a list of routes is passed as an argument to the ZunZun instance, the router will try to match the api_resource with the items of the rutes list, if no matches found it will try to found the module in the root directory.</p>
+
+<p>The routes format is very simple, it can be something like:</p>
+
+<pre><code># format is: regex pattern, handler (python module), allowed HTTP methods (defaults to ALL)
+[
+ ('/.*', default),
+ ('/test', default, 'POST, PUT, PATCH'),
+ ('(?:[0-9]{1,3}\.){3}[0-9]{1,3}', 'ip', 'GET')
+]
+</code></pre>
+
+<p>Lets suppose this routes where passed to the ZunZun instance, therefor the router would try to found a match between the api_resource <strong>gevent</strong> in our example with the regex patterns in the list, basically something like:</p>
+
+<pre><code>    gevent in: ['/.*', '/test', '(?:[0-9]{1,3}\.){3}[0-9]{1,3}']
+</code></pre>
+
+<p>if no match found then the router would try to load the module from the root directory using something like:</p>
+
+<pre><code>import my_api.v1.zun_gevent
+</code></pre>
+
+<p>In the case of not founding a module, an HTTP status <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">501 Not Implemented</a> code is returned to the client otherwiste the python module is imported by the router and and the request is handler entirely by the imported module</p>
+
+<h3>
+<a name="the-zun_-prefix" class="anchor" href="#the-zun_-prefix"><span class="octicon octicon-link"></span></a>The zun_ prefix</h3>
+
+<p>You may ask, why the need of the "zun_" prefix and why not just create a simple structure having the same name that the api_resource.</p>
+
+<p>Well, this is more due the way python import modules, and basically is to avoid collitions by having same modules with same hame,  you can change the prefix by passing it as an argument to the ZunZun instance or also disabling it by sending an empty prefix.</p>
+
+<p>In the previous example, the REQUEST_URI contains an <strong>APIResource</strong> with the word <strong>gevent</strong> the imported module name is in 'zun_gevent/zun_gevent.py' that gives the flexibility to use the <a href="http://www.gevent.org/">gevent</a> library within your module without creating any conflict, your zun_gevent.py could look something like:</p>
+
+<pre><code>    import gevent
+    import gevent.socket
+    ...
+</code></pre>
+
+<p>that way you could have any work with gevent or any other API resource having identical name of your current python modules without any conflict.</p>
+
+<h3>
+<a name="a-basic-example" class="anchor" href="#a-basic-example"><span class="octicon octicon-link"></span></a>A basic example</h3>
 
 <p>Contents of file app.py:</p>
 
-<pre><code>import zunzuncito
+<div class="highlight highlight-python"><pre><span class="kn">import</span> <span class="nn">zunzuncito</span>
 
-root = 'my_api'
-versions = ['v0', 'v1', 'v2']     
-routes = [
-    ('/my', 'ip_tools', 'GET'),
-    ('/status', 'http_status', 'GET'),
-    ('/upload/', 'test_post', 'PUT, POST')
-]
-app = zunzuncito.ZunZun(root, versions, routes)
-</code></pre>
+<span class="n">root</span> <span class="o">=</span> <span class="s">'my_api'</span>
+<span class="n">versions</span> <span class="o">=</span> <span class="p">[</span><span class="s">'v0'</span><span class="p">,</span> <span class="s">'v1'</span><span class="p">,</span> <span class="s">'v2'</span><span class="p">]</span>
+<span class="n">routes</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s">'/my'</span><span class="p">,</span> <span class="s">'ip_tools'</span><span class="p">,</span> <span class="s">'GET'</span><span class="p">),</span>
+    <span class="p">(</span><span class="s">'/status'</span><span class="p">,</span> <span class="s">'http_status'</span><span class="p">,</span> <span class="s">'GET'</span><span class="p">),</span>
+    <span class="p">(</span><span class="s">'/upload/'</span><span class="p">,</span> <span class="s">'test_post'</span><span class="p">,</span> <span class="s">'PUT, POST'</span><span class="p">)</span>
+<span class="p">]</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">zunzuncito</span><span class="o">.</span><span class="n">ZunZun</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">versions</span><span class="p">,</span> <span class="n">routes</span><span class="p">)</span>
+</pre></div>
 
 <p>To run it with gunicorn:</p>
 
@@ -90,7 +219,10 @@ app = zunzuncito.ZunZun(root, versions, routes)
 <h3>
 <a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a>Install</h3>
 
-<p><code>python setup.py install</code></p>
+<pre><code>git clone https://github.com/nbari/zunzuncito.git
+
+python setup.py install
+</code></pre>
       </section>
     </div>
     <footer>
