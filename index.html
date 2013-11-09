@@ -40,7 +40,7 @@
 <li>Be compatible with any WSGI server, example: <a href="http://uwsgi-docs.readthedocs.org/en/latest/">uWSGI</a>, <a href="http://gunicorn.org/">Gunicorn</a>, <a href="http://twistedmatrix.com/">Twisted</a>, etc.</li>
 <li>Structured Logging using JSON.</li>
 <li>No template rendering.</li>
-<li>Google App Engine compatible</li>
+<li>Google App Engine compatible.</li>
 </ul><blockquote>
 <p>Documentation : <a href="http://docs.zunzun.io">docs.zunzun.io</a></p>
 </blockquote>
@@ -239,7 +239,22 @@ python setup.py install
 <ul>
 <li>/my</li>
 <li>/status</li>
-</ul><h3>
+</ul><p>To get your current IP and location:</p>
+
+<pre><code>http://api.zunzun.io/my
+</code></pre>
+
+<p>To get only the IP:</p>
+
+<pre><code>http://api.zunzun.io/my/ip
+</code></pre>
+
+<p>For example to get the meaning of status code 201</p>
+
+<pre><code>http://api.zunzun.io/status/201
+</code></pre>
+
+<h3>
 <a name="gae" class="anchor" href="#gae"><span class="octicon octicon-link"></span></a>GAE</h3>
 
 <p>Tu have a ZunZun instance up and running in Google App Engine this are the configurations:</p>
@@ -271,8 +286,8 @@ python setup.py install
 <span class="n">root</span> <span class="o">=</span> <span class="s">'my_api'</span>
 <span class="n">versions</span> <span class="o">=</span> <span class="p">[</span><span class="s">'v0'</span><span class="p">,</span> <span class="s">'v1'</span><span class="p">]</span>
 <span class="n">routes</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="s">'/my'</span><span class="p">,</span> <span class="s">'ip_tools'</span><span class="p">,</span> <span class="s">'GET'</span><span class="p">),</span>
-    <span class="p">(</span><span class="s">'/status'</span><span class="p">,</span> <span class="s">'http_status'</span><span class="p">,</span> <span class="s">'GET'</span><span class="p">),</span>
+    <span class="p">(</span><span class="s">'/my/?.*'</span><span class="p">,</span> <span class="s">'ip_tools'</span><span class="p">,</span> <span class="s">'GET'</span><span class="p">),</span>
+    <span class="p">(</span><span class="s">'/status/?.*'</span><span class="p">,</span> <span class="s">'http_status'</span><span class="p">,</span> <span class="s">'GET'</span><span class="p">)</span>
 <span class="p">]</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">zunzuncito</span><span class="o">.</span><span class="n">ZunZun</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">versions</span><span class="p">,</span> <span class="n">routes</span><span class="p">)</span>
