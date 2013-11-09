@@ -11,7 +11,7 @@
 > Documentation : [docs.zunzun.io](http://docs.zunzun.io)
 
 ### What & Why ZunZuncito
-ZunZuncito is a [python](http://python.org/) module that allows to create and maintain [REST](http://en.wikipedia.org/wiki/REST) API's with out hassle.
+ZunZuncito is a [python](http://python.org/) module that allows to create and maintain [REST](http://en.wikipedia.org/wiki/REST) API's without hassle.
 
 The simplicity for sketching and debugging helps to develop very fast, versioning is inherit by default, which allow to serve and maintain existing applications, while working in new releases without need to create separate instances, all the applications are WSGI [PEP 333](http://www.python.org/dev/peps/pep-0333/) compliant, allowing to migrate existing code to more robust frameworks, without need to modify existing code.
 
@@ -26,9 +26,9 @@ All the custom python modules, follow the same structure, they basically consist
 
 ZunZun core turns around three arguments:
 
-    root: The diretory name containing all your API modules see this like the "document_root"
+    root: directory containing all your API modules, see this like the "document_root"
     versions: list of supported versions ['v0', 'v1', 'v2']
-    routes: list of tupples containing regex patterns, handlers and allowed http methods
+    routes: list of tuples containing regex patterns, handlers and allowed http methods
 
 > In the docs you can find a more detailed overview of the ZunZun arguments and the class it self.
 
@@ -36,11 +36,13 @@ When a new request arrive, the ZunZun router parses the REQUEST_URI in order to 
 
     /version/api_resource/arguments
 
-The router first analyse the URI and determines if it is versioned or not by finding a match with the current specified versions, in case none found, failback to the default wich is always the first item on the versions list in case one provieded, or 'v0', afther this proccess the REQUEST_URI becomes a list of resources something like:
+The router first analyse the URI and determines if it is versioned or not by finding a match with the current specified versions, in case none found, fallback to the default which is always the first item on the versions list in case one provided, or 'v0'.
+
+After this process, the REQUEST_URI becomes a list of resources something like:
 
     ['version, 'api_resource', 'arguments']
 
-Supose that the incoming request is:
+Suppose that the incoming request is:
 
     'http://api.zunzun.io/v1/gevent/ip'
 
@@ -48,7 +50,7 @@ ZunZun will convert convert it to:
 
     ['v1', 'gevent', 'ip']
 
-The second step on the router is to found a match within the routes list and the local modules, but before going further lets see the directory structure for the root (document_root) the first and required arguemnt for the ZunZun class.
+The second step on the router is to found a match within the routes list and the local modules, but before going further lets see the directory structure for the root (document_root) the first and required argument for the ZunZun class.
 
 <pre>
 my_api
@@ -92,11 +94,11 @@ As you can see basically is a directory containing sub-directories the ones at t
 
     import my_api.v1.zun_default
 
-    where zun_default if from the api_resource 'default' that ends beein a custom python module
+    where zun_default if from the api_resource 'default' that ends being a custom python module
 
     * notice the prefix zun_
 
-This helps the router to dispatch all the request to an existin module, so continue with the flow, for the incoming request: http://api.zunzun.io/v1/gevent/ip we will try to find a module that matches the API resource 'gevent':
+This helps the router to dispatch all the request to an existing module, so continue with the flow, for the incoming request: http://api.zunzun.io/v1/gevent/ip we will try to find a module that matches the API resource 'gevent':
 
 
     'http://api.zunzun.io/v1/gevent/ip' ==> ['v1', 'gevent', 'ip']
@@ -115,7 +117,7 @@ The routes format is very simple, it can be something like:
      ('(?:[0-9]{1,3}\.){3}[0-9]{1,3}', 'ip', 'GET')
     ]
 
-Lets supose this routes where passed to the ZunZun instance, thereforthe router would try to found a match between the api_resource **gevent** in our example with the regex patterns in the list, basically something like:
+Lets suppose this routes where passed to the ZunZun instance, therefor the router would try to found a match between the api_resource **gevent** in our example with the regex patterns in the list, basically something like:
 
         gevent in: ['/.*', '/test', '(?:[0-9]{1,3}\.){3}[0-9]{1,3}']
 
@@ -130,15 +132,15 @@ In the case of not founding a module, an HTTP status [501 Not Implemented](http:
 
 You may ask, why the need of the "zun_" prefix and why not just create a simple structure having the same name that the api_resource.
 
-Well, this is more due the way python import modules, and basically is to avoid collitions by having same modules with same hame,  you can change the prefix by passing it as an argument to the ZunZun instance or also disabiling it by sending an empty prefix.
+Well, this is more due the way python import modules, and basically is to avoid collitions by having same modules with same hame,  you can change the prefix by passing it as an argument to the ZunZun instance or also disabling it by sending an empty prefix.
 
-In the previous example, the REQUEST_URI contanins an **APIResource** with the word **gevent** the imported module name is in 'zun_gevent/zun_gevent.py' that gives the flexibility to use the [gevent](http://www.gevent.org/) library within your module with out creating any conflic, your zun_gevent.py could look something like:
+In the previous example, the REQUEST_URI contains an **APIResource** with the word **gevent** the imported module name is in 'zun_gevent/zun_gevent.py' that gives the flexibility to use the [gevent](http://www.gevent.org/) library within your module without creating any conflict, your zun_gevent.py could look something like:
 
         import gevent
         import gevent.socket
         ...
 
-that way you could have any work with gevent or any other API resource having identical name of your current python modules with out any conflic.
+that way you could have any work with gevent or any other API resource having identical name of your current python modules without any conflict.
 
 
 ### A basic example
