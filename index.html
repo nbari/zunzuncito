@@ -1,88 +1,79 @@
 <!DOCTYPE html>
 <html>
-
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta charset=utf-8"/>
     <meta name="description" content="Zunzuncito : micro-framework for creating REST API's." />
+    <title>zunzun.io</title>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <link rel="stylesheet" href="/stylesheets/screen.css" />
+    <script src="/javascripts/scale.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
     <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
-    <title>Zunzuncito</title>
   </head>
+<body>
+  <header>
+  <a href="/"><img src="/images/logo-dark.png" width="30" height="30" alt="Ordered List" /></a>
+</header>
 
-  <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/nbari/zunzuncito">View on GitHub</a>
-
-          <h1 id="project_title">Zunzuncito</h1>
-          <h2 id="project_tagline">micro-framework for creating REST API's.</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/nbari/zunzuncito/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/nbari/zunzuncito/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
+<article>
         <h3>
-<a name="design-goals" class="anchor" href="#design-goals"><span class="octicon octicon-link"></span></a>Design Goals</h3>
+            <a name="design-goals" class="anchor" href="#design-goals"><span class="octicon octicon-link"></span></a>Design Goals</h3>
 
-<ul>
-<li>Keep it simple, avoid extra complexity at all cost.</li>
-<li>Creation of routes on the fly or by defining regular expressions.</li>
-<li>Support API versions out of the box with out altering routes.</li>
-<li>Via decorator or in a defined route, accept only certain HTTP methods. </li>
-<li>Follow the single responsibility principle.</li>
-<li>Be compatible with any WSGI server, example: uWSGI, Gunicorn, Twisted, etc.</li>
-<li>Structured Logging using JSON.</li>
-</ul><h3>
-<a name="what--why-zunzuncito" class="anchor" href="#what--why-zunzuncito"><span class="octicon octicon-link"></span></a>What &amp; Why ZunZuncito</h3>
+        <ul>
+            <li>Keep it simple, avoid extra complexity at all cost.</li>
+            <li>Creation of routes on the fly or by defining regular expressions.</li>
+            <li>Support API versions out of the box with out altering routes.</li>
+            <li>Via decorator or in a defined route, accept only certain HTTP methods. </li>
+            <li>Follow the single responsibility principle.</li>
+            <li>Be compatible with any WSGI server, example: uWSGI, Gunicorn, Twisted, etc.</li>
+            <li>Structured Logging using JSON.</li>
+            </ul><h3>
+            <a name="what--why-zunzuncito" class="anchor" href="#what--why-zunzuncito"><span class="octicon octicon-link"></span></a>What &amp; Why ZunZuncito</h3>
 
-<p>ZunZuncito is a python development that allows to create and maintain REST API's with out hassle.  </p>
+        <p>ZunZuncito is a python development that allows to create and maintain REST API's with out hassle.  </p>
 
-<p>The simplicity for sketching  and debugging helps to develop very fast, versioning is inherit by default, which allow to serve and maintain existing applications, while working in new releases without need to create separate instances, all the applications are  WSGI PEP 333 compliant, allowing to migrate existing code to more robust frameworks, without need to modify existing code.</p>
+        <p>The simplicity for sketching  and debugging helps to develop very fast, versioning is inherit by default, which allow to serve and maintain existing applications, while working in new releases without need to create separate instances, all the applications are  WSGI PEP 333 compliant, allowing to migrate existing code to more robust frameworks, without need to modify existing code.</p>
 
-<p>For example, if API v3.0 is the latest API version, the following two should be aliases (i.e. behave identically to all API requests):</p>
+        <p>For example, if API v3.0 is the latest API version, the following two should be aliases (i.e. behave identically to all API requests):</p>
 
-<p><a href="http://api.zunzun.io/customers/1234">http://api.zunzun.io/customers/1234</a>
-<a href="http://api.zunzun.io/v3.0/customers/1234">http://api.zunzun.io/v3.0/customers/1234</a>
-<a href="http://api.zunzun.io/v3/customers/1234">http://api.zunzun.io/v3/customers/1234</a></p>
+        <p><a href="http://api.zunzun.io/customers/1234">http://api.zunzun.io/customers/1234</a>
+        <a href="http://api.zunzun.io/v3.0/customers/1234">http://api.zunzun.io/v3.0/customers/1234</a>
+        <a href="http://api.zunzun.io/v3/customers/1234">http://api.zunzun.io/v3/customers/1234</a></p>
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+</article>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Zunzuncito maintained by <a href="https://github.com/nbari">nbari</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-              <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-45578428-1");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
+<script>
+var path = window.location.pathname;
+document.getElementById('archive').href="http://archive.orderedlist.com" + path;
+</script>
 
 
-  </body>
+      <footer>
+      <p>Copyright &copy; 2013 Steve Smith. All Rights Reserved.</p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
+    <script type="text/javascript">
+      var headlines = document.getElementsByTagName('h2');
+
+      for (var i = 0; i < headlines.length; i++) {
+        var headline = headlines[i];
+        headline.innerHTML = '<span>' + headline.innerHTML + '</span>';
+      }
+
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+    try {
+      var pageTracker = _gat._getTracker("UA-45578428-1");
+    pageTracker._trackPageview();
+    } catch(err) {}
+
+    </script>
+
+
+</body>
 </html>
