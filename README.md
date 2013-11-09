@@ -110,16 +110,18 @@ In case a list of routes is passed as an argument to the ZunZun instance, the ro
 
 The routes format is very simple, it can be something like:
 
-    # format is: regex pattern, handler (python module), allowed HTTP methods (defaults to ALL)
-    [
-     ('/.*', default),
-     ('/test', default, 'POST, PUT, PATCH'),
-     ('(?:[0-9]{1,3}\.){3}[0-9]{1,3}', 'ip', 'GET')
-    ]
+```python
+# format is: regex pattern, handler (python module), allowed HTTP methods (defaults to ALL)
+[
+ ('/.*', default),
+ ('/test', default, 'POST, PUT, PATCH'),
+ ('(?:[0-9]{1,3}\.){3}[0-9]{1,3}', 'ip', 'GET')
+]
+```
 
 Lets suppose this routes where passed to the ZunZun instance, therefor the router would try to found a match between the api_resource **gevent** in our example with the regex patterns in the list, basically something like:
 
-        gevent in: ['/.*', '/test', '(?:[0-9]{1,3}\.){3}[0-9]{1,3}']
+    gevent in: ['/.*', '/test', '(?:[0-9]{1,3}\.){3}[0-9]{1,3}']
 
 if no match found then the router would try to load the module from the root directory using something like:
 
