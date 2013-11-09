@@ -194,6 +194,20 @@ available API resources:
 * /my
 * /status
 
+To get your current IP and location:
+
+
+    http://api.zunzun.io/my
+
+To get only the IP:
+
+    http://api.zunzun.io/my/ip
+
+
+For example to get the meaning of status code 201
+
+    http://api.zunzun.io/status/201
+
 ### GAE
 
 Tu have a ZunZun instance up and running in Google App Engine this are the configurations:
@@ -227,7 +241,7 @@ import zunzuncito
 root = 'my_api'
 versions = ['v0', 'v1']
 routes = [
-    ('/my', 'ip_tools', 'GET'),
+    ('/my/?.*', 'ip_tools', 'GET'),
     ('/status/?.*', 'http_status', 'GET')
 ]
 

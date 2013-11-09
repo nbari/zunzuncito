@@ -33,12 +33,20 @@ class APIResource(object):
             getattr(http_status_codes, 'HTTP_%d' %
                     self.status), list(headers.items()))
         data = {}
-        data['API'] = self.api.version
-        data['REMOTE_ADDR'] = environ.get('REMOTE_ADDR', 0)
-        data['URI'] = self.api.URI
-        data['method'] = self.api.method
-        data['city'] = environ.get('HTTP_X_APPENGINE_CITY', 0)
-        data['latlong'] = environ.get('HTTP_X_APPENGINE_CITYLATLONG', 0)
-        data['country'] = environ.get('HTTP_X_APPENGINE_COUNTRY', 0)
+        try:
+            my_ip = True if self.api.resources[1] == 'ip' else False
+        except:
+            my_ip = False
+
+        if my_ip:
+            data['ip'] = environ.get('REMOTE_ADDR', 0)
+        else:
+            data['API'] = self.api.version
+            data['ip'] = environ.get('REMOTE_ADDR', 0)
+            data['URI'] = self.api.URI
+            data['method'] = self.api.method
+            data['city'] = environ.get('HTTP_X_APPENGINE_CITY', 0)
+            data['latlong'] = environ.get('HTTP_X_APPENGINE_CITYLATLONG', 0)
+            data['country'] = environ.get('HTTP_X_APPENGINE_COUNTRY', 0)
 
         return json.dumps(data, sort_keys=True, indent=4)
