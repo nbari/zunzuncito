@@ -40,6 +40,7 @@
 <li>Be compatible with any WSGI server, example: <a href="http://uwsgi-docs.readthedocs.org/en/latest/">uWSGI</a>, <a href="http://gunicorn.org/">Gunicorn</a>, <a href="http://twistedmatrix.com/">Twisted</a>, etc.</li>
 <li>Structured Logging using JSON.</li>
 <li>No template rendering.</li>
+<li>Google App Engine compatible</li>
 </ul><blockquote>
 <p>Documentation : <a href="http://docs.zunzun.io">docs.zunzun.io</a></p>
 </blockquote>
@@ -51,12 +52,12 @@
 
 <p>The simplicity for sketching and debugging helps to develop very fast; versioning is inherit by default, which allows to serve and maintain existing applications, while working in new releases without need to create separate instances, all the applications are WSGI <a href="http://www.python.org/dev/peps/pep-0333/">PEP 333</a> compliant, allowing to migrate existing code to more robust frameworks, without need to modify existing code.</p>
 
-<p>The idea of creating ZunZuncito, was the need of a very small and light tool (batteries included), that could help to create and deploy REST API's quickly, without forcing the developers to learn or follow a complex flow, but in contrast, from the very beginning, guide them to properly structure their API, giving special attention to "versioned URI's", having with this a solid base that allow to work in different versions within a single ZunZun instance without interrupting service of any existing API <a href="http://en.wikipedia.org/wiki/Web_resource">resources</a>.</p>
+<p>The idea of creating ZunZuncito, was the need of a very small and light tool (batteries included), that could help to create and deploy REST API's quickly, without forcing the developers to learn or follow a complex flow, but in contrast, from the very beginning, guide them to properly structure their API, giving special attention to "versioned URI's", having with this a solid base that allows to work in different versions within a single ZunZun instance without interrupting service of any existing API <a href="http://en.wikipedia.org/wiki/Web_resource">resources</a>.</p>
 
 <h3>
 <a name="how-it-works" class="anchor" href="#how-it-works"><span class="octicon octicon-link"></span></a>How it works</h3>
 
-<p>The main application contains a <strong>ZunZun</strong> instance the one must be served by an WSGI compliant server, all request later are handle by custom python modules; ZunZun is the name of the main class for the zunzuncito module.</p>
+<p>The main application contains a <strong>ZunZun</strong> instance that must be served by a WSGI compliant server. All request are later handled by custom python modules; ZunZun is the name of the main class for the zunzuncito module.</p>
 
 <p>All the custom python modules, follow the same structure, they basically consist off a class called <strong>APIResource</strong> which contains a method called <strong>dispatch</strong> that will require two arguments: a WSGI environment "environ" as first argument and a function "start_response" that will start the response, <a href="http://www.python.org/dev/peps/pep-0333/">see PEP 333</a></p>
 
@@ -180,7 +181,7 @@ arguments = ip
 
 <p>You may ask, why the need of the "zun_" prefix and why not just create a simple structure having the same name that the api_resource.</p>
 
-<p>Well, this is more due the way python import modules, and basically is to avoid collitions by having same modules with same hame,  you can change the prefix by passing it as an argument to the ZunZun instance or also disabling it by sending an empty prefix.</p>
+<p>Well, this is more due the way python import modules, and basically is to avoid collisions by having same modules with same name, you can change the prefix by passing it as an argument to the ZunZun instance or also disabling it by sending an empty prefix.</p>
 
 <p>In the previous example, the REQUEST_URI contains an <strong>APIResource</strong> with the word <strong>gevent</strong> the imported module name is in 'zun_gevent/zun_gevent.py' that gives the flexibility to use the <a href="http://www.gevent.org/">gevent</a> library within your module without creating any conflict, your zun_gevent.py could look something like:</p>
 
@@ -225,6 +226,92 @@ arguments = ip
 
 python setup.py install
 </code></pre>
+
+<h3>
+<a name="demo" class="anchor" href="#demo"><span class="octicon octicon-link"></span></a>Demo</h3>
+
+<p>Current demo running on Google App Engine.</p>
+
+<p><a href="http://api.zunzun.io">http://api.zunzun.io</a></p>
+
+<p>available API resources:</p>
+
+<ul>
+<li>/my</li>
+<li>/status</li>
+</ul><h3>
+<a name="gae" class="anchor" href="#gae"><span class="octicon octicon-link"></span></a>GAE</h3>
+
+<p>Tu have a ZunZun instance up and running in Google App Engine this are the configurations:</p>
+
+<p>Contents os the app.yaml file:</p>
+
+<div class="highlight highlight-yaml"><pre><span class="l-Scalar-Plain">application</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">&lt;your-GAE-application-id&gt;</span>
+<span class="l-Scalar-Plain">version</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">1</span>
+<span class="l-Scalar-Plain">runtime</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">python27</span>
+<span class="l-Scalar-Plain">api_version</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">1</span>
+<span class="l-Scalar-Plain">threadsafe</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">no</span>
+
+<span class="l-Scalar-Plain">handlers</span><span class="p-Indicator">:</span>
+<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/favicon\.ico</span>
+<span class="p-Indicator">-</span>   <span class="l-Scalar-Plain">static_files</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">favicon.ico</span>
+<span class="p-Indicator">-</span>     <span class="l-Scalar-Plain">upload</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">favicon\.ico</span>
+<span class="p-Indicator">-</span>
+<span class="p-Indicator">-</span>     <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">.*</span>
+<span class="p-Indicator">-</span>       <span class="l-Scalar-Plain">script</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">main.py</span>
+
+</pre></div>
+
+<p>Contents of the main.py file:</p>
+
+<div class="highlight highlight-python"><pre>
+<span class="kn">from</span> <span class="nn">google.appengine.ext.webapp.util</span> <span class="kn">import</span> <span class="n">run_wsgi_app</span>
+<span class="kn">import</span> <span class="nn">zunzuncito</span>
+
+<span class="n">root</span> <span class="o">=</span> <span class="s">'my_api'</span>
+<span class="n">versions</span> <span class="o">=</span> <span class="p">[</span><span class="s">'v0'</span><span class="p">,</span> <span class="s">'v1'</span><span class="p">]</span>
+<span class="n">routes</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s">'/my'</span><span class="p">,</span> <span class="s">'ip_tools'</span><span class="p">,</span> <span class="s">'GET'</span><span class="p">),</span>
+    <span class="p">(</span><span class="s">'/status'</span><span class="p">,</span> <span class="s">'http_status'</span><span class="p">,</span> <span class="s">'GET'</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">zunzuncito</span><span class="o">.</span><span class="n">ZunZun</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">versions</span><span class="p">,</span> <span class="n">routes</span><span class="p">)</span>
+
+<span class="n">run_wsgi_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+</pre></div>
+
+<p>Directory structure:</p>
+
+<pre>
+
+|--app.yaml
+|--main.py
+|--favicon.ico
+|--zunzuncito
+|  |--__init__.py
+|  |--http_status_codes.py
+|  |--tools.py
+|  `--zunzun.py`
+`--my_api
+  |--v0
+  | |--__init__.py
+  | |--zun_ip_tools
+  | | |--__init__.py
+  | | `--zun_ip_tools.py
+  | |--zun_http_status
+  | | |--__init__.py
+  | | `zun_http_status.py
+  `--v1
+    |--__init__.py
+    |--zun_ip_tools
+    | |--__init__.py
+    | `--zun_ip_tools.py
+    `--zun_http_status
+       |--__init__.py
+       `--zun_http_status.py
+</pre>
+
+<p>Basically you just copy the zunzuncito module in to your GAE application directory, define your root, versions and routes, create a ZunZun objecte and focuse more on your API resources (custom python modules)</p>
       </section>
     </div>
     <footer>
