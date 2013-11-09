@@ -31,7 +31,8 @@
 <a name="design-goals" class="anchor" href="#design-goals"><span class="octicon octicon-link"></span></a>Design Goals</h3>
 
 <ul>
-<li>Keep it simple and small, avoid extra complexity at all cost <a href="http://en.wikipedia.org/wiki/KISS_principle">KISS</a>.</li>
+<li>Keep it simple and small, avoid extra complexity at all cost. <a href="http://en.wikipedia.org/wiki/KISS_principle">KISS</a>
+</li>
 <li>Creation of routes on the fly or by defining regular expressions.</li>
 <li>Support API versions out of the box without altering routes.</li>
 <li>Via decorator or in a defined route, accept only certain HTTP methods.</li>
@@ -48,7 +49,7 @@
 
 <p>ZunZuncito is a <a href="http://python.org/">python</a> module that allows to create and maintain <a href="http://en.wikipedia.org/wiki/REST">REST</a> API's without hassle.</p>
 
-<p>The simplicity for sketching and debugging helps to develop very fast, versioning is inherit by default, which allow to serve and maintain existing applications, while working in new releases without need to create separate instances, all the applications are WSGI <a href="http://www.python.org/dev/peps/pep-0333/">PEP 333</a> compliant, allowing to migrate existing code to more robust frameworks, without need to modify existing code.</p>
+<p>The simplicity for sketching and debugging helps to develop very fast; versioning is inherit by default, which allows to serve and maintain existing applications, while working in new releases without need to create separate instances, all the applications are WSGI <a href="http://www.python.org/dev/peps/pep-0333/">PEP 333</a> compliant, allowing to migrate existing code to more robust frameworks, without need to modify existing code.</p>
 
 <p>The idea of creating ZunZuncito, was the need of a very small and light tool (batteries included), that could help to create and deploy REST API's quickly, without forcing the developers to learn or follow a complex flow, but in contrast, from the very beginning, guide them to properly structure their API, giving special attention to "versioned URI's", having with this a solid base that allow to work in different versions within a single ZunZun instance without interrupting service of any existing API <a href="http://en.wikipedia.org/wiki/Web_resource">resources</a>.</p>
 
@@ -67,7 +68,7 @@ routes: list of tuples containing regex patterns, handlers and allowed http meth
 </code></pre>
 
 <blockquote>
-<p>In the docs you can find a more detailed overview of the ZunZun arguments and the class it self.</p>
+<p>In the <a href="http://docs.zunzun.io">docs</a> you can find a more detailed overview of the ZunZun arguments and the class it self.</p>
 </blockquote>
 
 <p>When a new request arrive, the ZunZun router parses the REQUEST_URI in order to accomplish this pattern:</p>
@@ -137,11 +138,9 @@ my_api
 <pre><code>import my_api.v1.zun_default
 </code></pre>
 
-<p>Where zun_default if from the api_resource 'default' that ends being a custom python module</p>
+<p>Where zun_default if from the api_resource 'default' that ends being a custom python module (notice the prefix <strong>zun_</strong>)</p>
 
-<ul>
-<li>notice the prefix zun_</li>
-</ul><p>This helps the router to dispatch all the request to an existing module, so continue with the flow, for the incoming request: <a href="http://api.zunzun.io/v1/gevent/ip">http://api.zunzun.io/v1/gevent/ip</a> we will try to find a module that matches the API resource 'gevent':</p>
+<p>This helps the router to dispatch all the request to an existing module, so continue with the flow, for the incoming request: <a href="http://api.zunzun.io/v1/gevent/ip">http://api.zunzun.io/v1/gevent/ip</a> we will try to find a module that matches the API resource 'gevent':</p>
 
 <pre><code>'http://api.zunzun.io/v1/gevent/ip' ==&gt; ['v1', 'gevent', 'ip']
 version = v1
@@ -171,8 +170,8 @@ arguments = ip
 
 <p>if no match found then the router would try to load the module from the root directory using something like:</p>
 
-<pre><code>import my_api.v1.zun_gevent
-</code></pre>
+<div class="highlight highlight-python"><pre><span class="kn">import</span> <span class="nn">my_api.v1.zun_gevent</span>
+</pre></div>
 
 <p>In the case of not founding a module, an HTTP status <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">501 Not Implemented</a> code is returned to the client otherwiste the python module is imported by the router and and the request is handler entirely by the imported module</p>
 
