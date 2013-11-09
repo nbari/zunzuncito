@@ -33,7 +33,7 @@
 <ul>
 <li>Keep it simple and small, avoid extra complexity at all cost <a href="http://en.wikipedia.org/wiki/KISS_principle">KISS</a>.</li>
 <li>Creation of routes on the fly or by defining regular expressions.</li>
-<li>Support API versions out of the box with out altering routes.</li>
+<li>Support API versions out of the box without altering routes.</li>
 <li>Via decorator or in a defined route, accept only certain HTTP methods. </li>
 <li>Follow the single responsibility principle.</li>
 <li>Be compatible with any WSGI server, example: <a href="http://uwsgi-docs.readthedocs.org/en/latest/">uWSGI</a>, <a href="http://gunicorn.org/">Gunicorn</a>, <a href="http://twistedmatrix.com/">Twisted</a>, etc.</li>
@@ -63,6 +63,8 @@
 
 <p>Example:</p>
 
+<p>Contents of file app.py:</p>
+
 <pre><code>import zunzuncito
 
 root = 'my_api'
@@ -85,11 +87,10 @@ app = zunzuncito.ZunZun(root, versions, routes)
 <pre><code>uwsgi --http :8080 --wsgi-file app.py --callable app --master
 </code></pre>
 
-<p>For example, if API v3.0 is the latest API version, the following two should be aliases (i.e. behave identically to all API requests):</p>
+<h3>
+<a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a>Install</h3>
 
-<p><a href="http://api.zunzun.io/customers/1234">http://api.zunzun.io/customers/1234</a>
-<a href="http://api.zunzun.io/v3.0/customers/1234">http://api.zunzun.io/v3.0/customers/1234</a>
-<a href="http://api.zunzun.io/v3/customers/1234">http://api.zunzun.io/v3/customers/1234</a></p>
+<p><code>python setup.py install</code></p>
       </section>
     </div>
     <footer>
