@@ -25,26 +25,10 @@ zunzuncito Package
     :undoc-members:
     :show-inheritance:
 
-.. toctree::
-   :maxdepth: 2
-
-   tools/HTTPException
-   tools/MethodException
-   tools/allow_methods
-
-
 :mod:`zunzun` Module
 --------------------
 
 .. automodule:: zunzuncito.zunzun
     :members:
+    :undoc-members:
     :show-inheritance:
-
-.. toctree::
-   :maxdepth: 2
-
-   zunzun/Debug
-   zunzun/Prefix
-   zunzun/Root
-   zunzun/Routes
-   zunzun/Versions
