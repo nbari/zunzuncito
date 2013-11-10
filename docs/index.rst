@@ -44,7 +44,7 @@ ZunZun
 The main class.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    zunzun/Debug
    zunzun/Prefix
