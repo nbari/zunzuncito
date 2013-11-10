@@ -45,10 +45,3 @@ Table of Contents
 
 .. autoclass:: ZunZun
    :members:
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
