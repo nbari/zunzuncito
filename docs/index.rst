@@ -31,17 +31,13 @@ Table of Contents
 =================
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    Download
    Install
    Quickstart
-   ZunZun
-   Root
-   Routes
-   Versions
-   Prefix
-   Debug
-   APIResource
-   Dispatch
-   allow_methods
+   zunzun
+   tools
+   HTTPException
+   MethodException
+   http_status_codes
