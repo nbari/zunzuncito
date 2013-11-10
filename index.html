@@ -33,15 +33,15 @@
 <ul>
 <li>Keep it simple and small, avoiding extra complexity at all cost. <a href="http://en.wikipedia.org/wiki/KISS_principle">KISS</a>
 </li>
-<li>Creation of routes on the fly or by defining regular expressions.</li>
+<li>Create routes on the fly or by defining regular expressions.</li>
 <li>Support API versions out of the box without altering routes.</li>
-<li>Via decorator or in a defined route, accept only certain <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html">HTTP methods</a>.</li>
+<li>Via decorator or in a defined route, accepts only certain <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html">HTTP methods</a>.</li>
 <li>Follow the single responsibility <a href="http://en.wikipedia.org/wiki/Single_responsibility_principle">principle</a>.</li>
-<li>Be compatible with any WSGI server, example: <a href="http://uwsgi-docs.readthedocs.org/en/latest/">uWSGI</a>, <a href="http://gunicorn.org/">Gunicorn</a>, <a href="http://twistedmatrix.com/">Twisted</a>, etc.</li>
+<li>Be compatible with any WSGI server. Example: <a href="http://uwsgi-docs.readthedocs.org/en/latest/">uWSGI</a>, <a href="http://gunicorn.org/">Gunicorn</a>, <a href="http://twistedmatrix.com/">Twisted</a>, etc.</li>
 <li>Structured Logging using <a href="http://en.wikipedia.org/wiki/JSON">JSON</a>.</li>
 <li>No template rendering.</li>
 <li>Tracing Request-ID "rid" per request.</li>
-<li>Google App Engine compatible. <a href="http://api.zunzun.io">demo</a>
+<li>Compatibility with Google App Engine. <a href="http://api.zunzun.io">demo</a>
 </li>
 </ul><blockquote>
 <p>Documentation : <a href="http://docs.zunzun.io">docs.zunzun.io</a></p>
@@ -52,7 +52,7 @@
 
 <p>ZunZuncito is a <a href="http://python.org/">python</a> module that allows to create and maintain <a href="http://en.wikipedia.org/wiki/REST">REST</a> API's without hassle.</p>
 
-<p>The simplicity for sketching and debugging helps to develop very fast; versioning is inherit by default, which allows to serve and maintain existing applications, while working in new releases without need to create separate instances. All the applications are WSGI <a href="http://www.python.org/dev/peps/pep-0333/">PEP 333</a> compliant, allowing to migrate existing code to more robust frameworks, without need to modify the existing code.</p>
+<p>The simplicity for sketching and debugging helps to develop very fast; versioning is inherit by default, which allows to serve and maintain existing applications, while working in new releases with no need to create separate instances. All the applications are WSGI <a href="http://www.python.org/dev/peps/pep-0333/">PEP 333</a> compliant, allowing to migrate existing code to more robust frameworks, without need to modify the existing code.</p>
 
 <p>The idea of creating ZunZuncito, was the need of a very small and light tool (batteries included), that could help to create and deploy REST API's quickly, without forcing the developers to learn or follow a complex flow but, in contrast, from the very beginning, guide them to properly structure their API, giving special attention to "versioned URI's", having with this a solid base that allows to work in different versions within a single ZunZun instance without interrupting service of any existing API <a href="http://en.wikipedia.org/wiki/Web_resource">resources</a>.</p>
 
@@ -61,7 +61,7 @@
 
 <p>The main application contains a <strong>ZunZun</strong> instance that must be served by a <a href="https://en.wikipedia.org/wiki/Web_Server_Gateway_Interface">WSGI compliant server</a>. All requests are later handled by custom python modules; ZunZun is the name of the main class for the zunzuncito module.</p>
 
-<p>All the custom python modules, follow the same structure, they basically consist off a class called <strong>APIResource</strong> which contains a method called <strong>dispatch</strong> that will require two arguments: a WSGI environment "environ" as first argument and a function "start_response" that will start the response, <a href="http://www.python.org/dev/peps/pep-0333/">see PEP 333</a></p>
+<p>All the custom python modules follow the same structure. They basically consist of a class called <strong>APIResource</strong> which contains a method called <strong>dispatch</strong> that will require two arguments: a WSGI environment "environ" as first argument and a function "start_response" that will start the response, <a href="http://www.python.org/dev/peps/pep-0333/">see PEP 333</a></p>
 
 <p>ZunZun core turns around three arguments:</p>
 
@@ -79,7 +79,7 @@ routes: list of tuples containing regex patterns, handlers and allowed http meth
 <pre><code>/version/api_resource/path
 </code></pre>
 
-<p>The router first analyse the URI and determines if it is versioned or not by finding a match with the current specified versions, in case none found, fallback to the default which is always the first item on the versions list in case one provided, or 'v0'.</p>
+<p>The router first analyses the URI and determines if it is versioned or not by finding a match with the current specified versions, in case no one is found, fallback to the default which is always the first item on the versions list in case one provided, or 'v0'.</p>
 
 <p>After this process, the REQUEST_URI becomes a list of resources - something like:</p>
 
@@ -136,7 +136,7 @@ my_api
      `--zun_my.py
 </pre>
 
-<p>As you can see basically is a directory containing sub-directories which at the end are all python custom modules and can be called in a clean way like:</p>
+<p>As you can see basically it is a directory containing sub-directories which at the end are all python custom modules and can be called in a clean way like:</p>
 
 <pre><code>import my_api.v1.zun_default
 </code></pre>
@@ -168,7 +168,7 @@ path = ip
 <span class="p">]</span>
 </pre></div>
 
-<p>Lets suppose this routes were passed to the ZunZun instance, therefore the router would try to found a match between the api_resource <strong>gevent</strong> in our example with the regex patterns in the list, basically something like:</p>
+<p>Lets suppose these routes were passed to the ZunZun instance, therefore the router would try to find a match between the api_resource <strong>gevent</strong> in our example with the regex patterns in the list, basically something like:</p>
 
 <pre><code>gevent in: ['/.*', '/test', '(?:[0-9]{1,3}\.){3}[0-9]{1,3}']
 </code></pre>
@@ -178,23 +178,23 @@ path = ip
 <div class="highlight highlight-python"><pre><span class="kn">import</span> <span class="nn">my_api.v1.zun_gevent.zun_gevent</span>
 </pre></div>
 
-<p>In case it doesn't find a module, an HTTP status <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">501 Not Implemented</a> code is returned to the client. otherwiste the python module is imported by the router and the request is handled entirely by the imported module</p>
+<p>In case it doesn't find a module, an HTTP status <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">501 Not Implemented</a> code is returned to the client. Otherwiste the python module is imported by the router and the request is handled entirely by the imported module.</p>
 
 <h3>
 <a name="the-zun_-prefix" class="anchor" href="#the-zun_-prefix"><span class="octicon octicon-link"></span></a>The zun_ prefix</h3>
 
 <p>You may ask, why the need of the "zun_" prefix and why not just create a simple structure having the same name that the api_resource.</p>
 
-<p>Well, this is more due the way python import modules, and basically is to avoid collisions by having same modules with the same name. You can change the prefix by passing it as an argument to the ZunZun instance or also disabling it by sending an empty prefix.</p>
+<p>Well, this is more due the way python imports modules. It intends to avoid collisions by having same modules with the same name. You can change the prefix by passing it as an argument to the ZunZun instance or also disabling it by sending an empty prefix.</p>
 
-<p>In the previous example, the REQUEST_URI contains an <strong>APIResource</strong> with the word <strong>gevent</strong> the imported module name is in 'zun_gevent/zun_gevent.py' that gives the flexibility to use the <a href="http://www.gevent.org/">gevent</a> library within your module without creating any conflict, your zun_gevent.py could look something like:</p>
+<p>In the previous example, the REQUEST_URI contains an <strong>APIResource</strong> with the word <strong>gevent</strong>. The imported module name is in 'zun_gevent/zun_gevent.py' that gives the flexibility to use the <a href="http://www.gevent.org/">gevent</a> library within your module without creating any conflict. Your zun_gevent.py would look like:</p>
 
 <div class="highlight highlight-python"><pre><span class="kn">import</span> <span class="nn">gevent</span>
 <span class="kn">import</span> <span class="nn">gevent.socket</span>
 <span class="o">...</span>
 </pre></div>
 
-<p>That way you could have any work with gevent or any other API resource having an identical name of your current python modules without any conflict.</p>
+<p>That way you can have any work with gevent or any other API resource having an identical name of your current python modules without any conflict.</p>
 
 <h3>
 <a name="a-basic-example" class="anchor" href="#a-basic-example"><span class="octicon octicon-link"></span></a>A basic example</h3>
@@ -300,7 +300,7 @@ python setup.py install
 <pre><code>http://api.zunzun.io/my/ip
 </code></pre>
 
-<p>For example to get the meaning of status code 201</p>
+<p>For example, to get the meaning of status code 201</p>
 
 <pre><code>http://api.zunzun.io/status/201
 </code></pre>
@@ -308,7 +308,7 @@ python setup.py install
 <h3>
 <a name="gae" class="anchor" href="#gae"><span class="octicon octicon-link"></span></a>GAE</h3>
 
-<p>Tu have a ZunZun instance up and running in Google App Engine this are the configurations:</p>
+<p>Tu have a ZunZun instance up and running in Google App Engine these are the configurations:</p>
 
 <p>Contents of the app.yaml file:</p>
 
@@ -377,7 +377,7 @@ python setup.py install
        `--zun_http_status.py
 </pre>
 
-<p>Basically you just copy the zunzuncito module in to your GAE application directory, define your root, versions and routes, create a ZunZun object and focus more on your API resources (custom python modules)</p>
+<p>Basically you just copy the zunzuncito module into your GAE application directory, define your root, versions and routes, create a ZunZun object and focus more on your API resources (custom python modules)</p>
       </section>
     </div>
     <footer>
@@ -395,11 +395,6 @@ python setup.py install
             pageTracker._trackPageview();
             } catch(err) {}
           </script>
-  <script>
-    var _lg = ['755aa10bae0b', 'zunzun'];
-    (function(d, t){var l=d.createElement(t),s=d.getElementsByTagName(t)[0]; l.async = true;
-    l.src = ('https:' == location.protocol ? 'https://' : 'http://') + 'logger-io.appspot.com/logger.io.js';
-    s.parentNode.insertBefore(l, s)}(document, 'script'))
-  </script>
+
   </body>
 </html>
