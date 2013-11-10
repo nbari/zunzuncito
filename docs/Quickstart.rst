@@ -19,7 +19,7 @@ Create a file app.py with this:
 
 Create a directory named 'my_api' with the following structure:
 
-.. code-block::
+.. highlight::
 
    --app.py
    --my_api
