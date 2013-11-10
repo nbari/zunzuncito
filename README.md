@@ -2,12 +2,13 @@
 * Keep it simple and small, avoid extra complexity at all cost. [KISS](http://en.wikipedia.org/wiki/KISS_principle)
 * Creation of routes on the fly or by defining regular expressions.
 * Support API versions out of the box without altering routes.
-* Via decorator or in a defined route, accept only certain HTTP methods.
-* Follow the single responsibility principle.
+* Via decorator or in a defined route, accept only certain [HTTP methods](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).
+* Follow the single responsibility [principle](http://en.wikipedia.org/wiki/Single_responsibility_principle).
 * Be compatible with any WSGI server, example: [uWSGI](http://uwsgi-docs.readthedocs.org/en/latest/), [Gunicorn](http://gunicorn.org/), [Twisted](http://twistedmatrix.com/), etc.
-* Structured Logging using JSON.
+* Structured Logging using [JSON](http://en.wikipedia.org/wiki/JSON).
 * No template rendering.
-* Google App Engine compatible.
+* Tracing Request-ID "rid" per request.
+* Google App Engine compatible. [demo](http://api.zunzun.io)
 
 > Documentation : [docs.zunzun.io](http://docs.zunzun.io)
 
@@ -21,13 +22,13 @@ The idea of creating ZunZuncito, was the need of a very small and light tool (ba
 
 ### How it works
 
-The main application contains a **ZunZun** instance that must be served by a WSGI compliant server. All requests are later handled by custom python modules; ZunZun is the name of the main class for the zunzuncito module.
+The main application contains a **ZunZun** instance that must be served by a [WSGI compliant server](https://en.wikipedia.org/wiki/Web_Server_Gateway_Interface). All requests are later handled by custom python modules; ZunZun is the name of the main class for the zunzuncito module.
 
 All the custom python modules, follow the same structure, they basically consist off a class called **APIResource** which contains a method called **dispatch** that will require two arguments: a WSGI environment "environ" as first argument and a function "start_response" that will start the response, [see PEP 333](http://www.python.org/dev/peps/pep-0333/)
 
 ZunZun core turns around three arguments:
 
-```python
+```
 root: directory containing all your API modules - see this like the "document_root"
 versions: list of supported versions ['v0', 'v1', 'v2']
 routes: list of tuples containing regex patterns, handlers and allowed http methods
@@ -35,15 +36,15 @@ routes: list of tuples containing regex patterns, handlers and allowed http meth
 
 > In the [docs](http://docs.zunzun.io) you can find a more detailed overview of the ZunZun arguments and the class itself.
 
-When a new request arrive, the ZunZun router parses the REQUEST_URI in order to accomplish this pattern:
+When a new request arrive, the ZunZun router parses the [REQUEST_URI](http://en.wikipedia.org/wiki/URI_scheme) in order to accomplish this pattern:
 
-    /version/api_resource/arguments
+    /version/api_resource/path
 
 The router first analyse the URI and determines if it is versioned or not by finding a match with the current specified versions, in case none found, fallback to the default which is always the first item on the versions list in case one provided, or 'v0'.
 
 After this process, the REQUEST_URI becomes a list of resources - something like:
 
-    ['version, 'api_resource', 'arguments']
+    ['version, 'api_resource', 'path']
 
 Suppose that the incoming request is:
 
@@ -93,18 +94,18 @@ my_api
      `--zun_my.py
 </pre>
 
-As you can see basically is a directory containing sub-directories which at the end are all python modules and can be called in a clean way like:
+As you can see basically is a directory containing sub-directories which at the end are all python custom modules and can be called in a clean way like:
 
     import my_api.v1.zun_default
 
-Where zun_default if from the api_resource 'default' that ends being a custom python module (notice the prefix **zun_**)
+> notice the prefix **zun_**
 
 This helps the router to dispatch all the request to an existing module, so continue with the flow, for the incoming request: http://api.zunzun.io/v1/gevent/ip we will try to find a module that matches the API resource 'gevent':
 
     'http://api.zunzun.io/v1/gevent/ip' ==> ['v1', 'gevent', 'ip']
     version = v1
     api_resource = gevent
-    arguments = ip
+    path = ip
 
 In case a list of routes is passed as an argument to the ZunZun instance, the router will try to match the api_resource with the items of the routes list. If no matches are found it will try to find the module in the root directory.
 
@@ -129,7 +130,7 @@ Lets suppose this routes were passed to the ZunZun instance, therefore the route
 if no match is found then the router would try to load the module from the root directory using something like:
 
 ```python
-import my_api.v1.zun_gevent
+import my_api.v1.zun_gevent.zun_gevent
 ```
 
 In case it doesn't find a module, an HTTP status [501 Not Implemented](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) code is returned to the client. otherwiste the python module is imported by the router and the request is handled entirely by the imported module
@@ -169,6 +170,53 @@ routes = [
 app = zunzuncito.ZunZun(root, versions, routes)
 ```
 
+Contents of file zun_default.py located in "my_api/zun_default/zun_default.py"
+
+```python
+""
+default resource
+"""
+import json
+import logging
+from zunzuncito import http_status_codes
+from zunzuncito.tools import MethodException, HTTPException, allow_methods
+
+
+class APIResource(object):
+
+    def __init__(self, api):
+        self.api = api
+        self.status = 200
+        self.headers = api.headers.copy()
+        self.log = logging.getLogger()
+        self.log.setLevel('INFO')
+        self.log = logging.LoggerAdapter(
+            logging.getLogger(), {
+                'rid': api.request_id,
+                'indent': 4
+            })
+        self.log.info(dict((x, y) for x, y in (
+            ('API', api.version),
+            ('URI', api.URI),
+            ('method', api.method)
+        )))
+
+    @allow_methods('get')
+    def dispatch(self, environ, start_response):
+        headers = self.api.headers
+        start_response(
+            getattr(http_status_codes, 'HTTP_%d' %
+                    self.status), list(headers.items()))
+        data = {}
+        data['about'] = ("Hi %s, I am zunzuncito a micro-framework for creating"
+                         " REST API's, you can read more about me in: "
+                         "www.zunzun.io") % environ.get('REMOTE_ADDR', 0)
+        data['request-id'] = self.api.request_id
+        data['URI'] = self.api.URI
+        data['method'] = self.api.method
+
+        return json.dumps(data, sort_keys=True, indent=4)
+```
 
 To run it with gunicorn:
 
@@ -197,7 +245,6 @@ available API resources:
 * /status
 
 To get your current IP and location:
-
 
     http://api.zunzun.io/my
 

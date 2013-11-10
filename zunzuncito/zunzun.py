@@ -198,7 +198,7 @@ class ZunZun(object):
                 break
 
         """
-        if no matches, try to find API resource /py_mod/command/args
+        if no matches, try to find API resource /py_mod/path
         """
         self.resources = [x.strip()
                           for x in self.URI.split('?')[0].split('/')
