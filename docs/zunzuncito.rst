@@ -14,7 +14,6 @@ zunzuncito Package
 
 .. automodule:: zunzuncito.http_status_codes
     :members:
-    :undoc-members:
     :show-inheritance:
 
 :mod:`tools` Module
@@ -22,7 +21,6 @@ zunzuncito Package
 
 .. automodule:: zunzuncito.tools
     :members:
-    :undoc-members:
     :show-inheritance:
 
 :mod:`version` Module
@@ -30,7 +28,6 @@ zunzuncito Package
 
 .. automodule:: zunzuncito.version
     :members:
-    :undoc-members:
     :show-inheritance:
 
 :mod:`zunzun` Module
@@ -38,6 +35,4 @@ zunzuncito Package
 
 .. automodule:: zunzuncito.zunzun
     :members:
-    :undoc-members:
     :show-inheritance:
-
