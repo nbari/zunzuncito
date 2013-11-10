@@ -1,2 +1,2 @@
-@allow_methods decorator
-========================
+allow_methods
+=============
