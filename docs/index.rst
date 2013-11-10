@@ -36,8 +36,13 @@ Table of Contents
    Download
    Install
    Quickstart
-   zunzun
-   tools
-   HTTPException
-   MethodException
+   zunzun/Debug
+   zunzun/Prefix
+   zunzun/Root
+   zunzun/Routes
+   zunzun/Versions
+   zunzun/ZunZun
+   tools/HTTPException
+   tools/MethodException
+   tools/allow_methods
    http_status_codes
