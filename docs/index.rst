@@ -44,7 +44,7 @@ ZunZun
 The main class.
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    zunzun/Debug
    zunzun/Prefix
@@ -52,9 +52,10 @@ The main class.
    zunzun/Routes
    zunzun/Versions
    zunzun/ZunZun
+   http_status_codes
 
 Tools
------
+=====
 .. toctree::
    :maxdepth: 2
 
@@ -69,12 +70,3 @@ HTTP status codes
    :macdepth: 1
 
    http_status_codes
-
-
-Project modules
-===============
-
-.. toctree::
-   :maxdepth: 4
-
-   zunzun.zunzuncito
