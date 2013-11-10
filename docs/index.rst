@@ -39,6 +39,4 @@ Table of Contents
    zunzun
    tools
    http_status_codes
-
-
-.. automodule:: zunzuncito.zunzun
+   zunzuncito
