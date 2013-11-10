@@ -12,16 +12,6 @@
 # serve to show the default.
 
 import sys, os
-#import imp
-#from os import path
-
-#VERSION = imp.load_source(
-    #'version',
-    #path.join('../',
-              #'zunzuncito',
-              #'version.py'))
-
-#VERSION = VERSION.__version__
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
