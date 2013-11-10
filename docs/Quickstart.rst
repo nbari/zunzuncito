@@ -17,9 +17,8 @@ Create a file app.py with this:
 
    app = zunzuncito.ZunZun(root, versions, routes)
 
-Create a directory named 'my_api' with the following structure:
+Create a directory named 'my_api' with the following structure::
 
-::
    --app.py
    --my_api
    |--__init__.py
