@@ -44,4 +44,4 @@ Table of Contents
    Debug
    APIResource
    Dispatch
-   allow_methods decorator <allow_methods>
+   allow_methods
