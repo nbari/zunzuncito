@@ -215,49 +215,49 @@ path = ip
 
 <p>Contents of file zun_default.py located in "my_api/zun_default/zun_default.py"</p>
 
-<div class="highlight highlight-python"><pre><span class="s">""</span>
-<span class="n">default</span> <span class="n">resource</span>
-<span class="s">"""</span>
-<span class="s">import json</span>
-<span class="s">import logging</span>
-<span class="s">from zunzuncito import http_status_codes</span>
-<span class="s">from zunzuncito.tools import MethodException, HTTPException, allow_methods</span>
+<div class="highlight highlight-python"><pre><span class="sd">"""</span>
+<span class="sd">zun_default.py API resource</span>
+<span class="sd">"""</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">zunzuncito</span> <span class="kn">import</span> <span class="n">http_status_codes</span>
+<span class="kn">from</span> <span class="nn">zunzuncito.tools</span> <span class="kn">import</span> <span class="n">MethodException</span><span class="p">,</span> <span class="n">HTTPException</span><span class="p">,</span> <span class="n">allow_methods</span>
 
 
-<span class="s">class APIResource(object):</span>
+<span class="k">class</span> <span class="nc">APIResource</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
-<span class="s">    def __init__(self, api):</span>
-<span class="s">        self.api = api</span>
-<span class="s">        self.status = 200</span>
-<span class="s">        self.headers = api.headers.copy()</span>
-<span class="s">        self.log = logging.getLogger()</span>
-<span class="s">        self.log.setLevel('INFO')</span>
-<span class="s">        self.log = logging.LoggerAdapter(</span>
-<span class="s">            logging.getLogger(), {</span>
-<span class="s">                'rid': api.request_id,</span>
-<span class="s">                'indent': 4</span>
-<span class="s">            })</span>
-<span class="s">        self.log.info(dict((x, y) for x, y in (</span>
-<span class="s">            ('API', api.version),</span>
-<span class="s">            ('URI', api.URI),</span>
-<span class="s">            ('method', api.method)</span>
-<span class="s">        )))</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">api</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api</span> <span class="o">=</span> <span class="n">api</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="mi">200</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="s">'INFO'</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">LoggerAdapter</span><span class="p">(</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(),</span> <span class="p">{</span>
+                <span class="s">'rid'</span><span class="p">:</span> <span class="n">api</span><span class="o">.</span><span class="n">request_id</span><span class="p">,</span>
+                <span class="s">'indent'</span><span class="p">:</span> <span class="mi">4</span>
+            <span class="p">})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="nb">dict</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="p">(</span>
+            <span class="p">(</span><span class="s">'API'</span><span class="p">,</span> <span class="n">api</span><span class="o">.</span><span class="n">version</span><span class="p">),</span>
+            <span class="p">(</span><span class="s">'URI'</span><span class="p">,</span> <span class="n">api</span><span class="o">.</span><span class="n">URI</span><span class="p">),</span>
+            <span class="p">(</span><span class="s">'method'</span><span class="p">,</span> <span class="n">api</span><span class="o">.</span><span class="n">method</span><span class="p">)</span>
+        <span class="p">)))</span>
 
-<span class="s">    @allow_methods('get')</span>
-<span class="s">    def dispatch(self, environ, start_response):</span>
-<span class="s">        headers = self.api.headers</span>
-<span class="s">        start_response(</span>
-<span class="s">            getattr(http_status_codes, 'HTTP_</span><span class="si">%d</span><span class="s">' %</span>
-<span class="s">                    self.status), list(headers.items()))</span>
-<span class="s">        data = {}</span>
-<span class="s">        data['about'] = ("Hi </span><span class="si">%s</span><span class="s">, I am zunzuncito a micro-framework for creating"</span>
-<span class="s">                         " REST API's, you can read more about me in: "</span>
-<span class="s">                         "www.zunzun.io") </span><span class="si">% e</span><span class="s">nviron.get('REMOTE_ADDR', 0)</span>
-<span class="s">        data['request-id'] = self.api.request_id</span>
-<span class="s">        data['URI'] = self.api.URI</span>
-<span class="s">        data['method'] = self.api.method</span>
+    <span class="nd">@allow_methods</span><span class="p">(</span><span class="s">'get'</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">dispatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">headers</span>
+        <span class="n">start_response</span><span class="p">(</span>
+            <span class="nb">getattr</span><span class="p">(</span><span class="n">http_status_codes</span><span class="p">,</span> <span class="s">'HTTP_</span><span class="si">%d</span><span class="s">'</span> <span class="o">%</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">),</span> <span class="nb">list</span><span class="p">(</span><span class="n">headers</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">data</span><span class="p">[</span><span class="s">'about'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s">"Hi </span><span class="si">%s</span><span class="s">, I am zunzuncito a micro-framework for creating"</span>
+                         <span class="s">" REST API's, you can read more about me in: "</span>
+                         <span class="s">"www.zunzun.io"</span><span class="p">)</span> <span class="o">%</span> <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'REMOTE_ADDR'</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s">'request-id'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">request_id</span>
+        <span class="n">data</span><span class="p">[</span><span class="s">'URI'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">URI</span>
+        <span class="n">data</span><span class="p">[</span><span class="s">'method'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">method</span>
 
-<span class="s">        return json.dumps(data, sort_keys=True, indent=4)</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
 
 <p>To run it with gunicorn:</p>
@@ -395,12 +395,6 @@ python setup.py install
             pageTracker._trackPageview();
             } catch(err) {}
           </script>
-  <script>
-    var _lg = ['755aa10bae0b', 'zunzun'];
-    (function(d, t){var l=d.createElement(t),s=d.getElementsByTagName(t)[0]; l.async = true;
-    l.src = ('https:' == location.protocol ? 'https://' : 'http://') + 'logger-io.appspot.com/logger.io.js';
-    s.parentNode.insertBefore(l, s)}(document, 'script'))
-  </script>
 
   </body>
 </html>
