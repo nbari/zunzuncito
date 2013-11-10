@@ -1,7 +1,29 @@
 Quick Start
 ===========
 
-Create a file app.py with this:
+This is the directory structure::
+
+   :emphasize-lines: 3,4
+
+   /home/
+     `--zunzun/
+        |--app.py
+        `--my_api
+          |--__init__.py
+          |--v0
+          |  |--__init__.py
+          |  `--zun_default
+          |     |--__init__.py
+          |     `--zun_default.py
+          `--v1
+             |--__init__.py
+             `--zun_default
+               |--__init__.py
+               `--zun_default.py
+
+Inside directory /home/zunzun there is a file called **app.py** and a directory **my_api**.
+
+For a very basic API, contents of file **app.py** can be:
 
 .. code-block:: python
 
@@ -16,19 +38,3 @@ Create a file app.py with this:
    ]
 
    app = zunzuncito.ZunZun(root, versions, routes)
-
-Create a directory named 'my_api' with the following structure::
-
-   --app.py
-   --my_api
-   |--__init__.py
-   |--v0
-   |  |--__init__.py
-   |  `--zun_default
-   |     |--__init__.py
-   |     `--zun_default.py
-   `--v1
-      |--__init__.py
-      `--zun_default
-        |--__init__.py
-        `--zun_default.py
