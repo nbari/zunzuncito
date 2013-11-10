@@ -1,5 +1,8 @@
+tools module
+============
+
 :mod: `tools` Module
-====================
+--------------------
 
 .. toctree::
    :maxdepth: 2
