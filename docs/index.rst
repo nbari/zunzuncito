@@ -31,6 +31,7 @@ Table of Contents
 =================
 
 .. toctree::
+   :maxdepth: 2
 
    Download
    Install
@@ -38,6 +39,12 @@ Table of Contents
    zunzun
    tools
    http_status_codes
+
+
+.. automodule:: zunzuncito
+
+.. autoclass:: ZunZun
+   :members:
 
 Indices and tables
 ==================
