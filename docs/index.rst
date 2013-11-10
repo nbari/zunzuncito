@@ -36,7 +36,4 @@ Table of Contents
    Download
    Install
    Quickstart
-
-   zunzun
-   tools
    zunzuncito

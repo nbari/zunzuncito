@@ -14,6 +14,7 @@ zunzuncito Package
 
 .. automodule:: zunzuncito.http_status_codes
     :members:
+    :undoc-members:
     :show-inheritance:
 
 :mod:`tools` Module
@@ -21,6 +22,7 @@ zunzuncito Package
 
 .. automodule:: zunzuncito.tools
     :members:
+    :undoc-members:
     :show-inheritance:
 
 .. toctree::
@@ -30,12 +32,6 @@ zunzuncito Package
    tools/MethodException
    tools/allow_methods
 
-:mod:`version` Module
----------------------
-
-.. automodule:: zunzuncito.version
-    :members:
-    :show-inheritance:
 
 :mod:`zunzun` Module
 --------------------
@@ -43,3 +39,12 @@ zunzuncito Package
 .. automodule:: zunzuncito.zunzun
     :members:
     :show-inheritance:
+
+.. toctree::
+   :maxdepth: 2
+
+   zunzun/Debug
+   zunzun/Prefix
+   zunzun/Root
+   zunzun/Routes
+   zunzun/Versions
