@@ -31,17 +31,17 @@ Table of Contents
 =================
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    Download
    Install
    Quickstart
-   zunzun/Debug
-   zunzun/Prefix
-   zunzun/Root
-   zunzun/Routes
-   zunzun/Versions
-   zunzun/ZunZun
+   zunzun/debug
+   zunzun/prefix
+   zunzun/root
+   zunzun/routes
+   zunzun/versions
+   zunzun/zunzun
    tools/HTTPException
    tools/MethodException
    tools/allow_methods
