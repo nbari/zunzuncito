@@ -31,11 +31,10 @@ Table of Contents
 =================
 
 .. toctree::
-   :glob:
 
    Download
    Install
    Quickstart
-   zunzun/*
-   tools/*
+   zunzun
+   tools
    http_status_codes
