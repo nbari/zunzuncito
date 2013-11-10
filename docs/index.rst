@@ -41,6 +41,4 @@ Table of Contents
    http_status_codes
 
 
-.. module:: zunzuncito
-
-.. autoclass:: ZunZun
+.. automodule:: zunzuncito.zunzun
