@@ -35,12 +35,14 @@
 </li>
 <li>Creation of routes on the fly or by defining regular expressions.</li>
 <li>Support API versions out of the box without altering routes.</li>
-<li>Via decorator or in a defined route, accept only certain HTTP methods.</li>
-<li>Follow the single responsibility principle.</li>
+<li>Via decorator or in a defined route, accept only certain <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html">HTTP methods</a>.</li>
+<li>Follow the single responsibility <a href="http://en.wikipedia.org/wiki/Single_responsibility_principle">principle</a>.</li>
 <li>Be compatible with any WSGI server, example: <a href="http://uwsgi-docs.readthedocs.org/en/latest/">uWSGI</a>, <a href="http://gunicorn.org/">Gunicorn</a>, <a href="http://twistedmatrix.com/">Twisted</a>, etc.</li>
-<li>Structured Logging using JSON.</li>
+<li>Structured Logging using <a href="http://en.wikipedia.org/wiki/JSON">JSON</a>.</li>
 <li>No template rendering.</li>
-<li>Google App Engine compatible.</li>
+<li>Tracing Request-ID "rid" per request.</li>
+<li>Google App Engine compatible. <a href="http://api.zunzun.io">demo</a>
+</li>
 </ul><blockquote>
 <p>Documentation : <a href="http://docs.zunzun.io">docs.zunzun.io</a></p>
 </blockquote>
@@ -57,31 +59,31 @@
 <h3>
 <a name="how-it-works" class="anchor" href="#how-it-works"><span class="octicon octicon-link"></span></a>How it works</h3>
 
-<p>The main application contains a <strong>ZunZun</strong> instance that must be served by a WSGI compliant server. All requests are later handled by custom python modules; ZunZun is the name of the main class for the zunzuncito module.</p>
+<p>The main application contains a <strong>ZunZun</strong> instance that must be served by a <a href="https://en.wikipedia.org/wiki/Web_Server_Gateway_Interface">WSGI compliant server</a>. All requests are later handled by custom python modules; ZunZun is the name of the main class for the zunzuncito module.</p>
 
 <p>All the custom python modules, follow the same structure, they basically consist off a class called <strong>APIResource</strong> which contains a method called <strong>dispatch</strong> that will require two arguments: a WSGI environment "environ" as first argument and a function "start_response" that will start the response, <a href="http://www.python.org/dev/peps/pep-0333/">see PEP 333</a></p>
 
 <p>ZunZun core turns around three arguments:</p>
 
-<div class="highlight highlight-python"><pre><span class="n">root</span><span class="p">:</span> <span class="n">directory</span> <span class="n">containing</span> <span class="nb">all</span> <span class="n">your</span> <span class="n">API</span> <span class="n">modules</span> <span class="o">-</span> <span class="n">see</span> <span class="n">this</span> <span class="n">like</span> <span class="n">the</span> <span class="s">"document_root"</span>
-<span class="n">versions</span><span class="p">:</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">supported</span> <span class="n">versions</span> <span class="p">[</span><span class="s">'v0'</span><span class="p">,</span> <span class="s">'v1'</span><span class="p">,</span> <span class="s">'v2'</span><span class="p">]</span>
-<span class="n">routes</span><span class="p">:</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">tuples</span> <span class="n">containing</span> <span class="n">regex</span> <span class="n">patterns</span><span class="p">,</span> <span class="n">handlers</span> <span class="ow">and</span> <span class="n">allowed</span> <span class="n">http</span> <span class="n">methods</span>
-</pre></div>
+<pre><code>root: directory containing all your API modules - see this like the "document_root"
+versions: list of supported versions ['v0', 'v1', 'v2']
+routes: list of tuples containing regex patterns, handlers and allowed http methods
+</code></pre>
 
 <blockquote>
 <p>In the <a href="http://docs.zunzun.io">docs</a> you can find a more detailed overview of the ZunZun arguments and the class itself.</p>
 </blockquote>
 
-<p>When a new request arrive, the ZunZun router parses the REQUEST_URI in order to accomplish this pattern:</p>
+<p>When a new request arrive, the ZunZun router parses the <a href="http://en.wikipedia.org/wiki/URI_scheme">REQUEST_URI</a> in order to accomplish this pattern:</p>
 
-<pre><code>/version/api_resource/arguments
+<pre><code>/version/api_resource/path
 </code></pre>
 
 <p>The router first analyse the URI and determines if it is versioned or not by finding a match with the current specified versions, in case none found, fallback to the default which is always the first item on the versions list in case one provided, or 'v0'.</p>
 
 <p>After this process, the REQUEST_URI becomes a list of resources - something like:</p>
 
-<pre><code>['version, 'api_resource', 'arguments']
+<pre><code>['version, 'api_resource', 'path']
 </code></pre>
 
 <p>Suppose that the incoming request is:</p>
@@ -134,19 +136,21 @@ my_api
      `--zun_my.py
 </pre>
 
-<p>As you can see basically is a directory containing sub-directories which at the end are all python modules and can be called in a clean way like:</p>
+<p>As you can see basically is a directory containing sub-directories which at the end are all python custom modules and can be called in a clean way like:</p>
 
 <pre><code>import my_api.v1.zun_default
 </code></pre>
 
-<p>Where zun_default if from the api_resource 'default' that ends being a custom python module (notice the prefix <strong>zun_</strong>)</p>
+<blockquote>
+<p>notice the prefix <strong>zun_</strong></p>
+</blockquote>
 
 <p>This helps the router to dispatch all the request to an existing module, so continue with the flow, for the incoming request: <a href="http://api.zunzun.io/v1/gevent/ip">http://api.zunzun.io/v1/gevent/ip</a> we will try to find a module that matches the API resource 'gevent':</p>
 
 <pre><code>'http://api.zunzun.io/v1/gevent/ip' ==&gt; ['v1', 'gevent', 'ip']
 version = v1
 api_resource = gevent
-arguments = ip
+path = ip
 </code></pre>
 
 <p>In case a list of routes is passed as an argument to the ZunZun instance, the router will try to match the api_resource with the items of the routes list. If no matches are found it will try to find the module in the root directory.</p>
@@ -171,7 +175,7 @@ arguments = ip
 
 <p>if no match is found then the router would try to load the module from the root directory using something like:</p>
 
-<div class="highlight highlight-python"><pre><span class="kn">import</span> <span class="nn">my_api.v1.zun_gevent</span>
+<div class="highlight highlight-python"><pre><span class="kn">import</span> <span class="nn">my_api.v1.zun_gevent.zun_gevent</span>
 </pre></div>
 
 <p>In case it doesn't find a module, an HTTP status <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">501 Not Implemented</a> code is returned to the client. otherwiste the python module is imported by the router and the request is handled entirely by the imported module</p>
@@ -207,6 +211,53 @@ arguments = ip
     <span class="p">(</span><span class="s">'/upload/'</span><span class="p">,</span> <span class="s">'test_post'</span><span class="p">,</span> <span class="s">'PUT, POST'</span><span class="p">)</span>
 <span class="p">]</span>
 <span class="n">app</span> <span class="o">=</span> <span class="n">zunzuncito</span><span class="o">.</span><span class="n">ZunZun</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">versions</span><span class="p">,</span> <span class="n">routes</span><span class="p">)</span>
+</pre></div>
+
+<p>Contents of file zun_default.py located in "my_api/zun_default/zun_default.py"</p>
+
+<div class="highlight highlight-python"><pre><span class="s">""</span>
+<span class="n">default</span> <span class="n">resource</span>
+<span class="s">"""</span>
+<span class="s">import json</span>
+<span class="s">import logging</span>
+<span class="s">from zunzuncito import http_status_codes</span>
+<span class="s">from zunzuncito.tools import MethodException, HTTPException, allow_methods</span>
+
+
+<span class="s">class APIResource(object):</span>
+
+<span class="s">    def __init__(self, api):</span>
+<span class="s">        self.api = api</span>
+<span class="s">        self.status = 200</span>
+<span class="s">        self.headers = api.headers.copy()</span>
+<span class="s">        self.log = logging.getLogger()</span>
+<span class="s">        self.log.setLevel('INFO')</span>
+<span class="s">        self.log = logging.LoggerAdapter(</span>
+<span class="s">            logging.getLogger(), {</span>
+<span class="s">                'rid': api.request_id,</span>
+<span class="s">                'indent': 4</span>
+<span class="s">            })</span>
+<span class="s">        self.log.info(dict((x, y) for x, y in (</span>
+<span class="s">            ('API', api.version),</span>
+<span class="s">            ('URI', api.URI),</span>
+<span class="s">            ('method', api.method)</span>
+<span class="s">        )))</span>
+
+<span class="s">    @allow_methods('get')</span>
+<span class="s">    def dispatch(self, environ, start_response):</span>
+<span class="s">        headers = self.api.headers</span>
+<span class="s">        start_response(</span>
+<span class="s">            getattr(http_status_codes, 'HTTP_</span><span class="si">%d</span><span class="s">' %</span>
+<span class="s">                    self.status), list(headers.items()))</span>
+<span class="s">        data = {}</span>
+<span class="s">        data['about'] = ("Hi </span><span class="si">%s</span><span class="s">, I am zunzuncito a micro-framework for creating"</span>
+<span class="s">                         " REST API's, you can read more about me in: "</span>
+<span class="s">                         "www.zunzun.io") </span><span class="si">% e</span><span class="s">nviron.get('REMOTE_ADDR', 0)</span>
+<span class="s">        data['request-id'] = self.api.request_id</span>
+<span class="s">        data['URI'] = self.api.URI</span>
+<span class="s">        data['method'] = self.api.method</span>
+
+<span class="s">        return json.dumps(data, sort_keys=True, indent=4)</span>
 </pre></div>
 
 <p>To run it with gunicorn:</p>
@@ -344,12 +395,6 @@ python setup.py install
             pageTracker._trackPageview();
             } catch(err) {}
           </script>
-  <script>
-    var _lg = ['755aa10bae0b', 'zunzun'];
-    (function(d, t){var l=d.createElement(t),s=d.getElementsByTagName(t)[0]; l.async = true;
-    l.src = ('https:' == location.protocol ? 'https://' : 'http://') + 'logger-io.appspot.com/logger.io.js';
-    s.parentNode.insertBefore(l, s)}(document, 'script'))
-  </script>
 
   </body>
 </html>
