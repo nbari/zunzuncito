@@ -77,4 +77,4 @@ Project modules
 .. toctree::
    :maxdepth: 4
 
-   zunzun/zunzuncito
+   zunzun.zunzuncito
