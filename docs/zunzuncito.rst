@@ -36,3 +36,6 @@ zunzuncito Package
 .. automodule:: zunzuncito.zunzun
     :members:
     :show-inheritance:
+
+.. currentmodule:: zunzuncito.zunzun
+.. autofunction:: zunzuncito.__call__
