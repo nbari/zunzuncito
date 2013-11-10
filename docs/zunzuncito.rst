@@ -23,6 +23,13 @@ zunzuncito Package
     :members:
     :show-inheritance:
 
+.. toctree::
+   :maxdepth: 2
+
+   tools/HTTPException
+   tools/MethodException
+   tools/allow_methods
+
 :mod:`version` Module
 ---------------------
 
