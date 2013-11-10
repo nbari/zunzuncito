@@ -173,8 +173,8 @@ app = zunzuncito.ZunZun(root, versions, routes)
 Contents of file zun_default.py located in "my_api/zun_default/zun_default.py"
 
 ```python
-""
-default resource
+"""
+zun_default.py API resource
 """
 import json
 import logging
