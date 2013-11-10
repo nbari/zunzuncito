@@ -31,42 +31,18 @@ Table of Contents
 =================
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 4
 
    Download
    Install
    Quickstart
-
-
-ZunZun
-------
-
-The main class.
-
-.. toctree::
-   :maxdepth: 2
-
    zunzun/Debug
    zunzun/Prefix
    zunzun/Root
    zunzun/Routes
    zunzun/Versions
    zunzun/ZunZun
-   http_status_codes
-
-Tools
-=====
-.. toctree::
-   :maxdepth: 2
-
    tools/HTTPException
    tools/MethodException
    tools/allow_methods
-
-HTTP status codes
------------------
-
-.. toctree::
-   :macdepth: 1
-
    http_status_codes
