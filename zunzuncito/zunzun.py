@@ -1,4 +1,4 @@
-"""ZunZuncito
+"""ZunZuncito - zunzun.io
 
 micro-framework for creating REST API's
 """
@@ -43,6 +43,7 @@ class ZunZun(object):
         self.prefix = prefix
         self.request_id = None
         self.resources = []
+        self.path = []
         self.root = root
         self.routes = []
         self.version = self.versions[0]
@@ -198,11 +199,13 @@ class ZunZun(object):
                 break
 
         """
-        if no matches, try to find API resource /py_mod/path
+        get the API resource /api_resource/path from URI
         """
         self.resources = [x.strip()
                           for x in self.URI.split('?')[0].split('/')
                           if x.strip()]
+
+        self.path = self.resources[1:]
 
         if not py_mod:
             if not self.resources:
@@ -211,12 +214,7 @@ class ZunZun(object):
                 py_mod = self.resources[0]
 
         """
-        by default the zun_ prefix is appended, this is to avoid possible
-        conflicts, example if you want to have a module call 'gevent' the
-        directory structure should be zun_gevent/zun_gevent.py, the URI:
-        http://yourapi.tld/v1/gevent/
-        you can change the prefix when starting the class
-        see PEP: 395
+        by default the zun_ prefix is appended
         """
         module_name = '%s%s' % (self.prefix.lower(), py_mod.lower())
         module_path = '%s.%s.%s.%s' % (
