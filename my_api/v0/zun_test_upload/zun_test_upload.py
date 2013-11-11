@@ -75,8 +75,8 @@ class APIResource(object):
             with open(temp_file, 'a+b') as f:
                 original_file_size = f.tell()
 
-                f.truncate(index)
-                f.seek(0)
+                f.seek(index)
+                f.truncate()
 
                 bytes_to_write = chunk_size
 
@@ -88,7 +88,8 @@ class APIResource(object):
                     f.write(chunk)
                     chunk_size -= len(chunk)
 
-                bytes_written = f.tell()
+                f.flush()
+                bytes_written = f.tell() - index
 
                 if bytes_written != bytes_to_write:
                     f.truncate(original_file_size)
@@ -107,7 +108,7 @@ class APIResource(object):
                 ('size', total_size),
                 ('temp_file', temp_file),
                 ('status', self.status),
-                ('env', environ),
+                #('env', environ),
             )))
 
             start_response(
