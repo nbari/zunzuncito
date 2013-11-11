@@ -178,7 +178,7 @@ path = ip
 <div class="highlight highlight-python"><pre><span class="kn">import</span> <span class="nn">my_api.v1.zun_gevent.zun_gevent</span>
 </pre></div>
 
-<p>In case it doesn't find a module, an HTTP status <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">501 Not Implemented</a> code is returned to the client. Otherwiste the python module is imported by the router and the request is handled entirely by the imported module.</p>
+<p>In case it doesn't find a module, an HTTP status <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">501 Not Implemented</a> code is returned to the client. Otherwise the python module is imported by the router and the request is handled entirely by the imported module.</p>
 
 <h3>
 <a name="the-zun_-prefix" class="anchor" href="#the-zun_-prefix"><span class="octicon octicon-link"></span></a>The zun_ prefix</h3>
@@ -395,12 +395,6 @@ python setup.py install
             pageTracker._trackPageview();
             } catch(err) {}
           </script>
-  <script>
-    var _lg = ['755aa10bae0b', 'zunzun'];
-    (function(d, t){var l=d.createElement(t),s=d.getElementsByTagName(t)[0]; l.async = true;
-    l.src = ('https:' == location.protocol ? 'https://' : 'http://') + 'logger-io.appspot.com/logger.io.js';
-    s.parentNode.insertBefore(l, s)}(document, 'script'))
-  </script>
 
   </body>
 </html>
