@@ -1,7 +1,13 @@
 #!/bin/sh
 
-COMMITS=$(git rev-list HEAD --count)
+CHANGES=$(git status -s | grep "zunzuncito/" | wc -l)
 
-find . -type f -iname "version.py" -print0 | xargs -0 sed -i '' "s/^commits.*/commits = '$((COMMITS + 1))'/g"
+if [ $CHANGES -gt 0 ]; then
 
-git update-index --again
+  COMMITS=$(git rev-list HEAD --count)
+
+  find . -type f -iname "version.py" -print0 | xargs -0 sed -i '' "s/^commits.*/commits = '$((COMMITS + 1))'/g"
+
+  git update-index --again
+
+fi
