@@ -17,7 +17,7 @@ Design Goals
 * Google App Engine compatible. `demo <http://api.zunzun.io>`_
 
 What & Why ZunZuncito
-=====================
+---------------------
 
 ZunZuncito is a `python <http://python.org/>`_ module that allows to create and maintain `REST <http://en.wikipedia.org/wiki/REST>`_ API's without hassle.
 

@@ -1,9 +1,13 @@
 API Resource
 ============
 
-.. toctree::
-   :maxdepth: 2
+APIResource
+-----------
 
-   resource/APIResource
-   resource/dispatch
-   resource/allow_methods
+
+dispatch method
+---------------
+
+
+@allow_methods decorator
+------------------------

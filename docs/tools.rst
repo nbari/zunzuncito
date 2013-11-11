@@ -1,12 +1,10 @@
-tools module
+tools
 ============
 
-:mod: `tools` Module
---------------------
 
-.. toctree::
-   :maxdepth: 2
+HTTPException
+-------------
 
-   tools/HTTPException
-   tools/MethodException
-   tools/allow_methods
+
+MethodException
+---------------
