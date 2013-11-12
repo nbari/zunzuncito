@@ -11,7 +11,7 @@ import re
 from itertools import ifilter
 from uuid import uuid4
 from zunzuncito import http_status_codes
-from zunzuncito.tools import HTTPError, MethodException, HTTPException, LogFormatter
+from zunzuncito import tools
 
 
 class ZunZun(object):
@@ -39,7 +39,7 @@ class ZunZun(object):
         """
         set defauls
         """
-        self.headers = {}
+        self.headers = tools.CaseInsensitiveDict()
         self.prefix = prefix
         self.request_id = None
         self.resources = []
@@ -53,7 +53,7 @@ class ZunZun(object):
         """
         self.log = logging.getLogger()
         logHandler = logging.StreamHandler()
-        logformat = LogFormatter('%(asctime) %(levelname) %(message)')
+        logformat = tools.LogFormatter('%(asctime) %(levelname) %(message)')
         logHandler.setFormatter(logformat)
         self.log.addHandler(logHandler)
         self.log.setLevel('DEBUG' if debug else 'ERROR')
@@ -122,7 +122,7 @@ class ZunZun(object):
         try:
             resource = self.router()
             return resource.dispatch(environ, start_response)
-        except HTTPError as e:
+        except tools.HTTPError as e:
             status = e.status
 
             if e.headers:
@@ -231,12 +231,12 @@ class ZunZun(object):
             )))
             return __import__(module_path, fromlist=['']).APIResource(self)
         except ImportError as e:
-            raise HTTPException(
+            raise tools.HTTPException(
                 501,
                 title="[ %s ] not found" % module_name,
                 description=e)
         except Exception as e:
-            raise HTTPException(
+            raise tools.HTTPException(
                 500,
                 title="[ %s ] throw exception" % module_name,
                 description=e)

@@ -1,0 +1,1 @@
+curl -v -i -T "images/test_image_2.jpg" http://localhost:8080/v1/test_upload/file_name

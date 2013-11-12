@@ -34,12 +34,12 @@ def main(file, url):
     request.add_header('Content-Type', 'application/octet-stream')
     request.add_header('Content-Length', content_size)
     request.get_method = lambda: 'PUT'
-    rs = urllib2.urlopen(request).read()
-    print repr(rs)
+    rs = urllib2.urlopen(request)
+    print rs.headers, rs.getcode()
 
 
 if __name__ == '__main__':
-    url = 'http://localhost:8080/test_upload/file_name'
+    url = 'http://localhost:8080/v1/test_upload/file_name'
     #url = 'http://requestb.in/1kay3pk1'
     #main('images/test_image_%d.jpg' % randint(1, 3), url)
     main('images/test_image_%d.jpg' % 2, url)
