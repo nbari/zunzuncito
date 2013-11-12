@@ -1,8 +1,9 @@
+import base64
+import hashlib
+import json
 import os
 import requests
 import uuid
-import hashlib
-import base64
 from random import randint
 from uuid import uuid4
 
@@ -41,11 +42,12 @@ def main(file, url):
             index, offset, content_size)
         headers['Session-ID'] = session_id
         headers['Content-MD5'] = content_md5
+        headers['Expect'] = '100-continue'
 
         index = offset
         try:
             r = requests.put(url, data=chunk, headers=headers)
-            print "r: %s, Content-Range: %s" % (r, headers['Content-Range'])
+            print r.status_code
         except Exception as e:
             print e
 

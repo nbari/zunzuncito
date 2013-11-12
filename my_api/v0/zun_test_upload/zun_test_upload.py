@@ -108,7 +108,7 @@ class APIResource(object):
                 ('size', total_size),
                 ('temp_file', temp_file),
                 ('status', self.status),
-                #('env', environ),
+                # ('env', environ),
             )))
 
             start_response(

@@ -35,7 +35,7 @@ def main(file, url):
     request.add_header('Content-Length', content_size)
     request.get_method = lambda: 'PUT'
     rs = urllib2.urlopen(request).read()
-    print rs
+    print repr(rs)
 
 
 if __name__ == '__main__':
