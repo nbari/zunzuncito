@@ -42,6 +42,9 @@ class APIResource(object):
 
 
     def dispatch(self, environ, start_response):
+        start_response(
+            getattr(http_status_codes, 'HTTP_%d' %
+                    self.status), list(self.headers.items()))
         t = gevent.spawn(long_task)
         t.join()
         yield "sleeping for 3 seconds...<br/>"
