@@ -66,7 +66,7 @@ def main(fd=None):
 
 
 if __name__ == '__main__':
-    print argv
+    print "argv: %s" % argv
     if len(argv) == 1:
         main()
     else:
