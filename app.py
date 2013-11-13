@@ -34,7 +34,8 @@ routes = [
     ('/teste', 'test_post', 'POST'),
     ('/teste', 'test_put', 'PUT'),
     ('/my', 'ip_tools', 'GET'),
-    ('/status/?.*', 'http_status', 'GET')
+    ('/status/?.*', 'http_status', 'GET'),
+    ('/(md5|sha1|sha256|sha512)/.*', 'hasher', 'GET')
 ]
 
 app = zunzuncito.ZunZun(root, versions, routes, debug=False)
