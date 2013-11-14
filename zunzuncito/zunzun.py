@@ -42,7 +42,7 @@ class ZunZun(object):
         self.headers = tools.CaseInsensitiveDict()
         self.prefix = prefix
         self.request_id = None
-        self.resources = []
+        self.resource = None
         self.path = []
         self.root = root
         self.routes = []
@@ -201,17 +201,19 @@ class ZunZun(object):
         """
         get the API resource /api_resource/path from URI
         """
-        self.resources = [x.strip()
-                          for x in self.URI.split('?')[0].split('/')
-                          if x.strip()]
+        resource = [x.strip()
+                    for x in self.URI.split('?')[0].split('/')
+                    if x.strip()]
 
-        self.path = self.resources[1:]
+        self.path = resource[1:]
 
         if not py_mod:
-            if not self.resources:
+            if not resource:
                 py_mod = 'default'
             else:
-                py_mod = self.resources[0]
+                py_mod = resource[0]
+
+        self.resource = py_mod
 
         """
         by default the zun_ prefix is appended

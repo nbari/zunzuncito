@@ -29,7 +29,7 @@ class APIResource(object):
     @allow_methods('post', 'path', 'put')
     def dispatch(self, environ, start_response):
         try:
-            temp_name = self.api.resources[1]
+            temp_name = self.api.path[0]
         except:
             raise HTTPException(400)
 
