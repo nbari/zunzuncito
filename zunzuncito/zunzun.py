@@ -7,6 +7,7 @@ import imp
 import json
 import logging
 import re
+import time
 
 from itertools import ifilter
 from uuid import uuid4
@@ -18,6 +19,18 @@ class ZunZun(object):
 
     def __init__(self, root, versions=None,
                  routes=None, prefix='zun_', debug=False):
+        """
+        set defauls
+        """
+        self.headers = tools.CaseInsensitiveDict()
+        self.prefix = prefix
+        self.request_id = None
+        self.resource = None
+        self.path = []
+        self.root = root
+        self.routes = []
+        self.versions = ['v0']
+        self.version = self.versions[0]
 
         if versions:
             """versions:
@@ -33,20 +46,6 @@ class ZunZun(object):
             else:
                 raise Exception(
                     "Versions must be a list, example: ['v0', 'v1', 'v2']")
-        else:
-            self.versions = ['v0']
-
-        """
-        set defauls
-        """
-        self.headers = tools.CaseInsensitiveDict()
-        self.prefix = prefix
-        self.request_id = None
-        self.resource = None
-        self.path = []
-        self.root = root
-        self.routes = []
-        self.version = self.versions[0]
 
         """
         set the logger
@@ -83,8 +82,10 @@ class ZunZun(object):
             An iterable with the response to return to the client.
         """
 
+        self.start_time = time.time()
+
         """
-        get the REQUEST_ID
+        set the REQUEST_ID
         """
         if 'REQUEST_ID' in environ:
             self.request_id = environ['REQUEST_ID']
@@ -105,12 +106,12 @@ class ZunZun(object):
         """
         get the request URI
         """
+        self.URI = '/'
+
         if 'REQUEST_URI' in environ:
             self.URI = environ['REQUEST_URI']
         elif 'PATH_INFO' in environ:
             self.URI = environ['PATH_INFO']
-        else:
-            self.URI = '/'
 
         """
         Default headers in case an exception occurs
@@ -208,10 +209,7 @@ class ZunZun(object):
         self.path = resource[1:]
 
         if not py_mod:
-            if not resource:
-                py_mod = 'default'
-            else:
-                py_mod = resource[0]
+            py_mod = 'default' if not resource else resource[0]
 
         self.resource = py_mod
 
