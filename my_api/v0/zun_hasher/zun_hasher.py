@@ -45,7 +45,7 @@ class APIResource(object):
         if hash_type == 'md5':
             data['hash'] = hashlib.md5(string).hexdigest()
         elif hash_type == 'sha1':
-            data['hash'] = hashlib.md5(string).hexdigest()
+            data['hash'] = hashlib.sha1(string).hexdigest()
         elif hash_type == 'sha256':
             data['hash'] = hashlib.sha256(string).hexdigest()
         elif hash_type == 'sha512':
