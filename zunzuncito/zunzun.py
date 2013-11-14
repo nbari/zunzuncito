@@ -23,10 +23,10 @@ class ZunZun(object):
         set defauls
         """
         self.headers = tools.CaseInsensitiveDict()
+        self.path = []
         self.prefix = prefix
         self.request_id = None
         self.resource = None
-        self.path = []
         self.root = root
         self.routes = []
         self.versions = ['v0']
@@ -81,7 +81,6 @@ class ZunZun(object):
         :returns:
             An iterable with the response to return to the client.
         """
-
         self.start_time = time.time()
 
         """
@@ -200,18 +199,17 @@ class ZunZun(object):
                 break
 
         """
-        get the API resource /api_resource/path from URI
+        get the API resource and path from URI api_resource/path
         """
-        resource = [x.strip()
-                    for x in self.URI.split('?')[0].split('/')
-                    if x.strip()]
+        components = [x.strip()
+                      for x in self.URI.split('?')[0].split('/')
+                      if x.strip()]
 
-        self.path = resource[1:]
+        self.resource = ''.join(components[:1])
+        self.path = components[1:]
 
         if not py_mod:
-            py_mod = 'default' if not resource else resource[0]
-
-        self.resource = py_mod
+            py_mod = 'default' if not components else self.resource
 
         """
         by default the zun_ prefix is appended

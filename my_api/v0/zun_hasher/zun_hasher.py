@@ -33,7 +33,22 @@ class APIResource(object):
         start_response(
             getattr(http_status_codes, 'HTTP_%d' %
                     self.status), list(headers.items()))
+
+
+        hash_type = self.api.resource
+        string = ''.join(self.api.path[:1])
+
         data = {}
-        data['hash'] = self.api.resources[0]
+        data['type'] = hash_type
+        data['string'] = string
+
+        if hash_type == 'md5':
+            data['hash'] = hashlib.md5(string).hexdigest()
+        elif hash_type == 'sha1':
+            data['hash'] = hashlib.md5(string).hexdigest()
+        elif hash_type == 'sha256':
+            data['hash'] = hashlib.sha256(string).hexdigest()
+        elif hash_type == 'sha512':
+            data['hash'] = hashlib.sha512(string).hexdigest()
 
         return json.dumps(data, sort_keys=True, indent=4)
