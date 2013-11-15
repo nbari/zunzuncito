@@ -28,6 +28,9 @@ class HTTPError(Exception):
                           sort_keys=True,
                           indent=4)
 
+    def __repr__(self):
+        return self.__dict__
+
 
 class MethodException(HTTPError):
 
@@ -135,6 +138,7 @@ class LogFormatter(logging.Formatter):
 
 
 class CaseInsensitiveDict(collections.MutableMapping):
+
     """from:
     https://github.com/kennethreitz/requests/blob/master/requests/structures.py
 

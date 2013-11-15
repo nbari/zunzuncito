@@ -4,7 +4,6 @@ micro-framework for creating REST API's
 """
 
 import imp
-import json
 import logging
 import re
 import time
@@ -135,7 +134,7 @@ class ZunZun(object):
                 ('API', self.version),
                 ('URI', self.URI),
                 ('HTTPError', status),
-                ('body', json.loads(e.to_json()))
+                ('body', repr(e))
             )))
 
         except Exception as e:
