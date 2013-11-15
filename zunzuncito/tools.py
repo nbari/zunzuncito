@@ -29,7 +29,7 @@ class HTTPError(Exception):
                           indent=4)
 
     def __repr__(self):
-        return self.__dict__
+        return "%s(%r)" % (self.__class__.__name__, self.__dict__)
 
 
 class MethodException(HTTPError):
