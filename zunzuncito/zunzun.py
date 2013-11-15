@@ -183,8 +183,8 @@ class ZunZun(object):
         try to match any supplied routes (regex match)
 
         t[0] = regex
-        t[1] = module
-        t[2] = data
+        t[1] = py_mod
+        t[2] = HTTP methods
         """
         filterf = lambda t: any(i in (self.method.upper(), 'ALL')
                                 for i in t[2])
