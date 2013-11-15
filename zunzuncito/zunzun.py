@@ -134,7 +134,7 @@ class ZunZun(object):
                 ('API', self.version),
                 ('URI', self.URI),
                 ('HTTPError', status),
-                ('body', repr(e))
+                ('body', e.to_dict())
             )))
 
         except Exception as e:

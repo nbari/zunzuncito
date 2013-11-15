@@ -28,8 +28,8 @@ class HTTPError(Exception):
                           sort_keys=True,
                           indent=4)
 
-    def __repr__(self):
-        return "%s(%r)" % (self.__class__.__name__, self.__dict__)
+    def to_dict(self):
+        return self.__dict__
 
 
 class MethodException(HTTPError):
