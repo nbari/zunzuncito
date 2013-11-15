@@ -36,7 +36,7 @@ class APIResource(object):
 
 
         hash_type = self.api.resource
-        string = ''.join(self.api.path[:1])
+        string = '/'.join(self.api.path)
 
         data = {}
         data['type'] = hash_type
