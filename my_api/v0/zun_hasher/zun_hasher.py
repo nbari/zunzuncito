@@ -27,16 +27,27 @@ class APIResource(object):
             ('method', api.method)
         )))
 
-    @allow_methods('get')
+    @allow_methods('get, POST')
     def dispatch(self, environ, start_response):
         headers = self.api.headers
         start_response(
             getattr(http_status_codes, 'HTTP_%d' %
                     self.status), list(headers.items()))
 
-
         hash_type = self.api.resource
-        string = '/'.join(self.api.path)
+
+        if self.api.method == 'POST':
+            string = ''
+
+            try:
+                length= int(environ.get('CONTENT_LENGTH', '0'))
+            except ValueError:
+                length= 0
+
+            if length != 0:
+                string = environ['wsgi.input'].read(length)
+        else:
+            string = '/'.join(self.api.path)
 
         data = {}
         data['type'] = hash_type

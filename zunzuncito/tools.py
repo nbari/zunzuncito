@@ -46,16 +46,16 @@ class HTTPException(HTTPError):
 
 def allow_methods(*methods):
     """Allow methods decorator
-    :param methods:
-        list of http methods
+    :param methods: list of http methods
     """
 
     def true_decorator(f):
 
         @wraps(f)
         def wrapped(self, *args, **kwargs):
-            if self.api.method.lower() not in [x.lower()
-                                               for x in list(methods)]:
+            if self.api.method.lower() not in [x.lower().strip()
+                                               for x in methods[0].split(',')
+                                               if x.strip()]:
                 raise MethodException()
             else:
                 return f(self, *args, **kwargs)
