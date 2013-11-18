@@ -23,10 +23,9 @@ Supported versions
 versions = ['v0', 'v1', 'v2']
 
 """Route format:
-    :URI: a regex matching the URI by default
-    :handler: the python module that will handle the request
-    :methods: list of allowed methods (comma separated)
-        if none all are accepted
+    :pattern: a regex to match the URI path
+    :resource: the python module that will handle the request
+    :methods: list of allowed methods, defaults to ALL (optional)
 """
 routes = [
     # ('/.*', 'default'),
@@ -35,7 +34,7 @@ routes = [
     ('/teste', 'test_put', 'PUT'),
     ('/my', 'ip_tools', 'GET'),
     ('/status/?.*', 'http_status', 'GET'),
-    ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET')
+    ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST')
 ]
 
 app = zunzuncito.ZunZun(root, versions, routes, debug=False)
