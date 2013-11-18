@@ -26,7 +26,7 @@ class APIResource(object):
             ('method', api.method)
         )))
 
-    @allow_methods('post', 'path', 'put')
+    @allow_methods('post, path, put')
     def dispatch(self, environ, start_response):
         try:
             temp_name = self.api.path[0]
@@ -108,7 +108,7 @@ class APIResource(object):
                 ('size', total_size),
                 ('temp_file', temp_file),
                 ('status', self.status),
-                # ('env', environ),
+                ('env', environ),
             )))
 
             start_response(
