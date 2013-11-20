@@ -5,6 +5,10 @@ import re
 
 # $pattern = '#^(?:[^./@]+\.)*' . str_replace(array('*.','.'), array('','\.'), $domain) . '$#';
 
+hosts = {}
+hosts['*'] = []
+hosts['*.site.tld'] = []
+hosts['www.site.tld'] = []
 
 routes = {}
 routes['*'] = []
