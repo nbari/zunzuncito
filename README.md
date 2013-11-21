@@ -9,6 +9,7 @@
 * No template rendering.
 * Tracing Request-ID "rid" per request.
 * Compatibility with Google App Engine. [demo](http://api.zunzun.io)
+* [Multi-tenant](http://en.wikipedia.org/wiki/Multitenancy) Support.
 
 > Documentation : [docs.zunzun.io](http://docs.zunzun.io)
 
