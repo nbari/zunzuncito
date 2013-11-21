@@ -18,7 +18,7 @@ routes['www.site.tld'] = []
 
 HTTP_HOST = 'ftp.site.tld:8080'
 
-host = HTTP_HOST.strip().split(':')[0]
+host = HTTP_HOST.split(':')[0]
 sites = [k for k in sorted(routes, key=len, reverse=True)]
 
 sites = routes.keys()
@@ -32,5 +32,6 @@ else:
             domain = '^(?:[^./@]+\.)*%s$' % s.replace('*.', '').replace('.', '\.')
             if re.match(domain, s):
                 site = s
+                break
 
 print s
