@@ -29,8 +29,8 @@ class ZunZun(object):
         self.resource = None
         self.root = root
         self.routes = {}
-        self.version = self.versions[0]
         self.versions = ['v0']
+        self.version = self.versions[0]
         self.vroot = 'default'
 
         if versions:
