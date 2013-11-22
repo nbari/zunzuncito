@@ -14,7 +14,8 @@ Design Goals
 * Structured Logging using `JSON <http://en.wikipedia.org/wiki/JSON>`_.
 * No template rendering.
 * Tracing Request-ID "rid" per request.
-* Google App Engine compatible. `demo <http://api.zunzun.io>`_
+* Compatibility with Google App Engine. `demo <http://api.zunzun.io>`_
+* `Multi-tenant <http://en.wikipedia.org/wiki/Multitenancy>`_ Support.
 
 What & Why ZunZuncito
 ---------------------
