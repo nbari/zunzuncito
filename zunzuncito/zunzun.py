@@ -213,7 +213,7 @@ class ZunZun(object):
                 if match:
                     py_mod = p
                     self.log.debug(dict((x, y) for x, y in (
-                        ('vroot', self.vroot),
+                        ('HOST', (self.host ,self.vroot)),
                         ('API', self.version),
                         ('regex_match', (r.pattern, self.URI)),
                         ('methods', h)
@@ -246,8 +246,7 @@ class ZunZun(object):
 
         try:
             self.log.debug(dict((x, y) for x, y in (
-                ('HOST', self.host),
-                ('vroot', self.vroot),
+                ('HOST', (self.host, self.vroot)),
                 ('API', self.version),
                 ('URI', self.URI),
                 ('dispatching', (module_name, module_path))
@@ -292,7 +291,7 @@ class ZunZun(object):
 
                 self.log.debug(dict((x, y) for x, y in (
                     ('vroot', vroot),
-                    ("registering regex for route", regex),
+                    ("regex", regex),
                     ("py_mod", module),
                     ("methods", methods)
                 )))

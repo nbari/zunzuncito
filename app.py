@@ -64,4 +64,4 @@ routes['beta_zunzun_io'] = [
     ('/.*', 'default'),
 ]
 
-app = zunzuncito.ZunZun(root, versions, routes, debug=False)
+app = zunzuncito.ZunZun(root, versions, hosts, routes, debug=True)
