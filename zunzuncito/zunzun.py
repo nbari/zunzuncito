@@ -3,7 +3,6 @@
 micro-framework for creating REST API's
 """
 
-import imp
 import logging
 import re
 import time
@@ -16,20 +15,23 @@ from zunzuncito import tools
 
 class ZunZun(object):
 
-    def __init__(self, root, versions=None,
+    def __init__(self, root, versions=None, hosts=None,
                  routes=None, prefix='zun_', debug=False):
         """
         set defauls
         """
         self.headers = tools.CaseInsensitiveDict()
+        self.host = '*'
+        self.hosts = {'*': 'default'}
         self.path = []
         self.prefix = prefix
         self.request_id = None
         self.resource = None
         self.root = root
-        self.routes = []
-        self.versions = ['v0']
+        self.routes = {}
         self.version = self.versions[0]
+        self.versions = ['v0']
+        self.vroot = 'default'
 
         if versions:
             """versions:
@@ -64,7 +66,7 @@ class ZunZun(object):
         """
         register / compile the routes regex
         """
-        if routes:
+        if isinstance(routes, dict):
             self.register_routes(routes)
 
     def __call__(self, environ, start_response):
@@ -81,6 +83,12 @@ class ZunZun(object):
             An iterable with the response to return to the client.
         """
         self.start_time = time.time()
+
+        """
+        get the HOST
+        """
+        if 'HTTP_HOST' in environ:
+            self.host = environ['HTTP_HOST'].split(':')[0]
 
         """
         set the REQUEST_ID
@@ -174,28 +182,43 @@ class ZunZun(object):
         )))
 
         """
-        find a python module (py_mod) to handle the request
+        find a python module (py_mod) to handle the request per host
         """
         py_mod = False
 
+        if self.host in self.hosts.keys():
+            self.vroot = self.hosts[self.host]
+        else:
+            for host in self.hosts.keys():
+                if re.match('^\*\.', host):
+                    domain = '^(?:[^./@]+\.)*%s$' % (
+                        host.replace('*.', '').replace('.', '\.'))
+                    if re.match(domain, host):
+                        self.vroot = self.hosts[host]
+                        break
+
         """
         try to match any supplied routes (regex match)
+        only if the current host has rules
 
-        t[0] = regex
-        t[1] = py_mod
-        t[2] = HTTP methods
+        t[0] = r - regex
+        t[1] = p - py_mod
+        t[2] = h - HTTP methods
         """
-        filterf = lambda t: any(i in (self.method.upper(), 'ALL')
-                                for i in t[2])
-        for regex, module, method in ifilter(filterf, self.routes):
-            match = regex.match(self.URI)
-            if match:
-                py_mod = module
-                self.log.debug(dict((x, y) for x, y in (
-                    ('API', self.version),
-                    ('regex_match', (regex.pattern, self.URI))
-                )))
-                break
+        if self.routes[self.vroot]:
+            filterf = lambda t: any(i in (self.method.upper(), 'ALL')
+                                    for i in t[2])
+            for r, p, h in ifilter(filterf, self.routes[self.vroot]):
+                match = r.match(self.URI)
+                if match:
+                    py_mod = p
+                    self.log.debug(dict((x, y) for x, y in (
+                        ('vroot', self.vroot),
+                        ('API', self.version),
+                        ('regex_match', (r.pattern, self.URI)),
+                        ('methods', h)
+                    )))
+                    break
 
         """
         get the API resource and path from URI api_resource/path
@@ -214,14 +237,17 @@ class ZunZun(object):
         by default the zun_ prefix is appended
         """
         module_name = '%s%s' % (self.prefix.lower(), py_mod.lower())
-        module_path = '%s.%s.%s.%s' % (
+        module_path = '%s.%s.%s.%s.%s' % (
             self.root,
+            self.vroot,
             self.version,
             module_name,
             module_name)
 
         try:
             self.log.debug(dict((x, y) for x, y in (
+                ('HOST', self.host),
+                ('vroot', self.vroot),
                 ('API', self.version),
                 ('URI', self.URI),
                 ('dispatching', (module_name, module_path))
@@ -239,29 +265,34 @@ class ZunZun(object):
                 description=e)
 
     def register_routes(self, routes):
-        """compile regex pattern for routes
-
+        """compile regex pattern for routes per vroot
         :param routes:
-            tuple(regex, handler, methods).
+            {
+                'vroot': tuple(regex, py_mod, methods).
+            }
         """
-        if routes:
-            for route in routes:
-                if isinstance(route, tuple):
-                    regex, module = route[:2]
-                    methods = ['ALL']
+        for vroot, routes in routes.iteritems():
+            gen = (route for route in routes if isinstance(route, tuple))
+            vroot = vroot.replace('.', '_')
+            self.routes[vroot] = []
+            for route in gen:
+                regex, module = route[:2]
+                methods = ['ALL']
 
-                    if len(route) > 2:
-                        methods = [x.strip().upper()
-                                   for x in route[2].split(',') if x]
+                if len(route) > 2:
+                    methods = [x.strip().upper()
+                               for x in route[2].split(',') if x]
 
-                    if regex.startswith('^'):
-                        self.routes.append(
-                            (re.compile(regex), module, methods))
-                    else:
-                        self.routes.append(
-                            (re.compile('^%s$' % regex), module, methods))
+                if regex.startswith('^'):
+                    self.routes[vroot].append(
+                        (re.compile(regex), module, methods))
+                else:
+                    self.routes[vroot].append(
+                        (re.compile('^%s$' % regex), module, methods))
 
-                    self.log.debug(dict((x, y) for x, y in (
-                        ("registering regex for route", regex),
-                        ("handler", module), ("methods", methods)
-                    )))
+                self.log.debug(dict((x, y) for x, y in (
+                    ('vroot', vroot),
+                    ("registering regex for route", regex),
+                    ("py_mod", module),
+                    ("methods", methods)
+                )))
