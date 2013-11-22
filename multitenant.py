@@ -16,7 +16,7 @@ routes['*.site.tld'] = []
 routes['www.site.tld'] = []
 
 
-HTTP_HOST = 'ftp.site.tld:8080'
+HTTP_HOST = 'www.ftp.site.tld:8080'
 
 host = HTTP_HOST.split(':')[0]
 sites = [k for k in sorted(routes, key=len, reverse=True)]
