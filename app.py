@@ -33,10 +33,11 @@ Multitenant support
             'host1': 'vroot1
         }
 """
-hosts = {}
-hosts['*'] = ['default']
-hosts['api.zunzun.io'] = ['default']
-hosts['beta.zunzun.io'] = ['beta_zunzun_io']
+hosts = {
+    '*': 'default',
+    'api.zunzun.io': 'default',
+    'beta.zunzun.io': 'beta_zunzun_io'
+}
 
 """Routes dictionary
     :vroot: the document root for this host root/vroot

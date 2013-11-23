@@ -27,17 +27,28 @@ The main application contains a **ZunZun** instance that must be served by a [WS
 
 All the custom python modules follow the same structure. They basically consist of a class called **APIResource** which contains a method called **dispatch** that will require two arguments: a WSGI environment "environ" as first argument and a function "start_response" that will start the response, [see PEP 333](http://www.python.org/dev/peps/pep-0333/)
 
-ZunZun core turns around three arguments:
+ZunZun core turns around four arguments:
 
 ```
 root: directory containing all your API modules - see this like the "document_root"
-versions: list of supported versions ['v0', 'v1', 'v2']
-routes: list of tuples containing regex patterns, handlers and allowed http methods
+versions: list of supported versions ['v0', 'v1', etc...]
+hosts: dict of hosts:vroots Multitenant support
+routes: dict of tuples containing regex patterns, py_mod and allowed http methods
 ```
 
 > In the [docs](http://docs.zunzun.io) you can find a more detailed overview of the ZunZun arguments and the class itself.
 
-When a new request arrive, the ZunZun router parses the [REQUEST_URI](http://en.wikipedia.org/wiki/URI_scheme) in order to accomplish this pattern:
+When a new request arrive, the ZunZun router searches for 'vroot' declared on the 'hosts' dictionary matching the current HTTP_HOST, a basic hosts dictionary looks like:
+
+    {
+      '*': 'default', # match all hosts
+      '*.zunzun.io': 'default', # match all hosts ending with zunzun.io
+      'api.zunzun.io': 'api_zunzun_io' # match only api.zunzun.io
+    }
+
+The format is `'host to match': 'vroot'`, wildcard **'*'** can be used prefixing domains names.
+
+Once a **vroot** is found, the ZunZun router parses the [REQUEST_URI](http://en.wikipedia.org/wiki/URI_scheme) in order to accomplish this pattern:
 
     /version/api_resource/path
 
@@ -60,50 +71,43 @@ The second step on the router is to find a match within the routes list and the 
 <pre>
 my_api
 |--__init__.py
-|--v0
-|  |--__init__.py
-|  |--zun_default
-|  |  |--__init__.py
-|  |  `--zun_default.py
-|  |--zun_gevent
-|  |  |--__init__.py
-|  |  `--zun_gevent.py
-|  `--zun_my
-|    |--__init__.py
-|    `--zun_my.py
-|--v1
-|  |--__init__.py
-|  |--zun_default
-|  |  |--__init__.py
-|  |  `--zun_default.py
-|  |--zun_gevent
-|  |  |--__init__.py
-|  |  `--zun_gevent.py
-|  `--zun_my
-|    |--__init__.py
-|    `--zun_my.py
-`--v2
+`--default
    |--__init__.py
-   |--zun_default
+   |--v0
    |  |--__init__.py
-   |  `--zun_default.py
-   |--zun_gevent
-   |  |--__init__.py
-   |  `--zun_gevent.py
-   `--zun_my
-     |--__init__.py
-     `--zun_my.py
+   |  |--zun_default
+   |  |  |--__init__.py
+   |  |  `--zun_default.py
+   |  |--zun_gevent
+   |  |  |--__init__.py
+   |  |  `--zun_gevent.py
+   |  `--zun_my
+   |    |--__init__.py
+   |    `--zun_my.py
+   `--v1
+      |--__init__.py
+      |--zun_default
+      |  |--__init__.py
+      |  `--zun_default.py
+      |--zun_gevent
+      |  |--__init__.py
+      |  `--zun_gevent.py
+      `--zun_my
+        |--__init__.py
+        `--zun_my.py
 </pre>
 
 As you can see basically it is a directory containing sub-directories which at the end are all python custom modules and can be called in a clean way like:
 
-    import my_api.v1.zun_default
+    import my_api.vroot.v1.zun_default
 
 > notice the prefix **zun_**
 
 This helps the router to dispatch all the request to an existing module, so continue with the flow, for the incoming request: http://api.zunzun.io/v1/gevent/ip we will try to find a module that matches the API resource 'gevent':
 
     'http://api.zunzun.io/v1/gevent/ip' ==> ['v1', 'gevent', 'ip']
+    host = api.zunzun.io
+    vroot = default
     version = v1
     api_resource = gevent
     path = ip
