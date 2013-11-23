@@ -40,13 +40,18 @@ routes: dict of tuples containing regex patterns, py_mod and allowed http method
 
 When a new request arrive, the ZunZun router searches for 'vroot' declared on the 'hosts' dictionary matching the current HTTP_HOST, a basic hosts dictionary looks like:
 
-    {
-      '*': 'default', # match all hosts
-      '*.zunzun.io': 'default', # match all hosts ending with zunzun.io
-      'api.zunzun.io': 'api_zunzun_io' # match only api.zunzun.io
-    }
-
-The format is `'host to match': 'vroot'`, wildcard **'*'** can be used prefixing domains names.
+```python
+"""
+format is:
+    'host': 'vroot'
+    wildcard '*' can be used prefixing the host or to match all hosts
+"""
+{
+  '*': 'default', # match all hosts
+  '*.zunzun.io': 'default', # match all hosts ending with zunzun.io
+  'api.zunzun.io': 'api_zunzun_io' # match only api.zunzun.io
+}
+```
 
 Once a **vroot** is found, the ZunZun router parses the [REQUEST_URI](http://en.wikipedia.org/wiki/URI_scheme) in order to accomplish this pattern:
 
@@ -99,7 +104,7 @@ my_api
 
 As you can see basically it is a directory containing sub-directories which at the end are all python custom modules and can be called in a clean way like:
 
-    import my_api.vroot.v1.zun_default
+    import my_api.default.v1.zun_default
 
 > notice the prefix **zun_**
 
