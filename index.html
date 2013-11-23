@@ -79,14 +79,17 @@ routes: dict of tuples containing regex patterns, py_mod and allowed http method
 
 <p>When a new request arrive, the ZunZun router searches for 'vroot' declared on the 'hosts' dictionary matching the current HTTP_HOST, a basic hosts dictionary looks like:</p>
 
-<pre><code>{
-  '*': 'default', # match all hosts
-  '*.zunzun.io': 'default', # match all hosts ending with zunzun.io
-  'api.zunzun.io': 'api_zunzun_io' # match only api.zunzun.io
-}
-</code></pre>
-
-<p>The format is <code>'host to match': 'vroot'</code>, wildcard <strong>'*'</strong> can be used prefixing domains names.</p>
+<div class="highlight highlight-python"><pre><span class="sd">"""</span>
+<span class="sd">format is:</span>
+<span class="sd">    'host': 'vroot'</span>
+<span class="sd">    wildcard '*' can be used prefixing the host or to match all hosts</span>
+<span class="sd">"""</span>
+<span class="p">{</span>
+  <span class="s">'*'</span><span class="p">:</span> <span class="s">'default'</span><span class="p">,</span> <span class="c"># match all hosts</span>
+  <span class="s">'*.zunzun.io'</span><span class="p">:</span> <span class="s">'default'</span><span class="p">,</span> <span class="c"># match all hosts ending with zunzun.io</span>
+  <span class="s">'api.zunzun.io'</span><span class="p">:</span> <span class="s">'api_zunzun_io'</span> <span class="c"># match only api.zunzun.io</span>
+<span class="p">}</span>
+</pre></div>
 
 <p>Once a <strong>vroot</strong> is found, the ZunZun router parses the <a href="http://en.wikipedia.org/wiki/URI_scheme">REQUEST_URI</a> in order to accomplish this pattern:</p>
 
@@ -143,7 +146,7 @@ my_api
 
 <p>As you can see basically it is a directory containing sub-directories which at the end are all python custom modules and can be called in a clean way like:</p>
 
-<pre><code>import my_api.vroot.v1.zun_default
+<pre><code>import my_api.default.v1.zun_default
 </code></pre>
 
 <blockquote>
@@ -402,12 +405,6 @@ python setup.py install
             pageTracker._trackPageview();
             } catch(err) {}
           </script>
-          <script type="text/javascript">
-              var _lg = ['755aa10bae0b', 'zunzun'];
-              (function(d, t){var l=d.createElement(t),s=d.getElementsByTagName(t)[0]; l.async = true;
-               l.src = ('https:' == location.protocol ? 'https://' : 'http://') + 'logger-io.appspot.com/logger.io.js';
-               s.parentNode.insertBefore(l, s)}(document, 'script'))
-              </script>
 
   </body>
 </html>
