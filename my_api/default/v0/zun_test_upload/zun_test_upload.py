@@ -82,7 +82,7 @@ class APIResource(object):
 
                 while chunk_size > 0:
                     # buffer size
-                    chunk = stream.read(min(chunk_size, 65536))
+                    chunk = stream.read(min(chunk_size, 1 << 13))
                     if not chunk:
                         break
                     f.write(chunk)
