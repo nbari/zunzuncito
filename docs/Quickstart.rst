@@ -7,7 +7,8 @@ This is the directory structure:
 
     :my_api: The **root** directory of the API.
     :default: The **vroot** directory.
-    :v0: Directory for default version or for **v0** when specified.
+    :v0: Directory for default API resources or for version *0* when specified.
+    :v1: Directory for API resources version *1*
 
 
 .. code-block:: python
