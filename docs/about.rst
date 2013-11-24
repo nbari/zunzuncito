@@ -20,7 +20,7 @@ Design Goals
 What & Why ZunZuncito
 ---------------------
 
-ZunZuncito is a `python <http://python.org/>`_ module that allows to create and maintain `REST <http://en.wikipedia.org/wiki/REST>`_ API's without hassle.
+ZunZuncito is a `python <http://python.org/>`_ package that allows to create and maintain `REST <http://en.wikipedia.org/wiki/REST>`_ API's without hassle.
 
 The simplicity for sketching and debugging helps to develop very fast; versioning is inherit by default, which allows to serve and maintain existing applications, while working in new releases without need to create separate instances. All the applications are WSGI `PEP 333 <http://www.python.org/dev/peps/pep-0333/>`_ compliant, allowing to migrate existing code to more robust frameworks, without need to modify the existing code.
 
