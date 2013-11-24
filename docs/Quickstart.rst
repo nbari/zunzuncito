@@ -34,7 +34,9 @@ This is the directory structure:
    """
 
 .. sidebar:: API structure
-    :subtitle: -
+        :subtitle: "aa"
+
+    aaa
     :my_api: the **root** directory of the API
     :default: the **vroot** directory
     :v0: directory for default version or for **v0** when specified
