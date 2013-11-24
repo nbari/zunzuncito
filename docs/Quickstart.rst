@@ -32,7 +32,7 @@ Inside directory /home/zunzun there is a file called **app.py** and a directory 
 For a very basic API, contents of file **app.py** can be:
 
 .. code-block:: python
-   :emphasize-lines: 3,11
+   :emphasize-lines: 3,7,11
    :linenos:
 
    import zunzuncito
@@ -50,7 +50,13 @@ For a very basic API, contents of file **app.py** can be:
 
    app = zunzuncito.ZunZun(root, versions, routes)
 
-**The order of the routes matters**
+* line 3 defines the "document root" for your API
+* line 7 gives multitenant support, in the example all '*' is going to be
+  handled by the 'default' **vroot**
+* line 11 contains a regex matching all the requests it is at the bottom
+  because in the routes order matters.
+
+*vroot
 
 The contents of the **my_api** contain python modules (API Resources) for
 example the content of module zun_default/zun_default.py is:
