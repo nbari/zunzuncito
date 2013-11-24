@@ -1,8 +1,9 @@
 Quick Start
 ===========
 
-This is the directory structure::
+This is the directory structure:
 
+.. code-block::
    :empasize-lines:3,6,8
    :linenos:
 
