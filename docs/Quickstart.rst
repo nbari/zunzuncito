@@ -3,11 +3,11 @@ Quick Start
 
 This is the directory structure:
 
-.. sidebar:: API structure
+.. sidebar:: API directory structure
 
-    :my_api: the **root** directory of the API
-    :default: the **vroot** directory
-    :v0: directory for default version or for **v0** when specified
+    :my_api: The **root** directory of the API.
+    :default: The **vroot** directory.
+    :v0: Directory for default version or for **v0** when specified.
 
 
 .. code-block:: python
