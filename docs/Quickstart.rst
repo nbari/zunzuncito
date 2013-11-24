@@ -3,7 +3,7 @@ Quick Start
 
 This is the directory structure:
 
-.. code-block:: python
+.. note::
    :emphasize-lines: 5,7,9,17
    :linenos:
 
