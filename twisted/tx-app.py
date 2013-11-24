@@ -23,22 +23,39 @@ Supported versions
 """
 versions = ['v0', 'v1', 'v2']
 
-"""Route format:
-    :URI: a regex matching the URI by default
-    :handler: the python module that will handle the request
-    :methods: list of allowed methods (comma separated)
-        if none all are accepted
-"""
-routes = [
-    # ('/.*', 'default'),
-    ('/teste', 'test_get', 'GET'),
-    ('/teste', 'test_post', 'POST'),
-    ('/teste', 'test_put', 'PUT'),
-    ('/my', 'ip_tools', 'GET'),
-    ('/status/?.*', 'http_status', 'GET')
-]
 
-app = zunzuncito.ZunZun(root, versions, routes, debug=False)
+"""hosts dictionary
+Multitenant support
+    :host: a host to match
+    :vroot: the document root for this host root/vroot
+        the vroot name should exists in the routes dictionary
+    data structure to follow:
+        {
+            'host': 'vroot',
+            'host1': 'vroot1
+        }
+"""
+hosts = {'*': 'default'}
+
+"""Routes dictionary
+    :vroot: the document root for this host root/vroot
+        the vroot name should exists in the hosts dictionary
+    :pattern: a regex to match the URI path
+    :resource: the python module that will handle the request
+    :methods: list of allowed methods, defaults to ALL (optional)
+    data structure to follow:
+        {
+            'vroot': [(regex,resource,methods)],
+            'vroot1': [(regex,resource,methods)]
+        }
+"""
+routes = {'default': [
+    ('/status/?.*', 'http_status', 'GET'),
+    ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST'),
+    ('/.*', 'default')
+]}
+
+app = zunzuncito.ZunZun(root, versions, hosts, routes, debug=False)
 
 resource = WSGIResource(reactor, reactor.getThreadPool(), app)
 reactor.listenTCP(8080, Site(resource))

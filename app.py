@@ -50,7 +50,6 @@ hosts = {
             'vroot': [(regex,resource,methods)],
             'vroot1': [(regex,resource,methods)]
         }
-
 """
 routes = {}
 routes['default'] = [
