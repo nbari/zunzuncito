@@ -44,8 +44,8 @@ For a very basic API, contents of file **app.py** can be:
    hosts = {'*': 'default'}
 
    routes = {'default':[
-       ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST')
-       ('/.*', 'default'),
+       ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST'),
+       ('/.*', 'default')
    ]}
 
    app = zunzuncito.ZunZun(root, versions, routes)
