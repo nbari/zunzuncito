@@ -3,6 +3,9 @@ Quick Start
 
 This is the directory structure::
 
+   :empasize-lines:3,6,8
+   :linenos:
+
    /home/
      `--zunzun/
         |--app.py
@@ -45,18 +48,17 @@ For a very basic API, contents of file **app.py** can be:
 
    routes = {'default':[
        ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST'),
-       ('/.*', 'default')
+
    ]}
 
    app = zunzuncito.ZunZun(root, versions, routes)
 
 * line 3 defines the "document root" for your API
-* line 7 gives multitenant support, in the example all '*' is going to be
+* line 7 gives multitenant support, in the example all "*" is going to be
   handled by the 'default' **vroot**
-* line 11 contains a regex matching all the requests it is at the bottom
-  because in the routes order matters.
+* line 11 contains a regex matching all the requests, it is at the bottom
+  because in the routes, order matters.
 
-*vroot
 
 The contents of the **my_api** contain python modules (API Resources) for
 example the content of module zun_default/zun_default.py is:
