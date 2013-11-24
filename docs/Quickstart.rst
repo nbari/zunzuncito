@@ -35,7 +35,7 @@ This is the directory structure:
 
 :my_api: the **root** directory of the API
 :default: the **vroot** directory
-:v0: directory for default version or v0 when specified
+:v0: directory for default version or for **v0** when specified
 
 Inside directory /home/zunzun there is a file called **app.py** and a directory **my_api**.
 
