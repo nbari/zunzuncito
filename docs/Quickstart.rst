@@ -8,22 +8,24 @@ This is the directory structure::
         |--app.py
         `--my_api
           |--__init__.py
-          |--v0
-          |  |--__init__.py
-          |  |--zun_default
-          |  |  |--__init__.py
-          |  |  `--zun_default.py
-          |  `--zun_hasher
-          |    |--__init__.py
-          |    `--zun_hasher.py
-          `--v1
-             |--__init__.py
-             |--zun_default
-             | |--__init__.py
-             | `--zun_default.py
-             `--zun_hasher
+          `--default
+            |--__init__.py
+            |--v0
+            |  |--__init__.py
+            |  |--zun_default
+            |  |  |--__init__.py
+            |  |  `--zun_default.py
+            |  `--zun_hasher
+            |    |--__init__.py
+            |    `--zun_hasher.py
+            `--v1
                |--__init__.py
-               `--zun_hasher.py
+               |--zun_default
+               | |--__init__.py
+               | `--zun_default.py
+               `--zun_hasher
+                 |--__init__.py
+                 `--zun_hasher.py
 
 Inside directory /home/zunzun there is a file called **app.py** and a directory **my_api**.
 
@@ -39,10 +41,12 @@ For a very basic API, contents of file **app.py** can be:
 
    versions = ['v0', 'v1']
 
-   routes = [
-      ('/md5/?.*', hasher, 'GET')
-      ('/sha1/?.*', hasher, 'GET')
-   ]
+   hosts = {'*': 'default'}
+
+   routes = {'default':[
+       ('/.*', 'default'),
+       ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST')
+   ]}
 
    app = zunzuncito.ZunZun(root, versions, routes)
 
