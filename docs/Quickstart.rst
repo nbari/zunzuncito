@@ -5,6 +5,7 @@ This is the directory structure:
 
 .. sidebar:: API directory structure
 
+    :app.py: application python file.
     :my_api: The **root** directory of the API.
     :default: The **vroot** directory.
     :v0: Directory for default API resources or for version *0* when specified.
@@ -12,7 +13,7 @@ This is the directory structure:
 
 
 .. code-block:: python
-   :emphasize-lines: 5,7,9,17
+   :emphasize-lines: 4,5,7,9,17
    :linenos:
 
    """
