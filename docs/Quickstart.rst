@@ -3,8 +3,8 @@ Quick Start
 
 This is the directory structure:
 
-.. code-block::
-   :empasize-lines:3,6,8
+.. code-block:: python
+   :emphasize-lines: 3,6,8
    :linenos:
 
    /home/
