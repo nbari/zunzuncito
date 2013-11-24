@@ -7,6 +7,7 @@ This is the directory structure:
    :emphasize-lines: 3,6,8
    :linenos:
 
+   """
    /home/
      `--zunzun/
         |--app.py
@@ -30,6 +31,7 @@ This is the directory structure:
                `--zun_hasher
                  |--__init__.py
                  `--zun_hasher.py
+   """
 
 Inside directory /home/zunzun there is a file called **app.py** and a directory **my_api**.
 
