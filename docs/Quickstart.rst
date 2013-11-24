@@ -3,6 +3,13 @@ Quick Start
 
 This is the directory structure:
 
+.. sidebar:: API structure
+
+    :my_api: the **root** directory of the API
+    :default: the **vroot** directory
+    :v0: directory for default version or for **v0** when specified
+
+
 .. code-block:: python
    :emphasize-lines: 5,7,9,17
    :linenos:
@@ -32,14 +39,6 @@ This is the directory structure:
                  |--__init__.py
                  `--zun_hasher.py
    """
-
-.. sidebar:: API structure
-        :subtitle: "aa"
-
-    aaa
-    :my_api: the **root** directory of the API
-    :default: the **vroot** directory
-    :v0: directory for default version or for **v0** when specified
 
 Inside directory /home/zunzun there is a file called **app.py** and a directory **my_api**.
 
