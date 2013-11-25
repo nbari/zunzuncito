@@ -172,12 +172,14 @@ import zunzuncito
 
 root = 'my_api'
 versions = ['v0', 'v1', 'v2']
-routes = [
+hosts = {'*': 'default'}
+routes = {'default': [
     ('/my', 'ip_tools', 'GET'),
     ('/status', 'http_status', 'GET'),
-    ('/upload/', 'test_post', 'PUT, POST')
-]
-app = zunzuncito.ZunZun(root, versions, routes)
+    ('/upload/', 'test_post', 'PUT, POST'),
+    ('/.*', 'catch_all')
+]}
+app = zunzuncito.ZunZun(root, versions, hosts, routes)
 ```
 
 Contents of file zun_default.py located in "my_api/zun_default/zun_default.py"
