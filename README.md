@@ -182,7 +182,10 @@ routes = {'default': [
 app = zunzuncito.ZunZun(root, versions, hosts, routes)
 ```
 
-Contents of file zun_default.py located in "my_api/zun_default/zun_default.py"
+Contents of file **zun_default.py** located in "my_api/default/zun_default/zun_default.py"
+
+> root: my_apy, vroot: default
+
 
 ```python
 """
