@@ -140,7 +140,7 @@ Lets suppose these routes were passed to the ZunZun instance, therefore the rout
 if no match is found then the router would try to load the module from the root directory using something like:
 
 ```python
-import my_api.v1.zun_gevent.zun_gevent
+import my_api.default.v1.zun_gevent.zun_gevent
 ```
 
 In case it doesn't find a module, an HTTP status [501 Not Implemented](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) code is returned to the client. Otherwise the python module is imported by the router and the request is handled entirely by the imported module.
