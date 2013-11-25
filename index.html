@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Zunzuncito</title>
+    <title>Zunzuncito by nbari</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
@@ -185,7 +185,7 @@ path = ip
 
 <p>if no match is found then the router would try to load the module from the root directory using something like:</p>
 
-<div class="highlight highlight-python"><pre><span class="kn">import</span> <span class="nn">my_api.v1.zun_gevent.zun_gevent</span>
+<div class="highlight highlight-python"><pre><span class="kn">import</span> <span class="nn">my_api.default.v1.zun_gevent.zun_gevent</span>
 </pre></div>
 
 <p>In case it doesn't find a module, an HTTP status <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">501 Not Implemented</a> code is returned to the client. Otherwise the python module is imported by the router and the request is handled entirely by the imported module.</p>
@@ -215,12 +215,14 @@ path = ip
 
 <span class="n">root</span> <span class="o">=</span> <span class="s">'my_api'</span>
 <span class="n">versions</span> <span class="o">=</span> <span class="p">[</span><span class="s">'v0'</span><span class="p">,</span> <span class="s">'v1'</span><span class="p">,</span> <span class="s">'v2'</span><span class="p">]</span>
-<span class="n">routes</span> <span class="o">=</span> <span class="p">[</span>
+<span class="n">hosts</span> <span class="o">=</span> <span class="p">{</span><span class="s">'*'</span><span class="p">:</span> <span class="s">'default'</span><span class="p">}</span>
+<span class="n">routes</span> <span class="o">=</span> <span class="p">{</span><span class="s">'default'</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">(</span><span class="s">'/my'</span><span class="p">,</span> <span class="s">'ip_tools'</span><span class="p">,</span> <span class="s">'GET'</span><span class="p">),</span>
     <span class="p">(</span><span class="s">'/status'</span><span class="p">,</span> <span class="s">'http_status'</span><span class="p">,</span> <span class="s">'GET'</span><span class="p">),</span>
-    <span class="p">(</span><span class="s">'/upload/'</span><span class="p">,</span> <span class="s">'test_post'</span><span class="p">,</span> <span class="s">'PUT, POST'</span><span class="p">)</span>
-<span class="p">]</span>
-<span class="n">app</span> <span class="o">=</span> <span class="n">zunzuncito</span><span class="o">.</span><span class="n">ZunZun</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">versions</span><span class="p">,</span> <span class="n">routes</span><span class="p">)</span>
+    <span class="p">(</span><span class="s">'/upload/'</span><span class="p">,</span> <span class="s">'test_post'</span><span class="p">,</span> <span class="s">'PUT, POST'</span><span class="p">),</span>
+    <span class="p">(</span><span class="s">'/.*'</span><span class="p">,</span> <span class="s">'not_found'</span><span class="p">)</span>
+<span class="p">]}</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">zunzuncito</span><span class="o">.</span><span class="n">ZunZun</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">versions</span><span class="p">,</span> <span class="n">hosts</span><span class="p">,</span> <span class="n">routes</span><span class="p">)</span>
 </pre></div>
 
 <p>Contents of file zun_default.py located in "my_api/zun_default/zun_default.py"</p>
@@ -405,11 +407,6 @@ python setup.py install
             pageTracker._trackPageview();
             } catch(err) {}
           </script>
-          <script type="text/javascript">
-              var _lg = ['755aa10bae0b', 'zunzun'];
-              (function(d, t){var l=d.createElement(t),s=d.getElementsByTagName(t)[0]; l.async = true;
-               l.src = ('https:' == location.protocol ? 'https://' : 'http://') + 'logger-io.appspot.com/logger.io.js';
-               s.parentNode.insertBefore(l, s)}(document, 'script'))
-          </script>
+
   </body>
 </html>
