@@ -177,7 +177,7 @@ routes = {'default': [
     ('/my', 'ip_tools', 'GET'),
     ('/status', 'http_status', 'GET'),
     ('/upload/', 'test_post', 'PUT, POST'),
-    ('/.*', 'catch_all')
+    ('/.*', 'not_found')
 ]}
 app = zunzuncito.ZunZun(root, versions, hosts, routes)
 ```
