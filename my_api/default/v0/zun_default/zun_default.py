@@ -33,11 +33,11 @@ class APIResource(object):
             getattr(http_status_codes, 'HTTP_%d' %
                     self.status), list(headers.items()))
         data = {}
-        data['about'] = ("Hi %s, I am zunzuncito a micro-framework for creating"
+        data['About'] = ("Hi %s, I am zunzuncito a micro-framework for creating"
                          " REST API's, you can read more about me in: "
                          "www.zunzun.io") % environ.get('REMOTE_ADDR', 0)
-        data['request-id'] = self.api.request_id
+        data['Request-ID'] = self.api.request_id
         data['URI'] = self.api.URI
-        data['method'] = self.api.method
+        data['Method'] = self.api.method
 
         return json.dumps(data, sort_keys=True, indent=4)
