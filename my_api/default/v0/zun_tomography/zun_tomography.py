@@ -1,6 +1,7 @@
 """
-default resource
+see https://github.com/nbari/my-sandbox/tree/master/python/exercices/tomography
 """
+
 import json
 import logging
 from zunzuncito import http_status_codes
@@ -33,11 +34,5 @@ class APIResource(object):
             getattr(http_status_codes, 'HTTP_%d' %
                     self.status), list(headers.items()))
         data = {}
-        data['About'] = ("Hi %s, I am zunzuncito a micro-framework for creating"
-                         " REST API's, you can read more about me in: "
-                         "www.zunzun.io") % environ.get('REMOTE_ADDR', 0)
-        data['Request-ID'] = self.api.request_id
-        data['URI'] = self.api.URI
-        data['Method'] = self.api.method
 
         return json.dumps(data, sort_keys=True, indent=4)
