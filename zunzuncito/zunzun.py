@@ -97,6 +97,8 @@ class ZunZun(object):
             self.request_id = environ['REQUEST_ID']
         elif 'HTTP_REQUEST_ID' in environ:
             self.request_id = environ['HTTP_REQUEST_ID']
+        elif 'REQUEST_LOG_ID' in environ:
+            self.request_id = environ['REQUEST_LOG_ID']
         else:
             self.request_id = str(uuid4())
 
@@ -213,7 +215,7 @@ class ZunZun(object):
                 if match:
                     py_mod = p
                     self.log.debug(dict((x, y) for x, y in (
-                        ('HOST', (self.host ,self.vroot)),
+                        ('HOST', (self.host, self.vroot)),
                         ('API', self.version),
                         ('regex_match', (r.pattern, self.URI)),
                         ('methods', h)
