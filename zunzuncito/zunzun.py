@@ -129,24 +129,22 @@ class ZunZun(object):
             if e.display:
                 body.append(e.to_json())
 
-            self.log.error(tools.log_json(
-                dict((x, y) for x, y in (
-                    ('API', self.version),
-                    ('URI', self.URI),
-                    ('HTTPError', status),
-                    ('body', e.to_dict())
-                )), True)
+            self.log.error(tools.log_json({
+                'API': self.version,
+                'URI': self.URI,
+                'HTTPError': status,
+                'body': e.to_dict()
+            }, True)
             )
 
         except Exception as e:
             status = 500
-            self.log.error(tools.log_json(
-                dict((x, y) for x, y in (
-                    ('API', self.version),
-                    ('URI', self.URI),
-                    ('Exception', e),
-                    ('environ', environ)
-                )), True)
+            self.log.error(tools.log_json({
+                'API': self.version,
+                'URI': self.URI,
+                'Exception': e,
+                'environ': environ
+            }, True)
             )
 
         start_response(
@@ -170,12 +168,11 @@ class ZunZun(object):
                 self.URI = self.URI[len(version) + 1:]
                 break
 
-        self.log.debug(tools.log_json(
-            dict((x, y) for x, y in (
-                ('API', self.version),
-                ('URI', self.URI),
-                ('versions', self.versions)
-            )), True)
+        self.log.debug(tools.log_json({
+            'API': self.version,
+            'URI': self.URI,
+            'versions': self.versions
+        }, True)
         )
 
         """
@@ -209,13 +206,12 @@ class ZunZun(object):
                 match = r.match(self.URI)
                 if match:
                     py_mod = p
-                    self.log.debug(tools.log_json(
-                        dict((x, y) for x, y in (
-                            ('HOST', (self.host, self.vroot)),
-                            ('API', self.version),
-                            ('regex_match', (r.pattern, self.URI)),
-                            ('methods', h)
-                        )), True)
+                    self.log.debug(tools.log_json({
+                        'HOST': (self.host, self.vroot),
+                        'API': self.version,
+                        'regex_match': (r.pattern, self.URI),
+                        'methods': h
+                    }, True)
                     )
                     break
 
@@ -244,13 +240,12 @@ class ZunZun(object):
             module_name)
 
         try:
-            self.log.debug(tools.log_json(
-                dict((x, y) for x, y in (
-                    ('HOST', (self.host, self.vroot)),
-                    ('API', self.version),
-                    ('URI', self.URI),
-                    ('dispatching', (module_name, module_path))
-                )), True)
+            self.log.debug(tools.log_json({
+                'HOST': (self.host, self.vroot),
+                'API': self.version,
+                'URI': self.URI,
+                'dispatching': (module_name, module_path)
+            }, True)
             )
             return __import__(module_path, fromlist=['']).APIResource(self)
         except ImportError as e:
@@ -290,11 +285,10 @@ class ZunZun(object):
                     self.routes[vroot].append(
                         (re.compile('^%s$' % regex), module, methods))
 
-                self.log.debug(tools.log_json(
-                    dict((x, y) for x, y in (
-                        ('vroot', vroot),
-                        ("regex", regex),
-                        ("py_mod", module),
-                        ("methods", methods)
-                    )), True)
+                self.log.debug(tools.log_json({
+                    'vroot': vroot,
+                    "regex": regex,
+                    "py_mod": module,
+                    "methods": methods
+                }, True)
                 )
