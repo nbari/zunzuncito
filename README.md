@@ -283,7 +283,7 @@ application: <your-GAE-application-id>
 version: 1
 runtime: python27
 api_version: 1
-threadsafe: no
+threadsafe: yes
 
 handlers:
 - url: /favicon\.ico
@@ -291,7 +291,7 @@ handlers:
 -     upload: favicon\.ico
 -
 -     - url: .*
--       script: main.py
+-       script: main.app
 
 ```
 
@@ -299,19 +299,25 @@ Contents of the main.py file:
 
 ```python
 
-from google.appengine.ext.webapp.util import run_wsgi_app
 import zunzuncito
 
 root = 'my_api'
+
 versions = ['v0', 'v1']
-routes = [
+
+hosts = {
+    '*': 'default'
+}
+
+routes = {}
+routes['default'] = [
     ('/my/?.*', 'ip_tools', 'GET'),
-    ('/status/?.*', 'http_status', 'GET')
+    ('/status/?.*', 'http_status', 'GET'),
+    ('/(md5|sha1|sha256|sha512)/.*', 'hasher', 'GET')
 ]
 
-app = zunzuncito.ZunZun(root, versions, routes)
+app = zunzuncito.ZunZun(root, versions, hosts, routes, debug=False)
 
-run_wsgi_app(app)
 ```
 
 Directory structure:
