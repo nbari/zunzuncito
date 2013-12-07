@@ -204,14 +204,14 @@ class APIResource(object):
         self.status = 200
         self.headers = api.headers.copy()
         self.log = logging.getLogger()
-        self.log.info(log_json(
-            dict((x, y) for x, y in (
-                ('vroot', api.vroot),
-                ('API', api.version),
-                ('URI', api.URI),
-                ('method', api.method)
-            )), True)
+        self.log.info(log_json({
+            'vroot': api.vroot,
+            'API': api.version,
+            'URI': api.URI,
+            'method': api.method
+        }, True)
         )
+ 
 
     @allow_methods('get')
     def dispatch(self, environ, start_response):
