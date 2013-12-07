@@ -54,11 +54,6 @@ class ZunZun(object):
         if debug:
             self.log.setLevel(logging.DEBUG)
 
-        self.log.debug(
-            tools.log_json({k: str(v)
-                            for k, v in self.__dict__.items()
-                            if k in ['root', 'versions', 'hosts', 'routes']}))
-
         """
         register / compile the routes regex
         """
@@ -138,7 +133,7 @@ class ZunZun(object):
                     ('URI', self.URI),
                     ('HTTPError', status),
                     ('body', e.to_dict())
-                ))), True
+                )), True)
             )
 
         except Exception as e:
@@ -149,7 +144,7 @@ class ZunZun(object):
                     ('URI', self.URI),
                     ('Exception', e),
                     ('environ', environ)
-                ))), True
+                )), True)
             )
 
         start_response(
@@ -178,7 +173,7 @@ class ZunZun(object):
                 ('API', self.version),
                 ('URI', self.URI),
                 ('versions', self.versions)
-            ))), True
+            )), True)
         )
 
         """
@@ -218,7 +213,7 @@ class ZunZun(object):
                             ('API', self.version),
                             ('regex_match', (r.pattern, self.URI)),
                             ('methods', h)
-                        ))), True
+                        )), True)
                     )
                     break
 
@@ -253,7 +248,7 @@ class ZunZun(object):
                     ('API', self.version),
                     ('URI', self.URI),
                     ('dispatching', (module_name, module_path))
-                ))), True
+                )), True)
             )
             return __import__(module_path, fromlist=['']).APIResource(self)
         except ImportError as e:
@@ -299,5 +294,5 @@ class ZunZun(object):
                         ("regex", regex),
                         ("py_mod", module),
                         ("methods", methods)
-                    ))), True
+                    )), True)
                 )
