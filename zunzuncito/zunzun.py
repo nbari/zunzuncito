@@ -53,9 +53,8 @@ class ZunZun(object):
         if not self.log.handlers:
             self.log.addHandler(logging.StreamHandler())
 
-        if debug:
-            self.log.setLevel(logging.DEBUG)
-            self.log.debug(tools.log_json(self.__dict__, True))
+        self.log.setLevel('DEBUG' if debug else 'INFO')
+        self.log.debug(tools.log_json(self.__dict__, True))
 
         """
         register / compile the routes regex
