@@ -199,13 +199,13 @@ class ZunZun(object):
 
         """
         try to match any supplied routes (regex match)
-        only if the current host has rules
+        only if the current host has defined routes
 
         t[0] = r - regex
         t[1] = p - py_mod
         t[2] = h - HTTP methods
         """
-        if self.routes[self.vroot]:
+        if self.routes.get(self.vroot, False):
             filterf = lambda t: any(i in (self.method.upper(), 'ALL')
                                     for i in t[2])
             for r, p, h in ifilter(filterf, self.routes[self.vroot]):
