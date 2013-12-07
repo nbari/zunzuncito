@@ -49,10 +49,9 @@ class ZunZun(object):
                     "Versions must be a list, example: ['v0', 'v1', 'v2']")
 
         self.log = logging.getLogger()
+        self.log.setLevel('DEBUG' if debug else 'INFO')
         if not self.log.handlers:
             self.log.addHandler(logging.StreamHandler())
-        if debug:
-            self.log.setLevel(logging.DEBUG)
 
         """
         register / compile the routes regex
