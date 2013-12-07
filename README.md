@@ -211,7 +211,7 @@ class APIResource(object):
             'method': api.method
         }, True)
         )
- 
+
 
     @allow_methods('get')
     def dispatch(self, environ, start_response):
@@ -282,13 +282,16 @@ runtime: python27
 api_version: 1
 threadsafe: yes
 
+builtins:
+- appstats: on
+
 handlers:
 - url: /favicon\.ico
--   static_files: favicon.ico
--     upload: favicon\.ico
--
--     - url: .*
--       script: main.app
+  static_files: favicon.ico
+  upload: favicon\.ico
+
+- url: .*
+  script: main.app
 
 ```
 
