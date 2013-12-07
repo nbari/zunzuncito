@@ -13,7 +13,7 @@
 
 > Documentation : [docs.zunzun.io](http://docs.zunzun.io)
 
-### What & Why ZunZuncito
+### What & Why ZunZuncito (ßeta)
 ZunZuncito is a [python](http://python.org/) package that allows to create and maintain [REST](http://en.wikipedia.org/wiki/REST) API's without hassle.
 
 The simplicity for sketching and debugging helps to develop very fast; versioning is inherit by default, which allows to serve and maintain existing applications, while working in new releases with no need to create separate instances. All the applications are WSGI [PEP 333](http://www.python.org/dev/peps/pep-0333/) compliant, allowing to migrate existing code to more robust frameworks, without need to modify the existing code.
@@ -194,7 +194,7 @@ zun_default.py API resource
 import json
 import logging
 from zunzuncito import http_status_codes
-from zunzuncito.tools import MethodException, HTTPException, allow_methods
+from zunzuncito.tools import MethodException, HTTPException, allow_methods, log_json
 
 
 class APIResource(object):
@@ -204,17 +204,14 @@ class APIResource(object):
         self.status = 200
         self.headers = api.headers.copy()
         self.log = logging.getLogger()
-        self.log.setLevel('INFO')
-        self.log = logging.LoggerAdapter(
-            logging.getLogger(), {
-                'rid': api.request_id,
-                'indent': 4
-            })
-        self.log.info(dict((x, y) for x, y in (
-            ('API', api.version),
-            ('URI', api.URI),
-            ('method', api.method)
-        )))
+        self.log.info(log_json(
+            dict((x, y) for x, y in (
+                ('vroot', api.vroot),
+                ('API', api.version),
+                ('URI', api.URI),
+                ('method', api.method)
+            )), True)
+        )
 
     @allow_methods('get')
     def dispatch(self, environ, start_response):
