@@ -6,7 +6,6 @@ exceptions and decorators
 
 import collections
 import json
-import logging
 import time
 from functools import wraps
 
@@ -53,6 +52,9 @@ def allow_methods(*methods):
 
         @wraps(f)
         def wrapped(self, *args, **kwargs):
+            """self is because the allow_methods decorator is called
+            within APIResource class
+            """
             if self.api.method.lower() not in [x.lower().strip()
                                                for x in methods[0].split(',')
                                                if x.strip()]:
@@ -61,80 +63,24 @@ def allow_methods(*methods):
                 return f(self, *args, **kwargs)
 
         return wrapped
-
     return true_decorator
 
 
-class LogFormatter(logging.Formatter):
-    converter = time.gmtime
+def log_json(log, indent=False):
+    """ create structured log
+    :param dict: log in key value format
+    """
+    def clean_dict(d):
+        new = {}
+        for k, v in d.iteritems():
+            if isinstance(v, dict):
+                v = clean_dict(v)
+                new[k] = v
+            else:
+                new[k] = str(v)
+        return new
 
-    reserved_keys = [
-        'args',
-        'asctime',
-        'created',
-        'exc_info',
-        'exc_text',
-        'filename',
-        'funcName',
-        'levelname',
-        'levelno',
-        'lineno',
-        'message',
-        'module',
-        'msecs',
-        'msg',
-        'name',
-        'pathname',
-        'process',
-        'processName',
-        'relativeCreated',
-        'thread',
-        'threadName'
-    ]
-
-    def __init__(self, *args, **kwargs):
-        super(LogFormatter, self).__init__(*args, **kwargs)
-        self.required_fields = [x.strip("%()") for x in self._fmt.split()]
-
-    def format(self, record):
-        indent = record.__dict__.get('indent', None)
-        if indent:
-            del record.indent
-
-        if isinstance(record.msg, dict):
-            def clean_dict(self, d):
-                new = {}
-                for k, v in d.iteritems():
-                    if isinstance(v, dict):
-                        v = clean_dict(self, v)
-                        new[k] = v
-                    else:
-                        new[k] = str(v)
-                return new
-            record.message = clean_dict(self, record.msg)
-        else:
-            record.message = record.getMessage()
-
-        if "asctime" in self.required_fields:
-            ct = self.converter(record.created)
-            t = time.strftime("%Y-%m-%d %H:%M:%S", ct)
-            record.asctime = "%s,%03d" % (t, record.msecs)
-
-        log_record = {}
-
-        for field in self.required_fields:
-            log_record[field] = record.__dict__.get(field)
-
-        for key, value in record.__dict__.iteritems():
-            """See https://github.com/madzak/python-json-logger
-            this allows to have numeric keys
-            """
-            if (key not in self.reserved_keys and not (
-                    hasattr(key, "startswith") and key.startswith('_')
-            )):
-                log_record[key] = value
-
-        return json.dumps(log_record, sort_keys=True, indent=indent)
+    return json.dumps(clean_dict(log), sort_keys=True, indent=indent)
 
 
 class CaseInsensitiveDict(collections.MutableMapping):

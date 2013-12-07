@@ -48,20 +48,16 @@ class ZunZun(object):
                 raise Exception(
                     "Versions must be a list, example: ['v0', 'v1', 'v2']")
 
-        """
-        set the logger
-        """
         self.log = logging.getLogger()
-        logHandler = logging.StreamHandler()
-        logformat = tools.LogFormatter('%(asctime) %(levelname) %(message)')
-        logHandler.setFormatter(logformat)
-        self.log.addHandler(logHandler)
-        self.log.setLevel('DEBUG' if debug else 'ERROR')
+        if not self.log.handlers:
+            self.log.addHandler(logging.StreamHandler())
+        if debug:
+            self.log.setLevel(logging.DEBUG)
 
-        self.log = logging.getLogger()
-        self.log.debug({k: str(v)
-                       for k, v in self.__dict__.items()
-                       if v and k not in 'log'})
+        self.log.debug(
+            tools.log_json({k: str(v)
+                            for k, v in self.__dict__.items()
+                            if k in ['root', 'versions', 'hosts', 'routes']}))
 
         """
         register / compile the routes regex
@@ -102,10 +98,6 @@ class ZunZun(object):
         else:
             self.request_id = str(uuid4())
 
-        self.log = logging.LoggerAdapter(logging.getLogger(), {
-            'rid': self.request_id,
-            'indent': 4})
-
         """
         get the HTTP method
         """
@@ -140,21 +132,25 @@ class ZunZun(object):
             if e.display:
                 body.append(e.to_json())
 
-            self.log.error(dict((x, y) for x, y in (
-                ('API', self.version),
-                ('URI', self.URI),
-                ('HTTPError', status),
-                ('body', e.to_dict())
-            )))
+            self.log.error(tools.log_json(
+                dict((x, y) for x, y in (
+                    ('API', self.version),
+                    ('URI', self.URI),
+                    ('HTTPError', status),
+                    ('body', e.to_dict())
+                ))), True
+            )
 
         except Exception as e:
             status = 500
-            self.log.error(dict((x, y) for x, y in (
-                ('API', self.version),
-                ('URI', self.URI),
-                ('Exception', e),
-                ('environ', environ)
-            )))
+            self.log.error(tools.log_json(
+                dict((x, y) for x, y in (
+                    ('API', self.version),
+                    ('URI', self.URI),
+                    ('Exception', e),
+                    ('environ', environ)
+                ))), True
+            )
 
         start_response(
             getattr(http_status_codes, 'HTTP_%d' %
@@ -177,11 +173,13 @@ class ZunZun(object):
                 self.URI = self.URI[len(version) + 1:]
                 break
 
-        self.log.debug(dict((x, y) for x, y in (
-            ('API', self.version),
-            ('URI', self.URI),
-            ('versions', self.versions)
-        )))
+        self.log.debug(tools.log_json(
+            dict((x, y) for x, y in (
+                ('API', self.version),
+                ('URI', self.URI),
+                ('versions', self.versions)
+            ))), True
+        )
 
         """
         find a python module (py_mod) to handle the request per host
@@ -214,12 +212,14 @@ class ZunZun(object):
                 match = r.match(self.URI)
                 if match:
                     py_mod = p
-                    self.log.debug(dict((x, y) for x, y in (
-                        ('HOST', (self.host, self.vroot)),
-                        ('API', self.version),
-                        ('regex_match', (r.pattern, self.URI)),
-                        ('methods', h)
-                    )))
+                    self.log.debug(tools.log_json(
+                        dict((x, y) for x, y in (
+                            ('HOST', (self.host, self.vroot)),
+                            ('API', self.version),
+                            ('regex_match', (r.pattern, self.URI)),
+                            ('methods', h)
+                        ))), True
+                    )
                     break
 
         """
@@ -247,12 +247,14 @@ class ZunZun(object):
             module_name)
 
         try:
-            self.log.debug(dict((x, y) for x, y in (
-                ('HOST', (self.host, self.vroot)),
-                ('API', self.version),
-                ('URI', self.URI),
-                ('dispatching', (module_name, module_path))
-            )))
+            self.log.debug(tools.log_json(
+                dict((x, y) for x, y in (
+                    ('HOST', (self.host, self.vroot)),
+                    ('API', self.version),
+                    ('URI', self.URI),
+                    ('dispatching', (module_name, module_path))
+                ))), True
+            )
             return __import__(module_path, fromlist=['']).APIResource(self)
         except ImportError as e:
             raise tools.HTTPException(
@@ -291,9 +293,11 @@ class ZunZun(object):
                     self.routes[vroot].append(
                         (re.compile('^%s$' % regex), module, methods))
 
-                self.log.debug(dict((x, y) for x, y in (
-                    ('vroot', vroot),
-                    ("regex", regex),
-                    ("py_mod", module),
-                    ("methods", methods)
-                )))
+                self.log.debug(tools.log_json(
+                    dict((x, y) for x, y in (
+                        ('vroot', vroot),
+                        ("regex", regex),
+                        ("py_mod", module),
+                        ("methods", methods)
+                    ))), True
+                )
