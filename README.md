@@ -5,8 +5,6 @@
 * Via decorator or in a defined route, accepts only certain [HTTP methods](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).
 * Follow the single responsibility [principle](http://en.wikipedia.org/wiki/Single_responsibility_principle).
 * Be compatible with any WSGI server. Example: [uWSGI](http://uwsgi-docs.readthedocs.org/en/latest/), [Gunicorn](http://gunicorn.org/), [Twisted](http://twistedmatrix.com/), etc.
-* Structured Logging using [JSON](http://en.wikipedia.org/wiki/JSON).
-* No template rendering.
 * Tracing Request-ID "rid" per request.
 * Compatibility with Google App Engine. [demo](http://api.zunzun.io)
 * [Multi-tenant](http://en.wikipedia.org/wiki/Multitenancy) Support.
