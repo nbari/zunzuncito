@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Zunzuncito</title>
+    <title>Zunzuncito by nbari</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
@@ -38,8 +38,6 @@
 <li>Via decorator or in a defined route, accepts only certain <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html">HTTP methods</a>.</li>
 <li>Follow the single responsibility <a href="http://en.wikipedia.org/wiki/Single_responsibility_principle">principle</a>.</li>
 <li>Be compatible with any WSGI server. Example: <a href="http://uwsgi-docs.readthedocs.org/en/latest/">uWSGI</a>, <a href="http://gunicorn.org/">Gunicorn</a>, <a href="http://twistedmatrix.com/">Twisted</a>, etc.</li>
-<li>Structured Logging using <a href="http://en.wikipedia.org/wiki/JSON">JSON</a>.</li>
-<li>No template rendering.</li>
 <li>Tracing Request-ID "rid" per request.</li>
 <li>Compatibility with Google App Engine. <a href="http://api.zunzun.io">demo</a>
 </li>
@@ -417,15 +415,6 @@ python setup.py install
             pageTracker._trackPageview();
             } catch(err) {}
           </script>
-          <script>
-                var _lg = ['755aa10bae0b', 'zunzun'];
-              (function(d, t){var l=d.createElement(t),s=d.getElementsByTagName(t)[0]; l.async = true;
-               l.src = ('https:' == location.protocol ? 'https://' : 'http://') + 'logger-io.appspot.com/logger.io.js';
-               s.parentNode.insertBefore(l, s)}(document, 'script'))
-          </script>
-
-
-
 
   </body>
 </html>
