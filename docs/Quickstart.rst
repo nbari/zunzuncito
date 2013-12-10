@@ -137,6 +137,28 @@ Listening on port 80 with 2 processes and stats on http://127.0.0.1:8181::
    uwsgi --http :80 --wsgi-file app.py --callable app --master --processes 2 --threads 2 --stats 127.0.0.1:8181 --harakiri 30
 
 
+Using a .ini file
+
+.. sidebar:: TRACK_ID
+
+    :route-run: custom tracking ID
+
+.. code-block:: python
+   :emphasize-lines: 2,3
+   [uwsgi]
+   http = :8080
+   route-run = addvar:TRACK_ID=${uwsgi[uuid]}
+   route-run = log:TRACK_ID = ${TRACK_ID}
+   master = true
+   processes = 2
+   threads = 1
+   stats = 127.0.0.1:8181
+   harakiri = 30
+   wsgi-file = app.py
+   callable = app
+
+
+
 Gunicorn
 ........
 
