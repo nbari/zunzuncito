@@ -124,3 +124,19 @@ Tu have a ZunZun instance up and running in Google App Engine these are the
 configurations:
 
 Contents of the app.yaml file:
+
+.. code-block::
+
+    application: <your-GAE-application-id>
+    version: 1
+    runtime: python27
+    api_version: 1
+    threadsafe: yes
+
+    handlers:
+    - url: /favicon\.ico
+      static_files: favicon.ico
+      upload: favicon\.ico
+
+    - url: .*
+      script: main.app
