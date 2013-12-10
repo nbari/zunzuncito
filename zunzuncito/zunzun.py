@@ -89,10 +89,6 @@ class ZunZun(object):
         """
         if self.rid and self.rid in environ:
             self.request_id = environ[self.rid]
-        elif 'REQUEST_ID' in environ:
-            self.request_id = environ['REQUEST_ID']
-        elif 'HTTP_REQUEST_ID' in environ:
-            self.request_id = environ['HTTP_REQUEST_ID']
         elif 'REQUEST_LOG_ID' in environ:  # GAE
             self.request_id = environ['REQUEST_LOG_ID']
         else:

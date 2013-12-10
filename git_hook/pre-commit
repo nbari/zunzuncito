@@ -6,9 +6,11 @@ if [ $CHANGES -gt 0 ]; then
 
     COMMITS=$(git rev-list HEAD --count)
 
-    VC=$(find . -type f -iname "version.py" -print0 | xargs -0 awk '/version_commits/{ print $3 }')
+    VC=$(find . -type f -iname "version.py" -print0 | xargs -0 awk '/version_commits = /{ print $3 }')
     _VERSION=$(echo $VC | cut -f1 -d '.')
     _COMMITS=$(echo $VC | cut -f2 -d '.')
+
+    echo $VC
 
     if [ $COMMITS -gt $_COMMITS ]; then
 
