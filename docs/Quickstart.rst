@@ -148,7 +148,6 @@ Using a .ini file
    :emphasize-lines: 4,5
    :linenos:
 
-   """
    [uwsgi]
    http = :8080
    route-run = addvar:TRACK_ID=${uwsgi[uuid]}
@@ -160,7 +159,6 @@ Using a .ini file
    harakiri = 30
    wsgi-file = app.py
    callable = app
-   """
 
 
 
