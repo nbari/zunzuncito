@@ -11,8 +11,6 @@ Design Goals
 * Via decorator or in a defined route, accept only certain `HTTP methods <http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html>`_.
 * Follow the single responsibility `principle <http://en.wikipedia.org/wiki/Single_responsibility_principle>`_.
 * Be compatible with any WSGI server, example: `uWSGI <http://uwsgi-docs.readthedocs.org/en/latest/>`_, `Gunicorn <http://gunicorn.org/>`_, `Twisted <http://twistedmatrix.com/>`_, etc.
-* Structured Logging using `JSON <http://en.wikipedia.org/wiki/JSON>`_.
-* No template rendering.
 * Tracing Request-ID "rid" per request.
 * Compatibility with Google App Engine. `demo <http://api.zunzun.io>`_
 * `Multi-tenant <http://en.wikipedia.org/wiki/Multitenancy>`_ Support.
