@@ -123,9 +123,8 @@ GAE
 Tu have a ZunZun instance up and running in Google App Engine these are the
 configurations:
 
-Contents of the app.yaml file:
+Contents of the app.yaml file::
 
-.. code-block::
 
     application: <your-GAE-application-id>
     version: 1
