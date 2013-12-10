@@ -27,6 +27,7 @@ class ZunZun(object):
         self.prefix = prefix
         self.request_id = None
         self.resource = None
+        self.rid = rid
         self.root = root
         self.routes = {}
         self.versions = ['v0']
@@ -86,7 +87,7 @@ class ZunZun(object):
         """
         set the REQUEST_ID
         """
-        if rid and rid in environ:
+        if self.rid and self.rid in environ:
             self.request_id = environ[rid]
         elif 'REQUEST_ID' in environ:
             self.request_id = environ['REQUEST_ID']
