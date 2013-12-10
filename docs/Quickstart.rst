@@ -5,11 +5,11 @@ This is the directory structure:
 
 .. sidebar:: API directory structure
 
-    :app.py: application python file.
-    :my_api: The **root** directory of the API.
-    :default: The **vroot** directory.
-    :v0: Directory for default API resources or for version *0* when specified.
-    :v1: Directory for API resources version *1*
+   :app.py: application python file.
+   :my_api: The **root** directory of the API.
+   :default: The **vroot** directory.
+   :v0: Directory for default API resources or for version *0* when specified.
+   :v1: Directory for API resources version *1*
 
 
 .. code-block:: python
@@ -134,17 +134,17 @@ Listening on port 8080::
 
 Listening on port 80 with 2 processes and stats on http://127.0.0.1:8181::
 
-   uwsgi --http :80 --wsgi-file app.py --callable app --master --processes 2 --threads 2 --stats 127.0.0.1:8181 --harakiri 30
+    uwsgi --http :80 --wsgi-file app.py --callable app --master --processes 2 --threads 2 --stats 127.0.0.1:8181 --harakiri 30
 
 
 Using a .ini file
 
 .. sidebar:: TRACK_ID
 
-    :route-run: adds a custom tracking ID
+   :route-run: adds a custom tracking ID
 
 
-ok::
+.. code-block::
    :emphasize-lines: 4,5
    :linenos:
 
@@ -166,6 +166,7 @@ Gunicorn
 ........
 
 Listening on port 8080::
+    :linenos:
 
     gunicorn -b :8080  app:app
 
