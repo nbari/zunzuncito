@@ -126,6 +126,7 @@ run it with `uWSGI <http://uwsgi-docs.readthedocs.org/en/latest/>`_, and
 `Gunicorn <http://gunicorn.org/>`_, `Twisted <http://twistedmatrix.com/>`_.
 
 uWSGI
+.....
 
 Simple::
 
@@ -137,7 +138,8 @@ With 2 processes::
 --threads 2 --stats 127.0.0.1:8181 --harakiri 30
 
 
-Gunicorn::
+Gunicorn
+........
 
 Simple::
 
