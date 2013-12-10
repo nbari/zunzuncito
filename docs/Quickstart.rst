@@ -144,7 +144,7 @@ Using a .ini file
    :route-run: adds a custom tracking ID
 
 
-.. code-block::
+.. sourcecode::
    :emphasize-lines: 4,5
    :linenos:
 
@@ -166,7 +166,6 @@ Gunicorn
 ........
 
 Listening on port 8080::
-    :linenos:
 
     gunicorn -b :8080  app:app
 
