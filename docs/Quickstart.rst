@@ -117,6 +117,37 @@ example the content of module zun_default/zun_default.py is:
        return json.dumps(data, sort_keys=True, indent=4)
 
 
+
+How to run it
+-------------
+
+Zunzuncito is compatible with any WSGI server, next are some examples of how to
+run it with `uWSGI <http://uwsgi-docs.readthedocs.org/en/latest/>`_, and
+`Gunicorn <http://gunicorn.org/>`_, `Twisted <http://twistedmatrix.com/>`_.
+
+uWSGI
+
+Simple::
+
+    uwsgi --http :8080 --wsgi-file app.py --callable app --master
+
+With 2 processes::
+
+   uwsgi --http :8080 --wsgi-file app.py --callable app --master --processes 2
+--threads 2 --stats 127.0.0.1:8181 --harakiri 30
+
+
+Gunicorn::
+
+Simple::
+
+    gunicorn -b :8080  app:app
+
+With 2 processes:
+
+    gunicorn -b :8080 -w2 app:app
+
+
 GAE
 ---
 
