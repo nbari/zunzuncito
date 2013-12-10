@@ -88,7 +88,7 @@ class ZunZun(object):
         set the REQUEST_ID
         """
         if self.rid and self.rid in environ:
-            self.request_id = environ[rid]
+            self.request_id = environ[self.rid]
         elif 'REQUEST_ID' in environ:
             self.request_id = environ['REQUEST_ID']
         elif 'HTTP_REQUEST_ID' in environ:
