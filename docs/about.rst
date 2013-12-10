@@ -6,7 +6,7 @@ micro-framework for creating REST API's.
 Design Goals
 ------------
 * Keep it simple and small, avoiding extra complexity at all cost. `KISS <http://en.wikipedia.org/wiki/KISS_principle>`_
-* Creation of routes on the fly or by defining regular expressions.
+* Create routes on the fly or by defining regular expressions.
 * Support API versions out of the box without altering routes.
 * Via decorator or in a defined route, accept only certain `HTTP methods <http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html>`_.
 * Follow the single responsibility `principle <http://en.wikipedia.org/wiki/Single_responsibility_principle>`_.
