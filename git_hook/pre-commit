@@ -4,10 +4,19 @@ CHANGES=$(git status -s | grep "zunzuncito/" | wc -l)
 
 if [ $CHANGES -gt 0 ]; then
 
-  COMMITS=$(git rev-list HEAD --count)
+    COMMITS=$(git rev-list HEAD --count)
 
-  find . -type f -iname "version.py" -print0 | xargs -0 sed -i '' "s/^commits.*/commits = '$((COMMITS + 1))'/g"
+    VC=$(find . -type f -iname "version.py" -print0 | xargs -0 awk '/version_commits/{ print $3 }')
+    _VERSION=$(echo $VC | cut -f1 -d '.')
+    _COMMITS=$(echo $VC | cut -f2 -d '.')
 
-  git update-index --again
+    if [ $COMMITS -gt $_COMMITS ]; then
+
+        nVC=$(($_VERSION + 1)).$COMMITS
+
+        find . -type f -iname "version.py" -print0 | xargs -0 sed -i '' "s/^version_commits.*/version_commits = $nVC/g"
+
+        git update-index --again
+    fi
 
 fi

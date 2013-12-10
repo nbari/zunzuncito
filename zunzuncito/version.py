@@ -2,8 +2,8 @@
 
 major.minor.commits
 """
-commits = '264'
+version_commits = 2.277
 
-VERSION_TUPLE = (0, 1, commits)
+VERSION_TUPLE = (0, 1, int(version_commits))
 
 __version__ = '.'.join(map(str, VERSION_TUPLE))
