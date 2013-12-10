@@ -144,7 +144,7 @@ Using a .ini file
    :route-run: adds a custom tracking ID
 
 
-.. sourcecode::
+.. code-block:: rest
    :emphasize-lines: 4,5
    :linenos:
 
