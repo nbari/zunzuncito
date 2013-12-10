@@ -141,10 +141,11 @@ Using a .ini file
 
 .. sidebar:: TRACK_ID
 
-    :route-run: custom tracking ID
+    :route-run: adds a custom tracking ID
 
 .. code-block:: python
    :emphasize-lines: 2,3
+   """
    [uwsgi]
    http = :8080
    route-run = addvar:TRACK_ID=${uwsgi[uuid]}
@@ -156,6 +157,7 @@ Using a .ini file
    harakiri = 30
    wsgi-file = app.py
    callable = app
+   """
 
 
 
