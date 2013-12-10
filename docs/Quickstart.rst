@@ -145,6 +145,8 @@ Using a .ini file
 
 .. code-block:: python
    :emphasize-lines: 2,3
+   :linenos:
+
    """
    [uwsgi]
    http = :8080
