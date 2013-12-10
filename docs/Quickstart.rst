@@ -115,3 +115,12 @@ example the content of module zun_default/zun_default.py is:
        data['method'] = self.api.method
 
        return json.dumps(data, sort_keys=True, indent=4)
+
+
+GAE
+---
+
+Tu have a ZunZun instance up and running in Google App Engine these are the
+configurations:
+
+Contents of the app.yaml file:
