@@ -128,24 +128,23 @@ run it with `uWSGI <http://uwsgi-docs.readthedocs.org/en/latest/>`_, and
 uWSGI
 .....
 
-Simple::
+Listening on port 8080::
 
     uwsgi --http :8080 --wsgi-file app.py --callable app --master
 
-With 2 processes::
+Listening on port 80 with 2 processes and stats on http://127.0.0.1:8181::
 
-   uwsgi --http :8080 --wsgi-file app.py --callable app --master --processes 2
---threads 2 --stats 127.0.0.1:8181 --harakiri 30
+   uwsgi --http :80 --wsgi-file app.py --callable app --master --processes 2 --threads 2 --stats 127.0.0.1:8181 --harakiri 30
 
 
 Gunicorn
 ........
 
-Simple::
+Listening on port 8080::
 
     gunicorn -b :8080  app:app
 
-With 2 processes:
+Listening on port 8080 with 2 processes::
 
     gunicorn -b :8080 -w2 app:app
 
@@ -153,11 +152,10 @@ With 2 processes:
 GAE
 ---
 
-Tu have a ZunZun instance up and running in Google App Engine these are the
-configurations:
+Tu have a ZunZun instance up and running in Google App Engine you can use the
+following configuration.
 
-Contents of the app.yaml file::
-
+Contents of the **app.yaml** file::
 
     application: <your-GAE-application-id>
     version: 1
