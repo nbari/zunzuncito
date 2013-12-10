@@ -66,20 +66,21 @@ def allow_methods(*methods):
     return true_decorator
 
 
-def log_json(log, indent=False):
-    """ create structured log
-    :param dict: log in key value format
+def clean_dict(d):
+    """ clean dictionary object to sr
+    :param dict: dictionary
     """
-    def clean_dict(d):
-        new = {}
-        for k, v in d.iteritems():
-            if isinstance(v, dict):
-                v = clean_dict(v)
-                new[k] = v
-            else:
-                new[k] = str(v)
-        return new
+    new = {}
+    for k, v in d.iteritems():
+        if isinstance(v, dict):
+            v = clean_dict(v)
+            new[k] = v
+        else:
+            new[k] = str(v)
+    return new
 
+
+def log_json(log, indent=False):
     return json.dumps(clean_dict(log), sort_keys=True, indent=indent)
 
 
