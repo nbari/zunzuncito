@@ -16,7 +16,7 @@ from zunzuncito import tools
 class ZunZun(object):
 
     def __init__(self, root, versions=None, hosts=None,
-                 routes=None, prefix='zun_', debug=False):
+                 routes=None, prefix='zun_', rid=None, debug=False):
         """
         set defauls
         """
@@ -86,11 +86,13 @@ class ZunZun(object):
         """
         set the REQUEST_ID
         """
-        if 'REQUEST_ID' in environ:
+        if rid and rid in environ:
+            self.request_id = environ[rid]
+        elif 'REQUEST_ID' in environ:
             self.request_id = environ['REQUEST_ID']
         elif 'HTTP_REQUEST_ID' in environ:
             self.request_id = environ['HTTP_REQUEST_ID']
-        elif 'REQUEST_LOG_ID' in environ:
+        elif 'REQUEST_LOG_ID' in environ:  # GAE
             self.request_id = environ['REQUEST_LOG_ID']
         else:
             self.request_id = str(uuid4())
