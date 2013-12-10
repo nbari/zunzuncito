@@ -143,8 +143,9 @@ Using a .ini file
 
     :route-run: adds a custom tracking ID
 
+
 .. code-block:: python
-   :emphasize-lines: 2,3
+   :emphasize-lines: 4,5
    :linenos:
 
    """
