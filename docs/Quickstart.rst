@@ -12,11 +12,10 @@ This is the directory structure:
    :v1: Directory for API resources version *1*
 
 
-.. code-block:: python
-   :emphasize-lines: 4,5,7,9,17
+.. code-block:: rest
+   :emphasize-lines: 3,4,6,8,16
    :linenos:
 
-   """
    /home/
      `--zunzun/
         |--app.py
@@ -40,7 +39,6 @@ This is the directory structure:
                `--zun_hasher
                  |--__init__.py
                  `--zun_hasher.py
-   """
 
 Inside directory /home/zunzun there is a file called **app.py** and a directory **my_api**.
 
@@ -145,7 +143,7 @@ Using a .ini file
 
 
 .. code-block:: rest
-   :emphasize-lines: 4,5
+   :emphasize-lines: 3,4
    :linenos:
 
    [uwsgi]
