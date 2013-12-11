@@ -160,7 +160,7 @@ Using a .ini file
    callable = app
 
 
-To trace all the requests you could and append to the headers the 'REQUEST_ID'
+For this case, to append to all your responses the custom *tracking ID*
 use::
 
     app = zunzuncito.ZunZun(root, versions, hosts, routes, rid='TRACK_ID')
