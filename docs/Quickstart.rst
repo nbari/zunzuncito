@@ -160,6 +160,12 @@ Using a .ini file
    callable = app
 
 
+To trace all the requests you could and append to the headers the 'REQUEST_ID'
+use:
+
+   app = zunzuncito.ZunZun(root, versions, hosts, routes, rid='TRACK_ID')
+
+
 
 Gunicorn
 ........
@@ -194,3 +200,10 @@ Contents of the **app.yaml** file::
 
     - url: .*
       script: main.app
+
+
+When using GAE the global unique identifier for a request is:
+**REQUEST_LOG_ID**  therefore if you want to append the request id to your response you need to run
+the app like this:
+
+   app = zunzuncito.ZunZun(root, versions, hosts, routes, rid='REQUEST_LOG_ID')
