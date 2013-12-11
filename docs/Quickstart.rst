@@ -140,7 +140,8 @@ Using a .ini file
 
 .. sidebar:: TRACK_ID
 
-   :route-run: adds a custom tracking ID
+   :route-run: adds a custom tracking ID, see `uwsgi InternalRouting
+   <http://uwsgi-docs.readthedocs.org/en/latest/InternalRouting.html>`_
 
 
 .. code-block:: rest
@@ -202,7 +203,8 @@ Contents of the **app.yaml** file::
       script: main.app
 
 
-When using GAE the global unique identifier per request is: **REQUEST_LOG_ID**
+When using GAE the global unique identifier per request is: `REQUEST_LOG_ID
+<https://developers.google.com/appengine/docs/python/logs/requestlogclass#RequestLog_request_id>`_
 
 For this case, to append to all your responses the **Request-ID** header run
 the app like this::
