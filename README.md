@@ -314,9 +314,17 @@ routes['default'] = [
     ('/(md5|sha1|sha256|sha512)/.*', 'hasher', 'GET')
 ]
 
-app = zunzuncito.ZunZun(root, versions, hosts, routes, debug=False)
+app = zunzuncito.ZunZun(
+    root,
+    versions,
+    hosts,
+    routes,
+    rid='REQUEST_LOG_ID',
+    debug=False)
 
 ```
+
+> rid [REQUEST_LOG_ID](https://developers.google.com/appengine/docs/python/)
 
 Directory structure:
 

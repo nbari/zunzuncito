@@ -13,18 +13,6 @@ class APIResource(object):
         self.api = api
         self.status = 200
         self.headers = api.headers.copy()
-        self.log = logging.getLogger()
-        self.log.setLevel('INFO')
-        self.log = logging.LoggerAdapter(
-            logging.getLogger(), {
-                'rid': api.request_id,
-                'indent': 4
-            })
-        self.log.info(dict((x, y) for x, y in (
-            ('API', api.version),
-            ('URI', api.URI),
-            ('method', api.method)
-        )))
 
     @allow_methods('get')
     def dispatch(self, environ, start_response):
@@ -34,7 +22,7 @@ class APIResource(object):
                     self.status), list(headers.items()))
         data = {}
         try:
-            my_ip = True if self.api.resources[1] == 'ip' else False
+            my_ip = True if self.api.resource[1] == 'ip' else False
         except:
             my_ip = False
 
