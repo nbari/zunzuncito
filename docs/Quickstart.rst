@@ -63,6 +63,11 @@ For a very basic API, contents of file **app.py** can be:
 
    app = zunzuncito.ZunZun(root, versions, hosts, routes)
 
+   """
+   for appending the Request-ID header on GAE
+   """
+   # app = zunzuncito.ZunZun(root, versions, hosts, routes, rid='REQUEST_LOG_ID')
+
 
 * line 3 defines the "document root" for your API
 * line 7 gives multitenant support, in the example all "*" is going to be
