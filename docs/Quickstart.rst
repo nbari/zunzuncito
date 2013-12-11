@@ -63,9 +63,7 @@ For a very basic API, contents of file **app.py** can be:
 
    app = zunzuncito.ZunZun(root, versions, hosts, routes)
 
-   """
-   for appending the Request-ID header on GAE
-   """
+   # For appending the Request-ID header on GAE
    # app = zunzuncito.ZunZun(root, versions, hosts, routes, rid='REQUEST_LOG_ID')
 
 
