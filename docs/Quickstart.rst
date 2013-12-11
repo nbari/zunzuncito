@@ -160,8 +160,8 @@ Using a .ini file
    callable = app
 
 
-For this case, to append to all your responses the custom *tracking ID*
-use::
+For this case, to append to all your responses the **Request-ID** header run
+the app like this::
 
     app = zunzuncito.ZunZun(root, versions, hosts, routes, rid='TRACK_ID')
 
@@ -202,8 +202,9 @@ Contents of the **app.yaml** file::
       script: main.app
 
 
-When using GAE the global unique identifier for a request is:
-**REQUEST_LOG_ID**  therefore if you want to append the request id to your response you need to run
+When using GAE the global unique identifier per request is: **REQUEST_LOG_ID**
+
+For this case, to append to all your responses the **Request-ID** header run
 the app like this::
 
    app = zunzuncito.ZunZun(root, versions, hosts, routes, rid='REQUEST_LOG_ID')
