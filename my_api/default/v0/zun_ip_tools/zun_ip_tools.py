@@ -22,7 +22,7 @@ class APIResource(object):
                     self.status), list(headers.items()))
         data = {}
         try:
-            my_ip = True if self.api.resource[1] == 'ip' else False
+            my_ip = True if self.api.path[0] == 'ip' else False
         except:
             my_ip = False
 
