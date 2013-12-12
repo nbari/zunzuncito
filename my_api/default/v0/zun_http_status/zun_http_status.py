@@ -4,7 +4,7 @@ default resource
 import json
 import logging
 from zunzuncito import http_status_codes
-from zunzuncito.tools import MethodException, HTTPException, allow_methods
+from zunzuncito.tools import MethodException, HTTPException, allow_methods, log_json
 
 
 class APIResource(object):
@@ -14,6 +14,13 @@ class APIResource(object):
         self.status = 200
         self.headers = api.headers.copy()
         self.log = logging.getLogger()
+        self.log.info(log_json({
+            'vroot': api.vroot,
+            'API': api.version,
+            'URI': api.URI,
+            'method': api.method
+        }, True)
+        )
 
     @allow_methods('get')
     def dispatch(self, environ, start_response):
