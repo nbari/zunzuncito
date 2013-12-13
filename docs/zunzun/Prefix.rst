@@ -1,4 +1,2 @@
-.. _prefix:
-
 Prefix
 ======
