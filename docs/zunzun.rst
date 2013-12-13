@@ -8,5 +8,6 @@ ZunZun class
    zunzun/Versions
    zunzun/Hosts
    zunzun/Routes
+   zunzun/Prefix
    zunzun/Rid
    zunzun/Debug
