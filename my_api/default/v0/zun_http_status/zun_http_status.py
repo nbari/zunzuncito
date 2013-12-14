@@ -32,7 +32,7 @@ class APIResource(object):
         try:
             data['status code'] = getattr(
                 http_status_codes, 'HTTP_%d' %
-                int(self.api.resources[1], 0))
+                int(self.api.path[0], 0))
         except Exception as e:
             data['status code'] = 'not found'
 
