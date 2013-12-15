@@ -42,11 +42,11 @@ The wildcard character ***** can be used, for example:
        'api.ejemplo.org': 'api_ejemplo_org'
    }
 
-* line 2 matches any host and will be served on vroot 'default'
-* line 3 matches any host ending with zunzun.io and will be served on vroot 'default'
-* line 4 matches host 'ejemplo.org' and will be server on vroot 'ejemplo_org'
-* line 5 matches host 'api.ejemplo.org' and will be served on vroot
-  'api_ejemplo_org'
+* line 2 matches any host '*' and will be served on vroot 'default'
+* line 3 matches any host ending with `zunzun.io` and will be served on vroot '**default**'
+* line 4 matches host `ejemplo.org` and will be server on vroot '**ejemplo_org**'
+* line 5 matches host `api.ejemplo.org` and will be served on vroot
+  '**api_ejemplo_org**'
 
 | Notice that the vroot directoryes have a '_' instead of a dot, this is to
 prevent conflicts on how python read files.
