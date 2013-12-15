@@ -47,3 +47,35 @@ The wildcard character ***** can be used, for example:
 * line 4 matches host 'ejemplo.org' and will be server on vroot 'ejemplo_org'
 * line 5 matches host 'api.ejemplo.org' and will be served on vroot
   'api_ejemplo_org'
+
+The API directory structure for this would be:
+
+.. code-block:: rest
+   :linenos:
+
+    /home/
+     `--zunzun/
+        |--app.py
+        `--my-api
+           |--__init__.py
+           |--default
+           |  |--__init__.py
+           |  `--v0
+           |    |--__init__.py
+           |    `--zun_default
+           |       |--__init__.py
+           |       `--zun_default.py
+           |--ejemplo_org
+           |  |--__init__.py
+           |  `--v0
+           |    |--__init__.py
+           |    `--zun_default
+           |       |--__init__.py
+           |       `--zun_default.py
+           `--api_ejemplo_org
+              |--__init__.py
+              `--v0
+                 |--__init__.py
+                 `--zun_default
+                    |--__init__.py
+                    `--zun_default.py
