@@ -39,6 +39,7 @@ The output could be something like:
 
 .. code-block:: rest
    :linenos:
+   :emphasize-lines: 12
 
    HTTP/1.1 200 OK
    Request-ID: 52ad9da400ff0dda875ef62f7d0001737e7a756e7a756e6369746f2d617069000131000100
@@ -52,4 +53,32 @@ The output could be something like:
 
    {
        "ip": "89.181.199.57"
+   }
+
+
+Now if we change the version to something like::
+
+    curl -i http://api.zunzun.io/v1/my/ip
+
+| notice the ``v1``
+
+The output could be something like:
+
+.. code-block:: rest
+   :linenos:
+   :emphasize-lines: 12,13
+
+   HTTP/1.1 200 OK
+   Request-ID: 52ada62f00ff06ee2d1086b0d00001737e7a756e7a756e6369746f2d617069000131000100
+   Content-Type: application/json; charset=UTF-8
+   Vary: Accept-Encoding
+   Date: Sun, 15 Dec 2013 12:53:03 GMT
+   Server: Google Frontend
+   Cache-Control: private
+   Alternate-Protocol: 80:quic,80:quic
+   Transfer-Encoding: chunked
+
+   {
+   "inet_ntoa": 1505085241,
+   "ip": "89.181.199.57"
    }
