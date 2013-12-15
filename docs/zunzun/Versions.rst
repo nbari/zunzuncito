@@ -87,3 +87,33 @@ The output could be something like:
 
 How it works internally
 -----------------------
+
+The API directory structre looks like:
+
+.. code-block:: rest
+   :emphasize-lines: 3,4,6,8,16
+   :linenos:
+
+   /home/
+     `--zunzun/
+        |--app.py
+        `--my_api
+          |--__init__.py
+          `--default
+            |--__init__.py
+            |--v0
+            |  |--__init__.py
+            |  |--zun_default
+            |  |  |--__init__.py
+            |  |  `--zun_default.py
+            |  `--zun_ip_tools
+            |    |--__init__.py
+            |    `--zun_ip_tools.py
+            `--v1
+               |--__init__.py
+               |--zun_default
+               | |--__init__.py
+               | `--zun_default.py
+               `--zun_ip_tools
+                 |--__init__.py
+                 `--zun_ip_tools.py
