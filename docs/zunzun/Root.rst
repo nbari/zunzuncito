@@ -8,7 +8,8 @@ sources::
     app = zunzuncito.ZunZun(root, versions, hosts, routes)
 
 
-You can see the 'root' as the DocumentRoot of the application
+Making an analogy, you can see ``root`` as the `DocumentRoot
+<http://www.karelia.com/support/sandvox/help/z/Document_Root.html`_  of the application.
 
 .. code-block:: rest
    :emphasize-lines: 4
@@ -37,3 +38,5 @@ You can see the 'root' as the DocumentRoot of the application
                `--zun_hasher
                  |--__init__.py
                  `--zun_hasher.py
+
+* In this case the **my_api** is the ``root``
