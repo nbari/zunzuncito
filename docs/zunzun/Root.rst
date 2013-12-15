@@ -3,7 +3,7 @@ Root
 
 
 The ``root`` argument is the name of the directory containing all your
-sources::
+sources.
 
 .. code-block:: python
    :emphasize-lines: 3,14
