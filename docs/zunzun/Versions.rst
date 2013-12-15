@@ -40,8 +40,7 @@ The output could be something like:
    :linenos:
 
    HTTP/1.1 200 OK
-   Request-ID:
-   52ad9da400ff0dda875ef62f7d0001737e7a756e7a756e6369746f2d617069000131000100
+   Request-ID: 52ad9da400ff0dda875ef62f7d0001737e7a756e7a756e6369746f2d617069000131000100
    Content-Type: application/json; charset=UTF-8
    Vary: Accept-Encoding
    Date: Sun, 15 Dec 2013 12:16:37 GMT
