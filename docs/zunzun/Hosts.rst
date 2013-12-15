@@ -28,4 +28,4 @@ To support `multi-tenancy <http://en.wikipedia.org/wiki/Multitenancy>`_ the
 **hosts** dictionary is needed.
 
 A `dictionary structure
-<http://docs.python.org/2/tutorial/datastructures.html#dictionaries>`_ is formed by **key: value** elements, in this case the key is used for specifying the 'hosts' and the value to specify the **vroot**
+<http://docs.python.org/2/tutorial/datastructures.html#dictionaries>`_ is formed by **key: value** elements, in this case the key is used for specifying the 'host' and the value to specify the **vroot**
