@@ -24,7 +24,7 @@ The ``versions`` argument must be a list of names representing the available API
    app = zunzuncito.ZunZun(root, versions, hosts, routes)
 
 
-request example
+Request example
 ---------------
 
 When no version is specified on the URI request, the default version is the first element off the list, example::
@@ -32,7 +32,7 @@ When no version is specified on the URI request, the default version is the firs
 
     curl -i http://api.zunzun.io/my/ip
 
-or::
+Or::
 
     curl -i http://api.zunzun.io/v0/my/ip
 
