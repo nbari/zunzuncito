@@ -9,7 +9,7 @@ sources::
 
 
 Making an analogy, you can see ``root`` as the `DocumentRoot
-<http://www.karelia.com/support/sandvox/help/z/Document_Root.html`_  of the application.
+<http://www.karelia.com/support/sandvox/help/z/Document_Root.html>`_  of the application.
 
 .. code-block:: rest
    :emphasize-lines: 4
