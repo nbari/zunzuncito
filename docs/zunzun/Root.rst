@@ -39,4 +39,4 @@ Making an analogy, you can see ``root`` as the `DocumentRoot
                  |--__init__.py
                  `--zun_hasher.py
 
-* In this case the **my_api** is the ``root``
+* In this case the **my_api** directory, is the ``root``
