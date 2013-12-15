@@ -29,3 +29,15 @@ To support `multi-tenancy <http://en.wikipedia.org/wiki/Multitenancy>`_ the
 
 A `dictionary structure
 <http://docs.python.org/2/tutorial/datastructures.html#dictionaries>`_ is formed by **key: value** elements, in this case the key is used for specifying the 'host' and the value to specify the **vroot**
+
+The wildcard character '*' can be used, for example:
+
+.. code-block:: rest
+   :linenos:
+
+   hosts = {
+       '*': 'default',
+       '*.zunzun.io': 'default',
+       'ejemplo.org': 'ejemplo_org',
+       'api.ejemplo.org': 'api_ejemplo_org'
+   }
