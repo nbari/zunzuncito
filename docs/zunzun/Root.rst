@@ -6,7 +6,7 @@ The ``root`` argument is the name of the directory containing all your
 sources.
 
 .. code-block:: python
-   :emphasize-lines: 3,14
+   :emphasize-lines: 3
    :linenos:
 
    import zunzuncito

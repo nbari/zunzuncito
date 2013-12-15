@@ -1,7 +1,7 @@
 Versions
 ========
 
-The ``versions`` argument is a list names respresenting the API versions.
+The ``versions`` argument must be a list of names representing the available API versions.
 
 .. code-block:: python
    :emphasize-lines: 5
