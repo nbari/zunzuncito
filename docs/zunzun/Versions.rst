@@ -37,7 +37,7 @@ or::
 The output could be something like:
 
 .. code-block:: rest
-   :emphasize-lines: 5
+   :linenos:
 
    HTTP/1.1 200 OK
    Request-ID:
