@@ -22,7 +22,7 @@ sources.
        ('/.*', 'default')
    ]}
 
-   app = zunzuncito.ZunZun(root, versions, hosts, routes)
+   app = zunzuncito.ZunZun(**root**, versions, hosts, routes)
 
 
 Making an analogy, you can see ``root`` as the `DocumentRoot
