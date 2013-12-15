@@ -91,7 +91,7 @@ How it works internally
 The API directory structre looks like:
 
 .. code-block:: rest
-   :emphasize-lines: 8,16
+   :emphasize-lines: 8,13,16,21
    :linenos:
 
    /home/
