@@ -31,7 +31,7 @@ class APIResource(object):
         if my_ip:
             ip = environ.get('REMOTE_ADDR', 0)
             data['ip'] = ip
-            data['inet_ntoa'] = struct.unpack("!I", socket.inet_aton(ip))[0]
+            data['inet_aton'] = struct.unpack("!I", socket.inet_aton(ip))[0]
         else:
             data['API'] = self.api.version
             data['ip'] = environ.get('REMOTE_ADDR', 0)

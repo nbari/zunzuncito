@@ -91,7 +91,7 @@ How it works internally
 The API directory structre looks like:
 
 .. code-block:: rest
-   :emphasize-lines: 8,13,16,21
+   :emphasize-lines: 8,16
    :linenos:
 
    /home/
@@ -117,3 +117,11 @@ The API directory structre looks like:
                `--zun_ip_tools
                  |--__init__.py
                  `--zun_ip_tools.py
+
+
+The directories ```v0`` and ``v1`` have the same structure, but the contents of
+the .py scripts change.
+
+In this example, version 0 returns the IP of the request, while version 1
+besides returing the IP it also returns the `inet_atom
+<http://docs.python.org/2/library/socket.html#socket.inet_aton>`_
