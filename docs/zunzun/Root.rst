@@ -5,7 +5,24 @@ Root
 The ``root`` argument is the name of the directory containing all your
 sources::
 
-    app = zunzuncito.ZunZun(root, versions, hosts, routes)
+.. code-block:: python
+   :emphasize-lines: 3,14
+   :linenos:
+
+   import zunzuncito
+
+   root = 'my_api'
+
+   versions = ['v0', 'v1']
+
+   hosts = {'*': 'default'}
+
+   routes = {'default':[
+       ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST'),
+       ('/.*', 'default')
+   ]}
+
+   app = zunzuncito.ZunZun(root, versions, hosts, routes)
 
 
 Making an analogy, you can see ``root`` as the `DocumentRoot
