@@ -25,7 +25,7 @@ The ``versions`` argument must be a list of names representing the available API
 
 
 request example
-...............
+---------------
 
 When no version is specified on the URI request, the default version is the first element off the list, example::
 
@@ -83,3 +83,7 @@ The output could be something like:
    "inet_ntoa": 1505085241,
    "ip": "89.181.199.57"
    }
+
+
+How it works internally
+-----------------------
