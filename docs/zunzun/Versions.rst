@@ -4,7 +4,7 @@ Versions
 The ``versions`` argument is a list names respresenting the API versions.
 
 .. code-block:: python
-   :emphasize-lines: 7
+   :emphasize-lines: 5
    :linenos:
 
    import zunzuncito
@@ -19,3 +19,5 @@ The ``versions`` argument is a list names respresenting the API versions.
        ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST'),
        ('/.*', 'default')
    ]}
+
+   app = zunzuncito.ZunZun(root, versions, hosts, routes)
