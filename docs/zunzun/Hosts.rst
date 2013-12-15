@@ -52,7 +52,7 @@ The API directory structure for this would be:
 
 .. code-block:: rest
    :linenos:
-   :emphasize-lines: 7,14,21
+   :emphasize-lines: 6,13,20
 
     /home/
      `--zunzun/
