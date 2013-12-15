@@ -16,6 +16,7 @@ The ``versions`` argument must be a list of names representing the available API
    hosts = {'*': 'default'}
 
    routes = {'default':[
+       ('/my/?.*', 'ip_tools', 'GET'),
        ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST'),
        ('/.*', 'default')
    ]}
