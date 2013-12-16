@@ -25,7 +25,10 @@ of the python modules.
    app = zunzuncito.ZunZun(root, versions, hosts, routes, prefix='zzz')
 
 
-The directory structure for the application would look like:
+Directory structure
+-------------------
+
+The directory containing the sources for the application would look like:
 
 .. code-block:: rest
    :emphasize-lines: 10,12,13,15,18,20,21,23
