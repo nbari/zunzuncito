@@ -6,7 +6,7 @@ The ``prefix`` argument is the string that should be appended to all the names
 of the python modules.
 
 .. code-block:: python
-   :emphasize-lines: 3
+   :emphasize-lines: 14
    :linenos:
 
    import zunzuncito
@@ -28,7 +28,7 @@ of the python modules.
 The directory structure for the application would look like:
 
 .. code-block:: rest
-   :emphasize-lines: 4
+   :emphasize-lines: 10,12,18,20,21,23
    :linenos:
 
    /home/
@@ -40,19 +40,24 @@ The directory structure for the application would look like:
             |--__init__.py
             |--v0
             |  |--__init__.py
-            |  |--zun_default
+            |  |--zzz_default
             |  |  |--__init__.py
-            |  |  `--zun_default.py
-            |  `--zun_hasher
+            |  |  `--zzz_default.py
+            |  `--zzz_hasher
             |    |--__init__.py
-            |    `--zun_hasher.py
+            |    `--zzz_hasher.py
             `--v1
                |--__init__.py
-               |--zun_default
+               |--zzz_default
                | |--__init__.py
-               | `--zun_default.py
-               `--zun_hasher
+               | `--zzz_default.py
+               `--zzz_hasher
                  |--__init__.py
-                 `--zun_hasher.py
+                 `--zzz_hasher.py
 
-* In this case the **my_api** directory, is the ``root``
+* In this case the **my_api** directory, is the ``root`` and all modules (API
+  Resources) are start with 'zzz'
+
+
+The idea is to avoid conflics with current python modules, see more
+`pep 395 <http://www.python.org/dev/peps/pep-0395/>`_
