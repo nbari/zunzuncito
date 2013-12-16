@@ -56,7 +56,7 @@ The directory structure for the application would look like:
                  `--zzz_hasher.py
 
 * In this case the **my_api** directory, is the ``root`` and all modules (API
-  Resources) are start with 'zzz'
+  Resources) start with 'zzz'
 
 
 The idea is to avoid conflics with current python modules, see more
