@@ -26,7 +26,7 @@ The simplicity for sketching and debugging helps to develop very fast; versionin
 Why ?
 .....
 
-.. note::
+.. rubric:: Why
 
    The need to upload large files by chunks and support resumable uploads
    trying to accomplish something like the nginx upload module does in pure
