@@ -28,7 +28,7 @@ of the python modules.
 The directory structure for the application would look like:
 
 .. code-block:: rest
-   :emphasize-lines: 10,12,18,20,21,23
+   :emphasize-lines: 10,12,13,15,18,20,21,23
    :linenos:
 
    /home/
