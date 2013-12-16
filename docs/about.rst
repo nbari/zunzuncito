@@ -14,6 +14,7 @@ Design Goals
 * Tracing Request-ID "rid" per request.
 * Compatibility with Google App Engine. `demo <http://api.zunzun.io>`_
 * `Multi-tenant <http://en.wikipedia.org/wiki/Multitenancy>`_ Support.
+* Ability to create almost anything easy, example: Support `chunked transfer encoding  <http://en.wikipedia.org/wiki/Chunked_transfer_encoding>`_.
 
 What & Why ZunZuncito
 ---------------------
