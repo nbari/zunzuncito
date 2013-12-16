@@ -8,7 +8,7 @@
 * Tracing Request-ID "rid" per request.
 * Compatibility with Google App Engine. [demo](http://api.zunzun.io)
 * [Multi-tenant](http://en.wikipedia.org/wiki/Multitenancy) Support.
-* ability to create almost anything easy, example: Support [chunked transfer encoding](http://en.wikipedia.org/wiki/Chunked_transfer_encoding)
+* Ability to create almost anything easy, example: Support [chunked transfer encoding](http://en.wikipedia.org/wiki/Chunked_transfer_encoding)
 
 > Documentation : [docs.zunzun.io](http://docs.zunzun.io)
 
