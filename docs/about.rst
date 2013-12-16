@@ -23,7 +23,10 @@ ZunZuncito is a `python <http://python.org/>`_ package that allows to create and
 
 The simplicity for sketching and debugging helps to develop very fast; versioning is inherit by default, which allows to serve and maintain existing applications, while working in new releases without need to create separate instances. All the applications are WSGI `PEP 333 <http://www.python.org/dev/peps/pep-0333/>`_ compliant, allowing to migrate existing code to more robust frameworks, without need to modify the existing code.
 
-.. rubric:: Why ?
+Why ?
+.....
+
+.. rubric::
 
     The need to upload large files by chunks and support resumable uploads
     trying to accomplish something like the nginx upload module does in pure
