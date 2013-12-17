@@ -33,4 +33,4 @@ The response is something like:
    "type": "md5"
    }
 
-This can help to track the request in both server/client side.
+This can help to trace the request in both server/client side.
