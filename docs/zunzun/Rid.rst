@@ -37,9 +37,11 @@ This can help to trace the request in both server/client side.
 
 If you do not specify the ``rid`` argument the **Request-ID** will
 automatically be generated using an `UUID <http://en.wikipedia.org/wiki/Universally_unique_identifier>`_
-, so for example you can run the like this::
+, so for example you can run the app like this::
 
    app = zunzuncito.ZunZun(root, versions, hosts, routes)
+
+| notice there is no ``rid`` argument
 
 And the output will be something like:
 
