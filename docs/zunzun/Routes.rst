@@ -1,7 +1,8 @@
 Routes
 ======
 
-The ``routes`` argument is *required* and must be a dictionary.
+The ``routes`` argument must be a dictionary containing defined routes per
+vroot
 
 .. code-block:: python
    :emphasize-lines: 9,10,11,12
