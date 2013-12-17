@@ -41,7 +41,7 @@ automatically be generated using an `UUID <http://en.wikipedia.org/wiki/Universa
 
    app = zunzuncito.ZunZun(root, versions, hosts, routes)
 
-`notice there is no ``rid`` argument`_
+* notice there is no ``rid`` argument
 
 
 And the output will be something like:
