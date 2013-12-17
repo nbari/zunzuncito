@@ -21,3 +21,7 @@ The ``routes`` argument is *required* and must be a dictionary.
    ]}
 
    app = zunzuncito.ZunZun(root, versions, hosts, routes, debug=True)
+
+
+Routes dictionary structure
+---------------------------
