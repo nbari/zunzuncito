@@ -32,3 +32,5 @@ The response is something like:
    "string": "python",
    "type": "md5"
    }
+
+This can help to track the request in both server/client side.
