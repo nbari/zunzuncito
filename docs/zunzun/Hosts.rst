@@ -1,6 +1,8 @@
 Hosts
 =====
 
+The ``hosts`` argument contains a dictionary of domains and vroots.
+
 
 A very basic API, contents of file **app.py** can be:
 
