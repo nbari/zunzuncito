@@ -29,7 +29,6 @@ Request example
 
 When no version is specified on the URI request, the default version is the first element off the list, example::
 
-
     curl -i http://api.zunzun.io/my/ip
 
 Or::
