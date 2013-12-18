@@ -22,7 +22,7 @@ of the python modules.
        ('/.*', 'default')
    ]}
 
-   app = zunzuncito.ZunZun(root, versions, hosts, routes, prefix='zzz')
+   app = zunzuncito.ZunZun(root, versions, hosts, routes, prefix='zzz_')
 
 * The default prefix is ``zun_``
 
