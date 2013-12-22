@@ -33,7 +33,7 @@ vroot
 Routes dictionary structure
 ---------------------------
 
-The ``routes`` dictionary needs this structure:
+In the above example, the  ``routes`` dictionary contains:
 
 +-----------+-----------------------------------+--------------+--------------+
 | vroot     | regular expression                | API Resource | HTTP methods |
