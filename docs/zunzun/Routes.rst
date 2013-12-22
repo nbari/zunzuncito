@@ -24,6 +24,9 @@ vroot
    routes = {'default':[
        ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST'),
        ('/.*', 'default')
+   ],'beta':[
+       ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST'),
+       ('/.*', 'default')
    ]}
 
    app = zunzuncito.ZunZun(root, versions, hosts, routes, debug=True)
