@@ -205,8 +205,8 @@ Contents of the **app.yaml** file::
       script: main.app
 
 
-When using GAE the global unique identifier per request is: `REQUEST_LOG_ID
-<https://developers.google.com/appengine/docs/python/logs/requestlogclass#RequestLog_request_id>`_
+.. note::
+   When using GAE the global unique identifier per request is: `REQUEST_LOG_ID <https://developers.google.com/appengine/docs/python/logs/requestlogclass#RequestLog_request_id>`_
 
 For this case, to append to all your responses the **Request-ID** header run
 the app like this::
