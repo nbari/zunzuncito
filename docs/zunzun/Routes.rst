@@ -5,7 +5,7 @@ The ``routes`` argument must be a dictionary containing defined routes per
 vroot
 
 .. code-block:: python
-   :emphasize-lines: 9,10,11,12
+   :emphasize-lines: 14,15,16,17
    :linenos:
 
    import zunzuncito
@@ -17,7 +17,7 @@ vroot
    hosts = {
        '*': 'default',
        'domain.tld': 'default',
-       '*.domain.tld: 'default',
+       '*.domain.tld': 'default',
        'beta.domain.tld': 'beta'
    }
 
