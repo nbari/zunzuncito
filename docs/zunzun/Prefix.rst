@@ -65,5 +65,7 @@ The directory containing the sources for the application would look like:
 
 
 .. note::
-    The idea of the **prefix** is to avoid conflics with current python modules, see more:
+    The idea of the **prefix** is to avoid conflics with current python modules
+
+.. seealso::
     `pep 395 <http://www.python.org/dev/peps/pep-0395/>`_, `python import <http://docs.python.org/3/reference/import.html>`_
