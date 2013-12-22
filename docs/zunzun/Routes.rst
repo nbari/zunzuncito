@@ -25,9 +25,9 @@ vroot
 
 
 .. note::
-   By default, if no routes specified, the request are handled by matching the URI
-   request with an valid API Resource, you only need to specify routes if want to
-   handle different URI requests with a single API Resource
+   By default, if no **routes** specified, the request are handled by matching the URI
+   request with an valid **API Resource**, you only need to specify **routes** if want to
+   handle different URI requests with a single **API Resource**
 
 
 Routes dictionary structure
