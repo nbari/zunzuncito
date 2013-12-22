@@ -5,7 +5,7 @@ The ``routes`` argument must be a dictionary containing defined routes per
 vroot
 
 .. code-block:: python
-   :emphasize-lines: 14,15,16,17
+   :emphasize-lines: 14,15,16,17,18,19,20
    :linenos:
 
    import zunzuncito
