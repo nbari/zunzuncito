@@ -40,8 +40,8 @@ The directory containing the sources for the application would look like:
      `--zunzun/
         |--app.py
         `--my_api
-          |--__init__.py
-          `--default
+           |--__init__.py
+           `--default
              |--__init__.py
              |--v0
              |  |--__init__.py
