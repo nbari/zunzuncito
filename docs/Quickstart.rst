@@ -20,25 +20,25 @@ This is the directory structure:
      `--zunzun/
         |--app.py
         `--my_api
-          |--__init__.py
-          `--default
-            |--__init__.py
-            |--v0
-            |  |--__init__.py
-            |  |--zun_default
-            |  |  |--__init__.py
-            |  |  `--zun_default.py
-            |  `--zun_hasher
-            |    |--__init__.py
-            |    `--zun_hasher.py
-            `--v1
-               |--__init__.py
-               |--zun_default
-               | |--__init__.py
-               | `--zun_default.py
-               `--zun_hasher
+           |--__init__.py
+           `--default
+              |--__init__.py
+              |--v0
+              |  |--__init__.py
+              |  |--zun_default
+              |  |  |--__init__.py
+              |  |  `--zun_default.py
+              |  `--zun_hasher
+              |    |--__init__.py
+              |    `--zun_hasher.py
+              `--v1
                  |--__init__.py
-                 `--zun_hasher.py
+                 |--zun_default
+                 | |--__init__.py
+                 | `--zun_default.py
+                 `--zun_hasher
+                   |--__init__.py
+                   `--zun_hasher.py
 
 Inside directory /home/zunzun there is a file called **app.py** and a directory **my_api**.
 
