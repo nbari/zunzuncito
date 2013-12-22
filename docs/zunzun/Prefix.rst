@@ -42,23 +42,23 @@ The directory containing the sources for the application would look like:
         `--my_api
           |--__init__.py
           `--default
-            |--__init__.py
-            |--v0
-            |  |--__init__.py
-            |  |--zzz_default
-            |  |  |--__init__.py
-            |  |  `--zzz_default.py
-            |  `--zzz_hasher
-            |    |--__init__.py
-            |    `--zzz_hasher.py
-            `--v1
-               |--__init__.py
-               |--zzz_default
-               | |--__init__.py
-               | `--zzz_default.py
-               `--zzz_hasher
-                 |--__init__.py
-                 `--zzz_hasher.py
+             |--__init__.py
+             |--v0
+             |  |--__init__.py
+             |  |--zzz_default
+             |  |  |--__init__.py
+             |  |  `--zzz_default.py
+             |  `--zzz_hasher
+             |    |--__init__.py
+             |    `--zzz_hasher.py
+             `--v1
+                |--__init__.py
+                |--zzz_default
+                | |--__init__.py
+                | `--zzz_default.py
+                `--zzz_hasher
+                  |--__init__.py
+                  `--zzz_hasher.py
 
 * In this case the **my_api** directory, is the ``root`` and all modules (API
   Resources) start with 'zzz'
