@@ -42,3 +42,14 @@ In the above example, the  ``routes`` dictionary contains:
 +-----------+-----------------------------------+--------------+--------------+
 | 'default' | '/.*'                             | 'default'    |              |
 +-----------+-----------------------------------+--------------+--------------+
+
+Translating the table to code:
+
+.. code-block:: python
+   :linenos:
+
+   routes = {}
+   routes[default] = [
+       ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST'),
+       ('/.*', 'default')
+   ]
