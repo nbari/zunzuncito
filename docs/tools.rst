@@ -1,11 +1,9 @@
 tools
-============
+=====
 
 
-HTTPException
--------------
-TODO
+.. toctree::
+   :maxdepth: 2
 
-MethodException
----------------
-TODO
+   tools/HTTPException
+   tools/MethodException
