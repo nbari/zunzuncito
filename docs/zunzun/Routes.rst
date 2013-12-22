@@ -65,22 +65,40 @@ Directory structure
      `--zunzun/
         |--app.py
         `--my_api
-          |--__init__.py
-          `--default
-            |--__init__.py
-            |--v0
-            |  |--__init__.py
-            |  |--zun_default
-            |  |  |--__init__.py
-            |  |  `--zun_default.py
-            |  `--zun_hasher
-            |    |--__init__.py
-            |    `--zun_hasher.py
-            `--v1
-               |--__init__.py
-               |--zun_default
-               | |--__init__.py
-               | `--zun_default.py
-               `--zun_hasher
-                 |--__init__.py
-                 `--zun_hasher.py
+           |--__init__.py
+           |--default
+           |  |--__init__.py
+           |  |--v0
+           |  |  |--__init__.py
+           |  |  |--zun_default
+           |  |  |  |--__init__.py
+           |  |  |  `--zun_default.py
+           |  |  `--zun_hasher
+           |  |    |--__init__.py
+           |  |    `--zun_hasher.py
+           |  `--v1
+           |    |--__init__.py
+           |    |--zun_default
+           |    | |--__init__.py
+           |    | `--zun_default.py
+           |    `--zun_hasher
+           |      |--__init__.py
+           |      `--zun_hasher.py
+           `--beta
+              |--__init__.py
+              |--v0
+              |  |--__init__.py
+              |  |--zun_default
+              |  |  |--__init__.py
+              |  |  `--zun_default.py
+              |  `--zun_hasher
+              |    |--__init__.py
+              |    `--zun_hasher.py
+              `--v1
+                |--__init__.py
+                |--zun_default
+                | |--__init__.py
+                | `--zun_default.py
+                `--zun_hasher
+                  |--__init__.py
+                  `--zun_hasher.py
