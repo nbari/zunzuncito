@@ -27,7 +27,7 @@ Why ?
 .....
 
 *"The need to upload large files by chunks and support resumable uploads
-trying to accomplish something like the *`nginx upload module <http://www.grid.net.ru/nginx/resumable_uploads.en.html>`_
+trying to accomplish something like the* `nginx upload module <http://www.grid.net.ru/nginx/resumable_uploads.en.html>`_
 * does in pure python."*
 
 The idea of creating ZunZuncito, was the need of a very small and light tool (batteries included), that could help to create and deploy REST API's quickly, without forcing the developers to learn or follow a complex flow but, in contrast, from the very beginning, guide them to properly structure their API, giving special attention to "versioned URI's", having with this a solid base that allows to work in different versions within a single ZunZun instance without interrupting service of any existing API `resources <http://en.wikipedia.org/wiki/Web_resource>`_.
