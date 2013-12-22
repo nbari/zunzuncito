@@ -14,7 +14,12 @@ vroot
 
    versions = ['v0', 'v1']
 
-   hosts = {'*': 'default'}
+   hosts = {
+       '*': 'default',
+       'domain.tld': 'default',
+       '*.domain.tld: 'default',
+       'beta.domain.tld': 'beta'
+   }
 
    routes = {'default':[
        ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST'),
