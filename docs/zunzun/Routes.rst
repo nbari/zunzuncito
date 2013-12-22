@@ -53,3 +53,34 @@ Translating the table to code:
        ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST'),
        ('/.*', 'default')
    ]
+
+Directory structure
+-------------------
+
+.. code-block:: rest
+   :emphasize-lines: 4
+   :linenos:
+
+   /home/
+     `--zunzun/
+        |--app.py
+        `--my_api
+          |--__init__.py
+          `--default
+            |--__init__.py
+            |--v0
+            |  |--__init__.py
+            |  |--zun_default
+            |  |  |--__init__.py
+            |  |  `--zun_default.py
+            |  `--zun_hasher
+            |    |--__init__.py
+            |    `--zun_hasher.py
+            `--v1
+               |--__init__.py
+               |--zun_default
+               | |--__init__.py
+               | `--zun_default.py
+               `--zun_hasher
+                 |--__init__.py
+                 `--zun_hasher.py
