@@ -2,9 +2,11 @@ CaseInsensitiveDict
 ===================
 
 A case-insensitive ``dict``-like object.
+
+
 .. note::
 
-    Class taken from: `requests <https://github.com/kennethreitz/requests/blob/master/requests/structures.py>`_
+   Class taken from: `requests <https://github.com/kennethreitz/requests/blob/master/requests/structures.py>`_
 
 
 Implements all methods and operations of
@@ -15,7 +17,7 @@ All keys are expected to be strings. The structure remembers the
 case of the last key to be set, and ``iter(instance)``,
 ``keys()``, ``items()``, ``iterkeys()``, and ``iteritems()``
 will contain case-sensitive keys. However, querying and contains
-testing is case insensitive:
+testing is case insensitive::
 
     cid = CaseInsensitiveDict()
     cid['Accept'] = 'application/json'
