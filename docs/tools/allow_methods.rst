@@ -1,4 +1,4 @@
-HTTPException
+allow_methods
 =============
 
 TODO
