@@ -25,7 +25,7 @@ vroot
        ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST'),
        ('/.*', 'default')
    ],'beta':[
-       ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST'),
+       ('/upload/?.*', 'upload', 'PUT, POST'),
        ('/.*', 'default')
    ]}
 
@@ -99,6 +99,6 @@ Directory structure
                  |--zun_default
                  |  |--__init__.py
                  |  `--zun_default.py
-                 `--zun_example
+                 `--zun_upload
                    |--__init__.py
-                   `--zun_example.py
+                   `--zun_upload.py
