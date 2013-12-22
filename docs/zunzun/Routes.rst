@@ -61,8 +61,12 @@ Translating the table to code:
    :linenos:
 
    routes = {}
-   routes[default] = [
+   routes['default'] = [
        ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST'),
+       ('/.*', 'default')
+   ]
+   routes['beta'] = [
+       ('/upload/?.*', 'upload', 'PUT, POST'),
        ('/.*', 'default')
    ]
 
