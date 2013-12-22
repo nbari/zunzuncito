@@ -61,7 +61,7 @@ The directory containing the sources for the application would look like:
                   `--zzz_hasher.py
 
 * In this case the **my_api** directory, is the ``root`` and all modules (API
-  Resources) start with 'zzz'
+  Resources) start with 'zzz_'
 
 
 .. note::
