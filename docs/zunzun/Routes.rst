@@ -58,7 +58,7 @@ Directory structure
 -------------------
 
 .. code-block:: rest
-   :emphasize-lines: 6,10,13
+   :emphasize-lines: 6,10,13,24,28
    :linenos:
 
    /home/
@@ -86,19 +86,11 @@ Directory structure
            |      `--zun_hasher.py
            `--beta
               |--__init__.py
-              |--v0
-              |  |--__init__.py
-              |  |--zun_default
-              |  |  |--__init__.py
-              |  |  `--zun_default.py
-              |  `--zun_hasher
-              |    |--__init__.py
-              |    `--zun_hasher.py
-              `--v1
-                |--__init__.py
-                |--zun_default
-                | |--__init__.py
-                | `--zun_default.py
-                `--zun_hasher
-                  |--__init__.py
-                  `--zun_hasher.py
+              `--v0
+                 |--__init__.py
+                 |--zun_default
+                 |  |--__init__.py
+                 |  `--zun_default.py
+                 `--zun_example
+                   |--__init__.py
+                   `--zun_example.py
