@@ -64,6 +64,7 @@ The directory containing the sources for the application would look like:
   Resources) start with 'zzz'
 
 
-The idea is to avoid conflics with current python modules, see more
-`pep 395 <http://www.python.org/dev/peps/pep-0395/>`_, `python import
+.. note::
+    The idea of the **prefix** is to avoid conflics with current python modules, see more
+    `pep 395 <http://www.python.org/dev/peps/pep-0395/>`_, `python import
 <http://docs.python.org/3/reference/import.html>`_
