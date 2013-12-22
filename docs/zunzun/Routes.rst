@@ -32,3 +32,11 @@ vroot
 
 Routes dictionary structure
 ---------------------------
+
+The ``routes`` dictionary needs this structure:
+
++-------+--------------------+--------------+--------------+
+| vroot | regular expression | API Resource | HTTP methods |
++=======+====================+==============+==============+
+| 'default' | '/(md5|sha1|sha256|sha512)(/.*)?' | 'hasher' | 'GET, POST' |
++-----------+-----------------------------------+----------+-------------+
