@@ -37,6 +37,16 @@ vroot
    request with an valid **API Resource**, you only need to specify **routes** if want to
    handle different URI requests with a single **API Resource**
 
+Example
+.......
+
+The request::
+
+    http://api.zunzun.io/v0/env
+
+Will be handled by the custom python module ``zun_env/zun_env.py``
+
+
 
 Routes dictionary structure
 ---------------------------
