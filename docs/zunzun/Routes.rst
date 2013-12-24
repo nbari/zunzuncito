@@ -46,7 +46,7 @@ The request::
 
 Will be handled by the python custom module ``zun_env/zun_env.py``
 
-Buf all the following requests with the format:
+Buf all the following requests:
 
 * `http://api.zunzun.io/v0/md5/freebsd <http://api.zunzun.io/v0/md5/freebsd>`_
 * `http://api.zunzun.io/v0/sha1/freebsd <http://api.zunzun.io/v0/sha1/freebsd>`_
