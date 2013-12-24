@@ -121,6 +121,6 @@ The API directory structre looks like:
 The directories ```v0`` and ``v1`` have the same structure, but the contents of
 the .py scripts change.
 
-In this example, version 0 returns the IP of the request, while version 1
+In this example, `v0` returns the IP of the request, while `v1`
 besides returing the IP it also returns the `inet_atom
 <http://docs.python.org/2/library/socket.html#socket.inet_aton>`_
