@@ -48,13 +48,10 @@ Will be handled by the python custom module ``zun_env/zun_env.py``
 
 Buf all the following requests with the format:
 
-.. code-block:: rest
-   :linenos:
-
    `http://api.zunzun.io/v0/md5/freebsd <http://api.zunzun.io/v0/md5/freebsd>`_
-   http://api.zunzun.io/v0/sha1/freebsd
-   http://api.zunzun.io/v0/sha256/freebsd
-   http://api.zunzun.io/v0/sha512/freebsd
+   `http://api.zunzun.io/v0/sha1/freebsd <http://api.zunzun.io/v0/sha1/freebsd>`_
+   `http://api.zunzun.io/v0/sha256/freebsd <http://api.zunzun.io/v0/sha256/freebsd>`_
+   `http://api.zunzun.io/v0/sha512/freebsd <http://api.zunzun.io/v0/sha512/freebsd`_
 
 Will be handled by the pythom custom module ``zun_hasher/zun_hahser.py``
 
