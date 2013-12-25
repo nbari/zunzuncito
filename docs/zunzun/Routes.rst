@@ -53,7 +53,10 @@ But all the following requests:
 * `http://api.zunzun.io/v0/sha256/freebsd <http://api.zunzun.io/v0/sha256/freebsd>`_
 * `http://api.zunzun.io/v0/sha512/freebsd <http://api.zunzun.io/v0/sha512/freebsd>`_
 
-Will be handled by the pythom custom module ``zun_hasher/zun_hahser.py``
+Will be handled by the pythom custom module ``zun_hasher/zun_hahser.py``, this
+is because a specified route::
+
+       ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST')
 
 
 
