@@ -46,12 +46,14 @@ The request::
 
 Will be handled by the python custom module ``zun_env/zun_env.py``
 
-But all the following requests:
+But all the following **GET** requests:
 
 * `http://api.zunzun.io/v0/md5/freebsd <http://api.zunzun.io/v0/md5/freebsd>`_
 * `http://api.zunzun.io/v0/sha1/freebsd <http://api.zunzun.io/v0/sha1/freebsd>`_
 * `http://api.zunzun.io/v0/sha256/freebsd <http://api.zunzun.io/v0/sha256/freebsd>`_
 * `http://api.zunzun.io/v0/sha512/freebsd <http://api.zunzun.io/v0/sha512/freebsd>`_
+
+And also this **POST** requests:
 
 Will be handled by the pythom custom module ``zun_hasher/zun_hahser.py``, this
 is because a specified route::
