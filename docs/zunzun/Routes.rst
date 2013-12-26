@@ -55,8 +55,13 @@ But all the following `GET <http://en.wikipedia.org/wiki/GET_(HTTP)#Request_meth
 
 And also this `POST <http://en.wikipedia.org/wiki/POST_(HTTP)#Request_methods>`_ requests::
 
+    curl -i -X POST http://api.zunzun.io/v0/md5 -d 'freebsd'
 
+    curl -i -X POST http://api.zunzun.io/v0/sha1 -d 'freebsd'
 
+    curl -i -X POST http://api.zunzun.io/v0/sha256 -d 'freebsd'
+
+    curl -i -X POST http://api.zunzun.io/v0/sha512 -d 'freebsd'
 
 
 Will be handled by the pythom custom module ``zun_hasher/zun_hahser.py``, this
