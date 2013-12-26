@@ -53,7 +53,11 @@ But all the following `GET <http://en.wikipedia.org/wiki/GET_(HTTP)#Request_meth
 * `http://api.zunzun.io/v0/sha256/freebsd <http://api.zunzun.io/v0/sha256/freebsd>`_
 * `http://api.zunzun.io/v0/sha512/freebsd <http://api.zunzun.io/v0/sha512/freebsd>`_
 
-And also this **POST** requests:
+And also this `POST <http://en.wikipedia.org/wiki/POST_(HTTP)#Request_methods>`_ requests::
+
+
+
+
 
 Will be handled by the pythom custom module ``zun_hasher/zun_hahser.py``, this
 is because a specified route::
