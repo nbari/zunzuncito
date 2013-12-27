@@ -7,4 +7,6 @@ To log how the API is handling the requests you can run the app like this::
 
    app = zunzuncito.ZunZun(root, versions, hosts, routes, debug=True)
 
-The default loglevel is **INFO**
+.. note::
+
+   The default loglevel is **INFO**
