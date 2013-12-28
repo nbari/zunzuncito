@@ -74,7 +74,7 @@ is because a specified route::
 The flow
 ........
 
-When a new request arrive, the ZunZun router searches for ``vroot`` declared on
+When a new request arrive, the ZunZun router searches for a ``vroot`` declared on
 the `hosts </en/latest/zunzun/Hosts.html>`_ dictionary matching the current `HTTP_HOST <http://en.wikipedia.org/wiki/Hostname>`_.
 
 Once a ``vroot`` is found, the ZunZun router parses the `REQUEST_URI <http://en.wikipedia.org/wiki/URI_scheme>`_ in order to
@@ -83,6 +83,17 @@ accomplish this pattern::
     /version/api_resource/path
 
 
+The router first analyses the URI and determines if it is versioned or not by
+finding a match with the current specified versions, in case no one is found,
+fallback to the default which is always the first item on the versions list in
+case one provided, or 'v0'.
+
+After this process, the REQUEST_URI becomes a list of resources - something
+like:
+
+.. code-block:: python
+
+   ['version, 'api_resource', 'path']
 
 
 
