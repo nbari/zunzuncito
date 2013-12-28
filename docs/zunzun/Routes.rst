@@ -102,7 +102,7 @@ like:
    ['v0', 'sha256', 'freebsd']
 
 
-The second step on the router is to find a match within the routes list and the
+The second step on the router is to find a match within the ``routes`` dictionary and the
 local modules.
 
 In case a list of ``routes`` is passed as an argument to the ZunZun instance, the
