@@ -6,6 +6,11 @@ The ``hosts`` argument contains a dictionary of domains and vroots.
 
 A very basic API, contents of file **app.py** can be:
 
+.. sidebar:: Hosts dictionary elements
+
+    :*: wildcard matching all HTTP_HOSTS
+    :default: vroot
+
 .. code-block:: python
    :emphasize-lines: 7
    :linenos:
