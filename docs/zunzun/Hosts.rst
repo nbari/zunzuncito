@@ -8,7 +8,7 @@ A very basic API, contents of file **app.py** can be:
 
 .. sidebar:: Hosts dictionary elements
 
-    :*: wildcard matching all HTTP_HOSTS
+    :\*: wildcard matching all HTTP_HOSTS
     :default: vroot
 
 .. code-block:: python
