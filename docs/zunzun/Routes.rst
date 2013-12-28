@@ -74,7 +74,7 @@ is because a specified route::
 The flow
 ........
 
-When a new request arrive, the ZunZun router searches for **vroot** declared on
+When a new request arrive, the ZunZun router searches for ``vroot`` declared on
 the `hosts </en/latest/zunzun/Hosts.html>`_ dictionary matching the current `HTTP_HOST <http://en.wikipedia.org/wiki/Hostname>`_.
 
 Once a ``vroot`` is found, the ZunZun router parses the `REQUEST_URI <http://en.wikipedia.org/wiki/URI_scheme>`_ in order to
