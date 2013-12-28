@@ -108,8 +108,10 @@ Translating the table to code:
 Directory structure
 -------------------
 
+The API directory structure for the examples presented here is:
+
 .. code-block:: rest
-   :emphasize-lines: 6,10,13,24,28
+   :emphasize-lines: 6,10,13,16,21,31
    :linenos:
 
    /home/
