@@ -71,8 +71,8 @@ is because a specified route::
 
 
 
-The flow:
-.........
+The flow
+........
 
 When a new request arrive, the ZunZun router searches for **vroot** declared on
 the `hosts </en/latest/zunzun/Hosts.html>`_ dictionary matching the current `HTTP_HOST <http://en.wikipedia.org/wiki/Hostname>`_.
