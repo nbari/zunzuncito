@@ -99,7 +99,7 @@ like:
    ['v0', 'env']
 
    # for http://api.zunzun.io/v0/sha256/freebsd
-   ['v0', 'hasher', 'freebsd']
+   ['v0', 'sha256', 'freebsd']
 
 
 
