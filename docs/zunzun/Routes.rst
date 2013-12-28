@@ -115,6 +115,11 @@ Directory structure
 
 The API directory structure for the examples presented here is:
 
+.. sidebar:: API directory structure
+
+   :default: **vroot** directory
+   :beta: **vroot** directory
+
 .. code-block:: rest
    :emphasize-lines: 6,27
    :linenos:
