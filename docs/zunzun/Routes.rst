@@ -6,8 +6,7 @@ vroot
 
 .. sidebar:: API directory structure
 
-   :default: **vroot** directory
-   :beta: **vroot** directory
+   :routes: dictionary containing routes
 
 .. code-block:: python
    :emphasize-lines: 14,15,16,17,18,19,20
