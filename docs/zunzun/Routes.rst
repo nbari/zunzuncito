@@ -150,3 +150,5 @@ The API directory structure for the examples presented here is:
                  `--zun_upload
                    |--__init__.py
                    `--zun_upload.py
+
+| Default and beta are the **vroots**
