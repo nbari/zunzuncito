@@ -4,6 +4,11 @@ Routes
 The ``routes`` argument must be a dictionary containing defined routes per
 vroot
 
+.. sidebar:: API directory structure
+
+   :default: **vroot** directory
+   :beta: **vroot** directory
+
 .. code-block:: python
    :emphasize-lines: 14,15,16,17,18,19,20
    :linenos:
@@ -150,5 +155,3 @@ The API directory structure for the examples presented here is:
                  `--zun_upload
                    |--__init__.py
                    `--zun_upload.py
-
-| Default and beta are the **vroots**
