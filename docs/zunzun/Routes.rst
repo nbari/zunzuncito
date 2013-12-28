@@ -124,6 +124,9 @@ Directory structure
            |  |  |--zun_default
            |  |  |  |--__init__.py
            |  |  |  `--zun_default.py
+           |  |  |--zun_env
+           |  |  |  |--__init__.py
+           |  |  |  `--zun_env.py
            |  |  `--zun_hasher
            |  |    |--__init__.py
            |  |    `--zun_hasher.py
