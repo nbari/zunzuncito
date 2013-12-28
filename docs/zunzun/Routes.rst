@@ -93,7 +93,13 @@ like:
 
 .. code-block:: python
 
-   ['version, 'api_resource', 'path']
+   ['version', 'api_resource', 'path']
+
+   # for  http://api.zunzun.io/v0/env
+   ['v0', 'env']
+
+   # for http://api.zunzun.io/v0/sha256/freebsd
+   ['v0', 'hasher', 'freebsd']
 
 
 
