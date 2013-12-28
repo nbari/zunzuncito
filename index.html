@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Zunzuncito</title>
+    <title>Zunzuncito by nbari</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
@@ -107,7 +107,7 @@ routes: dict of tuples containing regex patterns, py_mod and allowed http method
 
 <p>After this process, the REQUEST_URI becomes a list of resources - something like:</p>
 
-<pre><code>['version, 'api_resource', 'path']
+<pre><code>['version', 'api_resource', 'path']
 </code></pre>
 
 <p>Suppose that the incoming request is:</p>
@@ -368,7 +368,7 @@ python setup.py install
 <span class="n">routes</span><span class="p">[</span><span class="s">'default'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">(</span><span class="s">'/my/?.*'</span><span class="p">,</span> <span class="s">'ip_tools'</span><span class="p">,</span> <span class="s">'GET'</span><span class="p">),</span>
     <span class="p">(</span><span class="s">'/status/?.*'</span><span class="p">,</span> <span class="s">'http_status'</span><span class="p">,</span> <span class="s">'GET'</span><span class="p">),</span>
-    <span class="p">(</span><span class="s">'/(md5|sha1|sha256|sha512)/.*'</span><span class="p">,</span> <span class="s">'hasher'</span><span class="p">,</span> <span class="s">'GET'</span><span class="p">)</span>
+    <span class="p">(</span><span class="s">'/(md5|sha1|sha256|sha512)(/.*)?'</span><span class="p">,</span> <span class="s">'hasher'</span><span class="p">,</span> <span class="s">'GET, POST'</span><span class="p">)</span>
 <span class="p">]</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">zunzuncito</span><span class="o">.</span><span class="n">ZunZun</span><span class="p">(</span>
@@ -433,12 +433,6 @@ python setup.py install
               var pageTracker = _gat._getTracker("UA-45578428-1");
             pageTracker._trackPageview();
             } catch(err) {}
-          </script>
-          <script>
-                var _lg = ['755aa10bae0b', 'zunzun'];
-              (function(d, t){var l=d.createElement(t),s=d.getElementsByTagName(t)[0]; l.async = true;
-               l.src = ('https:' == location.protocol ? 'https://' : 'http://') + 'logger-io.appspot.com/logger.io.js';
-               s.parentNode.insertBefore(l, s)}(document, 'script'))
           </script>
 
   </body>
