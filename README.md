@@ -64,7 +64,7 @@ The router first analyses the URI and determines if it is versioned or not by fi
 
 After this process, the REQUEST_URI becomes a list of resources - something like:
 
-    ['version, 'api_resource', 'path']
+    ['version', 'api_resource', 'path']
 
 Suppose that the incoming request is:
 
@@ -316,7 +316,7 @@ routes = {}
 routes['default'] = [
     ('/my/?.*', 'ip_tools', 'GET'),
     ('/status/?.*', 'http_status', 'GET'),
-    ('/(md5|sha1|sha256|sha512)/.*', 'hasher', 'GET')
+    ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST')
 ]
 
 app = zunzuncito.ZunZun(
