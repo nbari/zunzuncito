@@ -72,7 +72,7 @@ is because a specified route::
 
 
 The flow:
----------
+.........
 
 When a new request arrive, the ZunZun router searches for **vroot** declared on
 the `hosts </en/latest/zunzun/Hosts.html>`_ dictionary matching the current `HTTP_HOST <http://en.wikipedia.org/wiki/Hostname>`_.
@@ -83,7 +83,7 @@ the `hosts </en/latest/zunzun/Hosts.html>`_ dictionary matching the current `HTT
 
 
 Routes dictionary structure
----------------------------
+...........................
 
 In the above example, the  ``routes`` dictionary contains:
 
