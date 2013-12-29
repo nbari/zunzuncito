@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Zunzuncito</title>
+    <title>Zunzuncito by nbari</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
@@ -84,7 +84,7 @@ routes: dict of tuples containing regex patterns, py_mod and allowed http method
 <p>In the <a href="http://docs.zunzun.io">docs</a> you can find a more detailed overview of the ZunZun arguments and the class itself.</p>
 </blockquote>
 
-<p>When a new request arrive, the ZunZun router searches for 'vroot' declared on the 'hosts' dictionary matching the current HTTP_HOST, a basic hosts dictionary looks like:</p>
+<p>When a new request arrive, the ZunZun router searches for 'vroot' declared on the 'hosts' dictionary matching the current HTTP_HOST, a basic <a href="http://docs.zunzun.io/en/latest/zunzun/Hosts.html">hosts dictionary</a> looks like:</p>
 
 <div class="highlight highlight-python"><pre><span class="sd">"""</span>
 <span class="sd">format is:</span>
@@ -105,6 +105,10 @@ routes: dict of tuples containing regex patterns, py_mod and allowed http method
 
 <p>The router first analyses the URI and determines if it is versioned or not by finding a match with the current specified versions, in case no one is found, fallback to the default which is always the first item on the versions list in case one provided, or 'v0'.</p>
 
+<blockquote>
+<p>see <a href="http://docs.zunzun.io/en/latest/zunzun/Versions.html">versions</a></p>
+</blockquote>
+
 <p>After this process, the REQUEST_URI becomes a list of resources - something like:</p>
 
 <pre><code>['version', 'api_resource', 'path']
@@ -121,6 +125,10 @@ routes: dict of tuples containing regex patterns, py_mod and allowed http method
 </code></pre>
 
 <p>The second step on the router is to find a match within the routes list and the local modules, but before going further lets see the directory structure for the root (document_root), the first and required argument for the ZunZun class.</p>
+
+<blockquote>
+<p>see <a href="http://docs.zunzun.io/en/latest/zunzun/Routes.html">routes</a></p>
+</blockquote>
 
 <pre>
 my_api
@@ -157,7 +165,7 @@ my_api
 </code></pre>
 
 <blockquote>
-<p>notice the prefix <strong>zun_</strong></p>
+<p>notice the prefix <a href="http://docs.zunzun.io/en/latest/zunzun/Prefix.html">zun_</a></p>
 </blockquote>
 
 <p>This helps the router to dispatch all the request to an existing module, so continue with the flow, for the incoming request: <a href="http://api.zunzun.io/v1/gevent/ip">http://api.zunzun.io/v1/gevent/ip</a> we will try to find a module that matches the API resource 'gevent':</p>
@@ -166,7 +174,7 @@ my_api
 host = api.zunzun.io
 vroot = default
 version = v1
-api_resource = gevent
+resource = gevent
 path = ip
 </code></pre>
 
@@ -433,12 +441,6 @@ python setup.py install
               var pageTracker = _gat._getTracker("UA-45578428-1");
             pageTracker._trackPageview();
             } catch(err) {}
-          </script>
-          <script>
-                var _lg = ['755aa10bae0b', 'zunzun'];
-              (function(d, t){var l=d.createElement(t),s=d.getElementsByTagName(t)[0]; l.async = true;
-               l.src = ('https:' == location.protocol ? 'https://' : 'http://') + 'logger-io.appspot.com/logger.io.js';
-               s.parentNode.insertBefore(l, s)}(document, 'script'))
           </script>
 
   </body>
