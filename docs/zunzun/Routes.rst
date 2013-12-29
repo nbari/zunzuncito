@@ -98,7 +98,7 @@ have independent modules like:
    would be prefered to have a module for every specific task.
 
 .. seealso::
-   The `zun_ prefix </en/latest/zunzun/Prefix.html>`_`
+   The `zun_ prefix </en/latest/zunzun/Prefix.html>`_
 
 The flow
 ........
