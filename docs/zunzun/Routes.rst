@@ -75,7 +75,7 @@ the previous example you could create modules for every hash algorithm, and
 have indpendent modules like:
 
 .. code-block:: rest
-   ...
+
    `--v0
        |--__init__.py
        |--zun_md5
