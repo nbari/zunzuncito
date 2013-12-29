@@ -44,7 +44,7 @@ The request::
 
     http://api.zunzun.io/v0/env
 
-Will be handled by the python custom module ```zun_env/zun_env.py`` <https://github.com/nbari/zunzuncito/blob/master/my_api/default/v0/zun_env/zun_env.py>`_
+Will be handled by the python custom module `zun_env/zun_env.py <https://github.com/nbari/zunzuncito/blob/master/my_api/default/v0/zun_env/zun_env.py>`_
 
 But all the following `GET <http://en.wikipedia.org/wiki/GET_(HTTP)#Request_methods>`_ requests:
 
@@ -64,8 +64,7 @@ And also this `POST <http://en.wikipedia.org/wiki/POST_(HTTP)#Request_methods>`_
     curl -i -X POST http://api.zunzun.io/v0/sha512 -d 'freebsd'
 
 
-Will be handled by the pythom custom module ``zun_hasher/zun_hahser.py``, this
-is because a specified route::
+Will be handled by the pythom custom module `zun_hasher/zun_hahser.py <https://github.com/nbari/zunzuncito/tree/master/my_api/default/v0/zun_hasher>`_, this is because a specified route::
 
        ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST')
 
