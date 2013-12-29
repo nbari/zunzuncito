@@ -117,7 +117,7 @@ This helps the router to dispatch all the request to an existing module, so cont
     host = api.zunzun.io
     vroot = default
     version = v1
-    api_resource = gevent
+    resource = gevent
     path = ip
 
 In case a list of routes is passed as an argument to the ZunZun instance, the router will try to match the api_resource with the items of the routes list. If no matches are found it will try to find the module in the root directory.
