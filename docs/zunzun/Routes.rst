@@ -72,7 +72,7 @@ You can totally omit routes and handle all by following the API
 `directory structure <#id1>`_,
 this can give you more fine control over you API, for example in
 the previous example you could create modules for every hash algorithm, and
-have indpendent modules like:
+have independent modules like:
 
 .. code-block:: rest
 
@@ -91,6 +91,14 @@ have indpendent modules like:
           |--__init__.py
           `--zun_sha512.py
 
+
+.. note::
+   Defining routes or using the directory structure is a design choice, some
+   times having all in one module can be easy to maintein, while other times
+   would be prefered to have a module for every specific task.
+
+.. seealso::
+   The `zun_ prefix </en/latest/zunzun/Prefix.html>`_`
 
 The flow
 ........
