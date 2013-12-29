@@ -86,7 +86,7 @@ accomplish this pattern::
 The router first analyses the URI and determines if it is versioned or not by
 finding a match with the current specified versions, in case no one is found,
 fallback to the default which is always the first item on the versions list in
-case one provided, or 'v0'.
+case one provided, or ``v0``.
 
 After this process, the REQUEST_URI becomes a list of resources - something
 like:
