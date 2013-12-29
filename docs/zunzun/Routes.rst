@@ -69,15 +69,28 @@ is because a specified route::
 
        ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST')
 
-.. note::
-   You can totally omit routes and handle all by following the API directory
-   structure, this can give you more fine control over you API, for example if
-   the previous example you could create modules for every hash algorithim, and
-   have for example indpendent modules like:
-   * zun_md5/zun_md5.py
-   * zun_sha1/zun_sha1.py
-   * zun_sha256/zun_512.py
-   * zun_sha512/zun_512.py
+You can totally omit routes and handle all by following the API directory
+structure, this can give you more fine control over you API, for example in
+the previous example you could create modules for every hash algorithim, and
+have indpendent modules like::
+
+.. code-block:: rest
+
+   |
+   `--v0
+       |--__init__.py
+       |--zun_md5
+       |  |--__init__.py
+       |  `--zun_md5.py
+       |--zun_sha1
+       |  |--__init__.py
+       |  `--zun_sha1.py
+       |--zun_sha256
+       |  |--__init__.py
+       |  `--zun_sha256.py
+       `--zun_sha512
+          |--__init__.py
+          `--zun_sha512.py
 
 
 The flow
