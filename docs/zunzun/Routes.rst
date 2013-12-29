@@ -68,8 +68,9 @@ Will be handled by the pythom custom module `zun_hasher/zun_hahser.py <https://g
 
        ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST')
 
-You can totally omit routes and handle all by following the API directory
-structure, this can give you more fine control over you API, for example in
+You can totally omit routes and handle all by following the API
+`directory structure <en/latest/zunzun/Routes.html#directory-structure>`_,
+this can give you more fine control over you API, for example in
 the previous example you could create modules for every hash algorithm, and
 have indpendent modules like:
 
