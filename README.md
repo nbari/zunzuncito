@@ -41,7 +41,7 @@ routes: dict of tuples containing regex patterns, py_mod and allowed http method
 
 > In the [docs](http://docs.zunzun.io) you can find a more detailed overview of the ZunZun arguments and the class itself.
 
-When a new request arrive, the ZunZun router searches for 'vroot' declared on the 'hosts' dictionary matching the current HTTP_HOST, a basic hosts dictionary looks like:
+When a new request arrive, the ZunZun router searches for 'vroot' declared on the 'hosts' dictionary matching the current HTTP_HOST, a basic [hosts dictionary](http://docs.zunzun.io/en/latest/zunzun/Hosts.html) looks like:
 
 ```python
 """
@@ -62,6 +62,8 @@ Once a **vroot** is found, the ZunZun router parses the [REQUEST_URI](http://en.
 
 The router first analyses the URI and determines if it is versioned or not by finding a match with the current specified versions, in case no one is found, fallback to the default which is always the first item on the versions list in case one provided, or 'v0'.
 
+> see [versions](http://docs.zunzun.io/en/latest/zunzun/Versions.html)
+
 After this process, the REQUEST_URI becomes a list of resources - something like:
 
     ['version', 'api_resource', 'path']
@@ -75,6 +77,8 @@ ZunZun will convert it to:
     ['v1', 'gevent', 'ip']
 
 The second step on the router is to find a match within the routes list and the local modules, but before going further lets see the directory structure for the root (document_root), the first and required argument for the ZunZun class.
+
+> see [routes](http://docs.zunzun.io/en/latest/zunzun/Routes.html)
 
 <pre>
 my_api
@@ -109,7 +113,7 @@ As you can see basically it is a directory containing sub-directories which at t
 
     import my_api.default.v1.zun_default
 
-> notice the prefix **zun_**
+> notice the prefix [zun_](http://docs.zunzun.io/en/latest/zunzun/Prefix.html)
 
 This helps the router to dispatch all the request to an existing module, so continue with the flow, for the incoming request: http://api.zunzun.io/v1/gevent/ip we will try to find a module that matches the API resource 'gevent':
 
