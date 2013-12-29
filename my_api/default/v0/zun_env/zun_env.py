@@ -1,5 +1,5 @@
 """
-default resource
+print the environ dict
 """
 import json
 import logging

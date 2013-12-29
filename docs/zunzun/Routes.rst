@@ -44,7 +44,7 @@ The request::
 
     http://api.zunzun.io/v0/env
 
-Will be handled by the python custom module ``zun_env/zun_env.py``
+Will be handled by the python custom module ```zun_env/zun_env.py`` <https://github.com/nbari/zunzuncito/blob/master/my_api/default/v0/zun_env/zun_env.py>`_
 
 But all the following `GET <http://en.wikipedia.org/wiki/GET_(HTTP)#Request_methods>`_ requests:
 
