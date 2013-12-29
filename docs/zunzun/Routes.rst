@@ -94,8 +94,8 @@ have independent modules like:
 
 .. note::
    Defining routes or using the directory structure is a design choice, some
-   times having all in one module can be easy to maintein, while other times
-   would be prefered to have a module for every specific task.
+   times having all in one module can be easy to maintain, while other times
+   having a module for each specific task, would be prefered.
 
 .. seealso::
    The `zun_ prefix </en/latest/zunzun/Prefix.html>`_
