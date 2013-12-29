@@ -72,7 +72,7 @@ is because a specified route::
 You can totally omit routes and handle all by following the API directory
 structure, this can give you more fine control over you API, for example in
 the previous example you could create modules for every hash algorithim, and
-have indpendent modules like::
+have indpendent modules like:
 
 .. code-block:: rest
 
