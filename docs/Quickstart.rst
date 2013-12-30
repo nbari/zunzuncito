@@ -189,6 +189,7 @@ Tu have a ZunZun instance up and running in Google App Engine you can use the
 following configuration.
 
 .. sidebar:: line 12
+
    :script: main is the main.py and app is the instance of zunzun
 
 
