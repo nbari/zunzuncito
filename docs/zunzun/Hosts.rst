@@ -65,9 +65,11 @@ is to prevent conflicts on how python read files. for example this request::
 
     http://api.ejemplo.org/v0/gevent
 
-Internally will be calling something like::
+Internally will be calling something like:
 
-    import my_api.api_ejemplo_org.v0.zun_gevent.zun_gevent
+.. code-block:: python
+
+   import my_api.api_ejemplo_org.v0.zun_gevent.zun_gevent
 
 
 
