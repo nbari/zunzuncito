@@ -80,12 +80,9 @@ The API directory structure for this example would be:
 
 .. sidebar:: hosts & vroots
 
-   hosts = {
-       '*': 'default',
-       '*.zunzun.io': 'default',
-       'ejemplo.org': 'ejemplo_org',
-       'api.ejemplo.org': 'api_ejemplo_org'
-   }
+   :default: '*' & \*.zunzun.io
+   :ejemplo_org: ejemplo.org
+   :api_ejemplo_org: api.ejemplo.org
 
 
 .. code-block:: rest
