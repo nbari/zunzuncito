@@ -190,7 +190,7 @@ following configuration.
 
 .. sidebar:: line 12
 
-   :script: main is the main.py and app is the instance of zunzun
+   :script: *main* is the main.py fileand *app* is the instance of zunzun
 
 
 Contents of the **app.yaml** file:
