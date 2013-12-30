@@ -188,13 +188,13 @@ GAE
 Tu have a ZunZun instance up and running in Google App Engine you can use the
 following configuration.
 
-.. sidebar:: main.py
+.. sidebar:: line 12
    :script: main is the main.py and app is the instance of zunzun
 
 
 Contents of the **app.yaml** file:
 
-.. code-block:: yaml
+.. code-block:: rest
    :linenos:
 
    application: <your-GAE-application-id>
