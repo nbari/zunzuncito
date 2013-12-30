@@ -78,7 +78,7 @@ Directory structure
 
 The API directory structure for this example would be:
 
-.. sidebar:: hosts & vroots
+.. sidebar:: virtual roots (vroot)
 
    :default: `line 2, 3 <#hosts-structure-vroot>`_
    :ejemplo_org: `line 4 <#hosts-structure-vroot>`_
