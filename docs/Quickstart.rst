@@ -192,9 +192,9 @@ following configuration.
    :script: main is the main.py and app is the instance of zunzun
 
 
-Contents of the **app.yaml** file
+Contents of the **app.yaml** file:
 
-.. code-block::
+.. code-block:: yaml
    :linenos:
 
    application: <your-GAE-application-id>
