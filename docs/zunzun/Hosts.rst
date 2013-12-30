@@ -78,6 +78,16 @@ Directory structure
 
 The API directory structure for this example would be:
 
+.. sidebar:: hosts & vroots
+
+   hosts = {
+       '*': 'default',
+       '*.zunzun.io': 'default',
+       'ejemplo.org': 'ejemplo_org',
+       'api.ejemplo.org': 'api_ejemplo_org'
+   }
+
+
 .. code-block:: rest
    :linenos:
    :emphasize-lines: 6,13,20
