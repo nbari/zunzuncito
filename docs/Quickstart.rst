@@ -188,21 +188,28 @@ GAE
 Tu have a ZunZun instance up and running in Google App Engine you can use the
 following configuration.
 
-Contents of the **app.yaml** file::
+.. sidebar:: main.py
+   :script: main is the main.py and app is the instance of zunzun
 
-    application: <your-GAE-application-id>
-    version: 1
-    runtime: python27
-    api_version: 1
-    threadsafe: yes
 
-    handlers:
-    - url: /favicon\.ico
-      static_files: favicon.ico
-      upload: favicon\.ico
+Contents of the **app.yaml** file
 
-    - url: .*
-      script: main.app
+.. code-block::
+   :linenos:
+
+   application: <your-GAE-application-id>
+   version: 1
+   runtime: python27
+   api_version: 1
+   threadsafe: yes
+
+   handlers:
+   - url: /favicon\.ico
+     static_files: favicon.ico
+     upload: favicon\.ico
+
+   - url: .*
+     script: main.app
 
 
 .. note::
