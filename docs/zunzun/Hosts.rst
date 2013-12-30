@@ -80,9 +80,10 @@ The API directory structure for this example would be:
 
 .. sidebar:: hosts & vroots
 
-   :default: '*' & \*.zunzun.io
-   :ejemplo_org: ejemplo.org
-   :api_ejemplo_org: api.ejemplo.org
+   :default: `line 2, 3 <#hosts-structure-vroot>`_
+   :ejemplo_org: line 4
+   :api_ejemplo_org: line 5
+
 
 
 .. code-block:: rest
