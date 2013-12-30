@@ -75,7 +75,7 @@ the previous example you could create modules for every hash algorithm, and
 have independent modules like:
 
 .. code-block:: rest
-   :emphasize-lines: 6,27
+   :emphasize-lines: 3,6,9,12
    :linenos:
 
    `--v0
