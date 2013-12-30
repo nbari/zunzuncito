@@ -34,8 +34,9 @@ A very basic API, contents of file **app.py** can be:
 To support `multi-tenancy <http://en.wikipedia.org/wiki/Multitenancy>`_ the
 **hosts** dictionary is needed.
 
-A `dictionary structure
-<http://docs.python.org/2/tutorial/datastructures.html#dictionaries>`_ is formed by **key: value** elements, in this case the key is used for specifying the 'host' and the value to specify the **vroot**
+A `dictionary structure <http://docs.python.org/2/tutorial/datastructures.html#dictionaries>`_ is
+formed by **key: value** elements, in this case the key is used for
+specifying the 'host' and the value to specify the **vroot**
 
 
 Hosts structure & vroot
@@ -66,7 +67,7 @@ is to prevent conflicts on how python read files. for example this request::
 
 Internally will be calling something like::
 
-    import my_api.api_ejemplo_org.default.v0.zun_gevent.zun_gevent
+    import my_api.api_ejemplo_org.v0.zun_gevent.zun_gevent
 
 
 
@@ -82,7 +83,7 @@ The API directory structure for this example would be:
     /home/
      `--zunzun/
         |--app.py
-        `--my-api
+        `--my_api
            |--__init__.py
            |--default
            |  |--__init__.py
@@ -102,6 +103,9 @@ The API directory structure for this example would be:
               |--__init__.py
               `--v0
                  |--__init__.py
+                 |--zun_gevent
+                 |  |--__init__.py
+                 |  `--zun_gevent.py
                  `--zun_default
                     |--__init__.py
                     `--zun_default.py
