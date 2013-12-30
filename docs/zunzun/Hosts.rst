@@ -38,10 +38,10 @@ A `dictionary structure
 <http://docs.python.org/2/tutorial/datastructures.html#dictionaries>`_ is formed by **key: value** elements, in this case the key is used for specifying the 'host' and the value to specify the **vroot**
 
 
-Hosts structure
----------------
+Hosts structure & vroot
+-----------------------
 
-The wildcard character ***** can be used, for example:
+The wildcard character **\*** can be used, for example:
 
 .. code-block:: rest
    :linenos:
@@ -60,7 +60,14 @@ The wildcard character ***** can be used, for example:
   '**api_ejemplo_org**'
 
 | Notice that the vroot values use ``_`` as separator instead of a dot, this
-is to prevent conflicts on how python read files.
+is to prevent conflicts on how python read files. for example this request::
+
+    http://api.ejemplo.org/v0/gevent
+
+Internally will be calling something like::
+
+    import my_api.api_ejemplo_org.default.v0.zun_gevent.zun_gevent
+
 
 
 Directory structure
