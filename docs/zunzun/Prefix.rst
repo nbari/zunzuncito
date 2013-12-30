@@ -24,7 +24,8 @@ of the python modules.
 
    app = zunzuncito.ZunZun(root, versions, hosts, routes, prefix='zzz_')
 
-* The default prefix is ``zun_``
+.. note::
+   The default prefix is ``zun_``
 
 
 Directory structure
