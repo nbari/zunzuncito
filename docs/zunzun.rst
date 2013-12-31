@@ -1,7 +1,10 @@
 ZunZun class
 ============
 
-An example
+**ZunZun** is the name of the `class <http://docs.python.org/2/tutorial/classes.html>`_
+that will parse all the incoming request and route them to a proper APIResource
+class to proccess the requests
+
 .. code-block:: python
    :emphasize-lines: 14
    :linenos:
