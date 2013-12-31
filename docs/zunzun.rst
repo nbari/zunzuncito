@@ -22,7 +22,7 @@ class to proccess the requests
        ('/.*', 'default')
    ]}
 
-   app = zunzuncito.ZunZun(root, versions, hosts, routes, debug=True)
+   app = zunzuncito.ZunZun(root, versions, hosts, routes, rid='TRACK_ID', debug=True)
 
 
 .. toctree::
