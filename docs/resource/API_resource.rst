@@ -1,4 +1,2 @@
-API resource
-============
-
-TODO
+APIResource class
+=================

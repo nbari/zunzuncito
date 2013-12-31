@@ -1,4 +1,4 @@
-API Resource class
+APIResource class
 ==================
 
 .. toctree::
