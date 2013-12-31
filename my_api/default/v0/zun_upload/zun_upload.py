@@ -10,6 +10,7 @@ import os
 from zunzuncito import tools
 from zunzuncito import http_status_codes
 
+
 class APIResource(object):
 
     def __init__(self, api):
@@ -25,12 +26,12 @@ class APIResource(object):
         }, True)
         )
 
-    @allow_methods('post, path, put')
+    @tools.allow_methods('post, put')
     def dispatch(self, environ, start_response):
         try:
             temp_name = self.api.path[0]
         except:
-            raise HTTPException(400)
+            raise tools.HTTPException(400)
 
         """rfc2616-sec14.html
         see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html
@@ -54,13 +55,13 @@ class APIResource(object):
             elif total_size:
                 chunk_size = total_size
             else:
-                raise HTTPException(416)
+                raise tools.HTTPException(416)
         elif length:
             chunk_size = total_size = length
             index = 0
             offset = 0
         else:
-            raise HTTPException(400)
+            raise tools.HTTPException(400)
 
         stream = environ['wsgi.input']
 
@@ -93,7 +94,7 @@ class APIResource(object):
                 if bytes_written != bytes_to_write:
                     f.truncate(original_file_size)
                     f.close()
-                    raise HTTPException(416)
+                    raise tools.HTTPException(416)
 
             if os.stat(temp_file).st_size == total_size:
                 self.status = 200
@@ -101,21 +102,22 @@ class APIResource(object):
                 self.status = 201
                 body.append('%d-%d/%d' % (index, offset, total_size))
 
-            self.log.info(dict((x, y) for x, y in (
-                ('index', index),
-                ('offset', offset),
-                ('size', total_size),
-                ('temp_file', temp_file),
-                ('status', self.status),
-                ('env', environ),
-            )))
+            self.log.info(tools.log_json({
+                'index': index,
+                'offset': offset,
+                'size': total_size,
+                'temp_file': temp_file,
+                'status': self.status,
+                'env': environ
+            }, True)
+            )
 
             start_response(
                 getattr(http_status_codes, 'HTTP_%d' %
                         self.status), list(self.headers.items()))
             return body
         except IOError:
-            raise HTTPException(
+            raise tools.HTTPException(
                 500,
                 title="upload directory [ %s ]doesn't exist" % temp_file,
                 display=True)
