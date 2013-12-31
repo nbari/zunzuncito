@@ -1,6 +1,9 @@
 HTTP status codes
 =================
 
+The **ZunZun** instance allows to handle exeptions by replying with an
+`HTTP status code <http://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml>`_,
+the current codes are:
 
 .. code-block:: rest
   :linenos:
