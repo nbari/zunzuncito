@@ -1,5 +1,5 @@
-API Resource
-============
+API Resource class
+==================
 
 .. toctree::
    :maxdepth: 2

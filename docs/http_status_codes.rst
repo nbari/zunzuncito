@@ -78,4 +78,4 @@ HTTP status codes
 
 .. seealso::
 
-   `HTTP status code <http://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml>`_
+   `HTTP status codes <http://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml>`_
