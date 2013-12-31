@@ -1,10 +1,6 @@
 HTTP status codes
 =================
 
-The **ZunZun** instance allows to handle exeptions by replying with an
-`HTTP status code <http://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml>`_,
-the current codes are:
-
 .. code-block:: rest
   :linenos:
 
@@ -79,3 +75,7 @@ the current codes are:
    HTTP_509 = '509 Unassigned'
    HTTP_510 = '510 Not Extended' # [RFC2774]
    HTTP_511 = '511 Network Authentication Required' # [RFC6585]
+
+.. seealso::
+
+   `HTTP status code <http://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml>`_
