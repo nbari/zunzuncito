@@ -14,7 +14,7 @@ Table of Contents
    Install
    Quickstart
    zunzun
-   API resource <resource>
+   resource
    tools
    http_status_codes
    zunzuncito
