@@ -3,6 +3,7 @@ HTTP status codes
 
 
 .. code-block:: rest
+  :linenos:
 
    # 1xx: Informational - Request received, continuing process
    HTTP_100 = '100 Continue' # [RFC2616]
