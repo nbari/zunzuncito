@@ -20,6 +20,13 @@ Is handled by the custom python module ``zun_upload/zun_upload.py`` which conten
    :linenos:
    :emphasize-lines: 7,22,23
 
+   """
+   upload resource
+
+   Upload by chunks
+
+   @see http://www.grid.net.ru/nginx/resumable_uploads.en.html
+   """
    import logging
    import os
    from zunzuncito import tools
