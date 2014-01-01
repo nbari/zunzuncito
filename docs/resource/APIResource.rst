@@ -14,11 +14,8 @@ Is handled by the custom python module ``zun_upload/zun_upload.py`` which conten
 .. sidebar:: APIResource.dispatch
 
    The `ZunZun <en/latest/zunzun.html>`_ instance always will call the ``dispath`` method
-   that belongs  to the APIResource class.
-
-.. sidenote::
-
-   https://github.com/nbari/zunzuncito/blob/master/zunzuncito/zunzun.py#L119
+   that belongs  to the APIResource class. **APIResource.dispatch(environ,
+   start_response)**
 
 .. code-block:: python
    :linenos:
