@@ -11,6 +11,15 @@ For example, the following requests::
 
 Is handled by the custom python module ``zun_upload/zun_upload.py`` which contents:
 
+.. sidebar:: APIResource.dispatch
+
+   The `ZunZun <en/latest/zunzun.html>`_ instance always will call the ``dispath`` method
+   that belongs  to the APIResource class.
+
+.. sidenote::
+
+   https://github.com/nbari/zunzuncito/blob/master/zunzuncito/zunzun.py#L119
+
 .. code-block:: python
    :linenos:
    :emphasize-lines: 7,22,23
