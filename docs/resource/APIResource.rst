@@ -13,7 +13,7 @@ Is handled by the custom python module ``zun_upload/zun_upload.py`` which conten
 
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 7
+   :emphasize-lines: 7,22,23
 
    import logging
    import os
