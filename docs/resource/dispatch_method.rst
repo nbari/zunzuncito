@@ -7,7 +7,8 @@ order to process the requests.
 
 
 Basic template
-..............
+--------------
+
 
 .. code-block:: python
    :linenos:
