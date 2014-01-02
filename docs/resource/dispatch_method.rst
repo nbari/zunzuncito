@@ -36,3 +36,7 @@ Basic template
 
        def dispatch(self, environ, start_response):
            """ your code goes here """
+
+.. seealso::
+
+   `pep 0333 <http://www.python.org/dev/peps/pep-0333/>`_
