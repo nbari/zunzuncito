@@ -56,6 +56,8 @@ like::
 
     curl -i http://api.zunzun.io/exception/foo
 
+That will return something like::
+
     HTTP/1.1 200 OK
     Request-ID:
     52c597d200ff0d89f81dcec4280001737e7a756e7a756e6369746f2d617069000131000100
