@@ -34,3 +34,6 @@ Example
        @tools.allow_methods('post, put')
        def dispatch(self, environ, start_response):
            """ your code goes here """
+
+
+In this case all the request that are not 'POST' or 'PUT' will be rejected
