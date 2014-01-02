@@ -1,6 +1,9 @@
 tools
 =====
 
+**tools** are a set of methods and classes that help to proccess the reply of
+the request more easy.
+
 .. code-block:: python
    :linenos:
    :emphasize-lines: 2
