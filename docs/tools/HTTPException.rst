@@ -2,7 +2,7 @@ HTTPException
 =============
 
 The ``HTTPException`` class extends the `HTTPError <https://github.com/nbari/zunzuncito/blob/master/zunzuncito/tools.py#L13>`_
-class, the main idea of it, is to handle posible erros and to properly reply with the corresponding
+class, the main idea of it, is to handle posible erros and properly reply with the corresponding
 `HTTP status code  <en/latest/http_status_codes.html>`_
 
 
@@ -31,3 +31,38 @@ Example
                name = self.api.path[0]
            except:
                raise tools.HTTPException(400)
+
+the line::
+
+    raise tools.HTTPException(400)
+
+For a request like::
+
+    curl -i -X POST http://localhost:8080/delete/
+
+Will reply with this::
+
+    HTTP/1.1 400 Bad Request
+    Request-ID: ea6b28ac-a733-482d-a398-16c620ba2b4e
+    Content-Type: application/json; charset=UTF-8
+
+This is because the request URI is missing the path and should be something
+like::
+
+    curl -i -X POST http://localhost:8080/delete/foo
+
+.. note ::
+
+   If you only pass the HTTP status code to the HTTPExecption, only the response
+headers will be sent
+
+
+Body response
+.............
+
+Besides only replying with the headers you may want to give a more informative
+/ verbose message, the HTTPExeption accept the following arguments:
+
+.. code-block:: python
+
+   HTTPException(status, title=None, description=None, headers=None, code=None, display=False)
