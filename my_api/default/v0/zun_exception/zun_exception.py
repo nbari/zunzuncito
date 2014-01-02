@@ -29,6 +29,14 @@ class APIResource(object):
         except:
             raise tools.HTTPException(400)
 
+        if name != 'foo':
+            raise tools.HTTPException(
+                406,
+                title='exeption example',
+                description='name must be foo',
+                code='my-custom-code',
+                display=True)
+
         headers = self.api.headers
         start_response(
             getattr(http_status_codes, 'HTTP_%d' %

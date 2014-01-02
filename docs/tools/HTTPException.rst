@@ -69,7 +69,7 @@ That will return something like::
     Alternate-Protocol: 80:quic,80:quic
     Transfer-Encoding: chunked
 
-    my_api.default.v0.zun_exception.zun_exception
+     my_api.default.v0.zun_exception.zun_exception
 
 .. note ::
 
@@ -86,3 +86,38 @@ Besides only replying with the headers you may want to give a more informative
 .. code-block:: python
 
    HTTPException(status, title=None, description=None, headers=None, code=None, display=False)
+
+
+For example the following snippet of code taken from `zun_exception.py <https://github.com/nbari/zunzuncito/blob/master/my_api/default/v0/zun_exception/zun_exception.py>`_::
+
+    if name != 'foo':
+        raise tools.HTTPException(
+            406,
+            title='exeption example',
+            description='name must be foo',
+            code='my-custom-code',
+            display=True)
+
+
+When the request is::
+
+    curl -i http://api.zunzun.io/exception/naranjas
+
+Will reply with something like::
+
+    HTTP/1.1 406 Not Acceptable
+    Request-ID: 52c59bdf00ff0b7042cbfd5d120001737e7a756e7a756e6369746f2d617069000131000100
+    Content-Type: application/json; charset=UTF-8
+    Vary: Accept-Encoding
+    Date: Thu, 02 Jan 2014 17:03:27 GMT
+    Server: Google Frontend
+    Cache-Control: private
+    Alternate-Protocol: 80:quic,80:quic
+    Transfer-Encoding: chunked
+
+    {
+        "code": "my-custom-code",
+        "description": "name must be foo",
+        "status": "406",
+        "title": "exeption example"
+    }
