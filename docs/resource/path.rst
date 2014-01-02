@@ -1,4 +1,32 @@
 path
 ====
 
-TODO
+``path`` is the name of the variable containing a list of elements of the URI after
+has been parsed.
+
+Suppose the incoming request is::
+
+    http://api.zunzun.io/v1/gevent/ip
+
+
+`ZunZun <en/latest/zunzun.html>`_ instance will convert it to::
+
+    ['v1', 'gevent', 'ip']
+
+where::
+
+    vroot = default
+    version = v1
+    resource = gevent
+    path = ['ip']
+
+for the incoming request::
+
+    http://api.zunzun.io/gevent/aa/bb
+
+this will be generated::
+
+    vroot = default
+    version = v0
+    resource = gevent
+    path = ['aa', 'bb']
