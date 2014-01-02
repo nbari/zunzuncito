@@ -11,7 +11,7 @@ Example
 
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 26
+   :emphasize-lines: 17
 
 
    import os
