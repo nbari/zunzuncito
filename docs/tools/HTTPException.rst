@@ -108,7 +108,9 @@ When the request is::
     curl -i http://api.zunzun.io/v0/exception/naranjas
 
 
-| notice that the `path </en/latest/resource/path.html>`_ in this case is ['naranjas']
+Notice that the `path </en/latest/resource/path.html>`_ in this case is::
+
+    path = ['naranjas']
 
 
 Will reply with something like:
