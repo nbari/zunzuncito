@@ -3,7 +3,7 @@ HTTPException
 
 The ``HTTPException`` class extends the `HTTPError <https://github.com/nbari/zunzuncito/blob/master/zunzuncito/tools.py#L13>`_
 class, the main idea of it, is to handle posible erros and properly reply with the corresponding
-`HTTP status code  <en/latest/http_status_codes.html>`_
+`HTTP status code  </en/latest/http_status_codes.html>`_
 
 
 Example
@@ -46,15 +46,15 @@ Will reply with this::
     Request-ID: ea6b28ac-a733-482d-a398-16c620ba2b4e
     Content-Type: application/json; charset=UTF-8
 
-This is because the request URI is missing the `path <en/latest/resource/path.html>`_ and should be something
+This is because the request URI is missing the `path </en/latest/resource/path.html>`_ and should be something
 like::
 
     curl -i -X POST http://localhost:8080/delete/foo
 
 .. note ::
 
-   If you only pass the integer `HTTP status code <en/latest/http_status_codes.html>`_ to the HTTPExecption, only the response
-headers will be sent.
+   If you only pass the integer `HTTP status code </en/latest/http_status_codes.html>`_ to the HTTPExecption, only the response
+   headers will be sent.
 
 
 Body response
