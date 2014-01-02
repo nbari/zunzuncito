@@ -11,7 +11,7 @@ Basic template
 
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 14,29,30
+   :emphasize-lines: 5, 20
 
 
    import logging
