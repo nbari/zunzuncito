@@ -88,7 +88,11 @@ Besides only replying with the headers you may want to give a more informative
    HTTPException(status, title=None, description=None, headers=None, code=None, display=False)
 
 
-For example the following snippet of code taken from `zun_exception.py <https://github.com/nbari/zunzuncito/blob/master/my_api/default/v0/zun_exception/zun_exception.py>`_::
+For example the following snippet of code taken from `zun_exception.py <https://github.com/nbari/zunzuncito/blob/master/my_api/default/v0/zun_exception/zun_exception.py>`_:
+
+.. code-block:: rest
+   :linenos:
+   :emphasize-lines: 3
 
     if name != 'foo':
         raise tools.HTTPException(
@@ -103,7 +107,10 @@ When the request is::
 
     curl -i http://api.zunzun.io/exception/naranjas
 
-Will reply with something like::
+Will reply with something like:
+
+.. code-block:: rest
+   :emphasize-lines: 1
 
     HTTP/1.1 406 Not Acceptable
     Request-ID: 52c59bdf00ff0b7042cbfd5d120001737e7a756e7a756e6369746f2d617069000131000100
