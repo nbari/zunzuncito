@@ -105,7 +105,11 @@ For example the following snippet of code taken from `zun_exception.py <https://
 
 When the request is::
 
-    curl -i http://api.zunzun.io/exception/naranjas
+    curl -i http://api.zunzun.io/v0/exception/naranjas
+
+
+| notice that the `path </en/latest/resource/path.html>`_ in this case is ['naranjas']
+
 
 Will reply with something like:
 
