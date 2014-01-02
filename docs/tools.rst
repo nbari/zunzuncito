@@ -34,7 +34,6 @@ a set of classes and functions that help to proccess the reply of the request mo
 .. toctree::
    :maxdepth: 2
 
-   tools/HTTPError
    tools/HTTPException
    tools/MethodException
    tools/allow_methods
