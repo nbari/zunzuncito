@@ -1,7 +1,7 @@
 path
 ====
 
-``path`` is the name of the variable containing a list of elements of the URI after
+``path`` is the name of the variable containing a `list <http://docs.python.org/2/tutorial/datastructures.html>`_ of elements of the URI after
 has been parsed.
 
 Suppose the incoming request is::
