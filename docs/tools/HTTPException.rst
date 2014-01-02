@@ -14,7 +14,6 @@ Example
    :emphasize-lines: 26
 
 
-   import logging
    import os
    from zunzuncito import tools
    from zunzuncito import http_status_codes
@@ -26,14 +25,6 @@ Example
            self.api = api
            self.status = 200
            self.headers = api.headers.copy()
-           self.log = logging.getLogger()
-           self.log.info(tools.log_json({
-               'vroot': api.vroot,
-               'API': api.version,
-               'URI': api.URI,
-               'method': api.method
-           }, True)
-           )
 
        def dispatch(self, environ, start_response):
            try:
