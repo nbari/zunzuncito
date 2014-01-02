@@ -1,7 +1,7 @@
 tools
 =====
 
-`tools <https://github.com/nbari/zunzuncito/blob/master/zunzuncito/tools.py>`_ are
+`tools <https://github.com/nbari/zunzuncito/blob/master/zunzuncito/tools.py>`_ is a module that containg
 a set of classes and functions that help to proccess the reply of the request more easy.
 
 .. code-block:: python
