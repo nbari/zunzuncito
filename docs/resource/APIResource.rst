@@ -148,5 +148,5 @@ Is handled by the custom python module ``zun_upload/zun_upload.py`` which conten
 
 .. note::
 
-   All the custom modules must have the APIResource class and the method dispatch in
+   All the custom modules must have the **APIResource** class and the method **dispatch** in
    order to work
