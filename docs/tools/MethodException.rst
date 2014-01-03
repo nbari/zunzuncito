@@ -31,6 +31,8 @@ Therefor if you try the following::
 
     curl -i -X HEAD http://api.zunzun.io/exception/foo
 
+* Note the -X HEAD
+
 The answer will be simillar to:
 
 .. code-block:: rest
