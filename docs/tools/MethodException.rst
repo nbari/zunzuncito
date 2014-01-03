@@ -18,7 +18,15 @@ that by default sets the status code to `405 Method Not Allowed <https://github.
 
 
 For example the `zun_exception.py <https://github.com/nbari/zunzuncito/blob/master/my_api/default/v0/zun_exception/zun_exception.py>`_
-custom module only accepts 'GET' methods therefor if you try the following::
+custom module only accepts 'GET' methods from this code snippet:
+
+.. code-block:: python
+
+   @tools.allow_methods('get')
+   def dispatch(self, environ, start_response):
+
+
+Therefor if you try the following::
 
     curl -i -X HEAD http://api.zunzun.io/exception/foo
 
