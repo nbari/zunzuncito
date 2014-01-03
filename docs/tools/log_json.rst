@@ -14,6 +14,16 @@ The arguments are::
 :log: a python dictionary
 :indent: returns the json structured indented (more human readable)
 
+.. note::
+
+   If indent is a non-negative integer, then JSON array elements and object
+   members will be pretty-printed with that indent level. An indent level of 0,
+   or negative, will only insert newlines. None (the default) selects the most
+   compact representation.
+
+.. seealso::
+
+   `python json <http://docs.python.org/2/library/json.html#basic-usage>`_
 
 Example
 .......
