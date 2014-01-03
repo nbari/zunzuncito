@@ -12,11 +12,11 @@ It is commonly used in conjuntion with the `log_json </en/latest/tools/log_json.
 Example
 .......
 
-snipped taken from `zun_self.py <https://github.com/nbari/zunzuncito/blob/master/my_api/default/v0/zun_self/zun_self.py>`_:
+snippet taken from `zun_self.py <https://github.com/nbari/zunzuncito/blob/master/my_api/default/v0/zun_self/zun_self.py>`_:
 
 .. code-block:: python
    :linenos:
-   :emphazis-lines: 3
+   :emphasize-lines: 3
 
 
     @tools.allow_methods('get')
