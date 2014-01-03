@@ -4,7 +4,7 @@ log_json
 The ``log_json`` is a function that given a `dictionary <http://docs.python.org/2/tutorial/datastructures.html#dictionaries>`_, returns a
 `json <http://json.org/example>`_ structure.
 
-The idea is that later the logs can be parsed and processed by external tools.
+This helps that logs can be parsed and processed by external tools.
 
 The arguments are::
 
