@@ -10,7 +10,7 @@ for the corret method, otherwise will raise an ``MethodException``
 
 The ``MethodException`` behaves similar to the
 `HTTPException </en/latest/tools/HTTPException.html>`_ the only difference is
-that by default sets the status code to `405 <https://github.com/nbari/zunzuncito/blob/master/zunzuncito/http_status_codes.py#L40>`_
+that by default sets the status code to `405 Method Not Allowed <https://github.com/nbari/zunzuncito/blob/master/zunzuncito/http_status_codes.py#L40>`_
 
 .. code-block:: python
 
