@@ -2,7 +2,7 @@ MethodException
 ===============
 
 While defining `routes </en/latest/zunzun/Routes.html>`_ or using the
-`allow_methods </en/latest/resource/allow_methods.html>`_ decorator you
+`@allow_methods </en/latest/resource/allow_methods.html>`_ decorator you
 can specify the allowed `HTTP methods
 <http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods>`_ to
 support, the `ZunZun </en/latest/zunzun.html>`_ instance, internally will verify
