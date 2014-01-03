@@ -2,7 +2,7 @@
 
 major.minor.commits
 """
-version_commits = 6.649
+version_commits = 8.650
 
 VERSION_TUPLE = (0, 1, int(version_commits))
 
