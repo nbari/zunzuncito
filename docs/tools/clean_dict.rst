@@ -16,7 +16,7 @@ snippet taken from `zun_self.py <https://github.com/nbari/zunzuncito/blob/master
 
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 3
+   :emphasize-lines: 10
 
 
     @tools.allow_methods('get')
