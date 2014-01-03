@@ -15,7 +15,7 @@ setup(
     version=VERSION,
     author='Nicolas Embriz',
     author_email='nbari@dalmp.com',
-    description='A micro-framework for creating REST APIs.',
+    description="A micro-framework for creating REST API's.",
     license='BSD',
     keywords='wsgi web api framework rest http',
     url='https://github.com/nbari/zunzuncito',
@@ -24,7 +24,7 @@ setup(
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
-        'Environment :: Web Environment'
+        'Environment :: Web Environment',
         'Intended Audience :: Developers',
         'Intended Audience :: System Administrators',
         'License :: OSI Approved :: BSD License',
