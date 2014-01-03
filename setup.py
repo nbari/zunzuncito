@@ -8,11 +8,13 @@ VERSION = imp.load_source(
               'zunzuncito',
               'version.py'))
 
-VERSION = VERSION.version_commits
+VERSION = VERSION.__version__
 
-f = open(os.path.join(os.path.dirname(__file__), 'README.rst'))
+f = open('README.rst')
 long_description = f.read()
 f.close()
+
+print long_description
 
 setup(
     name='zunzuncito',
@@ -22,7 +24,6 @@ setup(
     description="A micro-framework for creating REST API's.",
     long_description=long_description,
     license='BSD',
-    include_package_data=True,
     keywords='wsgi web api framework rest http',
     url='https://github.com/nbari/zunzuncito',
     packages=['zunzuncito'],
