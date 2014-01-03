@@ -20,7 +20,7 @@ that by default sets the status code to `405 <https://github.com/nbari/zunzuncit
 For example the zun_exception.py custom module only accepts 'GET' methods
 therefor if you try the following::
 
-    curl -I -X HEAD http://api.zunzun.io/exception/foo
+    curl -i -X HEAD http://api.zunzun.io/exception/foo
 
 The answer will be simillar to:
 
