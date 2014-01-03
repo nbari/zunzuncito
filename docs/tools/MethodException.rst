@@ -31,7 +31,8 @@ Therefor if you try the following::
 
     curl -i -X HEAD http://api.zunzun.io/exception/foo
 
-* Note the -X HEAD
+* Note the: **-X HEAD** this will send a **HEAD** request not a **GET**
+
 
 The answer will be simillar to:
 
