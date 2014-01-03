@@ -10,9 +10,8 @@ The arguments are::
 
     log_json(log, indent=False)
 
-
-* :log: a python dictionary
-* :indent: return the json structured indent more human readable
+ :log: a python dictionary
+ :indent: return the json structured indent more human readable
 
 
 Example
@@ -48,4 +47,4 @@ Example
 
 .. seealso::
 
-   `Structured Logging <http://docs.python.org/2/howto/logging-cookbook.html#implementing-structured-logging`_
+   `Structured Logging <http://docs.python.org/2/howto/logging-cookbook.html#implementing-structured-logging>`_
