@@ -1,4 +1,4 @@
 allow_methods
 =============
 
-TODO
+:param methods: list of http methods
