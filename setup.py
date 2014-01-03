@@ -14,8 +14,6 @@ f = open('README.rst')
 long_description = f.read()
 f.close()
 
-print long_description
-
 setup(
     name='zunzuncito',
     version=VERSION,
