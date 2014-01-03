@@ -1,7 +1,8 @@
 log_json
 ========
 
-The ``log_json`` is a function that given a `dictionary <http://docs.python.org/2/tutorial/datastructures.html#dictionaries>`_, returns a json structure.
+The ``log_json`` is a function that given a `dictionary <http://docs.python.org/2/tutorial/datastructures.html#dictionaries>`_, returns a
+`json <http://json.org/example>`_ structure.
 
 The idea is that later the logs can be parsed and processed by external tools.
 
@@ -11,7 +12,7 @@ Example
 
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 5, 20
+   :emphasize-lines: 12,13,14,15,16,17
 
 
    import logging
