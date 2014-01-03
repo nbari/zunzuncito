@@ -9,3 +9,7 @@ Tar Ball: `https://github.com/nbari/zunzuncito/tarball/master
 
 View on GitHub: `https://github.com/nbari/zunzuncito
 <https://github.com/nbari/zunzuncito>`_
+
+.. seealso::
+
+   `Install <en/latest/Install.html>`_
