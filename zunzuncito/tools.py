@@ -67,7 +67,7 @@ def allow_methods(*methods):
 
 
 def clean_dict(d):
-    """ clean dictionary object to sr
+    """ clean dictionary object to str
     :param dict: dictionary
     """
     new = {}
