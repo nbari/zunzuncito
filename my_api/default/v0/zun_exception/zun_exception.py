@@ -22,7 +22,7 @@ class APIResource(object):
         }, True)
         )
 
-    @allow_methods('get')
+    @tools.allow_methods('get')
     def dispatch(self, environ, start_response):
 
         try:
