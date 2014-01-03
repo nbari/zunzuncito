@@ -124,6 +124,7 @@ Notice that the `path </en/latest/resource/path.html>`_ in this case is::
 Will reply with something like:
 
 .. code-block:: rest
+   :linenos:
    :emphasize-lines: 1
 
     HTTP/1.1 406 Not Acceptable
