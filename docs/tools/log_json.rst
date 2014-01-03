@@ -12,7 +12,7 @@ The arguments are::
 
 
 :log: a python dictionary
-:indent: return the json structured indent more human readable
+:indent: returns the json structured with indent=4 (more human readable)
 
 
 Example
