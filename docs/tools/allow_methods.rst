@@ -6,4 +6,4 @@ The ``allow_methods`` is a function used as `decorator <https://wiki.python.org/
 
 .. seealso::
 
-    `@allow_methods decorator <en/latest/resource/allow_methods.html>`_
+    `@allow_methods decorator </en/latest/resource/allow_methods.html>`_
