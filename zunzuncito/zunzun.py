@@ -35,9 +35,6 @@ class ZunZun(object):
         self.vroot = 'default'
 
         if versions:
-            """versions:
-            first in list is treated as the default
-            """
             if isinstance(versions, list):
                 versions = [x.lower().strip()
                             for x in map(str, versions) if x.strip()]
