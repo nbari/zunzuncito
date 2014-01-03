@@ -21,6 +21,7 @@ For example the `zun_exception.py <https://github.com/nbari/zunzuncito/blob/mast
 custom module only accepts 'GET' methods from this code snippet:
 
 .. code-block:: python
+   :emphasize-lines: 1
 
    @tools.allow_methods('get')
    def dispatch(self, environ, start_response):
