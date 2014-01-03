@@ -1,6 +1,5 @@
 .gitignore
 LICENSE
-MANIFEST.in
 README.rst
 setup.py
 zunzuncito/__init__.py
