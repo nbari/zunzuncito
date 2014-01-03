@@ -6,6 +6,14 @@ The ``log_json`` is a function that given a `dictionary <http://docs.python.org/
 
 The idea is that later the logs can be parsed and processed by external tools.
 
+The arguments are::
+
+    log_json(log, indent=False)
+
+
+* :log: a python dictionary
+* :indent: return the json structured indent more human readable
+
 
 Example
 .......
