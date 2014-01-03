@@ -7,7 +7,7 @@ will try to 'clean it' converting it to a string::
     clean_dict(dictionary)
 
 
-It is commonly used in conjuntion with the `log_json </en/latest/tools/log_json.html>`_ function.
+It is commonly used in conjunction with the `log_json </en/latest/tools/log_json.html>`_ function.
 
 Example
 .......
