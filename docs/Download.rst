@@ -12,4 +12,4 @@ View on GitHub: `https://github.com/nbari/zunzuncito
 
 .. seealso::
 
-   `Install <en/latest/Install.html>`_
+   `Install </en/latest/Install.html>`_
