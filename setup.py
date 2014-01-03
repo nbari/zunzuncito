@@ -20,7 +20,7 @@ setup(
     keywords='wsgi web api framework rest http',
     url='https://github.com/nbari/zunzuncito',
     packages=['zunzuncito'],
-    long_description=open('README.rst', 'r').read(),
+    long_description=open('README.md', 'r').read(),
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
