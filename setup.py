@@ -10,9 +10,7 @@ VERSION = imp.load_source(
 
 VERSION = VERSION.__version__
 
-f = open('README.rst')
-long_description = f.read()
-f.close()
+readme = open("README.md", "r")
 
 setup(
     name='zunzuncito',
@@ -20,7 +18,6 @@ setup(
     author='Nicolas Embriz',
     author_email='nbari@dalmp.com',
     description="A micro-framework for creating REST API's.",
-    long_description=long_description,
     license='BSD',
     keywords='wsgi web api framework rest http',
     url='https://github.com/nbari/zunzuncito',
@@ -38,4 +35,5 @@ setup(
         'Topic :: Internet :: WWW/HTTP :: WSGI',
         'Topic :: Software Development :: Libraries :: Application Frameworks'
     ],
+    long_description=readme.read()
 )
