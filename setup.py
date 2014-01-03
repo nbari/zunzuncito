@@ -8,7 +8,7 @@ VERSION = imp.load_source(
               'zunzuncito',
               'version.py'))
 
-VERSION = VERSION.__version__
+VERSION = VERSION.version_commits
 
 setup(
     name='zunzuncito',
