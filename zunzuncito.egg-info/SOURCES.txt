@@ -1,3 +1,4 @@
+README.rst
 setup.py
 zunzuncito/__init__.py
 zunzuncito/http_status_codes.py
