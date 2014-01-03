@@ -17,8 +17,8 @@ that by default sets the status code to `405 <https://github.com/nbari/zunzuncit
    MethodException(status=405, title=None, description=None, headers=None, code=None, display=False)
 
 
-For example the zun_exception.py custom module only accepts 'GET' methods
-therefor if you try the following::
+For example the `zun_exception.py <https://github.com/nbari/zunzuncito/blob/master/my_api/default/v0/zun_exception/zun_exception.py>`_
+custom module only accepts 'GET' methods therefor if you try the following::
 
     curl -i -X HEAD http://api.zunzun.io/exception/foo
 
