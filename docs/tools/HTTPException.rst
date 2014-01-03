@@ -40,36 +40,44 @@ For a request like::
 
     curl -i http://api.zunzun.io/exception
 
-Will reply with this::
+Will reply with this:
 
-    HTTP/1.1 400 Bad Request
-    Request-ID:
-    52c597a700ff0229fef9f477280001737e7a756e7a756e6369746f2d617069000131000100
-    Content-Type: application/json; charset=UTF-8
-    Date: Thu, 02 Jan 2014 16:45:27 GMT
-    Server: Google Frontend
-    Content-Length: 0
-    Alternate-Protocol: 80:quic,80:quic
+.. code-block:: rest
+   :linenos:
+   :emphasize-lines: 1
+
+   HTTP/1.1 400 Bad Request
+   Request-ID:
+   52c597a700ff0229fef9f477280001737e7a756e7a756e6369746f2d617069000131000100
+   Content-Type: application/json; charset=UTF-8
+   Date: Thu, 02 Jan 2014 16:45:27 GMT
+   Server: Google Frontend
+   Content-Length: 0
+   Alternate-Protocol: 80:quic,80:quic
 
 This is because the request URI is missing the `path </en/latest/resource/path.html>`_ and should be something
 like::
 
     curl -i http://api.zunzun.io/exception/foo
 
-That will return something like::
+That will return something like:
 
-    HTTP/1.1 200 OK
-    Request-ID:
-    52c597d200ff0d89f81dcec4280001737e7a756e7a756e6369746f2d617069000131000100
-    Content-Type: application/json; charset=UTF-8
-    Vary: Accept-Encoding
-    Date: Thu, 02 Jan 2014 16:46:11 GMT
-    Server: Google Frontend
-    Cache-Control: private
-    Alternate-Protocol: 80:quic,80:quic
-    Transfer-Encoding: chunked
+.. code-block:: rest
+   :linenos:
+   :emphasize-lines: 1
 
-     my_api.default.v0.zun_exception.zun_exception
+   HTTP/1.1 200 OK
+   Request-ID:
+   52c597d200ff0d89f81dcec4280001737e7a756e7a756e6369746f2d617069000131000100
+   Content-Type: application/json; charset=UTF-8
+   Vary: Accept-Encoding
+   Date: Thu, 02 Jan 2014 16:46:11 GMT
+   Server: Google Frontend
+   Cache-Control: private
+   Alternate-Protocol: 80:quic,80:quic
+   Transfer-Encoding: chunked
+
+   my_api.default.v0.zun_exception.zun_exception
 
 .. note ::
 
