@@ -82,8 +82,8 @@ example the content of module `zun_default/zun_default.py <https://github.com/nb
 
    import json
    import logging
+   from zunzuncito import tools
    from zunzuncito import http_status_codes
-   from zunzuncito.tools import MethodException, HTTPException, allow_methods,
    log_json
 
 
@@ -94,7 +94,7 @@ example the content of module `zun_default/zun_default.py <https://github.com/nb
        self.status = 200
        self.headers = api.headers.copy()
        self.log = logging.getLogger()
-       self.log.info(log_json({
+       self.log.info(tools.log_json({
             'vroot': api.vroot,
             'API': api.version,
             'URI': api.URI,
@@ -102,7 +102,7 @@ example the content of module `zun_default/zun_default.py <https://github.com/nb
         }, True)
         )
 
-   @allow_methods('get')
+   @tools.allow_methods('get')
    def dispatch(self, environ, start_response):
        headers = self.api.headers
        start_response(
