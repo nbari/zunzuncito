@@ -21,6 +21,8 @@ setup(
     license='BSD',
     keywords='wsgi web api framework rest http',
     url='http://www.zunzun.io',
+    download_url='https://github.com/nbari/zunzuncito/tarball/master',
+    platforms="any",
     packages=['zunzuncito'],
     classifiers=[
         'Development Status :: 4 - Beta',
