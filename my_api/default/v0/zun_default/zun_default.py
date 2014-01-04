@@ -36,4 +36,4 @@ class APIResource(object):
         data['URI'] = self.api.URI
         data['Method'] = self.api.method
 
-        return tools.log_json(data)
+        return tools.log_json(data, 4)
