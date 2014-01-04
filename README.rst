@@ -19,7 +19,7 @@ Via pip::
 
   $ pip install zunzuncito
 
-Or::
+If you don't have pip, after downloading the sources, you can run::
 
   $ python setup.py install
 
