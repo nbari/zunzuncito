@@ -8,8 +8,8 @@ This is the directory structure:
    :app.py: application python file.
    :my_api: The **root** directory of the API.
    :default: The **vroot** directory.
-   :v0: Directory for default API resources or for version *0* when specified.
-   :v1: Directory for API resources version *1*
+   :v0: Directory for default API resources or for version **0** when specified.
+   :v1: Directory for API resources version **1**
 
 
 .. code-block:: rest
@@ -75,7 +75,7 @@ For a very basic API, contents of file **app.py** can be:
 
 
 The contents of the **my_api** contain python modules (API Resources) for
-example the content of module zun_default/zun_default.py is:
+example the content of module `zun_default/zun_default.py <https://github.com/nbari/zunzuncito/blob/master/my_api/default/v0/zun_default/zun_default.py>`_ is:
 
 .. code-block:: python
    :linenos:
@@ -118,6 +118,10 @@ example the content of module zun_default/zun_default.py is:
 
        return json.dumps(data, sort_keys=True, indent=4)
 
+
+.. seealso::
+
+   `Basic template <http://docs.zunzun.io/en/latest/resource/dispatch_method.html#basic-template>`_
 
 
 How to run it
