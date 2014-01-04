@@ -18,3 +18,4 @@ Table of Contents
    tools
    http_status_codes
    zunzuncito
+   changelog
