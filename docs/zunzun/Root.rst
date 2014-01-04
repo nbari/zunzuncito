@@ -45,15 +45,15 @@ Making an analogy, you can see ``root`` as the `DocumentRoot
             |  |  |--__init__.py
             |  |  `--zun_default.py
             |  `--zun_hasher
-            |    |--__init__.py
-            |    `--zun_hasher.py
+            |     |--__init__.py
+            |     `--zun_hasher.py
             `--v1
                |--__init__.py
                |--zun_default
-               | |--__init__.py
-               | `--zun_default.py
+               |  |--__init__.py
+               |  `--zun_default.py
                `--zun_hasher
-                 |--__init__.py
-                 `--zun_hasher.py
+                  |--__init__.py
+                  `--zun_hasher.py
 
 * In this case the **my_api** directory, is the ``root``
