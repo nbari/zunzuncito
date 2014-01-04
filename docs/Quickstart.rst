@@ -80,11 +80,9 @@ example the content of module `zun_default/zun_default.py <https://github.com/nb
 .. code-block:: python
    :linenos:
 
-   import json
    import logging
    from zunzuncito import http_status_codes
    from zunzuncito import tools
-   log_json
 
 
    class APIResource(object):
@@ -116,7 +114,7 @@ example the content of module `zun_default/zun_default.py <https://github.com/nb
        data['URI'] = self.api.URI
        data['method'] = self.api.method
 
-       return json.dumps(data, sort_keys=True, indent=4)
+       return tools.log_json(data, 4)
 
 
 .. seealso::
