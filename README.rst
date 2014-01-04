@@ -27,7 +27,7 @@ Or::
 Quick start
 ...........
 
-`http://docs.zunzun.io/en/latest/Quickstart.html <http://docs.zunzun.io/en/latest/Quickstart.html>`_
+* `http://docs.zunzun.io/en/latest/Quickstart.html <http://docs.zunzun.io/en/latest/Quickstart.html>`_
 
 
 Documentation
