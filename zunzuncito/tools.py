@@ -80,7 +80,7 @@ def clean_dict(d):
     return new
 
 
-def log_json(log, indent=False):
+def log_json(log, indent=None):
     return json.dumps(clean_dict(log), sort_keys=True, indent=indent)
 
 
