@@ -82,8 +82,8 @@ example the content of module `zun_default/zun_default.py <https://github.com/nb
 
    import json
    import logging
-   from zunzuncito import tools
    from zunzuncito import http_status_codes
+   from zunzuncito import tools
    log_json
 
 
