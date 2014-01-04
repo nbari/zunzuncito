@@ -20,7 +20,7 @@ setup(
     description="A micro-framework for creating REST API's",
     license='BSD',
     keywords='wsgi web api framework rest http',
-    url='https://github.com/nbari/zunzuncito',
+    url='www.zunzun.io',
     packages=['zunzuncito'],
     classifiers=[
         'Development Status :: 4 - Beta',
