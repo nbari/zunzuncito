@@ -12,12 +12,12 @@ Basic template
 
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 5, 20
+   :emphasize-lines: 5, 21
 
 
    import logging
-   from zunzuncito import tools
    from zunzuncito import http_status_codes
+   from zunzuncito import tools
 
    class APIResource(object):
 
@@ -34,6 +34,7 @@ Basic template
            }, True)
            )
 
+       @tools.allow_methods('post, put, head')
        def dispatch(self, environ, start_response):
            """ your code goes here """
 
