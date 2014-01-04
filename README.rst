@@ -12,12 +12,25 @@ Design Goals
 * `Multi-tenant <http://en.wikipedia.org/wiki/Multitenancy>`_ Support.
 * Ability to create almost anything easy, example: Support `chunked transfer encoding <http://en.wikipedia.org/wiki/Chunked_transfer_encoding>`_
 
+Install
+.......
+
+Via pip::
+
+  $ pip install zunzuncito
+
+Or::
+
+  $ python setup.py install
+
+
 Documentation
 ..............
 
 * `docs.zunzun.io <http://docs.zunzun.io>`_
 
 * `www.zunzun.io <http://www.zunzun.io>`_
+
 
 What & Why ZunZuncito
 ......................
