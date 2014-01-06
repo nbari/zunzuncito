@@ -24,9 +24,9 @@ class APIResource(object):
 
     def dispatch(self, environ, start_response):
         headers = self.api.headers
+        headers['naranjas'] = str(uuid.uuid4())
         start_response(
             getattr(http_status_codes, 'HTTP_%d' %
                     self.status), list(headers.items()))
-        headers['naranjas'] = str(uuid.uuid4())
 
         return tools.log_json(headers, 4)
