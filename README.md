@@ -10,7 +10,12 @@
 * [Multi-tenant](http://en.wikipedia.org/wiki/Multitenancy) Support.
 * Ability to create almost anything easy, example: Support [chunked transfer encoding](http://en.wikipedia.org/wiki/Chunked_transfer_encoding)
 
+### Install
+
+    $ pip install zunzuncito
+
 > Documentation : [docs.zunzun.io](http://docs.zunzun.io)
+
 
 ### What & Why ZunZuncito (ßeta)
 ZunZuncito is a [python](http://python.org/) package that allows to create and maintain [REST](http://en.wikipedia.org/wiki/REST) API's without hassle.
@@ -351,16 +356,16 @@ Directory structure:
   |--v0
   | |--__init__.py
   | |--zun_ip_tools
-  | | |--__init__.py
-  | | `--zun_ip_tools.py
+  | |  |--__init__.py
+  | |  `--zun_ip_tools.py
   | |--zun_http_status
-  | | |--__init__.py
-  | | `zun_http_status.py
+  | |  |--__init__.py
+  | |  `zun_http_status.py
   `--v1
     |--__init__.py
     |--zun_ip_tools
-    | |--__init__.py
-    | `--zun_ip_tools.py
+    |  |--__init__.py
+    |  `--zun_ip_tools.py
     `--zun_http_status
        |--__init__.py
        `--zun_http_status.py
