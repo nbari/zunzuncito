@@ -75,7 +75,6 @@ class ZunZun(object):
             An iterable with the response to return to the client.
         """
         self.start_time = time.time()
-        self.headers = self._headers.copy()
 
         """
         get the HOST
@@ -109,6 +108,7 @@ class ZunZun(object):
         """
         Default headers in case an exception occurs
         """
+        self.headers = self._headers.copy()
         self.headers['Content-Type'] = 'application/json; charset=UTF-8'
         self.headers['Request-ID'] = self.request_id
         body = []
