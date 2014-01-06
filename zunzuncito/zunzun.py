@@ -20,7 +20,8 @@ class ZunZun(object):
         """
         set defauls
         """
-        self.headers = tools.CaseInsensitiveDict()
+        self._headers = tools.CaseInsensitiveDict()
+        self.headers = None
         self.host = '*'
         self.hosts = {'*': 'default'}
         self.path = []
@@ -74,6 +75,7 @@ class ZunZun(object):
             An iterable with the response to return to the client.
         """
         self.start_time = time.time()
+        self.headers = self._headers.copy()
 
         """
         get the HOST
