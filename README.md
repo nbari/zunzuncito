@@ -99,8 +99,8 @@ my_api
    |  |  |--__init__.py
    |  |  `--zun_gevent.py
    |  `--zun_my
-   |    |--__init__.py
-   |    `--zun_my.py
+   |     |--__init__.py
+   |     `--zun_my.py
    `--v1
       |--__init__.py
       |--zun_default
@@ -110,8 +110,8 @@ my_api
       |  |--__init__.py
       |  `--zun_gevent.py
       `--zun_my
-        |--__init__.py
-        `--zun_my.py
+         |--__init__.py
+         `--zun_my.py
 </pre>
 
 As you can see basically it is a directory containing sub-directories which at the end are all python custom modules and can be called in a clean way like:
