@@ -60,7 +60,7 @@ The wildcard character **\*** can be used, for example:
 * line 5 matches host ``api.ejemplo.org`` and will be served on vroot
   '**api_ejemplo_org**'
 
-| Notice that the vroot values use ``_`` as separator instead of a dot, this
+| Notice that the vroot values use ``_`` as separator instead of a dot, this \
 is to prevent conflicts on how python read files. for example this request::
 
     http://api.ejemplo.org/v0/gevent

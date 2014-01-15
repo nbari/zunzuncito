@@ -1,8 +1,8 @@
 APIResource class
 =================
 
-``APIResource`` is the name of the class that the `ZunZun <http://docs.zunzun.io/en/latest/zunzun.html>`_
-instance will call to handle the incoming requests.
+``APIResource`` is the name of the class that the `ZunZun instance <http://docs.zunzun.io/en/latest/zunzun.html>`_
+will call to handle the incoming requests.
 
 
 For example, the following requests::
