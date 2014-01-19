@@ -19,3 +19,4 @@ Table of Contents
    http_status_codes
    zunzuncito
    changelog
+   issues
