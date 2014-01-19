@@ -138,8 +138,7 @@ class ZunZun(object):
             self.log.error(tools.log_json({
                 'API': self.version,
                 'URI': self.URI,
-                'Exception': e,
-                'environ': environ
+                'Exception': e
             }, True)
             )
 
