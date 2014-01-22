@@ -4,15 +4,12 @@ print the environ dict
 import json
 import logging
 from zunzuncito import tools
-from zunzuncito import http_status_codes
 
 
 class APIResource(object):
 
     def __init__(self, api):
         self.api = api
-        self.status = 200
-        self.headers = api.headers.copy()
         self.log = logging.getLogger()
         self.log.info(tools.log_json({
             'vroot': api.vroot,
@@ -23,15 +20,6 @@ class APIResource(object):
         )
 
     @tools.allow_methods('get')
-    def dispatch(self, environ, start_response):
-        headers = self.api.headers
-        start_response(
-            getattr(http_status_codes, 'HTTP_%d' %
-                    self.status), list(headers.items()))
+    def dispatch(self, environ):
 
-        return (
-            json.dumps(
-                tools.clean_dict(environ),
-                sort_keys=True,
-                indent=4)
-        )
+        return tools.log_json(environ, 4)

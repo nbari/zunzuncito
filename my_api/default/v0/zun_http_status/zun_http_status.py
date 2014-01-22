@@ -3,18 +3,17 @@ default resource
 """
 import json
 import logging
-from zunzuncito import http_status_codes
-from zunzuncito.tools import MethodException, HTTPException, allow_methods, log_json
+from zunzuncito.http_status_codes import codes
+from zunzuncito import tools
 
 
 class APIResource(object):
 
     def __init__(self, api):
         self.api = api
-        self.status = 200
         self.headers = api.headers.copy()
         self.log = logging.getLogger()
-        self.log.info(log_json({
+        self.log.info(tools.log_json({
             'vroot': api.vroot,
             'API': api.version,
             'URI': api.URI,
@@ -22,17 +21,12 @@ class APIResource(object):
         }, True)
         )
 
-    @allow_methods('get')
-    def dispatch(self, environ, start_response):
-        headers = self.api.headers
-        start_response(
-            getattr(http_status_codes, 'HTTP_%d' %
-                    self.status), list(headers.items()))
+    @tools.allow_methods('get')
+    def dispatch(self, environ):
+
         data = {}
         try:
-            data['status code'] = getattr(
-                http_status_codes, 'HTTP_%d' %
-                int(self.api.path[0], 0))
+            data['status code'] = codes[int(self.api.path[0], 0)]
         except Exception as e:
             data['status code'] = 'not found'
 
