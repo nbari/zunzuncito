@@ -17,9 +17,6 @@ class ZunZun(object):
 
     def __init__(self, root, versions=None, hosts=None,
                  routes=None, prefix='zun_', rid=None, debug=False):
-        """
-        set defauls
-        """
         self._headers = tools.CaseInsensitiveDict()
         self.headers = None
         self.host = '*'
