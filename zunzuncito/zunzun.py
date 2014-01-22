@@ -115,9 +115,10 @@ class ZunZun(object):
 
         try:
             resource = self.router()
+            self.status = 200
             return resource.dispatch(environ)
         except tools.HTTPError as e:
-            status = e.status
+            self.status = e.status
 
             if e.headers:
                 self.headers = e.headers
@@ -128,13 +129,13 @@ class ZunZun(object):
             self.log.error(tools.log_json({
                 'API': self.version,
                 'URI': self.URI,
-                'HTTPError': status,
+                'HTTPError': self.status,
                 'body': e.to_dict()
             }, True)
             )
 
         except Exception as e:
-            status = 500
+            self.status = 500
             self.log.error(tools.log_json({
                 'API': self.version,
                 'URI': self.URI,
@@ -142,12 +143,12 @@ class ZunZun(object):
             }, True)
             )
 
-        if status in http_status_codes.codes:
-            status = http_status_codes.codes[status]
+        if self.status in http_status_codes.codes:
+            self.status = http_status_codes.codes[self.status]
         else:
-            status = http_status_codes.generic_reasons[status // 100]
+            self.status = http_status_codes.generic_reasons[self.status // 100]
 
-        start_response(status, list(self.headers.items()))
+        start_response(self.status, list(self.headers.items()))
         return body
 
     def router(self):
