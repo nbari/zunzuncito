@@ -31,6 +31,7 @@ class ZunZun(object):
         self.rid = rid
         self.root = root
         self.routes = {}
+        self.status = 200
         self.versions = ['v0']
         self.version = self.versions[0]
         self.vroot = 'default'
