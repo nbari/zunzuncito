@@ -142,9 +142,12 @@ class ZunZun(object):
             }, True)
             )
 
-        start_response(
-            getattr(http_status_codes, 'HTTP_%d' %
-                    status), list(self.headers.items()))
+        if status in http_status_codes.codes:
+            status = http_status_codes.codes[status]
+        else:
+            status = http_status_codes.generic_reasons[status // 100]
+
+        start_response(status, list(self.headers.items()))
         return body
 
     def router(self):

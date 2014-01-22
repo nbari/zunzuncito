@@ -3,7 +3,7 @@ HTTP status codes. see rfc2817
 source http://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml
 """
 
-status_codes = {
+codes = {
 # 1xx: Informational - Request received, continuing process
     100: '100 Continue', # [RFC2616]
     101: '101 Switching Protocols', # [RFC2616]
@@ -75,4 +75,14 @@ status_codes = {
     509: '509 Unassigned',
     510: '510 Not Extended', # [RFC2774]
     511: '511 Network Authentication Required', # [RFC6585]
+}
+
+
+# taken from webob
+generic_reasons = {
+    1: 'Continue',
+    2: 'Success',
+    3: 'Multiple Choices',
+    4: 'Unknown Client Error',
+    5: 'Unknown Server Error',
 }
