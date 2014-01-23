@@ -112,8 +112,9 @@ class ZunZun(object):
         body = []
 
         try:
+            resource = self.router()
             self.status = 200
-            body = self.router().dispatch(environ)
+            body = resource.dispatch(environ)
         except tools.HTTPError as e:
             self.status = e.status
 
