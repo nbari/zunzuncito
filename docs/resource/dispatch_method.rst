@@ -12,7 +12,7 @@ Basic template
 
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 5, 21
+   :emphasize-lines: 4, 18
 
 
    import logging
@@ -32,7 +32,7 @@ Basic template
            )
 
        @tools.allow_methods('post, put, head')
-       def dispatch(self, environ, start_response):
+       def dispatch(self, environ):
            """ your code goes here """
 
 .. seealso::
