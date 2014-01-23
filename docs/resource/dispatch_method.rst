@@ -16,15 +16,12 @@ Basic template
 
 
    import logging
-   from zunzuncito import http_status_codes
    from zunzuncito import tools
 
    class APIResource(object):
 
        def __init__(self, api):
            self.api = api
-           self.status = 200
-           self.headers = api.headers.copy()
            self.log = logging.getLogger()
            self.log.info(tools.log_json({
                'vroot': api.vroot,
