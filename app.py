@@ -58,7 +58,8 @@ routes['default'] = [
     ('/teste', 'test_put', 'PUT'),
     ('/my/?.*', 'ip_tools', 'GET'),
     ('/status/?.*', 'http_status', 'GET'),
-    ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST')
+    ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST'),
+    ('/.*', 'default')
 ]
 routes['beta_zunzun_io'] = [
     ('/.*', 'default'),

@@ -227,7 +227,7 @@ class ZunZun(object):
         """
         by default the zun_ prefix is appended
         """
-        module_name = '%s%s' % (self.prefix.lower(), py_mod.lower())
+        module_name = '%s%s' % (self.prefix, py_mod.lower())
         module_path = '%s.%s.%s.%s.%s' % (
             self.root,
             self.vroot,
