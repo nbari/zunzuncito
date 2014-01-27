@@ -1,5 +1,5 @@
 """
-unicode resource
+webob resource
 """
 import logging
 import uuid
@@ -20,18 +20,18 @@ class APIResource(object):
         }, True)
         )
 
-    @tools.allow_methods('get, post')
     def dispatch(self, environ):
         req = Request(environ)
 
         data = {}
-        if environ.get('CONTENT_TYPE', '').startswith('multipart'):
-            data['files'] = True
-
+        data['req-GET'] = req.GET
+        data['req-POST'] = req.POST
         data['req-application_url'] = req.application_url
         data['req-body'] = req.body
         data['req-content_type'] = req.content_type
+        data['req-cookies'] = req.cookies
         data['req-method'] = req.method
+        data['req-params'] = req.params
         data['req-path'] = req.path
         data['req-path_info'] = req.path_info
         data['req-path_qs'] = req.path_qs
@@ -39,9 +39,5 @@ class APIResource(object):
         data['req-query_string'] = req.query_string
         data['req-script_name'] = req.script_name
         data['req-url'] = req.url
-        data['req-GET'] = req.GET
-        data['req-POST'] = req.POST
-        data['req-params'] = req.params
-        data['req-cookies'] = req.cookies
 
         return tools.log_json(data, 4)
