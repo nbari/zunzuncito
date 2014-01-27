@@ -1,10 +1,12 @@
 """
 webob resource
 """
+
 import logging
 import uuid
-from zunzuncito import tools
+
 from webob import Request
+from zunzuncito import tools
 
 
 class APIResource(object):
