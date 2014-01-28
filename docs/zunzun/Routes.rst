@@ -137,7 +137,7 @@ The second step on the router is to find a match within the ``routes`` dictionar
 local modules.
 
 In case a list of ``routes`` is passed as an argument to the ZunZun instance, the
-router will try to match the api_resource with the items of the ``routes``
+router will try to match the `API_resource </en/latest/resource.html>`_ with the items of the ``routes``
 dictionary. If no matches are found it will try to find the module in the root directory.
 
 Routes dictionary structure
