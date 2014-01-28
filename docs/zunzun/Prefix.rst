@@ -6,7 +6,7 @@ The ``prefix`` argument is the string that should be appended to all the names
 of the python modules.
 
 .. code-block:: python
-   :emphasize-lines: 14
+   :emphasize-lines: 13
    :linenos:
 
    import zunzuncito
@@ -18,8 +18,7 @@ of the python modules.
    hosts = {'*': 'default'}
 
    routes = {'default':[
-       ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST'),
-       ('/.*', 'default')
+       ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST')
    ]}
 
    app = zunzuncito.ZunZun(root, versions, hosts, routes, prefix='zzz_')
