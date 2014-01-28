@@ -19,7 +19,7 @@ Is handled by the custom python module ``zun_upload/zun_upload.py`` which conten
 
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 5
+   :emphasize-lines: 5,17
 
    import logging
    import os
@@ -59,9 +59,7 @@ Another example:
    import os
    from zunzuncito import tools
 
-
    class APIResource(object):
-
        def __init__(self, api):
            self.api = api
            self.log = logging.getLogger()
