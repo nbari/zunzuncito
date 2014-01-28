@@ -24,8 +24,7 @@ A very basic API, contents of file **app.py** can be:
    hosts = {'*': 'default'}
 
    routes = {'default':[
-       ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST'),
-       ('/.*', 'default')
+       ('/my/?.*', 'ip_tools', 'GET')
    ]}
 
    app = zunzuncito.ZunZun(root, versions, hosts, routes, debug=True)
@@ -97,17 +96,17 @@ The API directory structure for this example would be:
            |--default
            |  |--__init__.py
            |  `--v0
-           |    |--__init__.py
-           |    `--zun_default
-           |       |--__init__.py
-           |       `--zun_default.py
+           |     |--__init__.py
+           |     `--zun_default
+           |        |--__init__.py
+           |        `--zun_default.py
            |--ejemplo_org
            |  |--__init__.py
            |  `--v0
-           |    |--__init__.py
-           |    `--zun_default
-           |       |--__init__.py
-           |       `--zun_default.py
+           |     |--__init__.py
+           |     `--zun_default
+           |        |--__init__.py
+           |        `--zun_default.py
            `--api_ejemplo_org
               |--__init__.py
               `--v0
