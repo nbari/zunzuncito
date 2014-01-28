@@ -22,8 +22,8 @@ Is handled by the custom python module ``zun_upload/zun_upload.py`` which conten
    :emphasize-lines: 5,17
 
    import logging
-   import os
    from zunzuncito import tools
+
 
    class APIResource(object):
        def __init__(self, api):
@@ -58,6 +58,7 @@ Another example:
    import logging
    import os
    from zunzuncito import tools
+
 
    class APIResource(object):
        def __init__(self, api):
