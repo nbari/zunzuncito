@@ -1,7 +1,6 @@
 """
-default resource
+http_status resource
 """
-import json
 import logging
 from zunzuncito.http_status_codes import codes
 from zunzuncito import tools
@@ -32,4 +31,4 @@ class APIResource(object):
 
         data['URI'] = self.api.URI
 
-        return json.dumps(data, sort_keys=True, indent=4)
+        return tools.log_json(data, 4)
