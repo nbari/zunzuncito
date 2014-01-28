@@ -32,3 +32,5 @@ snippet taken from `zun_self.py <https://github.com/nbari/zunzuncito/blob/master
                 sort_keys=True,
                 indent=4)
         )
+        # taking advantage of the tools.log_json
+        # return tools.log_json(self.api.__dict__, 4)
