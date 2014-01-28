@@ -17,8 +17,7 @@ The ``versions`` argument must be a list of names representing the available API
 
    routes = {'default':[
        ('/my/?.*', 'ip_tools', 'GET'),
-       ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST'),
-       ('/.*', 'default')
+       ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST')
    ]}
 
    app = zunzuncito.ZunZun(root, versions, hosts, routes)
@@ -99,23 +98,23 @@ The API directory structre looks like:
         `--my_api
           |--__init__.py
           `--default
-            |--__init__.py
-            |--v0
-            |  |--__init__.py
-            |  |--zun_default
-            |  |  |--__init__.py
-            |  |  `--zun_default.py
-            |  `--zun_ip_tools
-            |    |--__init__.py
-            |    `--zun_ip_tools.py
-            `--v1
-               |--__init__.py
-               |--zun_default
-               | |--__init__.py
-               | `--zun_default.py
-               `--zun_ip_tools
-                 |--__init__.py
-                 `--zun_ip_tools.py
+             |--__init__.py
+             |--v0
+             |  |--__init__.py
+             |  |--zun_default
+             |  |  |--__init__.py
+             |  |  `--zun_default.py
+             |  `--zun_ip_tools
+             |     |--__init__.py
+             |     `--zun_ip_tools.py
+             `--v1
+                |--__init__.py
+                |--zun_default
+                |  |--__init__.py
+                |  `--zun_default.py
+                `--zun_ip_tools
+                   |--__init__.py
+                   `--zun_ip_tools.py
 
 
 The directories ``v0`` and ``v1`` have the same structure, but the contents of
