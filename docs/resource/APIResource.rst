@@ -46,7 +46,7 @@ Another example:
 
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 13,27
+   :emphasize-lines: 13,26
 
    """
    upload resource
