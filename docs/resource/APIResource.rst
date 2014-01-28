@@ -5,12 +5,6 @@ APIResource class
 will call to handle the incoming requests.
 
 
-For example, the following requests::
-
-    http://127.0.0.1:8080/v0/upload
-
-Is handled by the custom python module ``zun_upload/zun_upload.py`` which contents:
-
 .. sidebar:: APIResource.dispatch
 
    The `ZunZun <en/latest/zunzun.html>`_ instance always will call the ``dispath`` method
@@ -42,7 +36,12 @@ Is handled by the custom python module ``zun_upload/zun_upload.py`` which conten
            return tools.log_json(environ, 4)
 
 
-Another example:
+For example, the following requests::
+
+    http://127.0.0.1:8080/v0/upload
+
+Is handled by the custom python module ``zun_upload/zun_upload.py`` which contents:
+
 
 .. code-block:: python
    :linenos:
