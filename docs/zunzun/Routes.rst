@@ -5,7 +5,7 @@ The ``routes`` argument must be a dictionary containing defined routes per
 **vroot**.
 
 .. code-block:: python
-   :emphasize-lines: 14,15,16,17,18,19,20
+   :emphasize-lines: 14,15,16,17,18,19
    :linenos:
 
    import zunzuncito
@@ -22,8 +22,7 @@ The ``routes`` argument must be a dictionary containing defined routes per
    }
 
    routes = {'default':[
-       ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST'),
-       ('/.*', 'default')
+       ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST')
    ],'beta':[
        ('/upload/?.*', 'upload', 'PUT, POST'),
        ('/.*', 'default')
@@ -36,6 +35,7 @@ The ``routes`` argument must be a dictionary containing defined routes per
    By default, if no **routes** specified, the requests are handled by matching the URI
    request with an valid **API Resource**, you only need to specify **routes** if want to
    handle different URI requests with a single **API Resource**
+
 
 Example
 .......
