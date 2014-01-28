@@ -36,7 +36,7 @@ will call to handle the incoming requests.
            return tools.log_json(environ, 4)
 
 
-For example, the following requests::
+For example, the following request::
 
     http://127.0.0.1:8080/v0/upload
 
