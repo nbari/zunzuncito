@@ -150,8 +150,6 @@ In the above example, the  ``routes`` dictionary contains:
 +=========+=================================+==============+==============+
 | default | /(md5|sha1|sha256|sha512)(/.*)? | hasher       | 'GET, POST'  |
 +---------+---------------------------------+--------------+--------------+
-| default | /.*                             | default      |              |
-+---------+---------------------------------+--------------+--------------+
 | beta    | /upload/?.*                     | upload       | 'PUT, POST'  |
 +---------+---------------------------------+--------------+--------------+
 | beta    | /.*                             | default      |              |
@@ -164,13 +162,19 @@ Translating the table to code:
 
    routes = {}
    routes['default'] = [
-       ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST'),
-       ('/.*', 'default')
+       ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST')
    ]
    routes['beta'] = [
        ('/upload/?.*', 'upload', 'PUT, POST'),
        ('/.*', 'default')
    ]
+
+.. warning::
+
+   Regular expressions have priority over local **API Resources**, for example
+   the regex ``(/.*)`` will catch-all all the request, that's why in our
+   example is the last regex, since order is important.
+
 
 Directory structure
 -------------------
@@ -202,16 +206,16 @@ The API directory structure for the examples presented here is:
            |  |  |  |--__init__.py
            |  |  |  `--zun_env.py
            |  |  `--zun_hasher
-           |  |    |--__init__.py
-           |  |    `--zun_hasher.py
+           |  |     |--__init__.py
+           |  |     `--zun_hasher.py
            |  `--v1
            |     |--__init__.py
            |     |--zun_default
-           |     | |--__init__.py
-           |     | `--zun_default.py
+           |     |  |--__init__.py
+           |     |  `--zun_default.py
            |     `--zun_hasher
-           |       |--__init__.py
-           |       `--zun_hasher.py
+           |        |--__init__.py
+           |        `--zun_hasher.py
            `--beta
               |--__init__.py
               `--v0
@@ -220,5 +224,5 @@ The API directory structure for the examples presented here is:
                  |  |--__init__.py
                  |  `--zun_default.py
                  `--zun_upload
-                   |--__init__.py
-                   `--zun_upload.py
+                    |--__init__.py
+                    `--zun_upload.py
