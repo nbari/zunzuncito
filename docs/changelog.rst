@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.1.10 (2014-01-28)
+...................
+* dispatch method requires now only one argument, which is environ, the start_response is handled by the API it self.
+* http_status_codes now is a dictionary
 
 0.1.9 (2014-01-06)
 ..................
