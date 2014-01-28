@@ -189,7 +189,7 @@ routes = {'default': [
     ('/my', 'ip_tools', 'GET'),
     ('/status', 'http_status', 'GET'),
     ('/upload/', 'test_post', 'PUT, POST'),
-    ('/.*', 'not_found')
+    ('/(.*\.(gif|png|jpg|ico|bmp|css|otf|eot|svg|ttf|woff))', 'static')
 ]}
 app = zunzuncito.ZunZun(root, versions, hosts, routes)
 ```
@@ -205,18 +205,15 @@ zun_default.py API resource
 """
 import json
 import logging
-from zunzuncito import http_status_codes
-from zunzuncito.tools import MethodException, HTTPException, allow_methods, log_json
+from zunzuncito import tools
 
 
 class APIResource(object):
 
     def __init__(self, api):
         self.api = api
-        self.status = 200
-        self.headers = api.headers.copy()
         self.log = logging.getLogger()
-        self.log.info(log_json({
+        self.log.info(tools.log_json({
             'vroot': api.vroot,
             'API': api.version,
             'URI': api.URI,
@@ -226,11 +223,7 @@ class APIResource(object):
 
 
     @allow_methods('get')
-    def dispatch(self, environ, start_response):
-        headers = self.api.headers
-        start_response(
-            getattr(http_status_codes, 'HTTP_%d' %
-                    self.status), list(headers.items()))
+    def dispatch(self, environ):
         data = {}
         data['about'] = ("Hi %s, I am zunzuncito a micro-framework for creating"
                          " REST API's, you can read more about me in: "
@@ -239,7 +232,7 @@ class APIResource(object):
         data['URI'] = self.api.URI
         data['method'] = self.api.method
 
-        return json.dumps(data, sort_keys=True, indent=4)
+        return tools.log_json(data, 4)
 ```
 
 To run it with gunicorn:
@@ -250,12 +243,6 @@ To run it with uWSGI:
 
     uwsgi --http :8080 --wsgi-file app.py --callable app --master
 
-
-### Install
-
-    git clone https://github.com/nbari/zunzuncito.git
-
-    python setup.py install
 
 ### Demo
 
@@ -351,24 +338,26 @@ Directory structure:
 |  |--__init__.py
 |  |--http_status_codes.py
 |  |--tools.py
-|  `--zunzun.py`
+|  `--zunzun.py
 `--my_api
-  |--v0
-  | |--__init__.py
-  | |--zun_ip_tools
-  | |  |--__init__.py
-  | |  `--zun_ip_tools.py
-  | |--zun_http_status
-  | |  |--__init__.py
-  | |  `zun_http_status.py
-  `--v1
-    |--__init__.py
-    |--zun_ip_tools
-    |  |--__init__.py
-    |  `--zun_ip_tools.py
-    `--zun_http_status
-       |--__init__.py
-       `--zun_http_status.py
+   |--v0
+   |  |--__init__.py
+   |  |--zun_ip_tools
+   |  |  |--__init__.py
+   |  |  `--zun_ip_tools.py
+   |  |--zun_http_status
+   |  |  |--__init__.py
+   |  |  `zun_http_status.py
+   `--v1
+      |--__init__.py
+      |--zun_ip_tools
+      |  |--__init__.py
+      |  `--zun_ip_tools.py
+      `--zun_http_status
+         |--__init__.py
+         `--zun_http_status.py
 </pre>
 
-Basically you just copy the zunzuncito module into your GAE application directory, define your root, versions and routes, create a ZunZun object and focus more on your API resources (custom python modules)
+Basically you just copy the zunzuncito module into your GAE application directory, define your root, versions and routes, create a ZunZun object and focus more on your API resources (custom python modules).
+
+http://docs.zunzun.io/en/latest/Quickstart.html
