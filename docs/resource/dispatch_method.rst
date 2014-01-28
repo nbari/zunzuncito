@@ -34,6 +34,32 @@ Basic template
        def dispatch(self, environ):
            """ your code goes here """
 
+Status codes
+............
+
+The default `HTTP status code <http://en.wikipedia.org/wiki/List_of_HTTP_status_codes>`_
+is 200, but based on your needs you can change it to fit you response very eazy
+by just doing something like::
+
+    self.api.status = 201
+
+Headers
+.......
+
+As with the status codes, same happens with the `HTTP headers <http://en.wikipedia.org/wiki/List_of_HTTP_header_fields>`_,
+The default headers are::
+
+    Content-Type: 'application/json; charset=UTF-8'
+    Request-ID: <request_id>
+
+
+For updating/replacing you just need to do something like::
+
+    self.api.headers['my_custom_header'] = str(uuid.uuid4())
+
+Example
+.......
+
 .. seealso::
 
    `pep 0333 <http://www.python.org/dev/peps/pep-0333/>`_
