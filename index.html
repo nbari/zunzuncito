@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Zunzuncito</title>
+    <title>Zunzuncito by nbari</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
@@ -18,7 +18,7 @@
     <div class="wrapper">
       <header>
         <h1>Zunzuncito</h1>
-        <p>micro-framework for creating REST API's.</p>
+        <p>micro-framework for creating REST API&#39;s.</p>
         <p class="view"><a href="https://github.com/nbari/zunzuncito">View the Project on GitHub <small>nbari/zunzuncito</small></a></p>
         <ul>
           <li><a href="https://github.com/nbari/zunzuncito/zipball/master">Download <strong>ZIP File</strong></a></li>
@@ -150,8 +150,8 @@ my_api
    |  |  |--__init__.py
    |  |  `--zun_gevent.py
    |  `--zun_my
-   |    |--__init__.py
-   |    `--zun_my.py
+   |     |--__init__.py
+   |     `--zun_my.py
    `--v1
       |--__init__.py
       |--zun_default
@@ -161,8 +161,8 @@ my_api
       |  |--__init__.py
       |  `--zun_gevent.py
       `--zun_my
-        |--__init__.py
-        `--zun_my.py
+         |--__init__.py
+         `--zun_my.py
 </pre>
 
 <p>As you can see basically it is a directory containing sub-directories which at the end are all python custom modules and can be called in a clean way like:</p>
@@ -241,7 +241,7 @@ path = ip
     <span class="p">(</span><span class="s">'/my'</span><span class="p">,</span> <span class="s">'ip_tools'</span><span class="p">,</span> <span class="s">'GET'</span><span class="p">),</span>
     <span class="p">(</span><span class="s">'/status'</span><span class="p">,</span> <span class="s">'http_status'</span><span class="p">,</span> <span class="s">'GET'</span><span class="p">),</span>
     <span class="p">(</span><span class="s">'/upload/'</span><span class="p">,</span> <span class="s">'test_post'</span><span class="p">,</span> <span class="s">'PUT, POST'</span><span class="p">),</span>
-    <span class="p">(</span><span class="s">'/.*'</span><span class="p">,</span> <span class="s">'not_found'</span><span class="p">)</span>
+    <span class="p">(</span><span class="s">'/(.*\.(gif|png|jpg|ico|bmp|css|otf|eot|svg|ttf|woff))'</span><span class="p">,</span> <span class="s">'static'</span><span class="p">)</span>
 <span class="p">]}</span>
 <span class="n">app</span> <span class="o">=</span> <span class="n">zunzuncito</span><span class="o">.</span><span class="n">ZunZun</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">versions</span><span class="p">,</span> <span class="n">hosts</span><span class="p">,</span> <span class="n">routes</span><span class="p">)</span>
 </pre></div>
@@ -257,18 +257,15 @@ path = ip
 <span class="sd">"""</span>
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">from</span> <span class="nn">zunzuncito</span> <span class="kn">import</span> <span class="n">http_status_codes</span>
-<span class="kn">from</span> <span class="nn">zunzuncito.tools</span> <span class="kn">import</span> <span class="n">MethodException</span><span class="p">,</span> <span class="n">HTTPException</span><span class="p">,</span> <span class="n">allow_methods</span><span class="p">,</span> <span class="n">log_json</span>
+<span class="kn">from</span> <span class="nn">zunzuncito</span> <span class="kn">import</span> <span class="n">tools</span>
 
 
 <span class="k">class</span> <span class="nc">APIResource</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">api</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">api</span> <span class="o">=</span> <span class="n">api</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="mi">200</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">log_json</span><span class="p">({</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">tools</span><span class="o">.</span><span class="n">log_json</span><span class="p">({</span>
             <span class="s">'vroot'</span><span class="p">:</span> <span class="n">api</span><span class="o">.</span><span class="n">vroot</span><span class="p">,</span>
             <span class="s">'API'</span><span class="p">:</span> <span class="n">api</span><span class="o">.</span><span class="n">version</span><span class="p">,</span>
             <span class="s">'URI'</span><span class="p">:</span> <span class="n">api</span><span class="o">.</span><span class="n">URI</span><span class="p">,</span>
@@ -278,11 +275,7 @@ path = ip
 
 
     <span class="nd">@allow_methods</span><span class="p">(</span><span class="s">'get'</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">dispatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
-        <span class="n">headers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">headers</span>
-        <span class="n">start_response</span><span class="p">(</span>
-            <span class="nb">getattr</span><span class="p">(</span><span class="n">http_status_codes</span><span class="p">,</span> <span class="s">'HTTP_</span><span class="si">%d</span><span class="s">'</span> <span class="o">%</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">),</span> <span class="nb">list</span><span class="p">(</span><span class="n">headers</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
+    <span class="k">def</span> <span class="nf">dispatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environ</span><span class="p">):</span>
         <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">data</span><span class="p">[</span><span class="s">'about'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s">"Hi </span><span class="si">%s</span><span class="s">, I am zunzuncito a micro-framework for creating"</span>
                          <span class="s">" REST API's, you can read more about me in: "</span>
@@ -291,7 +284,7 @@ path = ip
         <span class="n">data</span><span class="p">[</span><span class="s">'URI'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">URI</span>
         <span class="n">data</span><span class="p">[</span><span class="s">'method'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">method</span>
 
-        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">tools</span><span class="o">.</span><span class="n">log_json</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 </pre></div>
 
 <p>To run it with gunicorn:</p>
@@ -302,14 +295,6 @@ path = ip
 <p>To run it with uWSGI:</p>
 
 <pre><code>uwsgi --http :8080 --wsgi-file app.py --callable app --master
-</code></pre>
-
-<h3>
-<a name="install-1" class="anchor" href="#install-1"><span class="octicon octicon-link"></span></a>Install</h3>
-
-<pre><code>git clone https://github.com/nbari/zunzuncito.git
-
-python setup.py install
 </code></pre>
 
 <h3>
@@ -410,27 +395,29 @@ python setup.py install
 |  |--__init__.py
 |  |--http_status_codes.py
 |  |--tools.py
-|  `--zunzun.py`
+|  `--zunzun.py
 `--my_api
-  |--v0
-  | |--__init__.py
-  | |--zun_ip_tools
-  | |  |--__init__.py
-  | |  `--zun_ip_tools.py
-  | |--zun_http_status
-  | |  |--__init__.py
-  | |  `zun_http_status.py
-  `--v1
-    |--__init__.py
-    |--zun_ip_tools
-    |  |--__init__.py
-    |  `--zun_ip_tools.py
-    `--zun_http_status
-       |--__init__.py
-       `--zun_http_status.py
+   |--v0
+   |  |--__init__.py
+   |  |--zun_ip_tools
+   |  |  |--__init__.py
+   |  |  `--zun_ip_tools.py
+   |  |--zun_http_status
+   |  |  |--__init__.py
+   |  |  `zun_http_status.py
+   `--v1
+      |--__init__.py
+      |--zun_ip_tools
+      |  |--__init__.py
+      |  `--zun_ip_tools.py
+      `--zun_http_status
+         |--__init__.py
+         `--zun_http_status.py
 </pre>
 
-<p>Basically you just copy the zunzuncito module into your GAE application directory, define your root, versions and routes, create a ZunZun object and focus more on your API resources (custom python modules)</p>
+<p>Basically you just copy the zunzuncito module into your GAE application directory, define your root, versions and routes, create a ZunZun object and focus more on your API resources (custom python modules).</p>
+
+<p><a href="http://docs.zunzun.io/en/latest/Quickstart.html">http://docs.zunzun.io/en/latest/Quickstart.html</a></p>
       </section>
     </div>
     <footer>
@@ -447,12 +434,6 @@ python setup.py install
               var pageTracker = _gat._getTracker("UA-45578428-1");
             pageTracker._trackPageview();
             } catch(err) {}
-          </script>
-          <script>
-                var _lg = ['755aa10bae0b', 'zunzun'];
-              (function(d, t){var l=d.createElement(t),s=d.getElementsByTagName(t)[0]; l.async = true;
-               l.src = ('https:' == location.protocol ? 'https://' : 'http://') + 'logger-io.appspot.com/logger.io.js';
-               s.parentNode.insertBefore(l, s)}(document, 'script'))
           </script>
 
   </body>
