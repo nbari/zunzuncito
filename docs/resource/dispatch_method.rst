@@ -12,7 +12,7 @@ Basic template
 
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 4, 18
+   :emphasize-lines: 4, 17
 
 
    import logging
@@ -31,7 +31,6 @@ Basic template
            }, True)
            )
 
-       @tools.allow_methods('post, put, head')
        def dispatch(self, environ):
            """ your code goes here """
 
