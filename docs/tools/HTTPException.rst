@@ -14,19 +14,15 @@ Example
    :emphasize-lines: 17
 
 
-   import os
    from zunzuncito import tools
-   from zunzuncito import http_status_codes
 
 
    class APIResource(object):
 
        def __init__(self, api):
            self.api = api
-           self.status = 200
-           self.headers = api.headers.copy()
 
-       def dispatch(self, environ, start_response):
+       def dispatch(self, environ):
            try:
                name = self.api.path[0]
            except:
