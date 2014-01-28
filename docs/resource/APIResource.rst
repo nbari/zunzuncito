@@ -30,15 +30,12 @@ Is handled by the custom python module ``zun_upload/zun_upload.py`` which conten
    import logging
    import os
    from zunzuncito import tools
-   from zunzuncito import http_status_codes
 
 
    class APIResource(object):
 
        def __init__(self, api):
            self.api = api
-           self.status = 200
-           self.headers = api.headers.copy()
            self.log = logging.getLogger()
            self.log.info(tools.log_json({
                'vroot': api.vroot,
@@ -49,7 +46,7 @@ Is handled by the custom python module ``zun_upload/zun_upload.py`` which conten
            )
 
        @tools.allow_methods('post, put')
-       def dispatch(self, environ, start_response):
+       def dispatch(self, environ):
            try:
                temp_name = self.api.path[0]
            except:
@@ -119,9 +116,9 @@ Is handled by the custom python module ``zun_upload/zun_upload.py`` which conten
                        raise tools.HTTPException(416)
 
                if os.stat(temp_file).st_size == total_size:
-                   self.status = 200
+                   self.api.status = 200
                else:
-                   self.status = 201
+                   self.api.status = 201
                    body.append('%d-%d/%d' % (index, offset, total_size))
 
                self.log.info(tools.log_json({
@@ -134,9 +131,6 @@ Is handled by the custom python module ``zun_upload/zun_upload.py`` which conten
                }, True)
                )
 
-               start_response(
-                   getattr(http_status_codes, 'HTTP_%d' %
-                           self.status), list(self.headers.items()))
                return body
            except IOError:
                raise tools.HTTPException(
