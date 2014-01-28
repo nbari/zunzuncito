@@ -60,6 +60,74 @@ For updating/replacing you just need to do something like::
 Example
 .......
 
+.. code-block:: python
+   :linenos:
+   :emphasize-lines: 4, 17
+
+   from zunzuncito import tools
+
+   class APIResource(object):
+
+       def __init__(self, api):
+           self.api = api
+
+       def dispatch(self, environ):
+
+           try:
+               name = self.api.path[0]
+           except:
+               name = ''
+
+           if name:
+               self.api.headers['my_custom_header'] = name
+           else:
+               self.api.status = 406
+
+           return 'Name: ' + name
+
+
+The output for::
+
+    curl -i http://api.zunzun.io/status_and_headers
+
+.. code-block:: rest
+   :linenos:
+   :emphasize-lines: 1
+
+   HTTP/1.1 406 Not Acceptable
+   Request-ID: 52e78a1500ff0f217359e91eb90001737e7a756e7a756e6369746f2d617069000131000100
+   Content-Type: application/json; charset=UTF-8
+   Vary: Accept-Encoding
+   Date: Tue, 28 Jan 2014 10:44:38 GMT
+   Server: Google Frontend
+   Cache-Control: private
+   Alternate-Protocol: 80:quic,80:quic
+   Transfer-Encoding: chunked
+
+   Name:
+
+The output for::
+
+    curl -i http://api.zunzun.io/status_and_headers/foo
+
+.. code-block:: rest
+   :linenos:
+   :emphasize-lines: 1,3
+
+   HTTP/1.1 200 OK
+   Request-ID: 52e78a9300ff0f3fe44a7e4fbf0001737e7a756e7a756e6369746f2d617069000131000100
+   my_custom_header: foo
+   Content-Type: application/json; charset=UTF-8
+   Vary: Accept-Encoding
+   Date: Tue, 28 Jan 2014 10:46:44 GMT
+   Server: Google Frontend
+   Cache-Control: private
+   Alternate-Protocol: 80:quic,80:quic
+   Transfer-Encoding: chunked
+
+   Name: foo
+
+
 .. seealso::
 
    `pep 0333 <http://www.python.org/dev/peps/pep-0333/>`_
