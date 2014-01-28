@@ -29,7 +29,7 @@ Example
            )
 
        @tools.allow_methods('post, put')
-       def dispatch(self, environ, start_response):
+       def dispatch(self, environ):
            """ your code goes here """
 
 
