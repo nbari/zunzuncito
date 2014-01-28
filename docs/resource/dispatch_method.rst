@@ -62,7 +62,7 @@ Example
 
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 4, 17
+   :emphasize-lines: 16, 18
 
    from zunzuncito import tools
 
