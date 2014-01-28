@@ -171,9 +171,9 @@ Translating the table to code:
 
 .. warning::
 
-   Regular expressions have priority over local **API Resources**, for example
-   the regex ``(/.*)`` will **catch-all** the request, that's why in our
-   example is the last regex, since order is important.
+   Regular expressions have priority, for example the regex ``(/.*)``
+   will **catch-all** the request, that's why in our example is the
+   last regex, since order is important.
 
 
 Directory structure
