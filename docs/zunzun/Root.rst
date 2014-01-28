@@ -19,7 +19,7 @@ sources.
 
    routes = {'default':[
        ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST'),
-       ('/.*', 'default')
+       ('/(.*\.(gif|png|jpg|ico|bmp|css|otf|eot|svg|ttf|woff))', 'static')
    ]}
 
    app = zunzuncito.ZunZun(root, versions, hosts, routes)
@@ -38,22 +38,22 @@ Making an analogy, you can see ``root`` as the `DocumentRoot
         `--my_api
           |--__init__.py
           `--default
-            |--__init__.py
-            |--v0
-            |  |--__init__.py
-            |  |--zun_default
-            |  |  |--__init__.py
-            |  |  `--zun_default.py
-            |  `--zun_hasher
-            |     |--__init__.py
-            |     `--zun_hasher.py
-            `--v1
-               |--__init__.py
-               |--zun_default
-               |  |--__init__.py
-               |  `--zun_default.py
-               `--zun_hasher
-                  |--__init__.py
-                  `--zun_hasher.py
+             |--__init__.py
+             |--v0
+             |  |--__init__.py
+             |  |--zun_default
+             |  |  |--__init__.py
+             |  |  `--zun_default.py
+             |  `--zun_hasher
+             |     |--__init__.py
+             |     `--zun_hasher.py
+             `--v1
+                |--__init__.py
+                |--zun_default
+                |  |--__init__.py
+                |  `--zun_default.py
+                `--zun_hasher
+                   |--__init__.py
+                   `--zun_hasher.py
 
 * In this case the **my_api** directory, is the ``root``
