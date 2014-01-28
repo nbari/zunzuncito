@@ -18,7 +18,7 @@ Is handled by the custom python module ``zun_upload/zun_upload.py`` which conten
 
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 14,29,30
+   :emphasize-lines: 13,27
 
    """
    upload resource
