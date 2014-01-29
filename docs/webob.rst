@@ -1,4 +1,4 @@
-webob
+WebOb
 =====
 
 What is it?
@@ -31,7 +31,7 @@ The following code, handles the request for `http://api.zunzun.io/webob <http://
 
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 3
+   :emphasize-lines: 3, 21
 
 
    import logging
@@ -74,3 +74,14 @@ The following code, handles the request for `http://api.zunzun.io/webob <http://
            data['req-url'] = req.url
 
            return tools.log_json(data, 4)
+
+
+Basically you only need to pass the **environ** argument to the ``webob.Request``::
+
+    def dispatch(self, environ):
+        req = Request(environ)
+        """ your code goes here """
+
+.. see-also::
+
+    `WebOb Request <http://docs.webob.org/en/latest/reference.html#id1>`_
