@@ -3,7 +3,10 @@ Jinja2
 
 `Jinja2 <http://jinja.pocoo.org/docs/>`_ is a modern and designer friendly templating language for Python,
 modelled after Django’s templates. It is fast, widely used and secure with the
-optional sandboxed template execution environment::
+optional sandboxed template execution environment:
+
+.. code-block:: python
+   :linenos:
 
     <title>{% block title %}{% endblock %}</title>
     <ul>
