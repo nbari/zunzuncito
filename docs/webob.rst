@@ -85,3 +85,14 @@ Basically you only need to pass the **environ** argument to the ``webob.Request`
 .. seealso::
 
     `WebOb Request <http://docs.webob.org/en/latest/reference.html#id1>`_
+
+GAE
+...
+
+When using google app engine you need to add this lines to your
+`app.yaml <https://developers.google.com/appengine/docs/python/config/appconfig>`_
+file in order to be available to import webob::
+
+   libraries:
+   - name: webob
+     version: latest
