@@ -27,9 +27,11 @@ parse the GET, POST arguments, set/get cookies, etc; with out hassle.
 Example
 .......
 
+The following code, handles the request for `http://api.zunzun.io/webob <http://api.zunzun.io/webob>`_.
+
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 3,
+   :emphasize-lines: 3
 
 
    import logging
