@@ -18,5 +18,7 @@ Table of Contents
    tools
    http_status_codes
    zunzuncito
+   webob
+   jinja2
    changelog
    issues
