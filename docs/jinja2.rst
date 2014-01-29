@@ -90,7 +90,7 @@ Directory structure
 ...................
 
 .. code-block:: rest
-   :emphasize-lines: 10,12,14
+   :emphasize-lines: 10,11,12,13,14
    :linenos:
 
    /home/
