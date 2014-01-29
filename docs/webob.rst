@@ -82,6 +82,6 @@ Basically you only need to pass the **environ** argument to the ``webob.Request`
         req = Request(environ)
         """ your code goes here """
 
-.. see-also::
+.. seealso::
 
     `WebOb Request <http://docs.webob.org/en/latest/reference.html#id1>`_
