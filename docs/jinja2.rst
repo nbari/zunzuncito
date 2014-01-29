@@ -30,7 +30,7 @@ The following code, handles the request for: `http://api.zunzun.io/jinja2 <http:
 
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 4, 26
+   :emphasize-lines: 4, 26, 34
 
    import logging
    import os
@@ -90,7 +90,7 @@ Directory structure
 ...................
 
 .. code-block:: rest
-   :emphasize-lines: 3,4,6,8,16
+   :emphasize-lines: 10,12,14
    :linenos:
 
    /home/
