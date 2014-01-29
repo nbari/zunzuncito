@@ -70,7 +70,7 @@ The following code, handles the request for: `http://api.zunzun.io/jinja2 <http:
 
 The example.html contains:
 
-.. code-block:: gues
+.. code-block:: guess
    :linenos:
    :emphasize-lines: 4, 8
 
