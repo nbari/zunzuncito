@@ -30,7 +30,7 @@ The following code, handles the request for: `http://api.zunzun.io/jinja2 <http:
 
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 4
+   :emphasize-lines: 4, 26
 
    import logging
    import os
@@ -66,3 +66,33 @@ The following code, handles the request for: `http://api.zunzun.io/jinja2 <http:
            template = jinja.get_template('example.html')
 
            return template.render(template_values).encode('utf-8')
+
+
+The example.html contains:
+
+.. code-block:: gues
+   :linenos:
+   :emphasize-lines: 4, 8
+
+   <html>
+       <head>
+           <meta charset="utf-8">
+           <title>{{ IP }}</title>
+       </head>
+
+       <body>
+       <h3>IP: {{ IP }}</h3>
+       </body>
+   </html>
+
+
+GAE
+...
+
+When using google app engine you need to add this lines to your
+`app.yaml <https://developers.google.com/appengine/docs/python/config/appconfig>`_
+file in order to be available to import jinja2::
+
+   libraries:
+   - name: jinja2
+     version: latest
