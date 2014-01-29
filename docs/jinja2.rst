@@ -86,6 +86,35 @@ The example.html contains:
    </html>
 
 
+Directory structure
+...................
+
+.. code-block:: rest
+   :emphasize-lines: 3,4,6,8,16
+   :linenos:
+
+   /home/
+     `--zunzun/
+        |--app.py
+        `--my_api
+           |--__init__.py
+           `--default
+              |--__init__.py
+              `--v0
+                 |--__init__.py
+                 `--zun_jinja2
+                    |--__init__.py
+                    |--zun_jinja2.py
+                    `--templates
+                       `--example.html
+
+
+.. seealso::
+
+   `zun_jinja2 API resource <https://github.com/nbari/zunzuncito/tree/master/my_api/default/v0/zun_jinja2>`_
+
+
+
 GAE
 ...
 
