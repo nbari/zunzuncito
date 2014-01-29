@@ -5,7 +5,7 @@ Jinja2
 modelled after Django’s templates. It is fast, widely used and secure with the
 optional sandboxed template execution environment:
 
-.. code-block:: python
+.. code-block:: guess
    :linenos:
 
     <title>{% block title %}{% endblock %}</title>
