@@ -20,4 +20,8 @@ Why ?
 
 **Zunzuncito** was made mainly for responding in `json format <http://www.json.org/>`_
 not HTML, but also one of the design goals is to give the ability to create
-almost anything easy.
+almost anything easy, therefor if you need to display HTML, Jinja2 integrates
+very easy.
+
+Example
+.......
