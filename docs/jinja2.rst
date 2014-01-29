@@ -112,6 +112,7 @@ Directory structure
 .. seealso::
 
    `zun_jinja2 API resource <https://github.com/nbari/zunzuncito/tree/master/my_api/default/v0/zun_jinja2>`_
+   & `Jinja2 Basics <http://jinja.pocoo.org/docs/api/#basics>`_
 
 
 
