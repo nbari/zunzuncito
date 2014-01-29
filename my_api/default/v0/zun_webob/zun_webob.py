@@ -3,7 +3,6 @@ webob resource
 """
 
 import logging
-import uuid
 
 from webob import Request
 from zunzuncito import tools
