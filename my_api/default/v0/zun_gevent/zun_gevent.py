@@ -1,9 +1,11 @@
 """
-default resource
+gevent resource
 """
+
 import gevent
 import gevent.socket
 import logging
+
 from zunzuncito import tools
 
 
