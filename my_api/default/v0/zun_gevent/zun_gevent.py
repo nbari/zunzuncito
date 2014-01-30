@@ -23,6 +23,7 @@ class APIResource(object):
 
     def __init__(self, api):
         self.api = api
+        self.api.headers['Content-Type'] = 'text/html; charset=UTF-8'
         self.log = logging.getLogger()
         self.log.info(tools.log_json({
             'vroot': api.vroot,
@@ -34,14 +35,17 @@ class APIResource(object):
 
     def dispatch(self, environ):
 
-        self.api.headers['Content-Type'] = 'text/html; charset=UTF-8'
+        self.api.headers['naranjas'] = '----'
 
         t = gevent.spawn(long_task)
         t.join()
 
         yield "sleeping for 3 seconds...<br/>"
+
         gevent.sleep(3)
-        yield "done<br>"
+
+        yield "done<br/>"
+
         yield "getting some ips...<br/>"
 
         urls = [
