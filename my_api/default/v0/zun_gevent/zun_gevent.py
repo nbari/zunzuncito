@@ -36,7 +36,9 @@ class APIResource(object):
         )
 
     def dispatch(self, environ):
-
+        """
+        not called
+        """
         self.api.headers['naranjas'] = '----'
 
         t = gevent.spawn(long_task)
