@@ -1,9 +1,10 @@
 """
 hasher API resource
 """
+
 import hashlib
-import json
 import logging
+
 from zunzuncito import tools
 
 
@@ -51,4 +52,4 @@ class APIResource(object):
         elif hash_type == 'sha512':
             data['hash'] = hashlib.sha512(string).hexdigest()
 
-        return json.dumps(data, sort_keys=True, indent=4)
+        return tools.log_json(data, 4)
