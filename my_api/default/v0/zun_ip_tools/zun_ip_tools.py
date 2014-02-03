@@ -1,26 +1,22 @@
 """
-default resource
+ip_tools resource
 """
 import json
 import logging
-from zunzuncito import http_status_codes
-from zunzuncito.tools import MethodException, HTTPException, allow_methods
+
+from zunzuncito import tools
 
 
 class APIResource(object):
 
     def __init__(self, api):
         self.api = api
-        self.status = 200
-        self.headers = api.headers.copy()
 
-    @allow_methods('get')
-    def dispatch(self, environ, start_response):
-        headers = self.api.headers
-        start_response(
-            getattr(http_status_codes, 'HTTP_%d' %
-                    self.status), list(headers.items()))
+    @tools.allow_methods('get')
+    def dispatch(self, environ):
+
         data = {}
+
         try:
             my_ip = True if self.api.path[0] == 'ip' else False
         except:
@@ -37,4 +33,4 @@ class APIResource(object):
             data['latlong'] = environ.get('HTTP_X_APPENGINE_CITYLATLONG', 0)
             data['country'] = environ.get('HTTP_X_APPENGINE_COUNTRY', 0)
 
-        return json.dumps(data, sort_keys=True, indent=4)
+        return tools.log_json(data, 4)
