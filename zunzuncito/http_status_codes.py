@@ -78,10 +78,12 @@ codes = {
 }
 
 # generic class responses as per RFC2616
+# 6.1.1 Status Code and Reason Phrase
+# http://www.ietf.org/rfc/rfc2616.txt
 generic_reasons = {
     1: '100 Continue',
     2: '200 Success',
     3: '300 Multiple Choices',
-    4: '400 Unknown Client Error',
-    5: '500 Unknown Server Error'
+    4: '400 Bad Request',
+    5: '500 Internal Server Error'
 }
