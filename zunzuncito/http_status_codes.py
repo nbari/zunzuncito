@@ -77,12 +77,11 @@ codes = {
     511: '511 Network Authentication Required', # [RFC6585]
 }
 
-
-# taken from webob
+# generic class responses as per RFC2616
 generic_reasons = {
-    1: 'Continue',
-    2: 'Success',
-    3: 'Multiple Choices',
-    4: 'Unknown Client Error',
-    5: 'Unknown Server Error',
+    1: '100 Continue',
+    2: '200 Success',
+    3: '300 Multiple Choices',
+    4: '400 Unknown Client Error',
+    5: '500 Unknown Server Error'
 }
