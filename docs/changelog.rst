@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.1.11 (2014-02-04)
+...................
+* Fixed bug in `http_status_codes.py <https://github.com/nbari/zunzuncito/blob/master/zunzuncito/http_status_codes.py>`_ when handling generic reasons.
+
 0.1.10 (2014-01-28)
 ...................
 * `dispatch method </en/latest/resource/dispatch_method.html>`_ requires now only one argument, which is **environ**, the start_response is handled by the API it self.
