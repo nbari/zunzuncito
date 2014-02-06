@@ -143,8 +143,7 @@ class ZunZun(object):
         if self.status in http_status_codes.codes:
             self.status = http_status_codes.codes[self.status]
         else:
-            s = int(self.status) if self.status.isdigit() else 500
-            self.status = http_status_codes.generic_reasons[s // 100]
+            self.status = http_status_codes.generic_reasons[self.status // 100]
 
         start_response(self.status, list(self.headers.items()))
         return body
