@@ -107,12 +107,12 @@ class ZunZun(object):
         Default headers in case an exception occurs
         """
         self.headers = self._headers.copy()
+        self.status = 200
         self.headers['Content-Type'] = 'application/json; charset=UTF-8'
         self.headers['Request-ID'] = self.request_id
         body = []
 
         try:
-            self.status = 200
             body = self.router().dispatch(environ)
         except tools.HTTPError as e:
             self.status = e.status
