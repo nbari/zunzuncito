@@ -123,7 +123,7 @@ class ZunZun(object):
             if e.display:
                 body.append(e.to_json())
 
-            self.log.error(tools.log_json({
+            self.log.warning(tools.log_json({
                 'API': self.version,
                 'URI': self.URI,
                 'HTTPError': self.status,
