@@ -143,7 +143,8 @@ class ZunZun(object):
         if self.status in http_status_codes.codes:
             self.status = http_status_codes.codes[self.status]
         else:
-            self.status = http_status_codes.generic_reasons[self.status // 100]
+            self.status = http_status_codes.generic_reasons[
+                int(self.status) // 100]
 
         start_response(self.status, list(self.headers.items()))
         return body
