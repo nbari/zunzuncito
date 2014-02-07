@@ -84,7 +84,8 @@ def log_json(log, indent=None):
     return json.dumps(clean_dict(log), sort_keys=True, indent=indent)
 
 
-def start_response(start_response, status, headers):
+def start_response(start_response, status=200, headers=[
+                   ('Content-Type', 'application/json; charset=UTF-8')]):
     try:
         status = int(status)
     except:

@@ -19,7 +19,6 @@ class ZunZun(object):
     def __init__(self, root, versions=None, hosts=None,
                  routes=None, prefix='zun_', rid=None, debug=False):
         self._headers = tools.CaseInsensitiveDict()
-        self.headers = None
         self.host = '*'
         self.hosts = {'*': 'default'}
         self.path = []
@@ -30,7 +29,6 @@ class ZunZun(object):
         self.rid = rid
         self.root = root
         self.routes = {}
-        self.status = None
         self.versions = ['v0']
         self.version = self.versions[0]
         self.vroot = 'default'
@@ -108,19 +106,19 @@ class ZunZun(object):
         """
         Default headers in case an exception occurs
         """
-        self.headers = self._headers.copy()
-        self.status = 200
-        self.headers['Content-Type'] = 'application/json; charset=UTF-8'
-        self.headers['Request-ID'] = self.request_id
+        headers = self._headers.copy()
+        status = 200
+        headers['Content-Type'] = 'application/json; charset=UTF-8'
+        headers['Request-ID'] = self.request_id
         body = []
 
         try:
-            return self.router().dispatch(environ, start_response)
+            return self.router(headers).dispatch(environ, start_response)
         except tools.HTTPError as e:
-            self.status = e.status
+            status = e.status
 
             if e.headers:
-                self.headers = e.headers
+                headers = e.headers
 
             if e.display:
                 body.append(e.to_json())
@@ -134,7 +132,7 @@ class ZunZun(object):
             )
 
         except Exception as e:
-            self.status = 500
+            status = 500
             self.log.error(tools.log_json({
                 'API': self.version,
                 'Exception': e,
@@ -143,15 +141,11 @@ class ZunZun(object):
             }, True)
             )
 
-        if self.status in http_status_codes.codes:
-            self.status = http_status_codes.codes[self.status]
-        else:
-            self.status = http_status_codes.generic_reasons[self.status // 100]
-
-        start_response(self.status, list(self.headers.items()))
+        status = http_status_codes.codes[status]
+        start_response(status, list(headers.items()))
         return body
 
-    def router(self):
+    def router(self, headers):
         """
         check if the URI is versioned (/v1/resource/...)
         defaults to the first version in versions list (default to v0).
@@ -245,7 +239,9 @@ class ZunZun(object):
         """
         try:
             if module_path in self.resources:
-                return self.resources[module_path](self)
+                self.resources[module_path].headers.update(headers)
+                return self.resources[module_path]
+
             self.log.debug(tools.log_json({
                 'API': self.version,
                 'HOST': (self.host, self.vroot),
@@ -254,11 +250,12 @@ class ZunZun(object):
                 'rid': self.request_id
             }, True)
             )
+
             __import__(module_path, fromlist=[''])
             module = sys.modules[module_path]
             resource = module.__dict__['APIResource']
-            self.resources[module_path] = resource
-            return resource(self)
+            self.resources[module_path] = resource(self, headers)
+            return self.resources[module_path]
         except ImportError as e:
             raise tools.HTTPException(
                 501,
