@@ -170,6 +170,7 @@ class ZunZun(object):
         self.log.debug(tools.log_json({
             'API': self.version,
             'URI': self.URI,
+            'rid': self.request_id,
             'versions': self.versions
         }, True)
         )
@@ -209,6 +210,7 @@ class ZunZun(object):
                         'HOST': (self.host, self.vroot),
                         'API': self.version,
                         'regex_match': (r.pattern, self.URI),
+                        'rid': self.request_id,
                         'methods': h
                     }, True)
                     )
@@ -245,10 +247,11 @@ class ZunZun(object):
             if module_path in self.resources:
                 return self.resources[module_path](self)
             self.log.debug(tools.log_json({
-                'HOST': (self.host, self.vroot),
                 'API': self.version,
+                'HOST': (self.host, self.vroot),
                 'URI': self.URI,
-                'loading': (module_name, module_path)
+                'loading': (module_name, module_path),
+                'rid': self.request_id
             }, True)
             )
             __import__(module_path, fromlist=[''])
