@@ -5,6 +5,7 @@ micro-framework for creating REST API's
 
 import logging
 import re
+import sys
 import time
 
 from itertools import ifilter
@@ -25,6 +26,7 @@ class ZunZun(object):
         self.prefix = prefix
         self.request_id = None
         self.resource = None
+        self.resources = {}
         self.rid = rid
         self.root = root
         self.routes = {}
@@ -235,15 +237,24 @@ class ZunZun(object):
             module_name,
             module_name)
 
+        """
+        lazy loading
+        """
         try:
+            if module_path in resources:
+                return resources[module_path](self)
             self.log.debug(tools.log_json({
                 'HOST': (self.host, self.vroot),
                 'API': self.version,
                 'URI': self.URI,
-                'dispatching': (module_name, module_path)
+                'loading': (module_name, module_path)
             }, True)
             )
-            return __import__(module_path, fromlist=['']).APIResource(self)
+            __import__(module_path, fromlist=[''])
+            module = sys.modules[module_path]
+            resource = module.__dict__['APIResource']
+            resources[module_path] = resource
+            return resource(self)
         except ImportError as e:
             raise tools.HTTPException(
                 501,
