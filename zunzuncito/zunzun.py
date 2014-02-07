@@ -241,8 +241,8 @@ class ZunZun(object):
         lazy loading
         """
         try:
-            if module_path in resources:
-                return resources[module_path](self)
+            if module_path in self.resources:
+                return self.resources[module_path](self)
             self.log.debug(tools.log_json({
                 'HOST': (self.host, self.vroot),
                 'API': self.version,
@@ -253,7 +253,7 @@ class ZunZun(object):
             __import__(module_path, fromlist=[''])
             module = sys.modules[module_path]
             resource = module.__dict__['APIResource']
-            resources[module_path] = resource
+            self.resources[module_path] = resource
             return resource(self)
         except ImportError as e:
             raise tools.HTTPException(
