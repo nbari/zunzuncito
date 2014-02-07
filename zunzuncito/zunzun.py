@@ -24,8 +24,6 @@ class ZunZun(object):
         self.path = []
         self.prefix = prefix
         self.request_id = None
-        self.resource = None
-        self.resources = {}
         self.rid = rid
         self.root = root
         self.routes = {}
@@ -91,7 +89,8 @@ class ZunZun(object):
         """
         get the HTTP method
         """
-        self.method = environ['REQUEST_METHOD']
+        if 'REQUEST_METHOD' in environ:
+            self.method = environ['REQUEST_METHOD']
 
         """
         get the request URI
@@ -136,9 +135,9 @@ class ZunZun(object):
             self.log.error(tools.log_json({
                 'API': self.version,
                 'Exception': e,
-                'Resource': self.resource,
                 'URI': self.URI,
-                'rid': self.request_id
+                'environ': environ,
+                'rid': headers['Request-ID']
             }, True)
             )
 
@@ -218,11 +217,11 @@ class ZunZun(object):
                       for x in self.URI.split('?')[0].split('/')
                       if x.strip()]
 
-        self.resource = ''.join(components[:1])
+        resource = ''.join(components[:1])
         self.path = components[1:]
 
         if not py_mod:
-            py_mod = 'default' if not components else self.resource
+            py_mod = 'default' if not components else resource
 
         """
         by default the zun_ prefix is appended
@@ -239,10 +238,6 @@ class ZunZun(object):
         lazy loading
         """
         try:
-            if module_path in self.resources:
-                self.resources[module_path].headers.update(headers)
-                return self.resources[module_path]
-
             self.log.debug(tools.log_json({
                 'API': self.version,
                 'HOST': (self.host, self.vroot),
@@ -255,8 +250,7 @@ class ZunZun(object):
             __import__(module_path, fromlist=[''])
             module = sys.modules[module_path]
             resource = module.__dict__['APIResource']
-            self.resources[module_path] = resource(self, headers)
-            return self.resources[module_path]
+            return resource(self, headers)
         except ImportError as e:
             raise tools.HTTPException(
                 501,
