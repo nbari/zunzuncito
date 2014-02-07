@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 exceptions and decorators
 """
@@ -7,7 +5,9 @@ exceptions and decorators
 import collections
 import json
 import time
+
 from functools import wraps
+from zunzuncito import http_status_codes
 
 
 class HTTPError(Exception):
@@ -82,6 +82,20 @@ def clean_dict(d):
 
 def log_json(log, indent=None):
     return json.dumps(clean_dict(log), sort_keys=True, indent=indent)
+
+
+def start_response(start_response, status, headers):
+    try:
+        status = int(status)
+    except:
+        status = int(status) if status.isdigit() else 501
+
+    if status in http_status_codes.codes:
+        status = http_status_codes.codes[status]
+    else:
+        status = http_status_codes.generic_reasons[status // 100]
+
+    start_response(status, list(headers.items()))
 
 
 class CaseInsensitiveDict(collections.MutableMapping):
