@@ -4,6 +4,7 @@ Design Goals
 * Keep it simple and small, avoiding extra complexity at all cost. `KISS <http://en.wikipedia.org/wiki/KISS_principle>`_
 * Create routes on the fly or by defining regular expressions.
 * Support API versions out of the box without altering routes.
+* Lazy loading.
 * Via decorator or in a defined route, accepts only certain `HTTP methods <http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html>`_.
 * Follow the single responsibility `principle <http://en.wikipedia.org/wiki/Single_responsibility_principle>`_.
 * Be compatible with any WSGI server. Example: `uWSGI <http://uwsgi-docs.readthedocs.org/en/latest/>`_, `Gunicorn <http://gunicorn.org/>`_, `Twisted <http://twistedmatrix.com/>`_, etc.
