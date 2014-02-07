@@ -2,7 +2,6 @@
 self resource
 """
 
-import json
 import logging
 
 from zunzuncito import tools
