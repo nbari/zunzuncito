@@ -32,7 +32,7 @@ def fake_req(num):
     for n in range(num):
         environ = {
             'rid': str(uuid4()),
-            'REQUEST_URI': '/v0/env',
+            'REQUEST_URI': '/v1/thread',
             'REQUEST_METHOD': 'get',
             'thread': n
         }
@@ -52,4 +52,4 @@ def main(t, requests):
 
 if __name__ == '__main__':
     # threads, requests
-    main(4, 1000)
+    main(4, 1)
