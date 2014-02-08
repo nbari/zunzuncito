@@ -227,7 +227,15 @@ class ZunZun(object):
             module_name)
 
         if module_path in self.resources:
-            return self.resources[module_path](req)
+            req.log.debug(tools.log_json({
+                'API': req.version,
+                'HOST': (req.host, req.vroot),
+                'URI': req.URI,
+                'dispatching': (module_name, module_path),
+                'rid': req.request_id
+            }, True)
+            )
+            return self.resources[module_path]
 
         req.log.debug(tools.log_json({
             'API': req.version,
@@ -240,8 +248,9 @@ class ZunZun(object):
 
         __import__(module_path, fromlist=[''])
         module = sys.modules[module_path]
-        self.resources[module_path] = module.__dict__['APIResource']
-        return self.resources[module_path](req)
+        resource = module.__dict__['APIResource']
+        self.resources[module_path] = resource(req)
+        return self.resources[module_path]
 
     def register_routes(self, routes):
         """compile regex pattern for routes per vroot

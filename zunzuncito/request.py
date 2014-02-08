@@ -11,7 +11,7 @@ class Request(object):
     def __init__(self, logger, request_id, environ, headers):
         self.log = logger
         self.request_id = request_id
-        self.env = environ
+        self.environ = environ
         self.headers = headers
         self.URI = '/'
         self.host = None
@@ -36,10 +36,9 @@ class Request(object):
         elif 'PATH_INFO' in environ:
             self.URI = environ['PATH_INFO']
 
-    def response(self, start_response, status=None, headers={}):
+    def response(self, start_response):
 
-        if not status:
-            status = self.status
+        status = self.status
 
         try:
             status = int(status)
@@ -56,11 +55,9 @@ class Request(object):
             self.log.error(tools.log_json({'bad status': e, 'status': status}))
             status = '500 Internal Server Error'
 
-        headers.update(self.headers)
+        if not 'content-type' in self.headers:
+            self.headers['Content-Type'] = 'application/json; charset=UTF-8'
 
-        if not 'Content-Type' in headers:
-            headers['Content-Type'] = 'application/json; charset=UTF-8'
+        self.headers['Request-ID'] = self.request_id
 
-        headers['Request-ID'] = self.request_id
-
-        start_response(status, list(headers.items()))
+        start_response(status, list(self.headers.items()))
