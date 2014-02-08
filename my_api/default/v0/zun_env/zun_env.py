@@ -20,6 +20,9 @@ class APIResource(object):
         }, True)
         )
 
+    def __call__(self, req):
+        self.req = req
+
     def dispatch(self, environ):
 
         self.log.info(tools.log_json({'rid': self.req.request_id}))

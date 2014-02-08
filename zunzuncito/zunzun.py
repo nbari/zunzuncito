@@ -22,6 +22,7 @@ class ZunZun(object):
         self.host = '*'
         self.hosts = {'*': 'default'}
         self.prefix = prefix
+        self.resources = {}
         self.rid = rid
         self.root = root
         self.routes = {}
@@ -211,6 +212,9 @@ class ZunZun(object):
         lazy loading
         """
         try:
+            if module_path in self.resources:
+                return self.resources[module_path](req)
+
             req.log.debug(tools.log_json({
                 'API': req.version,
                 'HOST': (req.host, req.vroot),
@@ -222,8 +226,8 @@ class ZunZun(object):
 
             __import__(module_path, fromlist=[''])
             module = sys.modules[module_path]
-            api_resource = module.__dict__['APIResource']
-            return api_resource(req)
+            self.resources[module_path] = module.__dict__['APIResource']
+            return self.resources[module_path](req)
         except ImportError as e:
             raise tools.HTTPException(
                 501,
