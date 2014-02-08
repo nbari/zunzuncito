@@ -15,7 +15,13 @@ start_response = lambda s, h: (s, h)
 
 
 def fake_req(num):
+    environ.update({'thread': num})
     print app(environ, start_response)
 
-for i in range(1):
-    t = Thread(target=fake_req, args=(i,)).start()
+threads = []
+for i in range(3):
+    threads.append(Thread(target=fake_req, args=(i,)))
+for t in threads:
+    t.start()
+for t in threads:
+    t.join()
