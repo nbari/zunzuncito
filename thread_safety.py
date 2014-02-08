@@ -4,7 +4,8 @@ from uuid import uuid4
 import zunzuncito
 
 root = 'my_api'
-app = zunzuncito.ZunZun(root, rid='rid', debug=True)
+versions = ['v0', 'v1']
+app = zunzuncito.ZunZun(root, versions, rid='rid', debug=True)
 
 
 def start_response(status, headers):
@@ -14,7 +15,7 @@ def start_response(status, headers):
 def fake_req(num):
     environ = {
         'rid': str(uuid4()),
-        'REQUEST_URI': '/env',
+        'REQUEST_URI': '/v1/env',
         'REQUEST_METHOD': 'get',
         'thread': num
     }

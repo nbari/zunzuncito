@@ -197,6 +197,24 @@ class ZunZun(object):
         if not py_mod:
             py_mod = 'default' if not components else req.resource
 
+        try:
+            return self.lazy_load(py_mod, req)
+        except ImportError as e:
+            try:
+                return self.lazy_load('catchall', req)
+            except ImportError:
+                pass
+            raise tools.HTTPException(
+                501,
+                title="[ %s ] not found" % py_mod,
+                description=e)
+        except Exception as e:
+            raise tools.HTTPException(
+                500,
+                title="[ %s ] throw exception" % py_mod,
+                description=e)
+
+    def lazy_load(self, py_mod, req):
         """
         by default the zun_ prefix is appended
         """
@@ -208,36 +226,22 @@ class ZunZun(object):
             module_name,
             module_name)
 
-        """
-        lazy loading
-        """
-        try:
-            if module_path in self.resources:
-                return self.resources[module_path](req)
-
-            req.log.debug(tools.log_json({
-                'API': req.version,
-                'HOST': (req.host, req.vroot),
-                'URI': req.URI,
-                'loading': (module_name, module_path),
-                'rid': req.request_id
-            }, True)
-            )
-
-            __import__(module_path, fromlist=[''])
-            module = sys.modules[module_path]
-            self.resources[module_path] = module.__dict__['APIResource']
+        if module_path in self.resources:
             return self.resources[module_path](req)
-        except ImportError as e:
-            raise tools.HTTPException(
-                501,
-                title="[ %s ] not found" % module_name,
-                description=e)
-        except Exception as e:
-            raise tools.HTTPException(
-                500,
-                title="[ %s ] throw exception" % module_name,
-                description=e)
+
+        req.log.debug(tools.log_json({
+            'API': req.version,
+            'HOST': (req.host, req.vroot),
+            'URI': req.URI,
+            'loading': (module_name, module_path),
+            'rid': req.request_id
+        }, True)
+        )
+
+        __import__(module_path, fromlist=[''])
+        module = sys.modules[module_path]
+        self.resources[module_path] = module.__dict__['APIResource']
+        return self.resources[module_path](req)
 
     def register_routes(self, routes):
         """compile regex pattern for routes per vroot
