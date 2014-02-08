@@ -235,6 +235,7 @@ class ZunZun(object):
                 'rid': req.request_id
             }, True)
             )
+            self.resources[module_path](req)
             return self.resources[module_path]
 
         req.log.debug(tools.log_json({

@@ -4,7 +4,7 @@ from uuid import uuid4
 
 root = 'my_api'
 versions = ['v0', 'v1']
-app = zunzuncito.ZunZun(root, versions, rid='rid', debug=True)
+app = zunzuncito.ZunZun(root, versions, rid='rid', debug=False)
 
 
 def start_response(status, headers):
