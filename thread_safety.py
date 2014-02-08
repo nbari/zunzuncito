@@ -24,20 +24,19 @@ def timeit(f):
 
 
 def start_response(status, headers):
-    pass
-    # sys.stdout.write('%s - %s\n' % (status, headers))
+    sys.stdout.write('%s - %s\n' % (status, headers))
 
 #@profile
 def fake_req(num):
     for n in range(num):
         environ = {
             'rid': str(uuid4()),
-            'REQUEST_URI': '/v1/thread',
+            'REQUEST_URI': '/v0/thread',
             'REQUEST_METHOD': 'get',
             'thread': n
         }
         body = app(environ, start_response)
-        # sys.stdout.write('%s\n' % body)
+        sys.stdout.write('%s\n' % body)
 
 
 @timeit
@@ -52,4 +51,4 @@ def main(t, requests):
 
 if __name__ == '__main__':
     # threads, requests
-    main(4, 1)
+    main(4, 2)
