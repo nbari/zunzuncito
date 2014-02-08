@@ -235,8 +235,8 @@ class ZunZun(object):
                 'rid': req.request_id
             }, True)
             )
-            self.resources[module_path](req)
-            return self.resources[module_path]
+#            self.resources[module_path](req)
+            return self.resources[module_path](req)
 
         req.log.debug(tools.log_json({
             'API': req.version,
@@ -250,8 +250,8 @@ class ZunZun(object):
         __import__(module_path, fromlist=[''])
         module = sys.modules[module_path]
         resource = module.__dict__['APIResource']
-        self.resources[module_path] = resource(req)
-        return self.resources[module_path]
+        self.resources[module_path] = resource
+        return self.resources[module_path](req)
 
     def register_routes(self, routes):
         """compile regex pattern for routes per vroot
