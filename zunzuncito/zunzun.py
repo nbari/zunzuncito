@@ -235,7 +235,6 @@ class ZunZun(object):
                 'rid': req.request_id
             }, True)
             )
-#            self.resources[module_path](req)
             return self.resources[module_path](req)
 
         req.log.debug(tools.log_json({
@@ -249,8 +248,7 @@ class ZunZun(object):
 
         __import__(module_path, fromlist=[''])
         module = sys.modules[module_path]
-        resource = module.__dict__['APIResource']
-        self.resources[module_path] = resource
+        self.resources[module_path] = module.__dict__['APIResource']
         return self.resources[module_path](req)
 
     def register_routes(self, routes):

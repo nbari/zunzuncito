@@ -25,29 +25,31 @@ def timeit(f):
 
 def start_response(status, headers):
     pass
-    #sys.stdout.write('%s - %s\n' % (status, headers))
+    # sys.stdout.write('%s - %s\n' % (status, headers))
 
 #@profile
 def fake_req(num):
-    environ = {
-        'rid': str(uuid4()),
-        'REQUEST_URI': '/v0/env',
-        'REQUEST_METHOD': 'get',
-        'thread': num
-    }
-    body = app(environ, start_response)
-    #sys.stdout.write('%s\n' % body)
+    for n in range(num):
+        environ = {
+            'rid': str(uuid4()),
+            'REQUEST_URI': '/v0/env',
+            'REQUEST_METHOD': 'get',
+            'thread': n
+        }
+        body = app(environ, start_response)
+        # sys.stdout.write('%s\n' % body)
 
 
 @timeit
-def main(requests):
+def main(t, requests):
     threads = []
-    for i in range(requests):
-        threads.append(Thread(target=fake_req, args=(i,)))
+    for i in range(t):
+        threads.append(Thread(target=fake_req, args=(requests,)))
     for t in threads:
         t.start()
     for t in threads:
         t.join()
 
 if __name__ == '__main__':
-    main(100000)
+    # threads, requests
+    main(4, 1000)
