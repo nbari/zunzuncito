@@ -1,7 +1,6 @@
 import zunzuncito
 from threading import Thread
 from uuid import uuid4
-import zunzuncito
 
 root = 'my_api'
 versions = ['v0', 'v1']
@@ -12,10 +11,11 @@ def start_response(status, headers):
     print status, headers
 
 
+
 def fake_req(num):
     environ = {
         'rid': str(uuid4()),
-        'REQUEST_URI': '/v1/env',
+        'REQUEST_URI': '/v0/env',
         'REQUEST_METHOD': 'get',
         'thread': num
     }
