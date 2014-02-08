@@ -111,7 +111,6 @@ class ZunZun(object):
                 'API': req.version,
                 'Exception': e,
                 'URI': req.URI,
-                'environ': environ,
                 'rid': req.request_id
             }, True)
             )
