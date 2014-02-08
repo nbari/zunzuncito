@@ -8,10 +8,13 @@ app = zunzuncito.ZunZun(root, rid='rid', debug=True)
 
 environ = {
     'rid': str(uuid4()),
-    'REQUEST_URI': '/env'
+    'REQUEST_URI': '/env',
+    'REQUEST_METHOD': 'get'
 }
 
-start_response = lambda s, h: (s, h)
+
+def start_response(status, headers):
+    print status, headers
 
 
 def fake_req(num):
@@ -19,7 +22,7 @@ def fake_req(num):
     print app(environ, start_response)
 
 threads = []
-for i in range(3):
+for i in range(1):
     threads.append(Thread(target=fake_req, args=(i,)))
 for t in threads:
     t.start()

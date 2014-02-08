@@ -9,17 +9,17 @@ from zunzuncito import tools
 
 class APIResource(object):
 
-    def __init__(self, api, head):
-        self.api = api
-        self.log = logging.getLogger()
+    def __init__(self, req):
+        self.req = req
+        self.log = req.log
         self.log.info(tools.log_json({
-            'vroot': api.vroot,
-            'API': api.version,
-            'URI': api.URI
+            'vroot': req.vroot,
+            'API': req.version,
+            'URI': req.URI
         }, True)
         )
 
     def dispatch(self, environ, start_response):
 
 #        tools.start_response(start_response, 200)
-        return tools.log_json(self.api.__dict__, 4)
+        return tools.log_json(self.req.__dict__, 4)

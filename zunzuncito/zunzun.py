@@ -6,11 +6,11 @@ micro-framework for creating REST API's
 import logging
 import re
 import sys
-import time
 
 from itertools import ifilter
 from uuid import uuid4
 from zunzuncito import http_status_codes
+from zunzuncito import request
 from zunzuncito import tools
 
 
@@ -68,101 +68,76 @@ class ZunZun(object):
         :returns:
             An iterable with the response to return to the client.
         """
-        self.start_time = time.time()
-
-        """
-        get the HOST
-        """
-        if 'HTTP_HOST' in environ:
-            self.host = environ['HTTP_HOST'].split(':')[0]
 
         """
         set the REQUEST_ID
         """
         if self.rid and self.rid in environ:
-            self.request_id = environ[self.rid]
+            request_id = environ[self.rid]
         else:
-            self.request_id = str(uuid4())
+            request_id = str(uuid4())
 
-        """
-        get the HTTP method
-        """
-        if 'REQUEST_METHOD' in environ:
-            self.method = environ['REQUEST_METHOD']
+        req = request.Request(
+            self.log,
+            request_id,
+            environ,
+            self._headers.copy())
 
-        """
-        get the request URI
-        """
-        self.URI = '/'
-
-        if 'REQUEST_URI' in environ:
-            self.URI = environ['REQUEST_URI']
-        elif 'PATH_INFO' in environ:
-            self.URI = environ['PATH_INFO']
-
-        """
-        Default headers in case an exception occurs
-        """
-        headers = self._headers.copy()
-        status = 200
-        headers['Content-Type'] = 'application/json; charset=UTF-8'
-        headers['Request-ID'] = self.request_id
         body = []
 
         try:
-            return self.router(headers).dispatch(environ, start_response)
+            body = self.router(req).dispatch(environ)
         except tools.HTTPError as e:
-            status = e.status
+            req.status = e.status
 
             if e.headers:
-                headers = e.headers
+                req.headers.update(e.headers)
 
             if e.display:
                 body.append(e.to_json())
 
             self.log.warning(tools.log_json({
-                'API': self.version,
-                'URI': self.URI,
+                'API': req.version,
+                'URI': req.URI,
                 'HTTPError': e.status,
                 'body': e.to_dict()
             }, True)
             )
 
         except Exception as e:
-            status = 500
+            req.status = 500
             self.log.error(tools.log_json({
-                'API': self.version,
+                'API': req.version,
                 'Exception': e,
-                'URI': self.URI,
+                'URI': req.URI,
                 'environ': environ,
-                'rid': headers['Request-ID']
+                'rid': req.request_id
             }, True)
             )
 
-        status = http_status_codes.codes[status]
-        start_response(status, list(headers.items()))
+        req.response(start_response)
         return body
 
-    def router(self, headers):
+    def router(self, req):
         """
         check if the URI is versioned (/v1/resource/...)
         defaults to the first version in versions list (default to v0).
         """
-        self.version = self.versions[0]
+        req.version = self.versions[0]
         for version in self.versions:
-            if self.URI.lower().startswith('/%s' % version):
-                self.version = version
+            if req.URI.lower().startswith('/%s' % version):
+                req.version = version
                 """
                 if URI is versioned, remove the version '/v0' from URI
                 the + 1 if for the starting '/' in the URI
                 """
-                self.URI = self.URI[len(version) + 1:]
+                req.URI = req.URI[len(req.version) + 1:]
                 break
 
-        self.log.debug(tools.log_json({
-            'API': self.version,
-            'URI': self.URI,
-            'rid': self.request_id,
+        req.log.debug(tools.log_json({
+            'API': req.version,
+            'URI': req.URI,
+            'rid': req.request_id,
             'versions': self.versions
         }, True)
         )
@@ -172,15 +147,15 @@ class ZunZun(object):
         """
         py_mod = False
 
-        if self.host in self.hosts.keys():
-            self.vroot = self.hosts[self.host]
+        if req.host in self.hosts.keys():
+            req.vroot = self.hosts[req.host]
         else:
             for host in self.hosts.keys():
                 if re.match('^\*\.', host):
                     domain = '^(?:[^./@]+\.)*%s$' % (
                         host.replace('*.', '').replace('.', '\.'))
                     if re.match(domain, host):
-                        self.vroot = self.hosts[host]
+                        req.vroot = self.hosts[host]
                         break
 
         """
@@ -191,18 +166,18 @@ class ZunZun(object):
         t[1] = p - py_mod
         t[2] = h - HTTP methods
         """
-        if self.routes.get(self.vroot, False):
-            filterf = lambda t: any(i in (self.method.upper(), 'ALL')
+        if self.routes.get(req.vroot, False):
+            filterf = lambda t: any(i in (req.method.upper(), 'ALL')
                                     for i in t[2])
-            for r, p, h in ifilter(filterf, self.routes[self.vroot]):
-                match = r.match(self.URI)
+            for r, p, h in ifilter(filterf, self.routes[req.vroot]):
+                match = r.match(req.URI)
                 if match:
                     py_mod = p
-                    self.log.debug(tools.log_json({
-                        'HOST': (self.host, self.vroot),
-                        'API': self.version,
-                        'regex_match': (r.pattern, self.URI),
-                        'rid': self.request_id,
+                    req.log.debug(tools.log_json({
+                        'HOST': (req.host, req.vroot),
+                        'API': req.version,
+                        'regex_match': (r.pattern, req.URI),
+                        'rid': req.request_id,
                         'methods': h
                     }, True)
                     )
@@ -212,14 +187,14 @@ class ZunZun(object):
         get the API resource and path from URI api_resource/path
         """
         components = [x.strip()
-                      for x in self.URI.split('?')[0].split('/')
+                      for x in req.URI.split('?')[0].split('/')
                       if x.strip()]
 
-        resource = ''.join(components[:1])
-        self.path = components[1:]
+        req.resource = ''.join(components[:1])
+        req.path = components[1:]
 
         if not py_mod:
-            py_mod = 'default' if not components else resource
+            py_mod = 'default' if not components else req.resource
 
         """
         by default the zun_ prefix is appended
@@ -227,8 +202,8 @@ class ZunZun(object):
         module_name = '%s%s' % (self.prefix, py_mod.lower())
         module_path = '%s.%s.%s.%s.%s' % (
             self.root,
-            self.vroot,
-            self.version,
+            req.vroot,
+            req.version,
             module_name,
             module_name)
 
@@ -236,19 +211,19 @@ class ZunZun(object):
         lazy loading
         """
         try:
-            self.log.debug(tools.log_json({
-                'API': self.version,
-                'HOST': (self.host, self.vroot),
-                'URI': self.URI,
+            req.log.debug(tools.log_json({
+                'API': req.version,
+                'HOST': (req.host, req.vroot),
+                'URI': req.URI,
                 'loading': (module_name, module_path),
-                'rid': self.request_id
+                'rid': req.request_id
             }, True)
             )
 
             __import__(module_path, fromlist=[''])
             module = sys.modules[module_path]
-            resource = module.__dict__['APIResource']
-            return resource(self, headers)
+            api_resource = module.__dict__['APIResource']
+            return api_resource(req)
         except ImportError as e:
             raise tools.HTTPException(
                 501,

@@ -55,7 +55,7 @@ def allow_methods(*methods):
             """self is because the allow_methods decorator is called
             within APIResource class
             """
-            if self.api.method.lower() not in [x.lower().strip()
+            if self.req.method.lower() not in [x.lower().strip()
                                                for x in methods[0].split(',')
                                                if x.strip()]:
                 raise MethodException()
@@ -82,21 +82,6 @@ def clean_dict(d):
 
 def log_json(log, indent=None):
     return json.dumps(clean_dict(log), sort_keys=True, indent=indent)
-
-
-def start_response(start_response, status=200, headers=[
-                   ('Content-Type', 'application/json; charset=UTF-8')]):
-    try:
-        status = int(status)
-    except:
-        status = int(status) if status.isdigit() else 501
-
-    if status in http_status_codes.codes:
-        status = http_status_codes.codes[status]
-    else:
-        status = http_status_codes.generic_reasons[status // 100]
-
-    start_response(status, list(headers.items()))
 
 
 class CaseInsensitiveDict(collections.MutableMapping):
