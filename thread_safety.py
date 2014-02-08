@@ -1,4 +1,8 @@
+import sys
+import time
 import zunzuncito
+
+from profilehooks import profile
 from threading import Thread
 from uuid import uuid4
 
@@ -7,10 +11,22 @@ versions = ['v0', 'v1']
 app = zunzuncito.ZunZun(root, versions, rid='rid', debug=False)
 
 
+def timeit(f):
+
+    def wrapper(*args, **kv):
+        ts = time.time()
+        result = f(*args, **kv)
+        te = time.time()
+        print '%r (%r, %r) %2.5f sec' % (f.__name__, args, kv, te - ts)
+        return result
+
+    return wrapper
+
+
 def start_response(status, headers):
-    print status, headers
+    sys.stdout.write('%s - %s\n' % (status, headers))
 
-
+#@profile
 def fake_req(num):
     environ = {
         'rid': str(uuid4()),
@@ -18,12 +34,18 @@ def fake_req(num):
         'REQUEST_METHOD': 'get',
         'thread': num
     }
-    print app(environ, start_response)
+    body = app(environ, start_response)
+    sys.stdout.write('%s\n' % body)
 
-threads = []
-for i in range(3):
-    threads.append(Thread(target=fake_req, args=(i,)))
-for t in threads:
-    t.start()
-for t in threads:
-    t.join()
+@timeit
+def main():
+    threads = []
+    for i in range(3):
+        threads.append(Thread(target=fake_req, args=(i,)))
+    for t in threads:
+        t.start()
+    for t in threads:
+        t.join()
+
+if __name__ == '__main__':
+    main()
