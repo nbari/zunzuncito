@@ -21,9 +21,7 @@ class ZunZun(object):
         self._headers = tools.CaseInsensitiveDict()
         self.host = '*'
         self.hosts = {'*': 'default'}
-        self.path = []
         self.prefix = prefix
-        self.request_id = None
         self.rid = rid
         self.root = root
         self.routes = {}
