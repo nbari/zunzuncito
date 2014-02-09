@@ -9,7 +9,6 @@ import sys
 
 from itertools import ifilter
 from uuid import uuid4
-from zunzuncito import http_status_codes
 from zunzuncito import request
 from zunzuncito import tools
 
@@ -20,7 +19,7 @@ class ZunZun(object):
                  routes=None, prefix='zun_', rid=None, debug=False):
         self._headers = tools.CaseInsensitiveDict()
         self.host = '*'
-        self.hosts = {'*': 'default'}
+        self.hosts = {'*': 'default'}.update(hosts)
         self.prefix = prefix
         self.resources = {}
         self.rid = rid
@@ -151,9 +150,9 @@ class ZunZun(object):
             req.vroot = self.hosts[req.host]
         else:
             for host in self.hosts.keys():
-                if re.match('^\*\.', host):
-                    domain = '^(?:[^./@]+\.)*%s$' % (
-                        host.replace('*.', '').replace('.', '\.'))
+                if re.match(r'^\*\.', host):
+                    domain = r'^(?:[^./@]+\.)*%s$' % (
+                        host.replace('*.', '').replace('.', r'\.'))
                     if re.match(domain, host):
                         req.vroot = self.hosts[host]
                         break
