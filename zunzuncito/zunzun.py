@@ -19,7 +19,9 @@ class ZunZun(object):
                  routes=None, prefix='zun_', rid=None, debug=False):
         self._headers = tools.CaseInsensitiveDict()
         self.host = '*'
-        self.hosts = {'*': 'default'}.update(hosts)
+        self.hosts = {'*': 'default'}
+        if isinstance(hosts, dict):
+            self.hosts = hosts
         self.prefix = prefix
         self.resources = {}
         self.rid = rid
