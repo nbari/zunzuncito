@@ -198,22 +198,13 @@ class ZunZun(object):
 
         try:
             return self.lazy_load(py_mod, req)
-        except ImportError as e:
-            try:
-                return self.lazy_load('catchall', req)
-            except ImportError:
-                pass
-            raise tools.HTTPException(
-                501,
-                title="[ %s ] not found" % py_mod,
-                description=e)
         except Exception as e:
             raise tools.HTTPException(
                 500,
                 title="[ %s ] throw exception" % py_mod,
                 description=e)
 
-    def lazy_load(self, py_mod, req):
+    def lazy_load(self, py_mod, req, stop=False):
         """
         by default the zun_ prefix is appended
         """
@@ -245,7 +236,16 @@ class ZunZun(object):
         }, True)
         )
 
-        __import__(module_path, fromlist=[''])
+        try:
+            __import__(module_path, fromlist=[''])
+        except ImportError as e:
+            if not stop:
+                return self.lazy_load('_catchall', req, stop=True)
+            raise tools.HTTPException(
+                501,
+                title="[ %s ] not found" % py_mod,
+                description=e)
+
         module = sys.modules[module_path]
         self.resources[module_path] = module.__dict__['APIResource']
         return self.resources[module_path](req)
