@@ -14,6 +14,8 @@ Table of Contents
    Install
    Quickstart
    zunzun
+   request
+   response
    resource
    tools
    http_status_codes
