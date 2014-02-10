@@ -10,7 +10,6 @@ class HTTPError(Exception):
 
     def __init__(self, status, title=None, description=None,
                  headers=None, code=None, display=False):
-        super(HTTPError, self).__init__()
         self.status = status
         self.title = title
         self.description = description
