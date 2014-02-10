@@ -33,8 +33,8 @@ class ZunZun(object):
 
         if versions:
             if isinstance(versions, list):
-                versions = [x.lower().strip()
-                            for x in map(str, versions) if x.strip()]
+                versions = tuple(x.lower().strip()
+                                 for x in map(str, versions) if x.strip())
                 if versions:
                     self.versions = versions
                 else:
