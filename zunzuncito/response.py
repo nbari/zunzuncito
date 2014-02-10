@@ -10,7 +10,6 @@ class Response(object):
 
     def __init__(self, logger, request_id, headers):
         self.log = logger
-        self.body = []
         self.headers = headers
         self.request_id = request_id
         self.status = 200

@@ -88,8 +88,10 @@ class ZunZun(object):
             self._headers.copy()
         )
 
+        body = []
+
         try:
-            self.router(req).dispatch(req, res)
+            body = self.router(req).dispatch(req, res)
         except tools.HTTPError as e:
             res.status = e.status
 
@@ -97,7 +99,7 @@ class ZunZun(object):
                 res.headers.update(e.headers)
 
             if e.display:
-                res.body.append(e.to_json())
+                body.append(e.to_json())
 
             self.log.warning(tools.log_json({
                 'API': req.version,
@@ -118,7 +120,7 @@ class ZunZun(object):
             )
 
         start_response(res.get_status(), res.get_headers())
-        return res.body
+        return body or []
 
     def router(self, req):
         """
