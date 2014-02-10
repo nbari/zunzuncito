@@ -13,7 +13,7 @@ will call to handle the incoming requests.
 
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 5,17
+   :emphasize-lines: 4
 
    from zunzuncito import tools
 
@@ -42,7 +42,7 @@ Is handled by the custom python module ``zun_upload/zun_upload.py`` which conten
 
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 13,26
+   :emphasize-lines: 12,25
 
    """
    upload resource
