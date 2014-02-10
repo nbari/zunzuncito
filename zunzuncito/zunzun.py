@@ -10,6 +10,7 @@ import sys
 from itertools import ifilter
 from uuid import uuid4
 from zunzuncito import request
+from zunzuncito import response
 from zunzuncito import tools
 
 
@@ -71,9 +72,6 @@ class ZunZun(object):
             An iterable with the response to return to the client.
         """
 
-        """
-        set the REQUEST_ID
-        """
         if self.rid and self.rid in environ:
             request_id = environ[self.rid]
         else:
@@ -82,21 +80,24 @@ class ZunZun(object):
         req = request.Request(
             self.log,
             request_id,
-            environ,
-            self._headers.copy())
+            environ)
 
-        body = []
+        res = response.Response(
+            self.log,
+            request_id,
+            self._headers.copy()
+        )
 
         try:
-            body = self.router(req)
+            self.router(req).dispatch(req, res)
         except tools.HTTPError as e:
-            req.status = e.status
+            res.status = e.status
 
             if e.headers:
-                req.headers.update(e.headers)
+                res.headers.update(e.headers)
 
             if e.display:
-                body.append(e.to_json())
+                res.body.append(e.to_json())
 
             self.log.warning(tools.log_json({
                 'API': req.version,
@@ -107,7 +108,7 @@ class ZunZun(object):
             )
 
         except Exception as e:
-            req.status = 500
+            res.status = 500
             self.log.error(tools.log_json({
                 'API': req.version,
                 'Exception': e,
@@ -116,8 +117,8 @@ class ZunZun(object):
             }, True)
             )
 
-        req.response(start_response)
-        return body
+        start_response(res.get_status, res.get_headers)
+        return res.body
 
     def router(self, req):
         """
@@ -220,7 +221,7 @@ class ZunZun(object):
                 'rid': req.request_id
             }, True)
             )
-            return self.resources[module_path].dispatch(req)
+            return self.resources[module_path]
 
         req.log.debug(tools.log_json({
             'API': req.version,
@@ -244,7 +245,7 @@ class ZunZun(object):
         module = sys.modules[module_path]
         resource = module.__dict__['APIResource']
         self.resources[module_path] = resource()
-        return self.resources[module_path].dispatch(req)
+        return self.resources[module_path]
 
     def register_routes(self, routes):
         """compile regex pattern for routes per vroot

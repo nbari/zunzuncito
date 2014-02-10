@@ -11,16 +11,15 @@ class APIResource(object):
     def __init__(self):
         self.headers = {'Content-Type': 'text/html; charset=UTF-8'}
 
-    def dispatch(self, request):
+    def dispatch(self, req, res):
 
-        request.log.info(tools.log_json({
-            'API': request.version,
-            'URI': request.URI,
-            'rid': request.request_id,
+        req.log.info(tools.log_json({
+            'API': req.version,
+            'URI': req.URI,
+            'rid': req.req_id,
             'in': 'dispatch',
-            'thread': request.environ.get('thread', '-'),
+            'thread': req.environ.get('thread', '-'),
         }))
 
-        request.headers.update(self.headers)
-
-        return tools.log_json(request.environ, 4)
+        res.headers.update(self.headers)
+        res.body = tools.log_json(req.environ, 4)
