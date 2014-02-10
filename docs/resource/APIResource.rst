@@ -15,25 +15,22 @@ will call to handle the incoming requests.
    :linenos:
    :emphasize-lines: 5,17
 
-   import logging
    from zunzuncito import tools
 
 
    class APIResource(object):
-       def __init__(self, api):
-           self.api = api
-           self.log = logging.getLogger()
-           self.log.info(tools.log_json({
-               'vroot': api.vroot,
-               'API': api.version,
-               'URI': api.URI,
-               'method': api.method
-           }, True)
-           )
 
-       def dispatch(self, environ):
-           # print all the environ
-           return tools.log_json(environ, 4)
+      def dispatch(self, request, response):
+
+          request.log.debug(tools.log_json({
+              'API': request.version,
+              'URI': request.URI,
+              'method': request.method,
+              'vroot': request.vroot
+          }, True))
+
+          # print all the environ
+          return tools.log_json(request.environ, 4)
 
 
 For example, the following request::
@@ -54,7 +51,6 @@ Is handled by the custom python module ``zun_upload/zun_upload.py`` which conten
 
    @see http://www.grid.net.ru/nginx/resumable_uploads.en.html
    """
-   import logging
    import os
    from zunzuncito import tools
 

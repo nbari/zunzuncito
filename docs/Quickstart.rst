@@ -80,34 +80,31 @@ example the content of module `zun_default/zun_default.py <https://github.com/nb
 .. code-block:: python
    :linenos:
 
-   import logging
    from zunzuncito import tools
 
 
    class APIResource(object):
 
-   def __init__(self, api):
-       self.api = api
-       self.log = logging.getLogger()
-       self.log.info(tools.log_json({
-            'vroot': api.vroot,
-            'API': api.version,
-            'URI': api.URI,
-            'method': api.method
-        }, True)
-        )
+      @tools.allow_methods('get, head')
+      def dispatch(self, request, response):
 
-   @tools.allow_methods('get')
-   def dispatch(self, environ):
-       data = {}
-       data['about'] = ("Hi %s, I am zunzuncito a micro-framework for creating"
-                        " REST API's, you can read more about me in: "
-                        "www.zunzun.io") % environ.get('REMOTE_ADDR', 0)
-       data['request-id'] = self.api.request_id
-       data['URI'] = self.api.URI
-       data['method'] = self.api.method
+          request.log.debug(tools.log_json({
+              'API': request.version,
+              'URI': request.URI,
+              'method': request.method,
+              'vroot': request.vroot
+          }, True))
 
-       return tools.log_json(data, 4)
+          data = {}
+          data['about'] = ("Hi %s, I am zunzuncito a micro-framework for creating"
+                           " REST API's, you can read more about me in: "
+                           "www.zunzun.io") % request.environ.get('REMOTE_ADDR', 0)
+
+          data['Request-ID'] = request.request_id
+          data['URI'] = request.URI
+          data['Method'] = request.method
+
+          return tools.log_json(data, 4)
 
 
 .. seealso::
@@ -205,7 +202,7 @@ Contents of the **app.yaml** file:
      static_files: favicon.ico
      upload: favicon\.ico
 
-   - url: .*
+   - url: /.*
      script: main.app
 
 

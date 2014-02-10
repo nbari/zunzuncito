@@ -15,23 +15,12 @@ Basic template
    :emphasize-lines: 4, 17
 
 
-   import logging
    from zunzuncito import tools
 
    class APIResource(object):
 
-       def __init__(self, api):
-           self.api = api
-           self.log = logging.getLogger()
-           self.log.info(tools.log_json({
-               'vroot': api.vroot,
-               'API': api.version,
-               'URI': api.URI,
-               'method': api.method
-           }, True)
-           )
 
-       def dispatch(self, environ):
+       def dispatch(self, request, response):
            """ your code goes here """
 
 Status codes
@@ -55,7 +44,7 @@ The default headers are::
 
 For updating/replacing you just need to do something like::
 
-    self.api.headers['my_custom_header'] = str(uuid.uuid4())
+    response.headers['my_custom_header'] = str(uuid.uuid4())
 
 Example
 .......
@@ -69,9 +58,9 @@ Example
    class APIResource(object):
 
        def __init__(self, api):
-           self.api = api
+           self.headers = {'Content-Type': 'text/html; charset=UTF-8'}
 
-       def dispatch(self, environ):
+       def dispatch(self, request, response):
 
            try:
                name = self.api.path[0]
@@ -79,9 +68,11 @@ Example
                name = ''
 
            if name:
-               self.api.headers['my_custom_header'] = name
+               request.headers['my_custom_header'] = name
            else:
-               self.api.status = 406
+               request.status = 406
+
+           response.headers.update(self.headers)
 
            return 'Name: ' + name
 
