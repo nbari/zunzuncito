@@ -117,7 +117,7 @@ class ZunZun(object):
             }, True)
             )
 
-        start_response(res.get_status, res.get_headers)
+        start_response(res.get_status(), res.get_headers())
         return res.body
 
     def router(self, req):

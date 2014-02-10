@@ -16,7 +16,7 @@ class APIResource(object):
         req.log.info(tools.log_json({
             'API': req.version,
             'URI': req.URI,
-            'rid': req.req_id,
+            'rid': req.request_id,
             'in': 'dispatch',
             'thread': req.environ.get('thread', '-'),
         }))
