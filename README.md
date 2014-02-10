@@ -204,7 +204,6 @@ Contents of file **zun_default.py** located in "my_api/default/zun_default/zun_d
 """
 zun_default.py API resource
 """
-import logging
 from zunzuncito import tools
 
 
