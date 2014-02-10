@@ -4,16 +4,13 @@ exceptions and decorators
 
 import collections
 import json
-import time
-
-from functools import wraps
-from zunzuncito import http_status_codes
 
 
 class HTTPError(Exception):
 
     def __init__(self, status, title=None, description=None,
                  headers=None, code=None, display=False):
+        super(HTTPError, self).__init__()
         self.status = status
         self.title = title
         self.description = description
@@ -43,21 +40,19 @@ class HTTPException(HTTPError):
         return super(HTTPException, self).__init__(status, **kwargs)
 
 
-def allow_methods(*methods):
+def allow_methods(methods):
     """Allow methods decorator
     :param methods: list of http methods
     """
-
     def true_decorator(f):
 
-        @wraps(f)
         def wrapped(self, *args, **kwargs):
             """self is because the allow_methods decorator is called
             within APIResource class
             """
-            if self.req.method.lower() not in [x.lower().strip()
-                                               for x in methods[0].split(',')
-                                               if x.strip()]:
+            if args[0].method.lower() not in [x.lower().strip()
+                                              for x in methods.split(',')
+                                              if x.strip()]:
                 raise MethodException()
             else:
                 return f(self, *args, **kwargs)
