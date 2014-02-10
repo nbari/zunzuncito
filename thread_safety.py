@@ -2,7 +2,7 @@ import sys
 import time
 import zunzuncito
 
-from profilehooks import profile
+# from profilehooks import profile
 from threading import Thread
 from uuid import uuid4
 
@@ -31,7 +31,7 @@ def fake_req(num):
     for n in range(num):
         environ = {
             'rid': str(uuid4()),
-            'REQUEST_URI': '/v0/thread',
+            'REQUEST_URI': '/v1/thread',
             'REQUEST_METHOD': 'get',
             'thread': n
         }

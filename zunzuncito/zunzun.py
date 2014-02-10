@@ -88,7 +88,7 @@ class ZunZun(object):
         body = []
 
         try:
-            body = self.router(req).dispatch(environ)
+            body = self.router(req)
         except tools.HTTPError as e:
             req.status = e.status
 
@@ -197,13 +197,7 @@ class ZunZun(object):
         if not py_mod:
             py_mod = 'default' if not components else req.resource
 
-        try:
-            return self.lazy_load(py_mod, req)
-        except Exception as e:
-            raise tools.HTTPException(
-                500,
-                title="[ %s ] throw exception" % py_mod,
-                description=e)
+        return self.lazy_load(py_mod, req)
 
     def lazy_load(self, py_mod, req, stop=False):
         """
@@ -226,7 +220,7 @@ class ZunZun(object):
                 'rid': req.request_id
             }, True)
             )
-            return self.resources[module_path](req)
+            return self.resources[module_path].dispatch(req)
 
         req.log.debug(tools.log_json({
             'API': req.version,
@@ -248,8 +242,9 @@ class ZunZun(object):
                 description=e)
 
         module = sys.modules[module_path]
-        self.resources[module_path] = module.__dict__['APIResource']
-        return self.resources[module_path](req)
+        resource = module.__dict__['APIResource']
+        self.resources[module_path] = resource()
+        return self.resources[module_path].dispatch(req)
 
     def register_routes(self, routes):
         """compile regex pattern for routes per vroot
