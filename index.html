@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Zunzuncito</title>
+    <title>Zunzuncito by nbari</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
@@ -256,34 +256,29 @@ path = ip
 <div class="highlight highlight-python"><pre><span class="sd">"""</span>
 <span class="sd">zun_default.py API resource</span>
 <span class="sd">"""</span>
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">zunzuncito</span> <span class="kn">import</span> <span class="n">tools</span>
 
 
 <span class="k">class</span> <span class="nc">APIResource</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">api</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">api</span> <span class="o">=</span> <span class="n">api</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">tools</span><span class="o">.</span><span class="n">log_json</span><span class="p">({</span>
-            <span class="s">'vroot'</span><span class="p">:</span> <span class="n">api</span><span class="o">.</span><span class="n">vroot</span><span class="p">,</span>
-            <span class="s">'API'</span><span class="p">:</span> <span class="n">api</span><span class="o">.</span><span class="n">version</span><span class="p">,</span>
-            <span class="s">'URI'</span><span class="p">:</span> <span class="n">api</span><span class="o">.</span><span class="n">URI</span><span class="p">,</span>
-            <span class="s">'method'</span><span class="p">:</span> <span class="n">api</span><span class="o">.</span><span class="n">method</span>
-        <span class="p">},</span> <span class="bp">True</span><span class="p">)</span>
-        <span class="p">)</span>
+    <span class="nd">@allow_methods</span><span class="p">(</span><span class="s">'get, head'</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">dispatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
 
+        <span class="n">request</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">tools</span><span class="o">.</span><span class="n">log_json</span><span class="p">({</span>
+            <span class="s">'API'</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">version</span><span class="p">,</span>
+            <span class="s">'URI'</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">URI</span><span class="p">,</span>
+            <span class="s">'method'</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="p">,</span>
+            <span class="s">'vroot'</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">vroot</span>
+        <span class="p">},</span> <span class="bp">True</span><span class="p">))</span>
 
-    <span class="nd">@allow_methods</span><span class="p">(</span><span class="s">'get'</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">dispatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environ</span><span class="p">):</span>
         <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">data</span><span class="p">[</span><span class="s">'about'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s">"Hi </span><span class="si">%s</span><span class="s">, I am zunzuncito a micro-framework for creating"</span>
                          <span class="s">" REST API's, you can read more about me in: "</span>
-                         <span class="s">"www.zunzun.io"</span><span class="p">)</span> <span class="o">%</span> <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'REMOTE_ADDR'</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="n">data</span><span class="p">[</span><span class="s">'request-id'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">request_id</span>
-        <span class="n">data</span><span class="p">[</span><span class="s">'URI'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">URI</span>
-        <span class="n">data</span><span class="p">[</span><span class="s">'method'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">method</span>
+                         <span class="s">"www.zunzun.io"</span><span class="p">)</span> <span class="o">%</span> <span class="n">request</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'REMOTE_ADDR'</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">data</span><span class="p">[</span><span class="s">'Request-ID'</span><span class="p">]</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">request_id</span>
+        <span class="n">data</span><span class="p">[</span><span class="s">'URI'</span><span class="p">]</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">URI</span>
+        <span class="n">data</span><span class="p">[</span><span class="s">'Method'</span><span class="p">]</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span>
 
         <span class="k">return</span> <span class="n">tools</span><span class="o">.</span><span class="n">log_json</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 </pre></div>
@@ -346,7 +341,7 @@ path = ip
   <span class="l-Scalar-Plain">static_files</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">favicon.ico</span>
   <span class="l-Scalar-Plain">upload</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">favicon\.ico</span>
 
-<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">.*</span>
+<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/.*</span>
   <span class="l-Scalar-Plain">script</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">main.app</span>
 
 </pre></div>
@@ -368,7 +363,8 @@ path = ip
 <span class="n">routes</span><span class="p">[</span><span class="s">'default'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">(</span><span class="s">'/my/?.*'</span><span class="p">,</span> <span class="s">'ip_tools'</span><span class="p">,</span> <span class="s">'GET'</span><span class="p">),</span>
     <span class="p">(</span><span class="s">'/status/?.*'</span><span class="p">,</span> <span class="s">'http_status'</span><span class="p">,</span> <span class="s">'GET'</span><span class="p">),</span>
-    <span class="p">(</span><span class="s">'/(md5|sha1|sha256|sha512)(/.*)?'</span><span class="p">,</span> <span class="s">'hasher'</span><span class="p">,</span> <span class="s">'GET, POST'</span><span class="p">)</span>
+    <span class="p">(</span><span class="s">'/(md5|sha1|sha256|sha512)(/.*)?'</span><span class="p">,</span> <span class="s">'hasher'</span><span class="p">,</span> <span class="s">'GET, POST'</span><span class="p">),</span>
+    <span class="p">(</span><span class="s">'/(.*\.(gif|png|jpg|ico|bmp|css|otf|eot|svg|ttf|woff))'</span><span class="p">,</span> <span class="s">'static'</span><span class="p">)</span>
 <span class="p">]</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">zunzuncito</span><span class="o">.</span><span class="n">ZunZun</span><span class="p">(</span>
@@ -436,11 +432,6 @@ path = ip
             pageTracker._trackPageview();
             } catch(err) {}
           </script>
-<script type="text/javascript">
-(function(d,t,i){var l=d.createElement(t),s=d.getElementsByTagName(t)[0];_lg=[i];l.async=1;
-l.src=('https:'==d.location.protocol?'https://':'http://')+'logger-io.appspot.com/logger.io.js';
-s.parentNode.insertBefore(l,s);}(document,'script','1F1NV1SMK8W'));
-</script>
 
   </body>
 </html>
