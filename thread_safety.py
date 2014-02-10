@@ -42,7 +42,7 @@ def fake_req(num):
 @timeit
 def main(t, requests):
     threads = []
-    for i in range(t):
+    for _ in range(t):
         threads.append(Thread(target=fake_req, args=(requests,)))
     for t in threads:
         t.start()
