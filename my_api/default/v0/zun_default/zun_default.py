@@ -1,32 +1,28 @@
 """
 default resource
 """
-import logging
 from zunzuncito import tools
 
 
 class APIResource(object):
 
-    def __init__(self, api):
-        self.api = api
-        self.log = logging.getLogger()
-        self.log.info(tools.log_json({
-            'vroot': api.vroot,
-            'API': api.version,
-            'URI': api.URI,
-            'method': api.method
-        }, True)
-        )
-
     @tools.allow_methods('get, head')
-    def dispatch(self, environ):
+    def dispatch(self, request, response):
+
+        request.log.debug(tools.log_json({
+            'API': request.version,
+            'URI': request.URI,
+            'method': request.method,
+            'vroot': request.vroot
+        }, True))
+
         data = {}
         data['about'] = ("Hi %s, I am zunzuncito a micro-framework for creating"
                          " REST API's, you can read more about me in: "
-                         "www.zunzun.io") % environ.get('REMOTE_ADDR', 0)
+                         "www.zunzun.io") % request.environ.get('REMOTE_ADDR', 0)
 
-        data['Request-ID'] = self.api.request_id
-        data['URI'] = self.api.URI
-        data['Method'] = self.api.method
+        data['Request-ID'] = request.request_id
+        data['URI'] = request.URI
+        data['Method'] = request.method
 
         return tools.log_json(data, 4)

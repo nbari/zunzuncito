@@ -204,34 +204,30 @@ Contents of file **zun_default.py** located in "my_api/default/zun_default/zun_d
 """
 zun_default.py API resource
 """
-import json
 import logging
 from zunzuncito import tools
 
 
 class APIResource(object):
 
-    def __init__(self, api):
-        self.api = api
-        self.log = logging.getLogger()
-        self.log.info(tools.log_json({
-            'vroot': api.vroot,
-            'API': api.version,
-            'URI': api.URI,
-            'method': api.method
-        }, True)
-        )
+    @allow_methods('get, head')
+    def dispatch(self, request, response):
 
+        request.log.debug(tools.log_json({
+            'API': request.version,
+            'URI': request.URI,
+            'method': request.method,
+            'vroot': request.vroot
+        }, True))
 
-    @allow_methods('get')
-    def dispatch(self, environ):
         data = {}
         data['about'] = ("Hi %s, I am zunzuncito a micro-framework for creating"
                          " REST API's, you can read more about me in: "
-                         "www.zunzun.io") % environ.get('REMOTE_ADDR', 0)
-        data['request-id'] = self.api.request_id
-        data['URI'] = self.api.URI
-        data['method'] = self.api.method
+                         "www.zunzun.io") % request.environ.get('REMOTE_ADDR', 0)
+
+        data['Request-ID'] = request.request_id
+        data['URI'] = request.URI
+        data['Method'] = request.method
 
         return tools.log_json(data, 4)
 ```
@@ -290,7 +286,7 @@ handlers:
   static_files: favicon.ico
   upload: favicon\.ico
 
-- url: .*
+- url: /.*
   script: main.app
 
 ```
@@ -313,7 +309,8 @@ routes = {}
 routes['default'] = [
     ('/my/?.*', 'ip_tools', 'GET'),
     ('/status/?.*', 'http_status', 'GET'),
-    ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST')
+    ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST'),
+    ('/(.*\.(gif|png|jpg|ico|bmp|css|otf|eot|svg|ttf|woff))', 'static')
 ]
 
 app = zunzuncito.ZunZun(
