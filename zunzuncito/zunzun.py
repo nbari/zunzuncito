@@ -6,7 +6,7 @@ import logging
 import re
 import sys
 
-from itertools import ifilter
+from itertools import ifilter, chain
 from uuid import uuid4
 from zunzuncito import request
 from zunzuncito import response
@@ -118,9 +118,11 @@ class ZunZun(object):
             }, True)
             )
 
-        body = list(body)
+        # body = list(body)
+        chunk = next(body)
         start_response(res.get_status(), res.get_headers())
-        return body or []
+        return chain([chunk], body)
+        #return body or []
 
     def router(self, req):
         """
