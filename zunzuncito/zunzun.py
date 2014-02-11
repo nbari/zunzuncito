@@ -61,14 +61,6 @@ class ZunZun(object):
         """Handle a WSGI application request.
 
         See pep 3333
-
-        :param environ:
-            A WSGI environment
-        :param start_response:
-            A callable accepting a status code, a list of headers and an
-            optional exception context to start the response.
-        :returns:
-            An iterable with the response to return to the client.
         """
 
         if self.rid and self.rid in environ:
