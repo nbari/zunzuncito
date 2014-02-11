@@ -118,7 +118,7 @@ class ZunZun(object):
             }, True)
             )
 
-        list(body)
+        body = list(body)
         start_response(res.get_status(), res.get_headers())
         return body or []
 
