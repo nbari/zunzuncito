@@ -44,11 +44,15 @@ class APIResource(object):
         t = gevent.spawn(long_task)
         t.join()
 
+        yield "sleep 1 second.<br/>"
+
+        gevent.sleep(1)
+
         yield "sleeping for 3 seconds...<br/>"
 
         gevent.sleep(3)
 
-        yield "done<br/>"
+        yield 'done'
 
         yield "getting some ips...<br/>"
 
