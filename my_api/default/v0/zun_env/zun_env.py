@@ -7,6 +7,15 @@ from zunzuncito import tools
 
 class APIResource(object):
 
+    def __call__(self, response):
+        # response headers
+        pass
+
+    def headers(self, response):
+        # response headers
+        pass
+
+
     def dispatch(self, request, response):
 
         request.log.debug(tools.log_json({
