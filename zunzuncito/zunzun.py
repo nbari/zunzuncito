@@ -84,7 +84,8 @@ class ZunZun(object):
         res = response.Response(
             self.log,
             request_id,
-            self._headers.copy()
+            self._headers.copy(),
+            start_response
         )
 
         body = []
@@ -118,7 +119,7 @@ class ZunZun(object):
             }, True)
             )
 
-        start_response(res.get_status(), res.get_headers())
+        res.send()
         return body or []
 
     def router(self, req):

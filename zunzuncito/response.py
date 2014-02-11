@@ -8,11 +8,12 @@ from zunzuncito import tools
 
 class Response(object):
 
-    def __init__(self, logger, request_id, headers):
+    def __init__(self, logger, request_id, headers, start_response):
         self.log = logger
         self.headers = headers
         self.request_id = request_id
         self.status = 200
+        self.start_response = start_response
 
     def get_status(self):
 
@@ -42,3 +43,6 @@ class Response(object):
         self.headers['Request-ID'] = self.request_id
 
         return list(self.headers.items())
+
+    def send(self):
+        self.start_response(self.get_status(), self.get_headers())

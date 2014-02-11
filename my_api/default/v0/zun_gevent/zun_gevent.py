@@ -36,10 +36,12 @@ class APIResource(object):
 
         response.headers.update(self.headers)
 
-        """
-        not called while yielding
-        """
         response.headers['naranjas'] = '----'
+
+        """
+        calls start_response
+        """
+        response.send()
 
         t = gevent.spawn(long_task)
         t.join()
