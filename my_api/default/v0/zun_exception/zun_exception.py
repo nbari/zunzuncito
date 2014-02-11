@@ -6,14 +6,18 @@ from zunzuncito import tools
 
 class APIResource(object):
 
-    def __init__(self, api):
-        self.api = api
-
     @tools.allow_methods('get')
-    def dispatch(self, environ):
+    def dispatch(self, request, response):
+
+        request.log.debug(tools.log_json({
+            'API': request.version,
+            'Method': request.method,
+            'URI': request.URI,
+            'vroot': request.vroot
+        }, True))
 
         try:
-            name = self.api.path[0]
+            name = request.path[0]
         except:
             raise tools.HTTPException(400)
 

@@ -2,35 +2,27 @@
 http_status resource
 """
 
-import logging
-
 from zunzuncito.http_status_codes import codes
 from zunzuncito import tools
 
 
 class APIResource(object):
 
-    def __init__(self, api):
-        self.api = api
-        self.headers = api.headers.copy()
-        self.log = logging.getLogger()
-        self.log.info(tools.log_json({
-            'vroot': api.vroot,
-            'API': api.version,
-            'URI': api.URI,
-            'method': api.method
-        }, True)
-        )
-
     @tools.allow_methods('get')
-    def dispatch(self, environ):
+    def dispatch(self, request, response):
+        request.log.debug(tools.log_json({
+            'API': request.version,
+            'Method': request.method,
+            'URI': request.URI,
+            'vroot': request.vroot
+        }, True))
 
         data = {}
         try:
-            data['status code'] = codes[int(self.api.path[0], 0)]
-        except Exception as e:
+            data['status code'] = codes[int(request.path[0], 0)]
+        except Exception as _:
             data['status code'] = 'not found'
 
-        data['URI'] = self.api.URI
+        data['URI'] = request.URI
 
         return tools.log_json(data, 4)

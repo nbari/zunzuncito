@@ -2,27 +2,17 @@
 webob resource
 """
 
-import logging
-
 from webob import Request
 from zunzuncito import tools
 
 
 class APIResource(object):
 
-    def __init__(self, api):
-        self.api = api
-        self.log = logging.getLogger()
-        self.log.info(tools.log_json({
-            'vroot': api.vroot,
-            'API': api.version,
-            'URI': api.URI,
-            'method': api.method
-        }, True)
-        )
+    def dispatch(self, request, response):
+        req = Request(request.environ)
 
-    def dispatch(self, environ):
-        req = Request(environ)
+        # to get a post param
+        # field = req.POST['field']
 
         data = {}
         data['req-GET'] = req.GET

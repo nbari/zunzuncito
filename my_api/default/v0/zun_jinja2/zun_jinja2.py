@@ -2,7 +2,6 @@
 jinja2 resource
 """
 
-import logging
 import os
 
 from jinja2 import Environment, FileSystemLoader
@@ -14,23 +13,22 @@ jinja = Environment(autoescape=True, loader=FileSystemLoader(
 
 class APIResource(object):
 
-    def __init__(self, api):
-        self.api = api
-        self.log = logging.getLogger()
-        self.log.info(tools.log_json({
-            'vroot': api.vroot,
-            'API': api.version,
-            'URI': api.URI,
-            'method': api.method
-        }, True)
-        )
+    def __init__(self):
+        self.headers = {'Content-Type': 'text/html; charset=UTF-8'}
 
-    def dispatch(self, environ):
+    def dispatch(self, request, response):
+        request.log.debug(tools.log_json({
+            'API': request.version,
+            'Method': request.method,
+            'URI': request.URI,
+            'vroot': request.vroot
+        }, True))
 
-        self.api.headers['Content-Type'] = 'text/html; charset=UTF-8'
+        response.headers.update(self.headers)
+
 
         template_values = {
-            'IP': environ.get('REMOTE_ADDR', 0)
+            'IP': request.environ.get('REMOTE_ADDR', 0)
         }
 
         template = jinja.get_template('example.html')

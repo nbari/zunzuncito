@@ -3,41 +3,36 @@ hasher API resource
 """
 
 import hashlib
-import logging
 
 from zunzuncito import tools
 
 
 class APIResource(object):
 
-    def __init__(self, api):
-        self.api = api
-        self.log = logging.getLogger()
-        self.log.info(tools.log_json({
-            'vroot': api.vroot,
-            'API': api.version,
-            'URI': api.URI,
-            'method': api.method
-        }, True)
-        )
-
     @tools.allow_methods('get, post')
-    def dispatch(self, environ):
+    def dispatch(self, request, response):
 
-        hash_type = self.api.resource
+        request.log.debug(tools.log_json({
+            'API': request.version,
+            'Method': request.method,
+            'URI': request.URI,
+            'vroot': request.vroot
+        }, True))
 
-        if self.api.method == 'POST':
+        hash_type = request.resource
+
+        if request.method == 'POST':
             string = ''
 
             try:
-                length = int(environ.get('CONTENT_LENGTH', '0'))
+                length = int(request.environ.get('CONTENT_LENGTH', '0'))
             except ValueError:
                 length = 0
 
             if length != 0:
-                string = environ['wsgi.input'].read(length)
+                string = request.environ['wsgi.input'].read(length)
         else:
-            string = '/'.join(self.api.path)
+            string = '/'.join(request.path)
 
         data = {}
         data['type'] = hash_type
