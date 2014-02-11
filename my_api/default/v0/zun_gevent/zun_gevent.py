@@ -41,9 +41,6 @@ class APIResource(object):
         """
         response.headers['naranjas'] = '----'
 
-        yield response.headers
-
-
         t = gevent.spawn(long_task)
         t.join()
 
