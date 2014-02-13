@@ -1,33 +1,33 @@
 {% extends "!page.html" %}
 
 {% block extrahead %}
-var READTHEDOCS_DATA = {
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
+<!-- RTD <head> via mako adapter -->
+<script type="text/javascript">
+    var doc_version = "${current_version}";
+    var doc_slug = "${slug}";
+    var static_root = "${pathto('_static', 1)}"
+
+    // copied from:
+    // https://github.com/rtfd/readthedocs.org/commit/edbbb4c753454cf20c128d4eb2fef60d740debaa#diff-2f70e8d9361202bfe3f378d2ff2c510bR8
+    var READTHEDOCS_DATA = {
         project: "${slug}",
         version: "${current_version}",
         page: "${pagename}",
         theme: "${html_theme or ''}"
       };
-<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
+
+</script>
+<!-- end RTD <head> via mako adapter -->
+
+${parent.headers()}
+
 <style>
 body {
     font-family: 'Droid Sans', sans-serif;
 }
 </style>
 {% endblock %}
-
-{# To customize for your project, search and replace 'labibi' stuff.
-   You might also want to replace the UA- string for google analytics.
-
-   Set what you need in conf.py
-#}
-
-{#  set in conf.py: google_analytics_id = 'UA-36028965-1' #}
-{#  set in conf.py: disqus_shortname = 'labibi' #}
-
-{# set these in conf.py:
-  github_base_account = 'ctb'
-  github_project = 'labibi'
-#}
 
 {%- block body %}
 {{ super() }}
