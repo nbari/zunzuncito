@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.1.12 (2014-02-10)
+0.1.12 (2014-02-13)
 ...................
 
 * Fixed core to be `thread safe <http://en.wikipedia.org/wiki/Thread_safety>`_.
