@@ -2,7 +2,7 @@ gevent
 ======
 
 .. code-block:: python
-   :emphasize-lines: 3
+   :emphasize-lines: 40
    :linenos:
 
    import gevent
