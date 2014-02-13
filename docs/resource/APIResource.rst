@@ -56,21 +56,11 @@ Is handled by the custom python module ``zun_upload/zun_upload.py`` which conten
 
 
    class APIResource(object):
-       def __init__(self, api):
-           self.api = api
-           self.log = logging.getLogger()
-           self.log.info(tools.log_json({
-               'vroot': api.vroot,
-               'API': api.version,
-               'URI': api.URI,
-               'method': api.method
-           }, True)
-           )
 
        @tools.allow_methods('post, put')
-       def dispatch(self, environ):
+       def dispatch(self, request, response):
            try:
-               temp_name = self.api.path[0]
+               temp_name = request.path[0]
            except:
                raise tools.HTTPException(400)
 
@@ -78,9 +68,9 @@ Is handled by the custom python module ``zun_upload/zun_upload.py`` which conten
            see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html
            see http://www.grid.net.ru/nginx/resumable_uploads.en.html
            """
-           content_range = environ.get('HTTP_CONTENT_RANGE', 0)
+           content_range = request.environ.get('HTTP_CONTENT_RANGE', 0)
 
-           length = int(environ.get('CONTENT_LENGTH', 0))
+           length = int(request.environ.get('CONTENT_LENGTH', 0))
 
            if content_range:
                content_range = content_range.split()[1].split('/')
@@ -104,7 +94,7 @@ Is handled by the custom python module ``zun_upload/zun_upload.py`` which conten
            else:
                raise tools.HTTPException(400)
 
-           stream = environ['wsgi.input']
+           stream = request.environ['wsgi.input']
 
            body = []
 
@@ -138,9 +128,9 @@ Is handled by the custom python module ``zun_upload/zun_upload.py`` which conten
                        raise tools.HTTPException(416)
 
                if os.stat(temp_file).st_size == total_size:
-                   self.api.status = 200
+                   response.status = 200
                else:
-                   self.api.status = 201
+                   response.status = 201
                    body.append('%d-%d/%d' % (index, offset, total_size))
 
                self.log.info(tools.log_json({
