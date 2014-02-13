@@ -25,6 +25,8 @@ The following code will:
     * print 'sleep 3 second...' and call gevent.sleep(3),
     * print 'done. getting some ips...' call gevent.socket.gethostbyname
 
+An example of the output can be seen here: `https://www.youtube.com/watch?v=0N6qXkT-t5E& <https://www.youtube.com/watch?v=0N6qXkT-t5E&>`_;
+notice that the prints are secuencial not in one shot.
 
 .. code-block:: python
    :emphasize-lines: 38
