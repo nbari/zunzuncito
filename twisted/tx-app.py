@@ -51,8 +51,7 @@ hosts = {'*': 'default'}
 """
 routes = {'default': [
     ('/status/?.*', 'http_status', 'GET'),
-    ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST'),
-    ('/.*', 'default')
+    ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST')
 ]}
 
 app = zunzuncito.ZunZun(root, versions, hosts, routes, debug=False)
