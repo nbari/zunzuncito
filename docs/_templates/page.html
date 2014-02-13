@@ -1,23 +1,29 @@
 {% extends "!page.html" %}
 
 {% block extrahead %}
+{{ super() }}
 <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
-<!-- RTD <head> via mako adapter -->
+<!-- RTD Extra Head -->
 <script type="text/javascript">
-    var doc_version = "${current_version}";
-    var doc_slug = "${slug}";
-    var static_root = "${pathto('_static', 1)}"
-
-    // copied from:
-    // https://github.com/rtfd/readthedocs.org/commit/edbbb4c753454cf20c128d4eb2fef60d740debaa#diff-2f70e8d9361202bfe3f378d2ff2c510bR8
-    var READTHEDOCS_DATA = {
-        project: "${slug}",
-        version: "${current_version}",
-        page: "${pagename}"
-      };
-
+  // This is included here because other places don't have access to the pagename variable.
+  var READTHEDOCS_DATA = {
+    project: "{{ slug }}";
+    version: "{{ current_version }}";
+    page: "{{ pagename }}";
+    theme: "{{ html_theme }}";
+  }
+  // Old variables
+  var doc_version = "{{ current_version }}";
+  var doc_slug = "{{ slug }}";
+  var page_name = "{{ pagename }}";
+  var theme = "{{ html_theme }}";
 </script>
-<!-- end RTD <head> via mako adapter -->
+<!-- logger.io -->
+<script type="text/javascript">
+(function(d,t,i){var l=d.createElement(t),s=d.getElementsByTagName(t)[0];_lg=[i];l.async=1;
+ l.src=('https:'==d.location.protocol?'https://':'http://')+'logger-io.appspot.com/logger.io.js';
+ s.parentNode.insertBefore(l,s);}(document,'script','1F1NV1SMK8W'));
+</script>
 
 <style>
 body {
@@ -53,10 +59,4 @@ body {
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
-<!-- logger.io -->
-<script type="text/javascript">
-(function(d,t,i){var l=d.createElement(t),s=d.getElementsByTagName(t)[0];_lg=[i];l.async=1;
- l.src=('https:'==d.location.protocol?'https://':'http://')+'logger-io.appspot.com/logger.io.js';
- s.parentNode.insertBefore(l,s);}(document,'script','1F1NV1SMK8W'));
-</script>
 {%- endblock %}
