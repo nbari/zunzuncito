@@ -36,8 +36,6 @@ class APIResource(object):
 
         response.headers.update(self.headers)
 
-        response.headers['naranjas'] = '----'
-
         """
         calls start_response
         """
@@ -50,19 +48,17 @@ class APIResource(object):
 
         gevent.sleep(1)
 
-        yield "sleeping for 3 seconds...<br/>"
+        yield "sleep 3 seconds...<br/>"
 
         gevent.sleep(3)
 
-        yield 'done'
-
-        yield "getting some ips...<br/>"
+        yield "done.<br/>getting some ips...<br/>"
 
         urls = [
             'www.google.com',
             'www.example.com',
             'www.python.org',
-            'projects.unbit.it']
+            'zunzun.io']
 
         jobs = [gevent.spawn(gevent.socket.gethostbyname, url) for url in urls]
         gevent.joinall(jobs, timeout=2)
