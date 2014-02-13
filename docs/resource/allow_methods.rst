@@ -9,10 +9,9 @@ Example
 
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 6
+   :emphasize-lines: 5
 
 
-   import logging
    from zunzuncito import tools
 
    class APIResource(object):

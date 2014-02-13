@@ -30,7 +30,7 @@ The following code, handles the request for: `http://api.zunzun.io/jinja2 <http:
 
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 4, 26, 34
+   :emphasize-lines: 3, 13, 32
 
    import os
 
