@@ -1,6 +1,18 @@
 gevent
 ======
 
+`gevent <http://www.gevent.org/>`_ is a coroutine-based Python networking library that uses greenlet to
+provide a high-level synchronous API on top of the libev event loop.
+
+
+When using gevent and 'yield' you may want to call the 'start_response' before
+so that it can send your proper headers, for this you must use something like:
+
+.. seealso::
+
+   `The start_response() Callable <http://www.python.org/dev/peps/pep-0333/#the-start-response-callable>`_
+
+
 .. code-block:: python
    :emphasize-lines: 40
    :linenos:
