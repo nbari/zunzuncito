@@ -95,9 +95,11 @@ class ZunZun(object):
 
             self.log.warning(tools.log_json({
                 'API': req.version,
-                'URI': req.URI,
                 'HTTPError': e.status,
-                'body': e.to_dict()
+                'URI': req.URI,
+                'body': e.to_dict(),
+                'method': req.method,
+                'rid': req.request_id
             }, True)
             )
 
@@ -107,6 +109,7 @@ class ZunZun(object):
                 'API': req.version,
                 'Exception': e,
                 'URI': req.URI,
+                'method': req.method,
                 'rid': req.request_id
             }, True)
             )
