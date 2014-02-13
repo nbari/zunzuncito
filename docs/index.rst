@@ -22,5 +22,6 @@ Table of Contents
    zunzuncito
    webob
    jinja2
+   gevent
    changelog
    issues
