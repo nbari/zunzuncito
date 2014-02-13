@@ -12,7 +12,6 @@ Basic template
 
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 4, 17
 
 
    from zunzuncito import tools
@@ -30,7 +29,7 @@ The default `HTTP status code <http://en.wikipedia.org/wiki/List_of_HTTP_status_
 is 200, but based on your needs you can change it to fit you response very eazy
 by just doing something like::
 
-    self.api.status = 201
+    response.status = 201
 
 Headers
 .......
@@ -68,9 +67,9 @@ Example
                name = ''
 
            if name:
-               request.headers['my_custom_header'] = name
+               response.headers['my_custom_header'] = name
            else:
-               request.status = 406
+               response.status = 406
 
            response.headers.update(self.headers)
 
