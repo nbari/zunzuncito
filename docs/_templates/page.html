@@ -1,6 +1,12 @@
 {% extends "!page.html" %}
 
 {% block extrahead %}
+var READTHEDOCS_DATA = {
+        project: "${slug}",
+        version: "${current_version}",
+        page: "${pagename}",
+        theme: "${html_theme or ''}"
+      };
 <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
 <style>
 body {
