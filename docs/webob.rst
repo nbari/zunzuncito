@@ -31,10 +31,7 @@ The following code, handles the request for `http://api.zunzun.io/webob <http://
 
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 3, 21
-
-
-   import logging
+   :emphasize-lines: 1, 9
 
    from webob import Request
    from zunzuncito import tools
@@ -42,19 +39,9 @@ The following code, handles the request for `http://api.zunzun.io/webob <http://
 
    class APIResource(object):
 
-       def __init__(self, api):
-           self.api = api
-           self.log = logging.getLogger()
-           self.log.info(tools.log_json({
-               'vroot': api.vroot,
-               'API': api.version,
-               'URI': api.URI,
-               'method': api.method
-           }, True)
-           )
 
-       def dispatch(self, environ):
-           req = Request(environ)
+       def dispatch(self, request, response):
+           req = Request(request.environ)
 
            data = {}
            data['req-GET'] = req.GET
