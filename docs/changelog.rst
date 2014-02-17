@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.1.13 (2014-02-17)
+...................
+
+* Added the log option to the HTTPException, it set to True it will log the
+  exception otherwise not.
+
 0.1.12 (2014-02-13)
 ...................
 
