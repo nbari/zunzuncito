@@ -24,12 +24,12 @@ Example
 Response object contents
 .......................
 
-============== =======================================================================================================
+============== ========================================================================================================
 Name           Description
-============== =======================================================================================================
-log            `logger <http://docs.python.org/2/library/logging.html>`_ intance
-request_id     The `request id </en/latest/zunzun/Rid.html>`_
-headers        A `CaseInsensitiveDict </en/latest/tools/CaseInsensitiveDict.html> instance.
-status         200 an int respresenting an `HTTP status code </en/latest/http_status_codes.html>`_
-start_response `The start_response() Callable <http://www.python.org/dev/peps/pep-0333/#the-start-response-callable>`_
-============== =======================================================================================================
+============== ========================================================================================================
+log            `logger <http://docs.python.org/2/library/logging.html>`_ intance.
+request_id     The `request id </en/latest/zunzun/Rid.html>`_.
+headers        A `CaseInsensitiveDict </en/latest/tools/CaseInsensitiveDict.html> instance, for storing the headers.
+status         Default **200** an int respresenting an `HTTP status code </en/latest/http_status_codes.html>`_.
+start_response `The start_response() Callable <http://www.python.org/dev/peps/pep-0333/#the-start-response-callable>`_.
+============== ========================================================================================================
