@@ -93,15 +93,15 @@ class ZunZun(object):
             if e.display:
                 body.append(e.to_json())
 
-            self.log.warning(tools.log_json({
-                'API': req.version,
-                'HTTPError': e.status,
-                'URI': req.URI,
-                'body': e.to_dict(),
-                'method': req.method,
-                'rid': req.request_id
-            }, True)
-            )
+            if e.log:
+                self.log.warning(tools.log_json({
+                    'API': req.version,
+                    'HTTPError': e.status,
+                    'URI': req.URI,
+                    'body': e.to_dict(),
+                    'method': req.method,
+                    'rid': req.request_id
+                }, True))
 
         except Exception as e:
             res.status = 500
