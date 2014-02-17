@@ -30,7 +30,7 @@ Name       Description
 log        `logger <http://docs.python.org/2/library/logging.html>`_ intance
 request_id The `request id </en/latest/zunzun/Rid.html>`_
 environ    The `wsgi environ <http://www.python.org/dev/peps/pep-0333/#environ-variables>`_
-URI        'REQUEST_URI' or 'PATH_INFO'
+URI        `REQUEST_URI or PATH_INFO <http://en.wikipedia.org/wiki/URI_scheme>`_
 host       The `host </en/latest/zunzun/Hosts.html>`_ name.
 method     The request method (GET, POST, HEAD, etc)
 path       `list of URI elements </en/latest/resource/path.html>`_
