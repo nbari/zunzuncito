@@ -9,23 +9,11 @@ a set of classes and functions that help to proccess the reply of the request mo
    :emphasize-lines: 2
 
 
-   import logging
    from zunzuncito import tools
 
    class APIResource(object):
 
-       def __init__(self, api):
-           self.api = api
-           self.log = logging.getLogger()
-           self.log.info(tools.log_json({
-               'vroot': api.vroot,
-               'API': api.version,
-               'URI': api.URI,
-               'method': api.method
-           }, True)
-           )
-
-       def dispatch(self, environ):
+       def dispatch(self, request, response):
            """ your code goes here """
 
 .. toctree::

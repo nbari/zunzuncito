@@ -3,15 +3,15 @@ HTTPException
 
 The ``HTTPException`` class extends the `HTTPError <https://github.com/nbari/zunzuncito/blob/master/zunzuncito/tools.py#L13>`_
 class, the main idea of it, is to handle posible erros and properly reply with the corresponding
-`HTTP status code  </en/latest/http_status_codes.html>`_
+`HTTP status code  </en/latest/http_status_codes.html>`_::
 
+    HTTPException(status, title=None, description=None, headers=None, code=None, display=False, log=True):
 
-Example
-.......
-
+Redirect example
+................
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 13
+   :emphasize-lines: 10,11,12,13
 
 
    from zunzuncito import tools
@@ -19,12 +19,32 @@ Example
 
    class APIResource(object):
 
-       def __init__(self, api):
-           self.api = api
-
-       def dispatch(self, environ):
+       def dispatch(self, request, response):
            try:
-               name = self.api.path[0]
+               name = request.path[0]
+           except:
+               raise tools.HTTPException(
+                   302,
+                   headers={'Location': '/home'},
+                   log=False}
+
+
+Bad request example
+...................
+
+.. code-block:: python
+   :linenos:
+   :emphasize-lines: 10
+
+
+   from zunzuncito import tools
+
+
+   class APIResource(object):
+
+       def dispatch(self, request, response):
+           try:
+               name = request.path[0]
            except:
                raise tools.HTTPException(400)
 
