@@ -3,9 +3,19 @@ HTTPException
 
 The ``HTTPException`` class extends the `HTTPError <https://github.com/nbari/zunzuncito/blob/master/zunzuncito/tools.py#L13>`_
 class, the main idea of it, is to handle posible erros and properly reply with the corresponding
-`HTTP status code  </en/latest/http_status_codes.html>`_::
+`HTTP status code  </en/latest/http_status_codes.html>`_.
 
-    HTTPException(status, title=None, description=None, headers=None, code=None, display=False, log=True):
+
+.. code-block:: python
+
+   HTTPException(status, title=None, description=None, headers=None, code=None, display=False, log=True)
+
+
+.. note ::
+
+   Description argument must be a `dictionary <http://docs.python.org/2/tutorial/datastructures.html#dictionaries>`_
+   containing `HTTP header fields <http://en.wikipedia.org/wiki/List_of_HTTP_header_fields>`_
+
 
 Redirect example
 ................

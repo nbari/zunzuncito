@@ -6,7 +6,7 @@ a set of classes and functions that help to proccess the reply of the request mo
 
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 2
+   :emphasize-lines: 1
 
 
    from zunzuncito import tools
