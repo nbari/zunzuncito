@@ -119,7 +119,7 @@ Besides only replying with the headers you may want to give a more informative
 
 .. code-block:: python
 
-   HTTPException(status, title=None, description=None, headers=None, code=None, display=False)
+   HTTPException(status, title=None, description=None, headers=None, code=None, display=False, log=True)
 
 
 For example the following snippet of code taken from `zun_exception.py <https://github.com/nbari/zunzuncito/blob/master/my_api/default/v0/zun_exception/zun_exception.py>`_:
