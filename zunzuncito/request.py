@@ -14,7 +14,6 @@ class Request(object):
         self.method = environ['REQUEST_METHOD']
         self.path = []
         self.resource = None
-        self.status = 200
         self.version = None
         self.vroot = 'default'
 
