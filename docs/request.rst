@@ -27,7 +27,7 @@ Request object contents
 ========== ================================================================================
 Name       Description
 ========== ================================================================================
-log        logger intance
+log        `logger <http://docs.python.org/2/library/logging.html>`_ intance
 request_id The `request id </en/latest/zunzun/Rid.html>`_
 environ    The `wsgi environ <http://www.python.org/dev/peps/pep-0333/#environ-variables>`_
 URI        'REQUEST_URI' or 'PATH_INFO'
