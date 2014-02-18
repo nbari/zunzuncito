@@ -22,8 +22,10 @@ class APIResource(object):
             request.host,
             request.vroot)
 
+        data['Method'] = request.method
         data['Request-ID'] = request.request_id
         data['URI'] = request.URI
-        data['Method'] = request.method
+        data['host'] = request.host
+        data['vroot'] = request.vroot
 
         return tools.log_json(data, 4)
