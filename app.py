@@ -53,16 +53,14 @@ hosts = {
 """
 routes = {}
 routes['default'] = [
-    ('/teste', 'test_get', 'GET'),
-    ('/teste', 'test_post', 'POST'),
-    ('/teste', 'test_put', 'PUT'),
     ('/my/?.*', 'ip_tools', 'GET'),
     ('/status/?.*', 'http_status', 'GET'),
     ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST'),
-    ('/(.*\.(gif|png|jpg|ico|bmp|css|otf|eot|svg|ttf|woff))', 'static')
+    (r'/(.*\.(gif|png|jpg|ico|bmp|css|otf|eot|svg|ttf|woff))', 'static')
 ]
 routes['beta_zunzun_io'] = [
-    ('/.*', 'default'),
+    ('/test/?.*', 'test'),
+    ('/.*', 'default')
 ]
 
 app = zunzuncito.ZunZun(

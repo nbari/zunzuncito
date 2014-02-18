@@ -6,20 +6,17 @@ from zunzuncito import tools
 
 class APIResource(object):
 
-    def __init__(self, api):
-        self.api = api
-
     @tools.allow_methods('get')
-    def dispatch(self, environ):
+    def dispatch(self, request, response):
 
         try:
-            name = self.api.path[0]
-        except:
+            name = request.path[0]
+        except Exception:
             name = ''
 
         if name:
-            self.api.headers['my_custom_header'] = name
+            response.headers['my_custom_header'] = name
         else:
-            self.api.status = 406
+            response.status = 406
 
         return 'Name: ' + name

@@ -5,31 +5,16 @@ Upload by chunks
 
 @see http://www.grid.net.ru/nginx/resumable_uploads.en.html
 """
-import logging
 import os
 from zunzuncito import tools
-from zunzuncito import http_status_codes
 
 
 class APIResource(object):
 
-    def __init__(self, api):
-        self.api = api
-        self.status = 200
-        self.headers = api.headers.copy()
-        self.log = logging.getLogger()
-        self.log.info(tools.log_json({
-            'vroot': api.vroot,
-            'API': api.version,
-            'URI': api.URI,
-            'method': api.method
-        }, True)
-        )
-
     @tools.allow_methods('post, put')
-    def dispatch(self, environ, start_response):
+    def dispatch(self, request, response):
         try:
-            temp_name = self.api.path[0]
+            temp_name = request.path[0]
         except:
             raise tools.HTTPException(400)
 
@@ -37,9 +22,9 @@ class APIResource(object):
         see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html
         see http://www.grid.net.ru/nginx/resumable_uploads.en.html
         """
-        content_range = environ.get('HTTP_CONTENT_RANGE', 0)
+        content_range = request.environ.get('HTTP_CONTENT_RANGE', 0)
 
-        length = int(environ.get('CONTENT_LENGTH', 0))
+        length = int(request.environ.get('CONTENT_LENGTH', 0))
 
         if content_range:
             content_range = content_range.split()[1].split('/')
@@ -63,7 +48,7 @@ class APIResource(object):
         else:
             raise tools.HTTPException(400)
 
-        stream = environ['wsgi.input']
+        stream = request.environ['wsgi.input']
 
         body = []
 
@@ -97,24 +82,21 @@ class APIResource(object):
                     raise tools.HTTPException(416)
 
             if os.stat(temp_file).st_size == total_size:
-                self.status = 200
+                response.status = 200
             else:
-                self.status = 201
+                response.status = 201
                 body.append('%d-%d/%d' % (index, offset, total_size))
 
-            self.log.info(tools.log_json({
+            request.log.info(tools.log_json({
                 'index': index,
                 'offset': offset,
                 'size': total_size,
                 'temp_file': temp_file,
-                'status': self.status,
-                'env': environ
+                'status': response.status,
+                'env': request.environ
             }, True)
             )
 
-            start_response(
-                getattr(http_status_codes, 'HTTP_%d' %
-                        self.status), list(self.headers.items()))
             return body
         except IOError:
             raise tools.HTTPException(
