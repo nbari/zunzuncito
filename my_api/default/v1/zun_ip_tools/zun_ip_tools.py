@@ -1,44 +1,42 @@
 """
-default resource
+v1 ip_tools resource
 """
-import json
-import logging
+
 import socket
 import struct
-from zunzuncito import http_status_codes
-from zunzuncito.tools import MethodException, HTTPException, allow_methods
+from zunzuncito import tools
 
 
 class APIResource(object):
 
-    def __init__(self, api):
-        self.api = api
-        self.status = 200
-        self.headers = api.headers.copy()
+    @tools.allow_methods('get')
+    def dispatch(self, request, response):
+        request.log.debug(tools.log_json({
+            'API': request.version,
+            'Method': request.method,
+            'URI': request.URI,
+            'vroot': request.vroot
+        }, True))
 
-    @allow_methods('get')
-    def dispatch(self, environ, start_response):
-        headers = self.api.headers
-        start_response(
-            getattr(http_status_codes, 'HTTP_%d' %
-                    self.status), list(headers.items()))
         data = {}
         try:
-            my_ip = True if self.api.path[0] == 'ip' else False
-        except:
+            my_ip = True if request.path[0] == 'ip' else False
+        except Exception:
             my_ip = False
 
         if my_ip:
-            ip = environ.get('REMOTE_ADDR', 0)
+            ip = request.environ.get('REMOTE_ADDR', 0)
             data['ip'] = ip
             data['inet_aton'] = struct.unpack("!I", socket.inet_aton(ip))[0]
         else:
-            data['API'] = self.api.version
-            data['ip'] = environ.get('REMOTE_ADDR', 0)
-            data['URI'] = self.api.URI
-            data['method'] = self.api.method
-            data['city'] = environ.get('HTTP_X_APPENGINE_CITY', 0)
-            data['latlong'] = environ.get('HTTP_X_APPENGINE_CITYLATLONG', 0)
-            data['country'] = environ.get('HTTP_X_APPENGINE_COUNTRY', 0)
+            data['API'] = request.version
+            data['ip'] = request.environ.get('REMOTE_ADDR', 0)
+            data['URI'] = request.URI
+            data['method'] = request.method
+            data['city'] = request.environ.get('HTTP_X_APPENGINE_CITY', 0)
+            data['latlong'] = request.environ.get(
+                'HTTP_X_APPENGINE_CITYLATLONG', 0)
+            data['country'] = request.environ.get(
+                'HTTP_X_APPENGINE_COUNTRY', 0)
 
-        return json.dumps(data, sort_keys=True, indent=4)
+        return tools.log_json(data, 4)
