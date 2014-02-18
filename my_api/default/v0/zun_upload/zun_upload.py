@@ -93,8 +93,7 @@ class APIResource(object):
                 'size': total_size,
                 'status': response.status,
                 'temp_file': temp_file
-            }, True)
-            )
+            }, True))
 
             return body
         except IOError:

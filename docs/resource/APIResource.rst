@@ -133,15 +133,13 @@ Is handled by the custom python module ``zun_upload/zun_upload.py`` which conten
                    response.status = 201
                    body.append('%d-%d/%d' % (index, offset, total_size))
 
-               self.log.info(tools.log_json({
+               request.log.info(tools.log_json({
                    'index': index,
                    'offset': offset,
                    'size': total_size,
-                   'temp_file': temp_file,
-                   'status': self.status,
-                   'env': environ
-               }, True)
-               )
+                   'status': response.status,
+                   'temp_file': temp_file
+               }, True))
 
                return body
            except IOError:
