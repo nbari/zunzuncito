@@ -91,9 +91,8 @@ class APIResource(object):
                 'index': index,
                 'offset': offset,
                 'size': total_size,
-                'temp_file': temp_file,
                 'status': response.status,
-                'env': request.environ
+                'temp_file': temp_file
             }, True)
             )
 
