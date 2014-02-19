@@ -6,8 +6,7 @@ the ``response`` class creates an object for every request, the one can be used 
 `custom headers <http://en.wikipedia.org/wiki/List_of_HTTP_header_fields>`_ or
 `HTTP status codes </en/latest/http_status_codes.html>`_.
 
-Example
-.......
+The second argument for the dispatch method is the response object:
 
 .. code-block:: python
    :linenos:
