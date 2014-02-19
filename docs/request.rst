@@ -43,7 +43,7 @@ Example
 
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 7
+   :emphasize-lines: 8
 
    from urlparse import parse_qsl
    from zunzuncito import tools
