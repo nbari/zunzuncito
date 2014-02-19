@@ -38,3 +38,38 @@ resource   Name of the API resource
 version    Current `version </en/latest/zunzun/Versions.html>`_
 vroot      Name of the `vroot </en/latest/zunzun/Hosts.html?highlight=vroot>`_
 ========== ================================================================================
+
+Example
+.......
+
+.. code-block:: python
+   :linenos:
+   :emphasize-lines: 7
+
+   from urlparse import parse_qsl
+   from zunzuncito import tools
+
+   class APIResource(object):
+
+
+       @tools.allow_methods('get, post')
+       def dispatch(self, request, response):
+
+          """
+          log this request
+          """
+          request.log.info(tools.log_json({
+              'API': request.version,
+              'Method': request.method,
+              'URI': request.URI,
+              'vroot': request.vroot
+          }, True))
+
+          if request.method == 'POST':
+              data = dict(parse_qsl(request.environ['wsgi.input'].read(), True))
+          else
+              data = dict(parse_qsl(request.environ['QUERY_STRING'], True))
+
+          data = {k: v.decode('utf-8') for k, v in data.items()}
+
+          return tools.log_json(data)
