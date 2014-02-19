@@ -6,8 +6,7 @@ a **request object** is created and  passed as an
 argument to the `dispatch </latest/resource/dispatch_method.html>`_
 method of the `APIResource class </latest/resource/APIResource.html>`_
 
-Example
-.......
+The first argument for the dispatch method is the request::
 
 .. code-block:: python
    :linenos:
