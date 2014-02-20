@@ -62,7 +62,7 @@ this:
 
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 2,3
+   :emphasize-lines: 3
 
    routes = {'default':[
        ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST'),
@@ -71,5 +71,52 @@ this:
    ]}
 
 That could solve the problem, but forces you to have a route for every module,
-the more modules you have, the more complicated and dificult becomes to maintein
-the routes dictionary.
+the more modules you have, the more complicated and dificult becomes to
+maintain the routes dictionary.
+
+So, be available to have regular expresions mathing many to one module, to
+continue serving directly from modules that don't need a regex, and to also have
+a catchall that does not need require a regex and it is olny called when all
+the routes and modules options have been exhauste, the **_catchall** module was
+created.
+
+How it works
+............
+
+The only thing required, is to create a module with the name ``__catchall``, if
+using the default prefix, it would be ``zun__catchall``.
+
+* Notice the double ``__catchall`` underscore
+
+.. sealso::
+
+    The `zun prefix </en/latest/zunzun/Prefix.html>`
+
+Directory structure
+...................
+
+.. code-block:: rest
+   :emphasize-lines: 19
+   :linenos:
+
+   /home/
+     `--zunzun/
+        |--app.py
+        `--my_api
+           |--__init__.py
+           `--default
+              |--__init__.py
+              `--v0
+                 |--__init__.py
+                 |--zun_default
+                 |  |--__init__.py
+                 |  `--zun_default.py
+                 |--zun_hasher
+                 |  |--__init__.py
+                 |  `--zun_hasher.py
+                 |--zun_gevent
+                 |  |--__init__.py
+                 |  `--zun_gevent.py
+                 `--zun__catchall
+                    |--__init__.py
+                    `--zun__catchall.py
