@@ -6,7 +6,7 @@ example using the following directory structure notice we only have 2 modules,
 ``zun_default``, ``zun_hassher`` and ``zun_gevent``.
 
 .. code-block:: rest
-   :emphasize-lines: 10, 13
+   :emphasize-lines: 10, 13, 16
    :linenos:
 
    /home/
@@ -33,11 +33,11 @@ more then one request into one module, for example:
 
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 3,4
+   :emphasize-lines: 2,3
 
    routes = {'default':[
        ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST'),
-       ('/.*', 'default')
+       ('/.*', 'notfound')
    ]}
 
 For example the ``zun_hasher`` module will handle all the request for URI containing::
@@ -48,10 +48,28 @@ But the regex::
 
     '/.*'
 
-Will match anything and send it to the ``zun_default`` module, the problem
+Will match anything and send it to the ``zun_notfound`` module, the problem
 with this regex, is that since it will catch anything, if you make a request
 for example to::
 
     api.zunzun.io/gevent
 
-It will answerd by the ``zun_default`` since the regex catched the request.
+It will be processed by the ``zun_notfound`` since the regex catched the
+request.
+
+A solution to this, could be to add a route for the gevent request, something like
+this:
+
+.. code-block:: python
+   :linenos:
+   :emphasize-lines: 2,3
+
+   routes = {'default':[
+       ('/(md5|sha1|sha256|sha512)(/.*)?', 'hasher', 'GET, POST'),
+       ('/gevent/?.*', 'gevent'),
+       ('/.*', 'notfound')
+   ]}
+
+That could solve the problem, but forces you to have a route for every module,
+the more modules you have, the more complicated and dificult becomes to maintein
+the routes dictionary.
