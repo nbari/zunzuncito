@@ -90,7 +90,7 @@ using the default prefix, it would be ``zun__catchall``.
 
 .. seealso::
 
-    The `zun prefix </en/latest/zunzun/Prefix.html>`
+    The `zun prefix </en/latest/zunzun/Prefix.html>`_
 
 Directory structure
 ...................
