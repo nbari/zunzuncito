@@ -136,7 +136,7 @@ request, and redirect to '/'.
 
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 21
+   :emphasize-lines: 23
 
    """
    catchall resource
