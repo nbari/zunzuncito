@@ -124,8 +124,8 @@ Directory structure
 
 When processing a request, if not module is found either in the routes or in
 the directory structure, if the If the ``__catchall`` module is found, it is
-goint to be used for handling the request, if not it will just return an HTTP
-501 Not Implementd status.
+goint to be used for handling the request, if not it will just return an
+`HTTP 501 Not Implementd status </en/latest/http_status_codes.html>`_.
 
 
 Example
