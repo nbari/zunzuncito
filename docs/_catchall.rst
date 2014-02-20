@@ -120,3 +120,9 @@ Directory structure
                  `--zun__catchall
                     |--__init__.py
                     `--zun__catchall.py
+
+
+When processing a request, if not module is found either in the routes or in
+the directory structure, if the If the ``__catchall`` module is found, it is
+goint to be used for handling the request, if not it will just return an HTTP
+501 Not Implementd status.
