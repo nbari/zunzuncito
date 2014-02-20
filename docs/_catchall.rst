@@ -126,3 +126,38 @@ When processing a request, if not module is found either in the routes or in
 the directory structure, if the If the ``__catchall`` module is found, it is
 goint to be used for handling the request, if not it will just return an HTTP
 501 Not Implementd status.
+
+
+Example
+.......
+
+The following example, will handle all *not found* modules for the incoming
+request, and redirect to '/'.
+
+.. code-block:: python
+   :linenos:
+   :emphasize-lines: 21
+
+   """
+   catchall resource
+   """
+
+   from zunzuncito import tools
+
+
+   class APIResource(object):
+
+       def __init__(self):
+           self.headers = {'Content-Type': 'text/html; charset=UTF-8'}
+
+       def dispatch(self, request, response):
+           request.log.debug(tools.log_json({
+               'API': request.version,
+               'URI': request.URI,
+               'rid': request.request_id,
+               'vroot': request.vroot
+           }, True))
+
+           response.headers.update(self.headers)
+
+           raise tools.HTTPException(302, headers={'Location': '/'}, log=False)
