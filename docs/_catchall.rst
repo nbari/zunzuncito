@@ -86,9 +86,9 @@ How it works
 The only thing required, is to create a module with the name ``__catchall``, if
 using the default prefix, it would be ``zun__catchall``.
 
-* Notice the double ``__catchall`` underscore
+* Notice the double ``__catchall`` underscore.
 
-.. sealso::
+.. seealso::
 
     The `zun prefix </en/latest/zunzun/Prefix.html>`
 
