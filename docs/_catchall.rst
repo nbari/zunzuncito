@@ -6,7 +6,7 @@ example using the following directory structure notice we only have 2 modules,
 ``default`` and ``hassher``
 
 .. code-block:: rest
-   :emphasize-lines: 3,4,6,8,16
+   :emphasize-lines: 10, 13
    :linenos:
 
    /home/
