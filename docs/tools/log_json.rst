@@ -33,23 +33,19 @@ Example
    :emphasize-lines: 9,10,11,12,13,14,15
 
 
-   import logging
    from zunzuncito import tools
 
    class APIResource(object):
 
-       def __init__(self, api):
-           self.api = api
-           self.log = logging.getLogger()
-           self.log.info(tools.log_json({
-               'vroot': api.vroot,
-               'API': api.version,
-               'URI': api.URI,
-               'method': api.method
-           }, True)
-           )
+       def dispatch(self, request, response):
 
-       def dispatch(self, environ):
+           request.log.debug(tools.log_json({
+               'API': request.version,
+               'Method': request.method,
+               'URI': request.URI,
+               'vroot': request.vroot
+           }, True))
+
            """ your code goes here """
 
 
