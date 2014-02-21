@@ -30,7 +30,7 @@ Example
 
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 9,10,11,12,13,14,15
+   :emphasize-lines: 7
 
 
    from zunzuncito import tools
