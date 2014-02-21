@@ -16,7 +16,7 @@ snippet taken from `zun_self.py <https://github.com/nbari/zunzuncito/blob/master
 
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 10
+   :emphasize-lines: 5
 
 
     def dispatch(self, request, response):
