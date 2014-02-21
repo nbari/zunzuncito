@@ -32,3 +32,33 @@ headers        A `CaseInsensitiveDict </en/latest/tools/CaseInsensitiveDict.html
 status         Default **200** an int respresenting an `HTTP status code </en/latest/http_status_codes.html>`_.
 start_response `The start_response() Callable <http://www.python.org/dev/peps/pep-0333/#the-start-response-callable>`_.
 ============== ========================================================================================================
+
+
+Example
+.......
+
+.. code-block:: python
+   :linenos:
+   :emphasize-lines: 9
+
+   from zunzuncito import tools
+
+
+   class APIResource(object):
+
+       def __init__(self):
+           self.headers['Content-Type'] = 'text/html; charset=UTF-8'
+
+       def dispatch(self, request, response):
+
+           response.headers.update(self.headers)
+
+           try:
+               name = request.path[0]
+           except Exception:
+               name = ''
+
+          if name:
+                return 'Name: ' + name
+
+           response.status =  406

@@ -24,7 +24,7 @@ custom module only accepts 'GET' methods from this code snippet:
    :emphasize-lines: 1
 
    @tools.allow_methods('get')
-   def dispatch(self, environ):
+   def dispatch(self, request, response):
 
 
 Therefor if you try the following::
