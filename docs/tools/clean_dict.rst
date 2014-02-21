@@ -19,18 +19,13 @@ snippet taken from `zun_self.py <https://github.com/nbari/zunzuncito/blob/master
    :emphasize-lines: 10
 
 
-    @tools.allow_methods('get')
-    def dispatch(self, environ, start_response):
-         headers = self.api.headers
-        start_response(
-            getattr(http_status_codes, 'HTTP_%d' %
-                    self.status), list(headers.items()))
+    def dispatch(self, request, response):
 
         return (
             json.dumps(
-                tools.clean_dict(self.api.__dict__),
+                tools.clean_dict(request.__dict__),
                 sort_keys=True,
                 indent=4)
         )
         # taking advantage of the tools.log_json
-        # return tools.log_json(self.api.__dict__, 4)
+        # return tools.log_json(request.__dict__, 4)
