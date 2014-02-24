@@ -111,8 +111,7 @@ class ZunZun(object):
                 'URI': req.URI,
                 'method': req.method,
                 'rid': req.request_id
-            }, True)
-            )
+            }, True))
 
         res.send()
         return body or []
@@ -138,8 +137,7 @@ class ZunZun(object):
             'URI': req.URI,
             'rid': req.request_id,
             'versions': self.versions
-        }, True)
-        )
+        }, True))
 
         """
         find a python module (py_mod) to handle the request per host
@@ -178,8 +176,7 @@ class ZunZun(object):
                         'regex_match': (r.pattern, req.URI),
                         'rid': req.request_id,
                         'methods': h
-                    }, True)
-                    )
+                    }, True))
                     break
 
         """
@@ -216,8 +213,7 @@ class ZunZun(object):
                 'URI': req.URI,
                 'dispatching': (module_name, module_path),
                 'rid': req.request_id
-            }, True)
-            )
+            }, True))
             return self.resources[module_path]
 
         req.log.debug(tools.log_json({
@@ -226,8 +222,7 @@ class ZunZun(object):
             'URI': req.URI,
             'loading': (module_name, module_path),
             'rid': req.request_id
-        }, True)
-        )
+        }, True))
 
         try:
             __import__(module_path, fromlist=[''])
@@ -275,5 +270,4 @@ class ZunZun(object):
                     "regex": regex,
                     "py_mod": module,
                     "methods": methods
-                }, True)
-                )
+                }, True))
