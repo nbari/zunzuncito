@@ -36,7 +36,8 @@ Multitenant support
 hosts = {
     '*': 'default',
     'api.zunzun.io': 'default',
-    'beta.zunzun.io': 'beta_zunzun_io'
+    'beta.zunzun.io': 'beta_zunzun_io',
+    'oic.zunzun.io': 'oic'
 }
 
 """Routes dictionary
