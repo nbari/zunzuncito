@@ -30,3 +30,27 @@ this will be generated::
     version = v0
     resource = gevent
     path = ['aa', 'bb']
+
+
+Example
+.......
+
+.. code-block:: python
+   :linenos:
+   :emphasize-lines: 11, 21
+
+   from zunzuncito import tools
+
+
+   class APIResource(object):
+
+       def dispatch(self, request, response):
+
+           response.headers.update(self.headers)
+
+           try:
+               name = request.path[0]
+           except Exception:
+               name = ''
+
+           return 'Name: ' + name
