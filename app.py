@@ -63,6 +63,9 @@ routes['beta_zunzun_io'] = [
     ('/test/?.*', 'test'),
     ('/.*', 'default')
 ]
+routes['oic'] = [
+    (r'/(.*\.(gif|png|jpg|ico|bmp|css|otf|eot|svg|ttf|woff))', 'static')
+]
 
 app = zunzuncito.ZunZun(
     root,
