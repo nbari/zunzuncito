@@ -37,6 +37,7 @@ hosts = {
     '*': 'default',
     'api.zunzun.io': 'default',
     'beta.zunzun.io': 'beta_zunzun_io',
+    'oauth.zunzun.io': 'oauth',
     'oic.zunzun.io': 'oic'
 }
 
@@ -62,6 +63,9 @@ routes['default'] = [
 routes['beta_zunzun_io'] = [
     ('/test/?.*', 'test'),
     ('/.*', 'default')
+]
+routes['oauth'] = [
+    (r'/(.*\.(gif|png|jpg|ico|bmp|css|otf|eot|svg|ttf|woff))', 'static')
 ]
 routes['oic'] = [
     (r'/(.*\.(gif|png|jpg|ico|bmp|css|otf|eot|svg|ttf|woff))', 'static')
