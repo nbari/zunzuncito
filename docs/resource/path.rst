@@ -37,7 +37,7 @@ Example
 
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 11, 21
+   :emphasize-lines: 8
 
    from zunzuncito import tools
 
@@ -45,8 +45,6 @@ Example
    class APIResource(object):
 
        def dispatch(self, request, response):
-
-           response.headers.update(self.headers)
 
            try:
                name = request.path[0]
