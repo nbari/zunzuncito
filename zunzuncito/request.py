@@ -13,6 +13,7 @@ class Request(object):
         self.host = None
         self.method = environ['REQUEST_METHOD']
         self.path = []
+        self.py_mod = None
         self.resource = None
         self.version = None
         self.vroot = 'default'

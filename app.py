@@ -77,4 +77,4 @@ app = zunzuncito.ZunZun(
     hosts,
     routes,
     rid='TRACK_ID',
-    debug=False)
+    debug=True)

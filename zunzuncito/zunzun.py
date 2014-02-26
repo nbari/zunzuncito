@@ -189,7 +189,14 @@ class ZunZun(object):
         req.path = components[1:]
 
         if not py_mod:
-            py_mod = 'default' if not components else req.resource
+            """
+            URI 2 mod: /foo/bar/ -> zun_foo_bar/zun_foo_bar.py
+            """
+            if len(req.path) >= 1 and req.URI.endswith('/'):
+                if re.match(r'^[\w-]+$', ''.join(components)):
+                    py_mod = components
+            else:
+                py_mod = 'default' if not components else req.resource
 
         return self.lazy_load(py_mod, req)
 
@@ -197,46 +204,51 @@ class ZunZun(object):
         """
         by default the zun_ prefix is appended
         """
-        module_name = '%s%s' % (self.prefix, py_mod.lower())
-        module_path = '%s.%s.%s.%s.%s' % (
+        if isinstance(py_mod, list):
+            path = '.'.join([self.prefix + i.lower() for i in py_mod])
+            name = '%s%s' % (self.prefix, py_mod[-1].lower())
+        else:
+            path = name = '%s%s' % (self.prefix, py_mod.lower())
+
+        req.py_mod = '%s.%s.%s.%s.%s' % (
             self.root,
             req.vroot,
             req.version,
-            module_name,
-            module_name)
+            path,
+            name)
 
-        if module_path in self.resources:
+        if req.py_mod in self.resources:
             req.log.debug(tools.log_json({
                 'API': req.version,
                 'HOST': (req.host, req.vroot),
                 'URI': req.URI,
-                'dispatching': (module_name, module_path),
+                'dispatching': (name, req.py_mod),
                 'rid': req.request_id
             }, True))
-            return self.resources[module_path]
+            return self.resources[req.py_mod]
 
         req.log.debug(tools.log_json({
             'API': req.version,
             'HOST': (req.host, req.vroot),
             'URI': req.URI,
-            'loading': (module_name, module_path),
+            'loading': (name, req.py_mod),
             'rid': req.request_id
         }, True))
 
         try:
-            __import__(module_path, fromlist=[''])
+            __import__(req.py_mod, fromlist=[''])
         except ImportError as e:
             if not stop:
                 return self.lazy_load('_catchall', req, stop=True)
             raise tools.HTTPException(
                 501,
-                title="[ %s ] not found" % py_mod,
+                title="[ %s ] not found" % req.py_mod,
                 description=e)
 
-        module = sys.modules[module_path]
+        module = sys.modules[req.py_mod]
         resource = module.__dict__['APIResource']
-        self.resources[module_path] = resource()
-        return self.resources[module_path]
+        self.resources[req.py_mod] = resource()
+        return self.resources[req.py_mod]
 
     def register_routes(self, routes):
         """compile regex pattern for routes per vroot
