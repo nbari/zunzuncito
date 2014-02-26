@@ -190,7 +190,7 @@ class ZunZun(object):
 
         if not py_mod:
             """
-            URI 2 mod: /foo/bar/ -> zun_foo_bar/zun_foo_bar.py
+            URI 2 mod: /add/user/ -> zun_add/zun_user/zun_user.py
             """
             if len(req.path) >= 1 and req.URI.endswith('/'):
                 if re.match(r'^[\w-]+$', ''.join(components)):

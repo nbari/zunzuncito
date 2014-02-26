@@ -4,6 +4,9 @@ Changelog
 0.1.14 (2014-02-26)
 ...................
 * replaced itertools.ifilter with filter
+* improve py_mod if a URI ends with an slash for example:
+  http://api.zunzun.io/v1/add/user/, the py_mod will be:
+  ``zun_add/zun_user/zun_user.py``
 
 0.1.13 (2014-02-17)
 ...................
