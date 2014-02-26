@@ -6,7 +6,6 @@ import logging
 import re
 import sys
 
-from itertools import ifilter
 from uuid import uuid4
 from zunzuncito import request
 from zunzuncito import response
@@ -166,7 +165,7 @@ class ZunZun(object):
         if self.routes.get(req.vroot, False):
             filterf = lambda t: any(i in (req.method.upper(), 'ALL')
                                     for i in t[2])
-            for r, p, h in ifilter(filterf, self.routes[req.vroot]):
+            for r, p, h in filter(filterf, self.routes[req.vroot]):
                 match = r.match(req.URI)
                 if match:
                     py_mod = p
