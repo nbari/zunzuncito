@@ -34,9 +34,10 @@ class APIResource(object):
         extract callable that falls back to the included TLD snapshot, no live
         HTTP fetching
         """
-        extract = tldextract.TLDExtract(
-            suffix_list_url=False,
-            cache_file='static/publicsuffix.txt')
-        ext = extract(domain)._asdict()
+        # extract = tldextract.TLDExtract(
+        #    suffix_list_url=False,
+        #    cache_file='static/publicsuffix.txt')
+        # ext = extract(domain)._asdict()
+        ext = tldextract.extract(domain)._asdict()
 
         return tools.log_json(ext, 4)
