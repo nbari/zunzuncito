@@ -30,6 +30,7 @@ class APIResource(object):
         else:
             domain = '/'.join(request.path)
 
-        ext = tldextract.extract(domain)._asdict()
+        extract = tldextract.TLDExtract(cache_file='static/publicsuffix.txt')
+        ext = extract(domain)._asdict()
 
         return tools.log_json(ext, 4)
