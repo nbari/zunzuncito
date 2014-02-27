@@ -239,11 +239,19 @@ class ZunZun(object):
             __import__(req.py_mod, fromlist=[''])
         except ImportError as e:
             if not stop:
-                return self.lazy_load('_catchall', req, stop=True)
+                self.log.debug(tools.log_json({
+                    'API': req.version,
+                    'ImportError': e,
+                    'URI': req.URI,
+                    'method': req.method,
+                    'py_mod': req.py_mod,
+                    'rid': req.request_id
+                }, True))
+                return self.lazy_load('_catchall', req, stop=(req.py_mod, e))
             raise tools.HTTPException(
                 501,
-                title="[ %s ] not found" % req.py_mod,
-                description=e)
+                title="[ %s ] not found" % stop[0],
+                description=stop[1])
 
         module = sys.modules[req.py_mod]
         resource = module.__dict__['APIResource']

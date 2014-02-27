@@ -1,8 +1,15 @@
 Changelog
 =========
 
+0.1.15 (2014-02-27)
+...................
+
+* log when trying to load the _catchall, if no _catchall raise Exception about
+  the missing module
+
 0.1.14 (2014-02-26)
 ...................
+
 * replaced itertools.ifilter with filter
 * improve py_mod if a URI ends with an slash for example:
   http://api.zunzun.io/v1/add/user/, the py_mod will be:
