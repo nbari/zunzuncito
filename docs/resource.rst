@@ -8,3 +8,4 @@ API Resource
    resource/dispatch_method
    resource/allow_methods
    resource/path
+   resource/py_mod
