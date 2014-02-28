@@ -76,8 +76,7 @@ class ZunZun(object):
             self.log,
             request_id,
             self._headers.copy(),
-            start_response
-        )
+            start_response)
 
         body = []
 
