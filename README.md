@@ -1,3 +1,10 @@
+[![Build Status](https://api.travis-ci.org/nbari/zunzuncito.png?branch=master)](https://travis-ci.org/nbari/zunzuncito)
+[![Downloads](https://pypip.in/d/zunzuncito/badge.png)](https://pypi.python.org/pypi/zunzuncito/)
+[![Latest Version](https://pypip.in/v/zunzuncito/badge.png)](https://pypi.python.org/pypi/zunzuncito/)
+[![Wheel Status](https://pypip.in/wheel/zunzuncito/badge.png)](https://pypi.python.org/pypi/zunzuncito/)
+[![License](https://pypip.in/license/zunzuncito/badge.png)](https://pypi.python.org/pypi/zunzuncito/)
+
+
 ### Design Goals
 * Keep it simple and small, avoiding extra complexity at all cost. [KISS](http://en.wikipedia.org/wiki/KISS_principle)
 * Create routes on the fly or by defining regular expressions.
