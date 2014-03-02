@@ -264,7 +264,7 @@ class ZunZun(object):
                 'vroot': tuple(regex, py_mod, methods).
             }
         """
-        for vroot, routes in routes.iteritems():
+        for vroot, routes in routes.items():
             gen = (route for route in routes if isinstance(route, tuple))
             vroot = vroot.replace('.', '_')
             self.routes[vroot] = []

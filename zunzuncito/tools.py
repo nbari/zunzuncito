@@ -66,7 +66,7 @@ def clean_dict(d):
     :param dict: dictionary
     """
     new = {}
-    for k, v in d.iteritems():
+    for k, v in d.items():
         if isinstance(v, dict):
             v = clean_dict(v)
             new[k] = v

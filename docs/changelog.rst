@@ -1,11 +1,12 @@
 Changelog
 =========
 
-0.1.15 (2014-02-27)
+0.2.15 (2014-02-27)
 ...................
 
 * log when trying to load the _catchall, if no _catchall raise Exception about
   the missing module
+* replaced iteritems with items() to be Python 3 compatible
 
 0.1.14 (2014-02-26)
 ...................
