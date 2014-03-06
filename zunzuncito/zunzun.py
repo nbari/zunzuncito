@@ -249,7 +249,7 @@ class ZunZun(object):
                 return self.lazy_load('_catchall', req, stop=(req.py_mod, e))
             raise tools.HTTPException(
                 501,
-                title="[ %s ] not found" % stop[0],
+                title="ImportError: %s, %s: %s" % (stop[0], req.py_mod, e),
                 description=stop[1])
 
         module = sys.modules[req.py_mod]

@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.2.15 (2014-02-27)
+0.1.15 (2014-02-27)
 ...................
 
 * log when trying to load the _catchall, if no _catchall raise Exception about
