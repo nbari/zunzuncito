@@ -48,3 +48,4 @@ Table of Contents
    gevent
    changelog
    issues
+   FAQ
