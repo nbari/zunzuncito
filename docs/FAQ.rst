@@ -7,7 +7,7 @@ Why I get a warnings for some requests?
 
 If you get something like this:
 
-.. code-rest::
+.. code-block:: json
     :linenos:
 
     WARNING  2014-03-07 10:01:30,845 zunzun.py:102] {
