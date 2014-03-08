@@ -26,6 +26,7 @@ micro-framework for creating REST API's.
 .. |br| raw:: html
 
    <br />
+   <hr>
 
 
 Table of Contents
