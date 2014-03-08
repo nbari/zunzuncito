@@ -23,6 +23,9 @@ micro-framework for creating REST API's.
     :alt: License
 
 
+.. |br| raw:: html
+
+   <br />
 
 
 Table of Contents
