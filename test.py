@@ -49,7 +49,6 @@ class ZunZunTest(unittest.TestCase):
 
     def test_versions(self):
         app = zunzuncito.ZunZun('/tmp', self.versions)
-        print app.versions
         self.assertEqual(6, len(app.versions))
 
     def test_hosts(self):
