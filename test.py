@@ -3,13 +3,20 @@ python text.py
 """
 
 import sys
-import time
 import unittest
 import zunzuncito
 
 from threading import Thread
 from uuid import uuid1
 from zunzuncito import tools
+
+
+def py_version(f):
+    def wrapper(*args, **kv):
+        if sys.version_info < (3, 3):
+            return f(*args, **kv)
+        return True
+    return wrapper
 
 
 class ZunZunTest(unittest.TestCase):
@@ -79,9 +86,11 @@ class ZunZunTest(unittest.TestCase):
 
         self.assertEqual(1000, len(out))
 
+    @py_version
     def test_Thread_safety(self):
         app = zunzuncito.ZunZun('my_api', rid='rid')
         out = []
+        body = []
 
         def start_response(status, headers):
             self.assertFalse(headers[0][1] in out)
@@ -89,7 +98,7 @@ class ZunZunTest(unittest.TestCase):
 
         def make_req(times):
             for environ in fake_req(times):
-                body = app(environ, start_response)
+                body.append(app(environ, start_response))
 
         """ num of threads t, and num or requests r """
         t = 4
@@ -104,6 +113,9 @@ class ZunZunTest(unittest.TestCase):
 
         """ out = threads x request t*r"""
         self.assertEqual(1000, len(out))
+
+        """ check if list are equals """
+        self.assertTrue(set(out) == set(body))
 
 
 def fake_req(num, uri='/test'):
