@@ -13,6 +13,7 @@ class APIResource(object):
             'API': request.version,
             'Method': request.method,
             'URI': request.URI,
+            'path': request.path,
             'vroot': request.vroot
         }, True))
 

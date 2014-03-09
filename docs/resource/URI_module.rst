@@ -13,7 +13,7 @@ URI parts
     \__________________/\_/\__/\_____/\_/
              |           |   | \__|____|/
              |       version |    |  | |
-           host          resource |path|
+       host (default)    resource |path|
                                   |    |
                                path[0] |
                                        |
@@ -28,4 +28,5 @@ URI parts
 
 .. seealso::
 
-    `URI scheme <a href="http://en.wikipedia.org/wiki/URI_scheme">`_.
+    `URI scheme <a href="http://en.wikipedia.org/wiki/URI_scheme">`_,
+    `Uniform_resource_locator <a http://en.wikipedia.org/wiki/Uniform_resource_locator>`_
