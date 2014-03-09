@@ -18,3 +18,14 @@ URI parts
                                path[0] |
                                        |
                                     path[1]
+
+
+
+**ZunZun** translates that URI to::
+
+    my_api.default.v0.zun_get.zun_client.zun_client
+
+
+.. seealso::
+
+    `URI scheme <a href="http://en.wikipedia.org/wiki/URI_scheme">`_.
