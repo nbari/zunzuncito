@@ -20,7 +20,7 @@ def py_version(f):
 
 
 class ZunZunTest(unittest.TestCase):
-    versions = ['  ', '', 1, 'v0', 'my version', (1,), 'api/v1', 'v1']
+    versions = ['  ', '', 1, 'v0', 'my version', (1,), 'api/v1', 'v1', 'v2 ']
 
     hosts = {
         '*': 'default',
@@ -49,7 +49,7 @@ class ZunZunTest(unittest.TestCase):
 
     def test_versions(self):
         app = zunzuncito.ZunZun('/tmp', self.versions)
-        self.assertEqual(6, len(app.versions))
+        self.assertEqual(3, len(app.versions))
 
     def test_hosts(self):
         app = zunzuncito.ZunZun('/tmp', self.versions, self.hosts)

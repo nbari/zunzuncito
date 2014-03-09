@@ -6,7 +6,7 @@ import logging
 import re
 import sys
 
-from uuid import uuid4
+from uuid import uuid1
 from zunzuncito import request
 from zunzuncito import response
 from zunzuncito import tools
@@ -16,7 +16,9 @@ class ZunZun(object):
 
     def __init__(self, root, versions=None, hosts=None,
                  routes=None, prefix='zun_', rid=None, debug=False):
+
         self._headers = tools.CaseInsensitiveDict()
+        self.allowed_URI_chars = re.compile(r'^[\w-]+$')
         self.host = '*'
         self.hosts = {'*': 'default'}
         if isinstance(hosts, dict):
@@ -26,21 +28,20 @@ class ZunZun(object):
         self.rid = rid
         self.root = root
         self.routes = {}
-        self.versions = ['v0']
+        self.versions = ['v0', 'v1']
         self.version = self.versions[0]
         self.vroot = 'default'
 
-        if versions:
-            if isinstance(versions, list):
-                versions = tuple(x.lower().strip()
-                                 for x in map(str, versions) if x.strip())
-                if versions:
-                    self.versions = versions
-                else:
-                    raise Exception('Versions missing')
+        if versions and isinstance(versions, list):
+            versions = tuple(
+                m.group(0) for m in (
+                    self.allowed_URI_chars.search(v) for v in map(
+                        str,
+                        versions)) if m)
+            if versions:
+                self.versions = versions
             else:
-                raise Exception(
-                    "Versions must be a list, example: ['v0', 'v1', 'v2']")
+                raise Exception('Versions missing')
 
         self.log = logging.getLogger()
 
@@ -65,7 +66,7 @@ class ZunZun(object):
         if self.rid and self.rid in environ:
             request_id = environ[self.rid]
         else:
-            request_id = str(uuid4())
+            request_id = str(uuid1())
 
         req = request.Request(
             self.log,
@@ -192,8 +193,11 @@ class ZunZun(object):
             URI 2 mod: /add/user/ -> zun_add/zun_user/zun_user.py
             """
             if len(req.path) >= 1 and req.URI.endswith('/'):
-                if re.match(r'^[\w-]+$', ''.join(components)):
+                if self.allowed_URI_chars.match(''.join(components)):
                     py_mod = components
+            elif len(req.path) > 1:
+                if self.allowed_URI_chars.match(''.join(components[:-1])):
+                    py_mod = components[:-1]
             else:
                 py_mod = 'default' if not components else req.resource
 

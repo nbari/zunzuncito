@@ -1,6 +1,14 @@
 Changelog
 =========
 
+0.1.16 (2014-03-09)
+...................
+
+* fixed bug on py_mod to allow sub modules based on the URI to work properly,
+  see `URI_module </en/latest/resource/URI_module.html>`_
+* fixed __init__ to make custom versions match allowed_URI_chars ``^[\w-]+$``
+* changed UUID4 to UUID1
+
 0.1.15 (2014-02-27)
 ...................
 
