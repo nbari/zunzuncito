@@ -7,7 +7,7 @@ import unittest
 import zunzuncito
 
 from threading import Thread
-from uuid import uuid1
+from uuid import uuid4
 from zunzuncito import tools
 
 
@@ -148,7 +148,7 @@ def fake_req(num, uri='/test'):
     i = 0
     while i < num:
         environ = {
-            'rid': str(uuid1()),
+            'rid': str(uuid4()),
             'REQUEST_URI': uri,
             'REQUEST_METHOD': 'get'
         }
