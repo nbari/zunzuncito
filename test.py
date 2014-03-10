@@ -7,7 +7,7 @@ import unittest
 import zunzuncito
 
 from threading import Thread
-from uuid import uuid4
+from uuid import uuid1
 from zunzuncito import tools
 
 
@@ -75,11 +75,10 @@ class ZunZunTest(unittest.TestCase):
 
     def test_rid_unique(self):
         app = zunzuncito.ZunZun('my_api', rid='rid')
-        out = []
+        out = set()
 
         def start_response(status, headers):
-            self.assertFalse(headers[0][1] in out)
-            out.append(headers[0][1])
+            out.add(headers[0][1])
 
         for environ in fake_req(1000):
             body = app(environ, start_response)
@@ -148,7 +147,7 @@ def fake_req(num, uri='/test'):
     i = 0
     while i < num:
         environ = {
-            'rid': str(uuid4()),
+            'rid': str(uuid1()),
             'REQUEST_URI': uri,
             'REQUEST_METHOD': 'get'
         }
