@@ -1,6 +1,25 @@
 Quick Start
 ===========
 
+URI parts:
+
+.. code-block:: rest
+
+    http://api.zunzun.io/v0/get/client/ip
+    \__________________/\_/\__/\_____/\_/
+             |           |   | \__|____|/
+             |       version |    |  | |
+       host (default)    resource |path|
+                                  |    |
+                               path[0] |
+                                       |
+                                    path[1]
+
+**ZunZun** translates that URI to::
+
+    my_api.default.v0.zun_get.zun_client.zun_client
+
+
 This is the directory structure:
 
 .. sidebar:: API directory structure
