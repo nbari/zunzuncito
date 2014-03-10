@@ -73,6 +73,7 @@ class ZunZunTest(unittest.TestCase):
 
         self.assertTrue(True)
 
+    @py_version
     def test_rid_unique(self):
         app = zunzuncito.ZunZun('my_api', rid='rid')
         out = set()
