@@ -32,7 +32,7 @@ This is the directory structure:
 
 
 .. code-block:: rest
-   :emphasize-lines: 3,4,6,8,16
+   :emphasize-lines: 3,4,6,8,13,16
    :linenos:
 
    /home/
