@@ -50,9 +50,9 @@ This is the directory structure:
               |  |--zun_get
               |  |  |--__init__.py
               |  |  |--zun_get.py
-              |  |  `--zun_ip
+              |  |  `--zun_client
               |  |     |--__init__.py
-              |  |     `--zun_ip.py
+              |  |     `--zun_client.py
               |  `--zun_hasher
               |     |--__init__.py
               |     `--zun_hasher.py
