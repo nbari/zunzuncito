@@ -50,7 +50,6 @@ environ = {
     'wsgi.version': (1, 0),
 }
 
-
 def start_response(status, headers, exc_info=None):
     return None
 
@@ -63,7 +62,12 @@ for framework in frameworks:
     os.chdir(os.path.join(path, framework))
     main = __import__('app', None, None, ['main']).main
 
+    f = lambda: list(main(environ.copy(), start_response))
+    st = profile.runctx('timeit(f, number=n)', globals(), {'n': 20})
+
     #profile.run('main(environ.copy(), start_response)')
+#    profile.run('f()')
+
     graphviz = GraphvizOutput()
     graphviz.output_file = 'basic.png'
 

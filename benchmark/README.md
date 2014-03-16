@@ -36,17 +36,17 @@ Running the benchmark:
 python benchmark.py:
 
                   msec    rps  tcalls  funcs
-    bobo          5002  19991     120     67
-    bottle        1691  59151      53     31
-    django       10376   9638     183     89
-    falcon        1076  92978      29     25
-    flask        14496   6899     257    119
-    pylons       10032   9968     195     82
-    pyramid       2935  34075      65     48
-    pyramid       2954  33849      65     48
-    tornado      10027   9973     188     67
-    wsgi           172 580916       8      8
-    zunzuncito   10810   9251     269     65
+    bobo          5043  19828     120     67
+    bottle        1797  55648      53     31
+    django       10575   9456     183     89
+    falcon        1130  88466      29     25
+    flask        14786   6763     257    119
+    pylons       10014   9986     195     82
+    pyramid       2990  33450      65     48
+    pyramid       2993  33408      65     48
+    tornado      10030   9970     188     67
+    wsgi           175 570568       8      8
+    zunzuncito   10702   9344     261     65
 
 * msec - a total time taken in milliseconds
 * rps - requests processed per second
