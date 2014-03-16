@@ -6,3 +6,4 @@ Makefile
 dist
 zunzuncito.egg-info
 build
+benchmark/zunzuncito
