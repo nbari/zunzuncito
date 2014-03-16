@@ -26,3 +26,16 @@ will output something like:
     Content-Type: text/html; charset=UTF-8
 
     Hello World!
+
+
+Running the benchmark:
+
+python benchmark.py:
+
+                  msec    rps  tcalls  funcs
+    zunzuncito   10893   9181     269     65
+
+* msec - a total time taken in milliseconds
+* rps - requests processed per second
+* tcalls - total number of call made by corresponding web framework
+* funcs -  number of unique functions used.
