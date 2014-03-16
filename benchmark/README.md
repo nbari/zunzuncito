@@ -1,5 +1,6 @@
 Benchmark
 ---------
 
+Setup:
 
-* virtualenv zunzuncito
+    virtualenv env
