@@ -54,7 +54,8 @@ environ = {
     'wsgi.version': (1, 0),
 }
 
-frameworks = ['zunzuncito']
+frameworks = ['bottle', 'falcon', 'flask', 'tornado', 'zunzuncito', 'pylons']
+frameworks += ['django', 'pyramid', 'pyramid', 'wsgi', 'bobo']
 frameworks = sorted(frameworks)
 
 
