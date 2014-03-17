@@ -52,3 +52,6 @@ python benchmark.py:
 * rps - requests processed per second
 * tcalls - total number of call made by corresponding web framework
 * funcs -  number of unique functions used.
+
+
+httperf --hog --timeout=5 --client=0/1 --server=localhost --port=8080 --uri=/welcome --send-buffer=4096 --recv-buffer=16384 --num-conns=1000 --num-calls=1
