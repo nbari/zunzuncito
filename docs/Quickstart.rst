@@ -29,7 +29,8 @@ This is the directory structure:
    :default: The **vroot** directory.
    :v0: Directory for default API resources or for version **0** when specified.
    :v1: Directory for API resources version **1**
-
+   :get: API resource
+   :client: Path
 
 .. code-block:: rest
    :emphasize-lines: 3,4,6,8,13,16
