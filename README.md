@@ -365,3 +365,5 @@ Directory structure:
 Basically you just copy the zunzuncito module into your GAE application directory, define your root, versions and routes, create a ZunZun object and focus more on your API resources (custom python modules).
 
 http://docs.zunzun.io/en/latest/Quickstart.html
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/nbari/zunzuncito/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
