@@ -30,11 +30,11 @@ Example
 .......
 
 The request http://api.zunzun.io/get/client/ will be handled by the file
-``zun_cilent.py`` notice that that the URI enda with a **/**
+``zun_cilent.py`` notice that that the URI ends with an **/**
 
 
-If the request where http://api.zunzun.io/get/client with out the ending slash
-it will be handled by ``zun_get.py``.`
+If the request where http://api.zunzun.io/get/client without the ending slash
+it will be handled by ``zun_get.py``.
 
 
 .. seealso::
