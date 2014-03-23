@@ -26,6 +26,17 @@ URI parts
     my_api.default.v0.zun_get.zun_client.zun_client
 
 
+Example
+.......
+
+The request http://api.zunzun.io/get/client/ will be handled by the file
+``zun_cilent.py`` notice that that the URI enda with a **/**
+
+
+If the request where http://api.zunzun.io/get/client with out the ending slash
+it will be handled by ``zun_get.py``.`
+
+
 .. seealso::
 
     `URI scheme <a href="http://en.wikipedia.org/wiki/URI_scheme">`_,
