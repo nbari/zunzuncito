@@ -53,6 +53,7 @@ Example
    :linenos:
    :emphasize-lines: 11, 21
 
+   from Cookie import SimpleCookie
    from zunzuncito import tools
 
 
@@ -65,6 +66,15 @@ Example
 
            response.headers.update(self.headers)
 
+           cookie = SimpleCookie()
+           cookie.load(request.environ['HTTP_COOKIE'])
+
+           cookie['session'] = session
+           cookie["session"]["path"] = "/"
+           cookie["session"]["expires"] = 12 * 30 * 24 * 60 * 60
+           for morsel in cookie.values():
+               response.add_header('Set-Cookie', morsel.OutputString())
+
            try:
                name = request.path[0]
            except Exception:
@@ -74,3 +84,6 @@ Example
                 return 'Name: ' + name
 
            response.status =  406
+           """ print all headers """
+           print str(response)
+           return []
