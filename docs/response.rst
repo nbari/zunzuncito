@@ -31,8 +31,14 @@ request_id     The `request id </en/latest/zunzun/Rid.html>`_.
 headers        A `CaseInsensitiveDict </en/latest/tools/CaseInsensitiveDict.html>`_ instance, for storing the headers.
 status         Default **200** an int respresenting an `HTTP status code </en/latest/http_status_codes.html>`_.
 start_response `The start_response() Callable <http://www.python.org/dev/peps/pep-0333/#the-start-response-callable>`_.
+extra          A list for repeated headers used with the ``add_header`` method
 ============== ========================================================================================================
 
+add_header
+..........
+
+If you need to create multiple headers using the same key for example to set up
+cookies you should use the ``add_header`` method.
 
 Example
 .......
