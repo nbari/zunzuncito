@@ -51,7 +51,7 @@ Example
 
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 11, 21
+   :emphasize-lines: 12,21,31,33
 
    from Cookie import SimpleCookie
    from zunzuncito import tools
