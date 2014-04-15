@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.1.17 (2014-04-15)
+...................
+
+* Added the ``add_header`` method to the response class, with the intention to
+  allow multiple headers with the same name, example 'Set-Cookie'.
+
 0.1.16 (2014-03-09)
 ...................
 
