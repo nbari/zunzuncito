@@ -14,6 +14,7 @@ class Response(object):
         self.request_id = request_id
         self.status = 200
         self.start_response = start_response
+        self.extra = []
 
     def get_status(self):
 
@@ -42,7 +43,15 @@ class Response(object):
 
         self.headers['Request-ID'] = self.request_id
 
-        return list(self.headers.items())
+        return list(self.headers.items() + self.extra)
 
     def send(self):
         self.start_response(self.get_status(), self.get_headers())
+
+    def add_header(self, name, value):
+        header = (name, value)
+        self.extra.append(header)
+
+    def __str__(self):
+        return '\r\n'.join(
+            ['%s: %s' % v for v in self.headers.items() + self.extra])
