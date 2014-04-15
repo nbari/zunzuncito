@@ -40,6 +40,12 @@ add_header
 If you need to create multiple headers using the same key for example to set up
 cookies you should use the ``add_header`` method.
 
+print str(response)
+...................
+
+Returns all the headers to be sent
+
+
 Example
 .......
 
