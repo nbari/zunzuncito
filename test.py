@@ -73,6 +73,43 @@ class ZunZunTest(unittest.TestCase):
 
         self.assertTrue(True)
 
+    def test_match_routes(self):
+        uuid_re = '[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}'
+        match = {}
+        match['/test'] = [1, {'default': [('/test', 'test_routes')]}]
+        match['/test'] = [0, {'default': [('/test', 'test_routes', 'POST')]}]
+        match['/%s' % str(uuid1())] = [1, {
+            'default': [('/%s' % uuid_re, 'test_routes')]}]
+        match['/a61cdae6-c5b7-11e3-a902-cdc1'] = [0, {
+            'default': [('/%s' % uuid_re, 'test_routes')]}]
+        match['/a61cdae6-c5b7-11e3-a902-cdc12279fa34'] = [1, {
+            'default': [('/%s' % uuid_re, 'test_routes')]}]
+        match['/book/%s' % str(uuid1())] = [1, {
+            'default': [('/book/%s' % uuid_re, 'test_routes')]}]
+        match['/book/%s/' % str(uuid1())] = [0, {
+            'default': [('/book/%s' % uuid_re, 'test_routes')]}]
+        match['/book/a61cdae6-c5b7-11e3-a902-cdc12345678'] = [0, {
+            'default': [('/book/%s' % uuid_re, 'test_routes')]}]
+        match['/book/a61cdae6-c5b7-11e3-a902-cdc1234567899999'] = [0, {
+            'default': [('/book/%s' % uuid_re, 'test_routes', 'GET')]}]
+        match['/book/%s' % str(uuid1())] = [1, {
+            'default': [('/book/%s(/.*)?' % uuid_re, 'test_routes', 'GET')]}]
+        match['/book/%s/' % str(uuid1())] = [1, {
+            'default': [('/book/%s(/.*)?' % uuid_re, 'test_routes', 'GET')]}]
+        match['/book/%s/%s' % (str(uuid1()), str(uuid1()))] = [1, {
+            'default': [('/book/%s(/.*)?' % uuid_re, 'test_routes', 'GET')]}]
+        match['/book/a61cdae6-c5b7-11e3-a902-cdc1'] = [0, {
+            'default': [('/book/%s(/.*)?' % uuid_re, 'test_routes', 'GET')]}]
+
+        for m, route in match.items():
+            app = zunzuncito.ZunZun('my_api', routes=route[1])
+            environ = list(fake_req(1, m))
+            body = app(environ[0], lambda x, y: (x, y))
+            if route[0]:
+                self.assertEqual('match', body)
+            else:
+                self.assertNotEqual('match', body)
+
     @py_version
     def test_rid_unique(self):
         app = zunzuncito.ZunZun('my_api', rid='rid')

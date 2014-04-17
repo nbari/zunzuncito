@@ -59,7 +59,6 @@ class ZunZun(object):
 
     def __call__(self, environ, start_response):
         """Handle a WSGI application request.
-
         See pep 3333
         """
 
@@ -131,13 +130,6 @@ class ZunZun(object):
                 req.URI = req.URI[len(req.version) + 1:]
                 break
 
-        req.log.debug(tools.log_json({
-            'API': req.version,
-            'URI': req.URI,
-            'rid': req.request_id,
-            'versions': self.versions
-        }, True))
-
         """
         find a python module (py_mod) to handle the request per host
         """
@@ -154,6 +146,14 @@ class ZunZun(object):
                         req.vroot = self.hosts[host]
                         break
 
+        req.log.debug(tools.log_json({
+            'API': req.version,
+            'HOST': (req.host, req.vroot),
+            'URI': req.URI,
+            'rid': req.request_id,
+            'versions': self.versions
+        }, True))
+
         """
         try to match any supplied routes (regex match)
         only if the current host has defined routes
@@ -162,7 +162,7 @@ class ZunZun(object):
         t[1] = p - py_mod
         t[2] = h - HTTP methods
         """
-        if self.routes.get(req.vroot, False):
+        if req.vroot in self.routes:
             filterf = lambda t: any(i in (req.method.upper(), 'ALL')
                                     for i in t[2])
             for r, p, h in filter(filterf, self.routes[req.vroot]):
@@ -170,11 +170,11 @@ class ZunZun(object):
                 if match:
                     py_mod = p
                     req.log.debug(tools.log_json({
-                        'HOST': (req.host, req.vroot),
                         'API': req.version,
+                        'HOST': (req.host, req.vroot),
+                        'methods': h,
                         'regex_match': (r.pattern, req.URI),
-                        'rid': req.request_id,
-                        'methods': h
+                        'rid': req.request_id
                     }, True))
                     break
 
@@ -282,10 +282,10 @@ class ZunZun(object):
 
                 if regex.startswith('^'):
                     self.routes[vroot].append(
-                        (re.compile(regex), module, methods))
+                        (re.compile(r'%s' % regex), module, methods))
                 else:
                     self.routes[vroot].append(
-                        (re.compile('^%s$' % regex), module, methods))
+                        (re.compile(r'^%s$' % regex), module, methods))
 
                 self.log.debug(tools.log_json({
                     'vroot': vroot,
