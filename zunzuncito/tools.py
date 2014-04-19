@@ -10,17 +10,17 @@ class HTTPError(Exception):
 
     def __init__(self, status, title=None, description=None,
                  headers=None, code=None, display=False, log=True):
+        self.code = code
+        self.description = description
+        self.display = display
+        self.headers = headers
+        self.log = log
         self.status = status
         self.title = title
-        self.description = description
-        self.headers = headers
-        self.code = code
-        self.display = display
-        self.log = log
 
     def to_json(self):
         return json.dumps({k: str(v) for k, v in self.__dict__.items()
-                           if v and k != 'display'},
+                           if v and k not in ['display', 'log']},
                           sort_keys=True,
                           indent=4)
 
