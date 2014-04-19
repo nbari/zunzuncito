@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.1.18 (2014-04-19)
+...................
+
+* fixed bug on tools.py to remove 'log=True' on the response body when raising
+  an exeption and using ``display=True``.
+
 0.1.17 (2014-04-17)
 ...................
 
