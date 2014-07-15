@@ -31,3 +31,31 @@ class Request(object):
             self.URI = environ['REQUEST_URI']
         elif 'PATH_INFO' in environ:
             self.URI = environ['PATH_INFO']
+
+    @property
+    def host_url(self):
+        """
+        The URL through the host (no path)
+        """
+        e = self.environ
+        scheme = e.get('wsgi.url_scheme')
+        url = scheme + '://'
+        host = e.get('HTTP_HOST')
+        if host is not None:
+            if ':' in host:
+                host, port = host.split(':', 1)
+            else:
+                port = None
+        else:
+            host = e.get('SERVER_NAME')
+            port = e.get('SERVER_PORT')
+        if scheme == 'https':
+            if port == '443':
+                port = None
+        elif scheme == 'http':
+            if port == '80':
+                port = None
+        url += host
+        if port:
+            url += ':%s' % port
+        return url

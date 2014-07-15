@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.1.19 (2014-07-15)
+...................
+
+* added host_url propety to Requests class, ``request.host_url`` will return
+  something like http://0:8080 depending on your url
+
 0.1.18 (2014-04-19)
 ...................
 
