@@ -13,7 +13,7 @@ class, the main idea of it, is to handle posible erros and properly reply with t
 
 .. note ::
 
-   Description argument must be a `dictionary <http://docs.python.org/2/tutorial/datastructures.html#dictionaries>`_
+   The ``headers`` argument must be a `dictionary <http://docs.python.org/2/tutorial/datastructures.html#dictionaries>`_
    containing `HTTP header fields <http://en.wikipedia.org/wiki/List_of_HTTP_header_fields>`_
 
 
