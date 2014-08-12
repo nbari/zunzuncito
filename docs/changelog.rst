@@ -1,10 +1,17 @@
 Changelog
 =========
 
+0.1.20 (2014-08-12)
+...................
+
+* added is_secure method to Request class, ``request.is_secure()`` will return
+  True if using https
+
+
 0.1.19 (2014-07-15)
 ...................
 
-* added host_url propety to Requests class, ``request.host_url`` will return
+* added host_url propety to Request class, ``request.host_url`` will return
   something like http://0:8080 depending on your url
 
 0.1.18 (2014-04-19)

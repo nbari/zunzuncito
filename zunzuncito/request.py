@@ -59,3 +59,7 @@ class Request(object):
         if port:
             url += ':%s' % port
         return url
+
+    def is_secure(self):
+        return 'wsgi.url_scheme' in self.environ \
+            and self.environ['wsgi.url_scheme'] == 'https'
