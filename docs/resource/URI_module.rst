@@ -39,5 +39,5 @@ it will be handled by ``zun_get.py``.
 
 .. seealso::
 
-    `URI scheme <href="http://en.wikipedia.org/wiki/URI_scheme">`_,
+    `URI scheme <http://en.wikipedia.org/wiki/URI_scheme>`_,
     `Uniform_resource_locator <http://en.wikipedia.org/wiki/Uniform_resource_locator>`_
