@@ -24,6 +24,13 @@
 
 > Documentation : [docs.zunzun.io](http://docs.zunzun.io)
 
+Thanks
+------
+
+Many thanks [Paw - The ultimate REST client for Mac.](https://luckymarmot.com/paw) for supporting Open Source projects.
+
+![paw](https://github.com/nbari/zunzuncito/blob/master/docs/Paw_logo.png)
+
 
 ### What & Why ZunZuncito (ßeta)
 ZunZuncito is a [python](http://python.org/) package that allows to create and maintain [REST](http://en.wikipedia.org/wiki/REST) API's without hassle.
