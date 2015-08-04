@@ -1,8 +1,8 @@
 [![Build Status](https://api.travis-ci.org/nbari/zunzuncito.png?branch=master)](https://travis-ci.org/nbari/zunzuncito)
-[![Downloads](https://pypip.in/d/zunzuncito/badge.png)](https://pypi.python.org/pypi/zunzuncito/)
-[![Latest Version](https://pypip.in/v/zunzuncito/badge.png)](https://pypi.python.org/pypi/zunzuncito/)
-[![Wheel Status](https://pypip.in/wheel/zunzuncito/badge.png)](https://pypi.python.org/pypi/zunzuncito/)
-[![License](https://pypip.in/license/zunzuncito/badge.png)](https://pypi.python.org/pypi/zunzuncito/)
+[![Downloads](https://pypip.in/d/zunzuncito/badge.png)](https://img.shields.io/pypi/dm/zunzuncito.svg?style=flat)
+[![Latest Version](https://pypip.in/v/zunzuncito/badge.png)](https://img.shields.io/pypi/v/zunzuncito.svg?style=flat)
+[![Wheel Status](https://pypip.in/wheel/zunzuncito/badge.png)](https://img.shields.io/pypi/wheel/zunzuncito.svg)
+[![License](https://pypip.in/license/zunzuncito/badge.png)](https://img.shields.io/github/license/zunzuncito/apistatus.svg)
 
 
 ### Design Goals
