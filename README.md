@@ -1,6 +1,6 @@
 [![Build Status](https://api.travis-ci.org/nbari/zunzuncito.png?branch=master)](https://travis-ci.org/nbari/zunzuncito)
-[![Downloads](https://img.shields.io/pypi/dm/zunzuncito.svg?style=flat)](https://img.shields.io/pypi/dm/zunzuncito.svg?style=flat)
-[![Latest Version](https://img.shields.io/pypi/v/zunzuncito.svg?style=flat)](https://img.shields.io/pypi/v/zunzuncito.svg?style=flat)
+[![Downloads](https://img.shields.io/pypi/dm/zunzuncito.svg)](https://img.shields.io/pypi/dm/zunzuncito.svg?style=flat)
+[![Latest Version](https://img.shields.io/pypi/v/zunzuncito.svg)](https://img.shields.io/pypi/v/zunzuncito.svg?style=flat)
 [![Wheel Status](https://img.shields.io/pypi/wheel/zunzuncito.svg)](https://img.shields.io/pypi/wheel/zunzuncito.svg)
 [![License](https://img.shields.io/github/license/zunzuncito/apistatus.svg)](https://pypip.in/license/zunzuncito/badge.png)](https://img.shields.io/github/license/zunzuncito/apistatus.svg)
 
