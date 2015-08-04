@@ -18,12 +18,6 @@
   var page_name = "{{ pagename }}";
   var theme = "{{ html_theme }}";
 </script>
-<!-- logger.io -->
-<script type="text/javascript">
-(function(d,t,i){var l=d.createElement(t),s=d.getElementsByTagName(t)[0];_lg=[i];l.async=1;
- l.src=('https:'==d.location.protocol?'https://':'http://')+'logger-io.appspot.com/logger.io.js';
- s.parentNode.insertBefore(l,s);}(document,'script','1E79QFT375S'));
-</script>
 
 <style>
 body {
@@ -34,6 +28,9 @@ body {
 
 {%- block body %}
 {{ super() }}
+
+<p>Many thanks <a href="https://luckymarmot.com/paw">Paw - The ultimate REST client for Mac.</a> for supporting Open Source projects.</p>
+<p><a href="https://luckymarmot.com/paw"><img src="https://raw.githubusercontent.com/nbari/zunzuncito/master/docs/Paw_logo.png" alt="paw"></a></p>
 
 <p>
     <b>A great amount of time has been spent creating, crafting and maintaining this software, please consider donating.</b>
