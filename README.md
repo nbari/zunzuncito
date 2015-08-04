@@ -1,8 +1,8 @@
 [![Build Status](https://api.travis-ci.org/nbari/zunzuncito.png?branch=master)](https://travis-ci.org/nbari/zunzuncito)
-[![Downloads](https://pypip.in/d/zunzuncito/badge.png)](https://img.shields.io/pypi/dm/zunzuncito.svg?style=flat)
-[![Latest Version](https://pypip.in/v/zunzuncito/badge.png)](https://img.shields.io/pypi/v/zunzuncito.svg?style=flat)
-[![Wheel Status](https://pypip.in/wheel/zunzuncito/badge.png)](https://img.shields.io/pypi/wheel/zunzuncito.svg)
-[![License](https://pypip.in/license/zunzuncito/badge.png)](https://img.shields.io/github/license/zunzuncito/apistatus.svg)
+[![Downloads](https://img.shields.io/pypi/dm/zunzuncito.svg?style=flat)](https://img.shields.io/pypi/dm/zunzuncito.svg?style=flat)
+[![Latest Version](https://img.shields.io/pypi/v/zunzuncito.svg?style=flat)](https://img.shields.io/pypi/v/zunzuncito.svg?style=flat)
+[![Wheel Status](https://img.shields.io/pypi/wheel/zunzuncito.svg)](https://img.shields.io/pypi/wheel/zunzuncito.svg)
+[![License](https://img.shields.io/github/license/zunzuncito/apistatus.svg)](https://pypip.in/license/zunzuncito/badge.png)](https://img.shields.io/github/license/zunzuncito/apistatus.svg)
 
 
 ### Design Goals
@@ -29,7 +29,7 @@ Thanks
 
 Many thanks [Paw - The ultimate REST client for Mac.](https://luckymarmot.com/paw) for supporting Open Source projects.
 
-![paw](https://github.com/nbari/zunzuncito/blob/master/docs/Paw_logo.png)
+[![paw](https://github.com/nbari/zunzuncito/blob/master/docs/Paw_logo.png)](https://luchymarmot.com/paw)
 
 
 ### What & Why ZunZuncito (ßeta)
