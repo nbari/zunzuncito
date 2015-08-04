@@ -1,40 +1,32 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en-us">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Zunzuncito</title>
-
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <meta charset="UTF-8">
+    <title>Zunzuncito by nbari</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>Zunzuncito</h1>
-        <p>micro-framework for creating REST API&#39;s.</p>
-        <p class="view"><a href="https://github.com/nbari/zunzuncito">View the Project on GitHub <small>nbari/zunzuncito</small></a></p>
-        <ul>
-          <li><a href="https://github.com/nbari/zunzuncito/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/nbari/zunzuncito/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/nbari/zunzuncito">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <p><a href="https://travis-ci.org/nbari/zunzuncito"><img src="https://api.travis-ci.org/nbari/zunzuncito.png?branch=master" alt="Build Status"></a>
+    <section class="page-header">
+      <h1 class="project-name">Zunzuncito</h1>
+      <h2 class="project-tagline">micro-framework for creating REST API&#39;s.</h2>
+      <a href="https://github.com/nbari/zunzuncito" class="btn">View on GitHub</a>
+      <a href="https://github.com/nbari/zunzuncito/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/nbari/zunzuncito/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <p><a href="https://travis-ci.org/nbari/zunzuncito"><img src="https://api.travis-ci.org/nbari/zunzuncito.png?branch=master" alt="Build Status"></a>
 <a href="https://pypi.python.org/pypi/zunzuncito/"><img src="https://pypip.in/d/zunzuncito/badge.png" alt="Downloads"></a>
 <a href="https://pypi.python.org/pypi/zunzuncito/"><img src="https://pypip.in/v/zunzuncito/badge.png" alt="Latest Version"></a>
 <a href="https://pypi.python.org/pypi/zunzuncito/"><img src="https://pypip.in/wheel/zunzuncito/badge.png" alt="Wheel Status"></a>
 <a href="https://pypi.python.org/pypi/zunzuncito/"><img src="https://pypip.in/license/zunzuncito/badge.png" alt="License"></a></p>
 
 <h3>
-<a name="design-goals" class="anchor" href="#design-goals"><span class="octicon octicon-link"></span></a>Design Goals</h3>
+<a id="design-goals" class="anchor" href="#design-goals" aria-hidden="true"><span class="octicon octicon-link"></span></a>Design Goals</h3>
 
 <ul>
 <li>Keep it simple and small, avoiding extra complexity at all cost. <a href="http://en.wikipedia.org/wiki/KISS_principle">KISS</a>
@@ -52,8 +44,10 @@
 <a href="http://en.wikipedia.org/wiki/Multitenancy">Multi-tenant</a> Support.</li>
 <li>Ability to create almost anything easy, example: Support <a href="http://en.wikipedia.org/wiki/Chunked_transfer_encoding">chunked transfer encoding</a>
 </li>
-</ul><h3>
-<a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a>Install</h3>
+</ul>
+
+<h3>
+<a id="install" class="anchor" href="#install" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install</h3>
 
 <pre><code>$ pip install zunzuncito
 </code></pre>
@@ -62,15 +56,22 @@
 <p>Documentation : <a href="http://docs.zunzun.io">docs.zunzun.io</a></p>
 </blockquote>
 
+<h2>
+<a id="thanks" class="anchor" href="#thanks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Thanks</h2>
+
+<p>Many thanks <a href="https://luckymarmot.com/paw">Paw - The ultimate REST client for Mac.</a> for supporting Open Source projects.</p>
+
+<p><img src="https://github.com/nbari/zunzuncito/blob/master/docs/Paw_logo.png" alt="paw"></p>
+
 <h3>
-<a name="what--why-zunzuncito-%C3%9Feta" class="anchor" href="#what--why-zunzuncito-%C3%9Feta"><span class="octicon octicon-link"></span></a>What &amp; Why ZunZuncito (ßeta)</h3>
+<a id="what--why-zunzuncito-ßeta" class="anchor" href="#what--why-zunzuncito-%C3%9Feta" aria-hidden="true"><span class="octicon octicon-link"></span></a>What &amp; Why ZunZuncito (ßeta)</h3>
 
 <p>ZunZuncito is a <a href="http://python.org/">python</a> package that allows to create and maintain <a href="http://en.wikipedia.org/wiki/REST">REST</a> API's without hassle.</p>
 
 <p>The simplicity for sketching and debugging helps to develop very fast; versioning is inherit by default, which allows to serve and maintain existing applications, while working in new releases with no need to create separate instances. All the applications are WSGI <a href="http://www.python.org/dev/peps/pep-0333/">PEP 333</a> compliant, allowing to migrate existing code to more robust frameworks, without need to modify the existing code.</p>
 
 <h4>
-<a name="why-" class="anchor" href="#why-"><span class="octicon octicon-link"></span></a>Why ?</h4>
+<a id="why-" class="anchor" href="#why-" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why ?</h4>
 
 <blockquote>
 <p>The need to upload large files by chunks and support resumable uploads trying to accomplish something like the <a href="http://www.grid.net.ru/nginx/resumable_uploads.en.html">nginx upload module</a> does in pure python.</p>
@@ -79,7 +80,7 @@
 <p>The idea of creating ZunZuncito, was the need of a very small and light tool (batteries included), that could help to create and deploy REST API's quickly, without forcing the developers to learn or follow a complex flow but, in contrast, from the very beginning, guide them to properly structure their API, giving special attention to "versioned URI's", having with this a solid base that allows to work in different versions within a single ZunZun instance without interrupting service of any existing API <a href="http://en.wikipedia.org/wiki/Web_resource">resources</a>.</p>
 
 <h3>
-<a name="how-it-works" class="anchor" href="#how-it-works"><span class="octicon octicon-link"></span></a>How it works</h3>
+<a id="how-it-works" class="anchor" href="#how-it-works" aria-hidden="true"><span class="octicon octicon-link"></span></a>How it works</h3>
 
 <p>The main application contains a <strong>ZunZun</strong> instance that must be served by a <a href="https://en.wikipedia.org/wiki/Web_Server_Gateway_Interface">WSGI compliant server</a>. All requests are later handled by custom python modules; ZunZun is the name of the main class for the zunzuncito module.</p>
 
@@ -99,17 +100,16 @@ routes: dict of tuples containing regex patterns, py_mod and allowed http method
 
 <p>When a new request arrive, the ZunZun router searches for 'vroot' declared on the 'hosts' dictionary matching the current HTTP_HOST, a basic <a href="http://docs.zunzun.io/en/latest/zunzun/Hosts.html">hosts dictionary</a> looks like:</p>
 
-<div class="highlight highlight-python"><pre><span class="sd">"""</span>
-<span class="sd">format is:</span>
-<span class="sd">    'host': 'vroot'</span>
-<span class="sd">    wildcard '*' can be used prefixing the host or to match all hosts</span>
-<span class="sd">"""</span>
-<span class="p">{</span>
-  <span class="s">'*'</span><span class="p">:</span> <span class="s">'default'</span><span class="p">,</span> <span class="c"># match all hosts</span>
-  <span class="s">'*.zunzun.io'</span><span class="p">:</span> <span class="s">'default'</span><span class="p">,</span> <span class="c"># match all hosts ending with zunzun.io</span>
-  <span class="s">'api.zunzun.io'</span><span class="p">:</span> <span class="s">'api_zunzun_io'</span> <span class="c"># match only api.zunzun.io</span>
-<span class="p">}</span>
-</pre></div>
+<div class="highlight highlight-python"><pre><span class="pl-s"><span class="pl-pds">"""</span></span>
+<span class="pl-s">format is:</span>
+<span class="pl-s">    'host': 'vroot'</span>
+<span class="pl-s">    wildcard '*' can be used prefixing the host or to match all hosts</span>
+<span class="pl-s"><span class="pl-pds">"""</span></span>
+{
+  <span class="pl-s"><span class="pl-pds">'</span>*<span class="pl-pds">'</span></span>: <span class="pl-s"><span class="pl-pds">'</span>default<span class="pl-pds">'</span></span>, <span class="pl-c"># match all hosts</span>
+  <span class="pl-s"><span class="pl-pds">'</span>*.zunzun.io<span class="pl-pds">'</span></span>: <span class="pl-s"><span class="pl-pds">'</span>default<span class="pl-pds">'</span></span>, <span class="pl-c"># match all hosts ending with zunzun.io</span>
+  <span class="pl-s"><span class="pl-pds">'</span>api.zunzun.io<span class="pl-pds">'</span></span>: <span class="pl-s"><span class="pl-pds">'</span>api_zunzun_io<span class="pl-pds">'</span></span> <span class="pl-c"># match only api.zunzun.io</span>
+}</pre></div>
 
 <p>Once a <strong>vroot</strong> is found, the ZunZun router parses the <a href="http://en.wikipedia.org/wiki/URI_scheme">REQUEST_URI</a> in order to accomplish this pattern:</p>
 
@@ -195,16 +195,15 @@ path = ip
 
 <p>The routes format is very simple, it can be something like:</p>
 
-<div class="highlight highlight-python"><pre><span class="sd">"""</span>
-<span class="sd">format is:</span>
-<span class="sd">regex pattern, handler (python module), allowed HTTP methods (defaults to ALL)</span>
-<span class="sd">"""</span>
-<span class="p">[</span>
- <span class="p">(</span><span class="s">'/.*'</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
- <span class="p">(</span><span class="s">'/test'</span><span class="p">,</span> <span class="n">default</span><span class="p">,</span> <span class="s">'POST, PUT, PATCH'</span><span class="p">),</span>
- <span class="p">(</span><span class="s">'(?:[0-9]{1,3}\.){3}[0-9]{1,3}'</span><span class="p">,</span> <span class="s">'ip'</span><span class="p">,</span> <span class="s">'GET'</span><span class="p">)</span>
-<span class="p">]</span>
-</pre></div>
+<div class="highlight highlight-python"><pre><span class="pl-s"><span class="pl-pds">"""</span></span>
+<span class="pl-s">format is:</span>
+<span class="pl-s">regex pattern, handler (python module), allowed HTTP methods (defaults to ALL)</span>
+<span class="pl-s"><span class="pl-pds">"""</span></span>
+[
+ (<span class="pl-s"><span class="pl-pds">'</span>/.*<span class="pl-pds">'</span></span>, default),
+ (<span class="pl-s"><span class="pl-pds">'</span>/test<span class="pl-pds">'</span></span>, default, <span class="pl-s"><span class="pl-pds">'</span>POST, PUT, PATCH<span class="pl-pds">'</span></span>),
+ (<span class="pl-s"><span class="pl-pds">'</span>(?:[0-9]{1,3}\.)<span class="pl-c1">{3}</span>[0-9]{1,3}<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>ip<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>GET<span class="pl-pds">'</span></span>)
+]</pre></div>
 
 <p>Lets suppose these routes were passed to the ZunZun instance, therefore the router would try to find a match between the api_resource <strong>gevent</strong> in our example with the regex patterns in the list, basically something like:</p>
 
@@ -213,13 +212,12 @@ path = ip
 
 <p>if no match is found then the router would try to load the module from the root directory using something like:</p>
 
-<div class="highlight highlight-python"><pre><span class="kn">import</span> <span class="nn">my_api.default.v1.zun_gevent.zun_gevent</span>
-</pre></div>
+<div class="highlight highlight-python"><pre><span class="pl-k">import</span> my_api.default.v1.zun_gevent.zun_gevent</pre></div>
 
 <p>In case it doesn't find a module, an HTTP status <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">501 Not Implemented</a> code is returned to the client. Otherwise the python module is imported by the router and the request is handled entirely by the imported module.</p>
 
 <h3>
-<a name="the-zun_-prefix" class="anchor" href="#the-zun_-prefix"><span class="octicon octicon-link"></span></a>The zun_ prefix</h3>
+<a id="the-zun_-prefix" class="anchor" href="#the-zun_-prefix" aria-hidden="true"><span class="octicon octicon-link"></span></a>The zun_ prefix</h3>
 
 <p>You may ask, why the need of the "zun_" prefix and why not just create a simple structure having the same name that the api_resource.</p>
 
@@ -227,31 +225,29 @@ path = ip
 
 <p>In the previous example, the REQUEST_URI contains an <strong>APIResource</strong> with the word <strong>gevent</strong>. The imported module name is in 'zun_gevent/zun_gevent.py' that gives the flexibility to use the <a href="http://www.gevent.org/">gevent</a> library within your module without creating any conflict. Your zun_gevent.py would look like:</p>
 
-<div class="highlight highlight-python"><pre><span class="kn">import</span> <span class="nn">gevent</span>
-<span class="kn">import</span> <span class="nn">gevent.socket</span>
-<span class="o">...</span>
-</pre></div>
+<div class="highlight highlight-python"><pre><span class="pl-k">import</span> gevent
+<span class="pl-k">import</span> gevent.socket
+...</pre></div>
 
 <p>That way you can have any work with gevent or any other API resource having an identical name of your current python modules without any conflict.</p>
 
 <h3>
-<a name="a-basic-example" class="anchor" href="#a-basic-example"><span class="octicon octicon-link"></span></a>A basic example</h3>
+<a id="a-basic-example" class="anchor" href="#a-basic-example" aria-hidden="true"><span class="octicon octicon-link"></span></a>A basic example</h3>
 
 <p>Contents of file app.py:</p>
 
-<div class="highlight highlight-python"><pre><span class="kn">import</span> <span class="nn">zunzuncito</span>
+<div class="highlight highlight-python"><pre><span class="pl-k">import</span> zunzuncito
 
-<span class="n">root</span> <span class="o">=</span> <span class="s">'my_api'</span>
-<span class="n">versions</span> <span class="o">=</span> <span class="p">[</span><span class="s">'v0'</span><span class="p">,</span> <span class="s">'v1'</span><span class="p">,</span> <span class="s">'v2'</span><span class="p">]</span>
-<span class="n">hosts</span> <span class="o">=</span> <span class="p">{</span><span class="s">'*'</span><span class="p">:</span> <span class="s">'default'</span><span class="p">}</span>
-<span class="n">routes</span> <span class="o">=</span> <span class="p">{</span><span class="s">'default'</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">(</span><span class="s">'/my'</span><span class="p">,</span> <span class="s">'ip_tools'</span><span class="p">,</span> <span class="s">'GET'</span><span class="p">),</span>
-    <span class="p">(</span><span class="s">'/status'</span><span class="p">,</span> <span class="s">'http_status'</span><span class="p">,</span> <span class="s">'GET'</span><span class="p">),</span>
-    <span class="p">(</span><span class="s">'/upload/'</span><span class="p">,</span> <span class="s">'test_post'</span><span class="p">,</span> <span class="s">'PUT, POST'</span><span class="p">),</span>
-    <span class="p">(</span><span class="s">'/(.*\.(gif|png|jpg|ico|bmp|css|otf|eot|svg|ttf|woff))'</span><span class="p">,</span> <span class="s">'static'</span><span class="p">)</span>
-<span class="p">]}</span>
-<span class="n">app</span> <span class="o">=</span> <span class="n">zunzuncito</span><span class="o">.</span><span class="n">ZunZun</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">versions</span><span class="p">,</span> <span class="n">hosts</span><span class="p">,</span> <span class="n">routes</span><span class="p">)</span>
-</pre></div>
+root <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>my_api<span class="pl-pds">'</span></span>
+versions <span class="pl-k">=</span> [<span class="pl-s"><span class="pl-pds">'</span>v0<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>v1<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>v2<span class="pl-pds">'</span></span>]
+hosts <span class="pl-k">=</span> {<span class="pl-s"><span class="pl-pds">'</span>*<span class="pl-pds">'</span></span>: <span class="pl-s"><span class="pl-pds">'</span>default<span class="pl-pds">'</span></span>}
+routes <span class="pl-k">=</span> {<span class="pl-s"><span class="pl-pds">'</span>default<span class="pl-pds">'</span></span>: [
+    (<span class="pl-s"><span class="pl-pds">'</span>/my<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>ip_tools<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>GET<span class="pl-pds">'</span></span>),
+    (<span class="pl-s"><span class="pl-pds">'</span>/status<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>http_status<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>GET<span class="pl-pds">'</span></span>),
+    (<span class="pl-s"><span class="pl-pds">'</span>/upload/<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>test_post<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>PUT, POST<span class="pl-pds">'</span></span>),
+    (<span class="pl-s"><span class="pl-pds">'</span>/(.*\.(gif|png|jpg|ico|bmp|css|otf|eot|svg|ttf|woff))<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>static<span class="pl-pds">'</span></span>)
+]}
+app <span class="pl-k">=</span> zunzuncito.ZunZun(root, versions, hosts, routes)</pre></div>
 
 <p>Contents of file <strong>zun_default.py</strong> located in "my_api/default/zun_default/zun_default.py"</p>
 
@@ -259,35 +255,34 @@ path = ip
 <p>root: my_apy, vroot: default</p>
 </blockquote>
 
-<div class="highlight highlight-python"><pre><span class="sd">"""</span>
-<span class="sd">zun_default.py API resource</span>
-<span class="sd">"""</span>
-<span class="kn">from</span> <span class="nn">zunzuncito</span> <span class="kn">import</span> <span class="n">tools</span>
+<div class="highlight highlight-python"><pre><span class="pl-s"><span class="pl-pds">"""</span></span>
+<span class="pl-s">zun_default.py API resource</span>
+<span class="pl-s"><span class="pl-pds">"""</span></span>
+<span class="pl-k">from</span> zunzuncito <span class="pl-k">import</span> tools
 
 
-<span class="k">class</span> <span class="nc">APIResource</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="pl-k">class</span> <span class="pl-en">APIResource</span>(<span class="pl-e"><span class="pl-c1">object</span></span>):
 
-    <span class="nd">@allow_methods</span><span class="p">(</span><span class="s">'get, head'</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">dispatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+    <span class="pl-en">@</span><span class="pl-en">allow_methods</span>(<span class="pl-s"><span class="pl-pds">'</span>get, head<span class="pl-pds">'</span></span>)
+    <span class="pl-k">def</span> <span class="pl-en">dispatch</span>(<span class="pl-smi">self</span>, <span class="pl-smi">request</span>, <span class="pl-smi">response</span>):
 
-        <span class="n">request</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">tools</span><span class="o">.</span><span class="n">log_json</span><span class="p">({</span>
-            <span class="s">'API'</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">version</span><span class="p">,</span>
-            <span class="s">'URI'</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">URI</span><span class="p">,</span>
-            <span class="s">'method'</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="p">,</span>
-            <span class="s">'vroot'</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">vroot</span>
-        <span class="p">},</span> <span class="bp">True</span><span class="p">))</span>
+        request.log.debug(tools.log_json({
+            <span class="pl-s"><span class="pl-pds">'</span>API<span class="pl-pds">'</span></span>: request.version,
+            <span class="pl-s"><span class="pl-pds">'</span>URI<span class="pl-pds">'</span></span>: request.URI,
+            <span class="pl-s"><span class="pl-pds">'</span>method<span class="pl-pds">'</span></span>: request.method,
+            <span class="pl-s"><span class="pl-pds">'</span>vroot<span class="pl-pds">'</span></span>: request.vroot
+        }, <span class="pl-c1">True</span>))
 
-        <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="n">data</span><span class="p">[</span><span class="s">'about'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s">"Hi </span><span class="si">%s</span><span class="s">, I am zunzuncito a micro-framework for creating"</span>
-                         <span class="s">" REST API's, you can read more about me in: "</span>
-                         <span class="s">"www.zunzun.io"</span><span class="p">)</span> <span class="o">%</span> <span class="n">request</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'REMOTE_ADDR'</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        data <span class="pl-k">=</span> {}
+        data[<span class="pl-s"><span class="pl-pds">'</span>about<span class="pl-pds">'</span></span>] <span class="pl-k">=</span> (<span class="pl-s"><span class="pl-pds">"</span>Hi <span class="pl-c1">%s</span>, I am zunzuncito a micro-framework for creating<span class="pl-pds">"</span></span>
+                         <span class="pl-s"><span class="pl-pds">"</span> REST API's, you can read more about me in: <span class="pl-pds">"</span></span>
+                         <span class="pl-s"><span class="pl-pds">"</span>www.zunzun.io<span class="pl-pds">"</span></span>) <span class="pl-k">%</span> request.environ.get(<span class="pl-s"><span class="pl-pds">'</span>REMOTE_ADDR<span class="pl-pds">'</span></span>, <span class="pl-c1">0</span>)
 
-        <span class="n">data</span><span class="p">[</span><span class="s">'Request-ID'</span><span class="p">]</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">request_id</span>
-        <span class="n">data</span><span class="p">[</span><span class="s">'URI'</span><span class="p">]</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">URI</span>
-        <span class="n">data</span><span class="p">[</span><span class="s">'Method'</span><span class="p">]</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span>
+        data[<span class="pl-s"><span class="pl-pds">'</span>Request-ID<span class="pl-pds">'</span></span>] <span class="pl-k">=</span> request.request_id
+        data[<span class="pl-s"><span class="pl-pds">'</span>URI<span class="pl-pds">'</span></span>] <span class="pl-k">=</span> request.URI
+        data[<span class="pl-s"><span class="pl-pds">'</span>Method<span class="pl-pds">'</span></span>] <span class="pl-k">=</span> request.method
 
-        <span class="k">return</span> <span class="n">tools</span><span class="o">.</span><span class="n">log_json</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-</pre></div>
+        <span class="pl-k">return</span> tools.log_json(data, <span class="pl-c1">4</span>)</pre></div>
 
 <p>To run it with gunicorn:</p>
 
@@ -300,7 +295,7 @@ path = ip
 </code></pre>
 
 <h3>
-<a name="demo" class="anchor" href="#demo"><span class="octicon octicon-link"></span></a>Demo</h3>
+<a id="demo" class="anchor" href="#demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h3>
 
 <p>Current demo running on Google App Engine.</p>
 
@@ -311,7 +306,9 @@ path = ip
 <ul>
 <li>/my</li>
 <li>/status</li>
-</ul><p>To get your current IP and location:</p>
+</ul>
+
+<p>To get your current IP and location:</p>
 
 <pre><code>http://api.zunzun.io/my
 </code></pre>
@@ -327,60 +324,58 @@ path = ip
 </code></pre>
 
 <h3>
-<a name="gae" class="anchor" href="#gae"><span class="octicon octicon-link"></span></a>GAE</h3>
+<a id="gae" class="anchor" href="#gae" aria-hidden="true"><span class="octicon octicon-link"></span></a>GAE</h3>
 
 <p>Tu have a ZunZun instance up and running in Google App Engine these are the configurations:</p>
 
 <p>Contents of the app.yaml file:</p>
 
-<div class="highlight highlight-yaml"><pre><span class="l-Scalar-Plain">application</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">&lt;your-GAE-application-id&gt;</span>
-<span class="l-Scalar-Plain">version</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">1</span>
-<span class="l-Scalar-Plain">runtime</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">python27</span>
-<span class="l-Scalar-Plain">api_version</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">1</span>
-<span class="l-Scalar-Plain">threadsafe</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">yes</span>
+<div class="highlight highlight-yaml"><pre><span class="pl-s"><span class="pl-ent">application:</span> <span class="pl-s">&lt;your-GAE-application-id&gt;</span></span>
+<span class="pl-c1"><span class="pl-ent">version:</span> 1</span>
+<span class="pl-s"><span class="pl-ent">runtime:</span> <span class="pl-s">python27</span></span>
+<span class="pl-c1"><span class="pl-ent">api_version:</span> 1</span>
+<span class="pl-s"><span class="pl-ent">threadsafe:</span> <span class="pl-s">yes</span></span>
 
-<span class="l-Scalar-Plain">builtins</span><span class="p-Indicator">:</span>
-<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">appstats</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">on</span>
+<span class="pl-s"><span class="pl-ent">builtins:</span></span>
+<span class="pl-s">- <span class="pl-ent">appstats:</span> <span class="pl-s">on</span></span>
 
-<span class="l-Scalar-Plain">handlers</span><span class="p-Indicator">:</span>
-<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/favicon\.ico</span>
-  <span class="l-Scalar-Plain">static_files</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">favicon.ico</span>
-  <span class="l-Scalar-Plain">upload</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">favicon\.ico</span>
+<span class="pl-s"><span class="pl-ent">handlers:</span></span>
+<span class="pl-s">- <span class="pl-ent">url:</span> <span class="pl-s">/favicon\.ico</span></span>
+  <span class="pl-s"><span class="pl-ent">static_files:</span> <span class="pl-s">favicon.ico</span></span>
+  <span class="pl-s"><span class="pl-ent">upload:</span> <span class="pl-s">favicon\.ico</span></span>
 
-<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/.*</span>
-  <span class="l-Scalar-Plain">script</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">main.app</span>
-
+<span class="pl-s">- <span class="pl-ent">url:</span> <span class="pl-s">/.*</span></span>
+  <span class="pl-s"><span class="pl-ent">script:</span> <span class="pl-s">main.app</span></span>
 </pre></div>
 
 <p>Contents of the main.py file:</p>
 
 <div class="highlight highlight-python"><pre>
-<span class="kn">import</span> <span class="nn">zunzuncito</span>
+<span class="pl-k">import</span> zunzuncito
 
-<span class="n">root</span> <span class="o">=</span> <span class="s">'my_api'</span>
+root <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>my_api<span class="pl-pds">'</span></span>
 
-<span class="n">versions</span> <span class="o">=</span> <span class="p">[</span><span class="s">'v0'</span><span class="p">,</span> <span class="s">'v1'</span><span class="p">]</span>
+versions <span class="pl-k">=</span> [<span class="pl-s"><span class="pl-pds">'</span>v0<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>v1<span class="pl-pds">'</span></span>]
 
-<span class="n">hosts</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s">'*'</span><span class="p">:</span> <span class="s">'default'</span>
-<span class="p">}</span>
+hosts <span class="pl-k">=</span> {
+    <span class="pl-s"><span class="pl-pds">'</span>*<span class="pl-pds">'</span></span>: <span class="pl-s"><span class="pl-pds">'</span>default<span class="pl-pds">'</span></span>
+}
 
-<span class="n">routes</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">routes</span><span class="p">[</span><span class="s">'default'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="s">'/my/?.*'</span><span class="p">,</span> <span class="s">'ip_tools'</span><span class="p">,</span> <span class="s">'GET'</span><span class="p">),</span>
-    <span class="p">(</span><span class="s">'/status/?.*'</span><span class="p">,</span> <span class="s">'http_status'</span><span class="p">,</span> <span class="s">'GET'</span><span class="p">),</span>
-    <span class="p">(</span><span class="s">'/(md5|sha1|sha256|sha512)(/.*)?'</span><span class="p">,</span> <span class="s">'hasher'</span><span class="p">,</span> <span class="s">'GET, POST'</span><span class="p">),</span>
-    <span class="p">(</span><span class="s">'/(.*\.(gif|png|jpg|ico|bmp|css|otf|eot|svg|ttf|woff))'</span><span class="p">,</span> <span class="s">'static'</span><span class="p">)</span>
-<span class="p">]</span>
+routes <span class="pl-k">=</span> {}
+routes[<span class="pl-s"><span class="pl-pds">'</span>default<span class="pl-pds">'</span></span>] <span class="pl-k">=</span> [
+    (<span class="pl-s"><span class="pl-pds">'</span>/my/?.*<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>ip_tools<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>GET<span class="pl-pds">'</span></span>),
+    (<span class="pl-s"><span class="pl-pds">'</span>/status/?.*<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>http_status<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>GET<span class="pl-pds">'</span></span>),
+    (<span class="pl-s"><span class="pl-pds">'</span>/(md5|sha1|sha256|sha512)(/.*)?<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>hasher<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>GET, POST<span class="pl-pds">'</span></span>),
+    (<span class="pl-s"><span class="pl-pds">'</span>/(.*\.(gif|png|jpg|ico|bmp|css|otf|eot|svg|ttf|woff))<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>static<span class="pl-pds">'</span></span>)
+]
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">zunzuncito</span><span class="o">.</span><span class="n">ZunZun</span><span class="p">(</span>
-    <span class="n">root</span><span class="p">,</span>
-    <span class="n">versions</span><span class="p">,</span>
-    <span class="n">hosts</span><span class="p">,</span>
-    <span class="n">routes</span><span class="p">,</span>
-    <span class="n">rid</span><span class="o">=</span><span class="s">'REQUEST_LOG_ID'</span><span class="p">,</span>
-    <span class="n">debug</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-
+app <span class="pl-k">=</span> zunzuncito.ZunZun(
+    root,
+    versions,
+    hosts,
+    routes,
+    <span class="pl-smi">rid</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>REQUEST_LOG_ID<span class="pl-pds">'</span></span>,
+    <span class="pl-smi">debug</span><span class="pl-k">=</span><span class="pl-c1">False</span>)
 </pre></div>
 
 <blockquote>
@@ -421,14 +416,16 @@ path = ip
 <p>Basically you just copy the zunzuncito module into your GAE application directory, define your root, versions and routes, create a ZunZun object and focus more on your API resources (custom python modules).</p>
 
 <p><a href="http://docs.zunzun.io/en/latest/Quickstart.html">http://docs.zunzun.io/en/latest/Quickstart.html</a></p>
-      </section>
-    </div>
-    <footer>
-      <p>Project maintained by <a href="https://github.com/nbari">nbari</a></p>
-      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
-    </footer>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-              <script type="text/javascript">
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/nbari/zunzuncito">Zunzuncito</a> is maintained by <a href="https://github.com/nbari">nbari</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+            <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
@@ -438,11 +435,6 @@ path = ip
             pageTracker._trackPageview();
             } catch(err) {}
           </script>
-<script type="text/javascript">
-(function(d,t,i){var l=d.createElement(t),s=d.getElementsByTagName(t)[0];_lg=[i];l.async=1;
-l.src=('https:'==d.location.protocol?'https://':'http://')+'logger-io.appspot.com/logger.io.js';
-s.parentNode.insertBefore(l,s);}(document,'script','1E79QFT375S'));
-</script>
 
   </body>
 </html>
