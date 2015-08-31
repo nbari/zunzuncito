@@ -1,9 +1,4 @@
-[![Build Status](https://api.travis-ci.org/nbari/zunzuncito.png?branch=master)](https://travis-ci.org/nbari/zunzuncito)
-[![Downloads](https://img.shields.io/pypi/dm/zunzuncito.png)](https://img.shields.io/pypi/dm/zunzuncito.svg?style=flat)
-[![Latest Version](https://img.shields.io/pypi/v/zunzuncito.png)](https://img.shields.io/pypi/v/zunzuncito.svg?style=flat)
-[![Wheel Status](https://img.shields.io/pypi/wheel/zunzuncito.png)](https://img.shields.io/pypi/wheel/zunzuncito.svg)
-[![License](https://img.shields.io/github/license/zunzuncito/apistatus.png)](https://pypip.in/license/zunzuncito/badge.png)](https://img.shields.io/github/license/zunzuncito/apistatus.svg)
-
+[![Build Status](https://drone.io/github.com/nbari/zunzuncito/status.png)](https://drone.io/github.com/nbari/zunzuncito/latest)
 
 ### Design Goals
 * Keep it simple and small, avoiding extra complexity at all cost. [KISS](http://en.wikipedia.org/wiki/KISS_principle)
