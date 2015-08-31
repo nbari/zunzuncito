@@ -1,5 +1,5 @@
 """
-python text.py
+python test.py
 """
 
 import sys
